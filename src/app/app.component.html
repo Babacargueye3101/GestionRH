@@ -1,6 +1,6 @@
 <mat-sidenav-container class="example-container">
   <mat-sidenav #sidenav mode="side" [opened]="isOpen" class="custom-sidenav"
-  (mouseenter)="mouseEnterSidenav()" (mouseleave)="mouseLeaveSidenav()">
+    (mouseenter)="mouseEnterSidenav()" (mouseleave)="mouseLeaveSidenav()">
     <div class="logo-container">
       <img src="assets/images/gop.png" alt="Logo" class="logo">
     </div>
@@ -57,15 +57,24 @@
 
   <mat-sidenav-content>
     <mat-toolbar color="primary">
-      <span mat-icon-button (mouseenter)="mouseEnterButton()" (click)="mouseEnterButton()" (mouseleave)="mouseLeaveButton()" style="cursor: pointer; margin-top:8px; font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif">
+      <span mat-icon-button (mouseenter)="mouseEnterButton()" (click)="mouseEnterButton()" (mouseleave)="mouseLeaveButton()" style="cursor: pointer; margin-top:8px;">
         <mat-icon>menu</mat-icon>
       </span>
       <span><span class="sen">Gestion</span> <span class="guinar">Optimum</span></span>
       <span class="spacer"></span>
-      <div class="auth-buttons">
+      <div class="auth-buttons" *ngIf="!isLoggedIn; else loggedInMenu">
         <a mat-button routerLink="/login">Login</a>
         <a mat-button routerLink="/register">Register</a>
       </div>
+      <ng-template #loggedInMenu>
+        <span style="font-size: 16px;">{{ userName }}</span>
+        <mat-menu #appMenu="matMenu">
+          <button mat-menu-item (click)="logout()">Déconnexion</button>
+        </mat-menu>
+        <button mat-icon-button [matMenuTriggerFor]="appMenu">
+          <mat-icon>account_circle</mat-icon>
+        </button>
+      </ng-template>
     </mat-toolbar>
     <div class="content">
       <router-outlet></router-outlet>

@@ -23,10 +23,13 @@ import { LoginComponent } from './pages/menus/login/login.component';
 import { RegisterComponent } from './pages/menus/register/register.component'; // Importez MatIconModule
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
+import { MatMenuModule } from '@angular/material/menu';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { HttpClientModule } from '@angular/common/http';
+
 
 @NgModule({
   declarations: [
@@ -55,10 +58,12 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     MatIconModule,
     ReactiveFormsModule,
     MatCardModule,
+    MatMenuModule,
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    HttpClientModule
 
   ],
   providers: [],
