@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CandidaturesComponent } from '../pages/menus/candidatures/candidatures.component';
+import { PerformanceComponent } from '../performance.component';
 
 const routes: Routes = [
-  { path: '', component: CandidaturesComponent }
+  { path: '', component: PerformanceComponent }
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class CandidaturesRoutingModule { }
+export class PerformanceRoutingModule { }

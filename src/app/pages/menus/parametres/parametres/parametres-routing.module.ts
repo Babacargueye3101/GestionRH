@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { PaiesComponent } from '../pages/menus/paies/paies.component';
-import { ParametresComponent } from '../pages/menus/parametres/parametres.component';
+import { PaiesComponent } from '../../paies/paies.component';
+import { ParametresComponent } from '../parametres.component';
 
 const routes: Routes = [
   { path: '', component: ParametresComponent }

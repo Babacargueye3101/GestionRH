@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { PaiesComponent } from '../pages/menus/paies/paies.component';
+import { PaiesComponent } from '../paies.component';
 
 const routes: Routes = [
   { path: '', component: PaiesComponent }
