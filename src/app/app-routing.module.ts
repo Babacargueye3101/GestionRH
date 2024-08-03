@@ -13,6 +13,8 @@ const routes: Routes = [
   { path: 'rapports', loadChildren: () => import('./pages/menus/rapports/rapports/rapports.module').then(m => m.RapportsModule) },
   { path: 'parametres', loadChildren: () => import('./pages/menus/parametres/parametres/parametres.module').then(m => m.ParametresModule) },
   { path: 'profil', loadChildren: () => import('./pages/menus/profil/profil/profil.module').then(m => m.ProfilModule) },
+  { path: 'login', loadChildren: () => import('./pages/menus/login/login/login.module').then(m => m.LoginModule) },
+  { path: 'register', loadChildren: () => import('./pages/menus/register/register/register.module').then(m => m.RegisterModule) },
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' }
 ];
 

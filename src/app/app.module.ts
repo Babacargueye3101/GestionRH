@@ -18,7 +18,9 @@ import { DocumentsComponent } from './pages/menus/documents/documents.component'
 import { CongesComponent } from './pages/menus/conges/conges.component';
 import { RapportsComponent } from './pages/menus/rapports/rapports.component';
 import { ParametresComponent } from './pages/menus/parametres/parametres.component';
-import { ProfilComponent } from './pages/menus/profil/profil.component'; // Importez MatIconModule
+import { ProfilComponent } from './pages/menus/profil/profil.component';
+import { LoginComponent } from './pages/menus/login/login.component';
+import { RegisterComponent } from './pages/menus/register/register.component'; // Importez MatIconModule
 
 
 @NgModule({
@@ -34,7 +36,9 @@ import { ProfilComponent } from './pages/menus/profil/profil.component'; // Impo
     CongesComponent,
     RapportsComponent,
     ParametresComponent,
-    ProfilComponent
+    ProfilComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
