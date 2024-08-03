@@ -21,7 +21,12 @@ import { ParametresComponent } from './pages/menus/parametres/parametres.compone
 import { ProfilComponent } from './pages/menus/profil/profil.component';
 import { LoginComponent } from './pages/menus/login/login.component';
 import { RegisterComponent } from './pages/menus/register/register.component'; // Importez MatIconModule
-
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
   declarations: [
@@ -47,7 +52,14 @@ import { RegisterComponent } from './pages/menus/register/register.component'; /
     MatSidenavModule,
     MatToolbarModule,
     MatListModule,
-    MatIconModule
+    MatIconModule,
+    ReactiveFormsModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    NgxSpinnerModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]
