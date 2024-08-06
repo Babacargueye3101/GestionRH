@@ -1,0 +1,55 @@
+.company-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: #f4f4f4;
+  padding: 20px;
+
+  .toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  .toolbar-title {
+    font-size: 20px;
+    font-weight: 500;
+    color: white;
+  }
+
+  .spacer {
+    flex: 1 1 auto;
+  }
+
+  .search-container {
+    margin: 20px 0;
+    display: flex;
+    justify-content: flex-start;
+  }
+
+  .company-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    table {
+      width: 100%;
+
+      th {
+        font-weight: bold;
+      }
+
+      td, th {
+        padding: 8px;
+      }
+
+      .mat-cell {
+        &.text-right {
+          display: flex;
+          justify-content: flex-end; // Aligne les boutons à droite
+        }
+      }
+    }
+  }
+}

@@ -12,7 +12,7 @@ import Swal from 'sweetalert2';
 })
 export class LoginComponent {
   loginForm: FormGroup;
-  hide = true; // Pour masquer le mot de passe
+  hide = true;
 
   constructor(private fb: FormBuilder, private spinner: NgxSpinnerService, private authService: AuthService, private router: Router) {
     // Initialisation du formulaire
@@ -33,7 +33,6 @@ export class LoginComponent {
         response => {
           console.log('Login successful', response);
           localStorage.setItem('currentUser', JSON.stringify(response.user));
-          this.spinner.hide();
           setTimeout(() => {
             Swal.fire({
               title: 'Success',
@@ -43,7 +42,8 @@ export class LoginComponent {
             }).then(() => {
               window.location.href = '/dashboard';
             });
-          }, 2000);
+            this.spinner.hide();
+          });
         },
         error => {
           this.spinner.hide();

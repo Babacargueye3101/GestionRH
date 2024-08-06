@@ -14,6 +14,7 @@ export class AppComponent implements OnInit {
   userName: any;
   title = 'GestionRH';
   currentUser: any;
+  showNestedMenu = false;
 
   @ViewChild('sidenav') sidenav!: MatSidenav;
 
@@ -66,4 +67,8 @@ export class AppComponent implements OnInit {
     localStorage.removeItem('currentUser');
     window.location.href = '/login';
   }
+  toggleNestedMenu() {
+    this.showNestedMenu = !this.showNestedMenu;
+  }
+
 }

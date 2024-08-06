@@ -41,17 +41,28 @@
         <mat-icon>bar_chart</mat-icon>
         <span>Rapports</span>
       </a>
-      <a mat-list-item routerLink="/parametres">
-        <mat-icon>settings</mat-icon>
-        <span>Paramètres</span>
-      </a>
       <a mat-list-item routerLink="/profil">
         <mat-icon>account_circle</mat-icon>
         <span>Profil</span>
       </a>
+      <a mat-list-item (click)="toggleNestedMenu()">
+        <mat-icon>settings</mat-icon>
+        <span>Configurations</span>
+        <mat-icon class="expand-icon">{{ showNestedMenu ? 'expand_less' : 'expand_more' }}</mat-icon>
+      </a>
+      <div class="nested-menu" *ngIf="showNestedMenu">
+        <a mat-list-item routerLink="/parametres" class="nested-link">
+          <mat-icon>settings</mat-icon>
+          <span>Paramètres</span>
+        </a>
+        <a mat-list-item routerLink="/compagnies" class="nested-link">
+          <mat-icon>business</mat-icon>
+          <span>Compagnies</span>
+        </a>
+      </div>
     </mat-nav-list>
     <div class="footer">
-      <span>&copy; {{ currentYear }} Gestion Optimum</span>
+      <span>&copy; {{ currentYear }} Gestion RH</span>
     </div>
   </mat-sidenav>
 
@@ -60,11 +71,11 @@
       <span mat-icon-button (mouseenter)="mouseEnterButton()" (click)="mouseEnterButton()" (mouseleave)="mouseLeaveButton()" style="cursor: pointer; margin-top:8px;">
         <mat-icon>menu</mat-icon>
       </span>
-      <span><span class="sen">Gestion</span> <span class="guinar">Optimum</span></span>
+      <span><span class="sen">Gestion</span> <span class="guinar">RH</span></span>
       <span class="spacer"></span>
       <div class="auth-buttons" *ngIf="!isLoggedIn; else loggedInMenu">
-        <a mat-button routerLink="/login">Login</a>
-        <a mat-button routerLink="/register">Register</a>
+        <a mat-button routerLink="/login" style="color: white; background-color:#f39c12;">Login</a>
+        <a mat-button routerLink="/register" style="color: white; background-color:#f39c12;">Register</a>
       </div>
       <ng-template #loggedInMenu>
         <span style="font-size: 16px;">{{ userName }}</span>

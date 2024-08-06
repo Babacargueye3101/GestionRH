@@ -1,0 +1,101 @@
+<!-- company-container.component.html -->
+<div class="company-container">
+    <mat-toolbar color="primary" class="toolbar">
+      <span class="toolbar-title">Gestion des Compagnies</span>
+      <span class="spacer"></span>
+      <button mat-raised-button color="accent" (click)="openCreateCompanyModal()" class="create-button">
+        <mat-icon>add</mat-icon> Ajouter
+      </button>
+    </mat-toolbar>
+
+    <div class="search-container">
+      <form (ngSubmit)="searchCompany()">
+        <mat-form-field>
+          <mat-label>Nom</mat-label>
+          <input matInput [(ngModel)]="searchCriteria.name" name="name" placeholder="Nom de la compagnie">
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>État</mat-label>
+          <input matInput [(ngModel)]="searchCriteria.state" name="state" placeholder="État">
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Ville</mat-label>
+          <input matInput [(ngModel)]="searchCriteria.city" name="city" placeholder="Ville">
+        </mat-form-field>
+
+        <span class="spacer"></span>
+        <button mat-raised-button color="primary" type="submit" style="margin-right: 10px;">Rechercher</button>
+        <span class="spacer"></span>
+        <button mat-raised-button color="accent" (click)="resetSearch()">Réinitialiser</button>
+
+      </form>
+    </div>
+
+    <div class="company-list">
+      <table mat-table [dataSource]="companies" class="mat-elevation-z8">
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef> Nom </th>
+          <td mat-cell *matCellDef="let company"> {{company.name}} </td>
+        </ng-container>
+
+        <!-- Description Column -->
+        <ng-container matColumnDef="address">
+          <th mat-header-cell *matHeaderCellDef> Address </th>
+          <td mat-cell *matCellDef="let company"> {{company.address}} </td>
+        </ng-container>
+
+        <!-- Countrie Column -->
+        <ng-container matColumnDef="city">
+          <th mat-header-cell *matHeaderCellDef> Ville </th>
+          <td mat-cell *matCellDef="let company"> {{company.city}} </td>
+        </ng-container>
+
+        <!-- Countrie Column -->
+        <ng-container matColumnDef="countrie">
+          <th mat-header-cell *matHeaderCellDef> Pays </th>
+          <td mat-cell *matCellDef="let company"> {{company.state}} </td>
+        </ng-container>
+
+         <!-- Phone Number Column -->
+         <ng-container matColumnDef="phoneNumber">
+          <th mat-header-cell *matHeaderCellDef> Téléphone </th>
+          <td mat-cell *matCellDef="let company"> {{company.phoneNumber}} </td>
+        </ng-container>
+
+        <!-- Phone Number Column -->
+        <ng-container matColumnDef="email">
+          <th mat-header-cell *matHeaderCellDef> E-mail </th>
+          <td mat-cell *matCellDef="let company"> {{company.email}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef class="text-right"> Actions </th>
+            <td mat-cell *matCellDef="let company" class="text-right">
+            <button mat-mini-fab aria-label="voir compagny" color="accent" (click)="viewCompany(company.id)" style="margin-right: 10px;">
+              <mat-icon>add</mat-icon>
+            </button>
+            <span class="spacer"></span>
+            <button mat-mini-fab aria-label="supprimé compagny" color="primary" (click)="deleteCompany(company.id)">
+              <mat-icon>delete</mat-icon>
+            </button>
+            </td>
+        </ng-container>
+
+        <ng-container>
+          <p>Aucune données à afficher</p>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </div>
+  </div>
+
+
+  <ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="medium" color="#fff" type="Ball-Tail">
+    <p style="color: white">Veillez patienter un moment  😕 !!</p>
+  </ngx-spinner>

@@ -1,0 +1,74 @@
+// company-modal.component.scss
+
+::ng-deep .mat-dialog-container {
+  width: 90vw; // Largeur du modal (90% de la largeur de la fenêtre)
+  max-width: 800px; // Largeur maximale fixe pour éviter que le modal ne devienne trop large
+  margin: 20px auto; // Marge en haut et en bas, centré horizontalement
+  height: auto; // Hauteur automatique pour s'adapter au contenu
+  max-height: 90vh; // Hauteur maximale (90% de la hauteur de la fenêtre)
+  display: flex;
+  flex-direction: column; // Dispose le contenu en colonne
+}
+
+.mat-dialog-title {
+  position: relative; // Pour permettre le positionnement absolu du bouton de fermeture
+  display: flex;
+  align-items: center; // Centre verticalement le titre et le bouton
+  justify-content: space-between; // Sépare le titre du bouton de fermeture
+}
+
+.close-button {
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 8px;
+  z-index: 1; // Assure que le bouton est au-dessus du titre
+}
+
+.mat-dialog-content {
+  padding: 16px; // Padding autour du contenu du modal
+  overflow-y: auto; // Permet le défilement vertical si nécessaire
+  flex: 1; // Permet au contenu de s'étendre et de prendre la place disponible
+}
+
+.company-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px; // Espacement entre les champs du formulaire
+  padding: 16px; // Padding à l'intérieur du formulaire
+}
+
+.mat-form-field {
+  width: 100%;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end; // Aligne les boutons à droite
+  gap: 16px; // Espacement entre les boutons
+}
+
+.mat-stroked-button {
+  border-radius: 4px; // Bord arrondi pour les boutons
+  border-width: 1px; // Épaisseur du contour
+  border-style: solid; // Style de contour
+  border-color: currentColor; // Couleur du contour basée sur la couleur du texte
+  padding: 8px 16px; // Padding à l'intérieur du bouton
+  transition: background-color 0.3s, color 0.3s; // Transition douce pour les changements de couleur
+}
+
+.cancel-button {
+  color: #f44336; // Couleur du texte pour le bouton Annuler
+}
+
+.cancel-button:hover {
+  background-color: rgba(244, 67, 54, 0.1); // Couleur de fond en survol pour Annuler
+}
+
+.create-button {
+  color: #3f51b5; // Couleur du texte pour le bouton Créer
+}
+
+.create-button:hover {
+  background-color: rgba(63, 81, 181, 0.1); // Couleur de fond en survol pour Créer
+}

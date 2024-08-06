@@ -29,6 +29,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { HttpClientModule } from '@angular/common/http';
+import { CompagnymodalComponent } from './pages/menus/compagny/compagnymodal/compagnymodal.component';
 
 
 @NgModule({
@@ -46,7 +47,8 @@ import { HttpClientModule } from '@angular/common/http';
     ParametresComponent,
     ProfilComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    CompagnymodalComponent
   ],
   imports: [
     BrowserModule,
