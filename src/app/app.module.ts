@@ -35,6 +35,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { AddEmployeeComponent } from './pages/menus/employements/add-employee/add-employee.component';
 import { EditEmployeeComponent } from './pages/menus/employements/edit-employee/edit-employee.component';
 import { UploaddocumentComponent } from './pages/menus/employements/uploaddocument/uploaddocument.component';
+import { DetailemployeeComponent } from './pages/menus/employements/detailemployee/detailemployee.component';
+import { ThousandSeparatorPipe } from './thousand-separator.pipe';
 
 @NgModule({
   declarations: [
@@ -54,7 +56,9 @@ import { UploaddocumentComponent } from './pages/menus/employements/uploaddocume
     CompagnymodalComponent,
     AddEmployeeComponent,
     EditEmployeeComponent,
-    UploaddocumentComponent
+    UploaddocumentComponent,
+    DetailemployeeComponent,
+    ThousandSeparatorPipe
   ],
   imports: [
     BrowserModule,

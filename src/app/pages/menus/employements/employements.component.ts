@@ -10,6 +10,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import Swal from 'sweetalert2';
 import { EditEmployeeComponent } from './edit-employee/edit-employee.component';
 import { UploaddocumentComponent } from './uploaddocument/uploaddocument.component';
+import { DetailemployeeComponent } from './detailemployee/detailemployee.component';
 
 
 @Component({
@@ -19,6 +20,7 @@ import { UploaddocumentComponent } from './uploaddocument/uploaddocument.compone
 })
 export class EmployementsComponent implements OnInit {
 
+  filteredEmployees: any[] = [];
 
   employees: any []=[];
   displayedColumns: string[] = ['firstName', 'lastName', 'email', 'position', 'actions'];
@@ -70,6 +72,7 @@ export class EmployementsComponent implements OnInit {
     this.employeeService.getEmployees(pageIndex + 1, pageSize, this.compagny).subscribe(data => {
       this.employees = data?.employees;
       this.totalEmployees = data.meta.total_count;
+      this.filteredEmployees = this.employees;
       this.spinnerService.hide();
       },
       error => {
@@ -88,7 +91,26 @@ export class EmployementsComponent implements OnInit {
   }
 
   openCreateDialog() {
-    // Ouvre un dialog pour créer un nouvel employé
+    const dialogRef = this.dialog.open(AddEmployeeComponent, {
+      width: '800px',
+      disableClose: true,
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        console.log(result);
+
+        this.employeeService.createEmployee(result).subscribe(
+          (newEmployee) => {
+            this.employees.push(newEmployee);
+            Swal.fire('Succès', 'L\'employé a été ajouté avec succès', 'success');
+          },
+          (error) => {
+            Swal.fire('Erreur', 'Une erreur s\'est produite lors de l\'ajout de l\'employé', 'error');
+          }
+        );
+      }
+    });
   }
 
   openEditDialog(employee: any): void {
@@ -99,10 +121,6 @@ export class EmployementsComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        console.log("4484484848448");
-        console.log(result);
-
-
         this.employeeService.updateEmployee(result.id, result).subscribe(() => {
           this.loadEmployees();
         });
@@ -153,6 +171,25 @@ export class EmployementsComponent implements OnInit {
       }
     });
   }
+
+  viewEmployeeDetails(employee: any): void {
+    this.dialog.open(DetailemployeeComponent, {
+      data: employee,
+      width: '600px'
+    });
+  }
+
+  applyFilter(event: Event) {
+    const input = event.target as HTMLInputElement;
+    const filterValue = input ? input.value.trim().toLowerCase() : '';
+    this.filteredEmployees = this.employees.filter(employee =>
+      employee.first_name.toLowerCase().includes(filterValue) ||
+      employee.last_name.toLowerCase().includes(filterValue) ||
+      employee.position.toLowerCase().includes(filterValue) ||
+      (employee.telephone ? employee.telephone.toLowerCase().includes(filterValue) : false)
+    );
+  }
+
 
 
 

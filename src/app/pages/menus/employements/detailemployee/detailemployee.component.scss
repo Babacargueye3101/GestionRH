@@ -1,0 +1,46 @@
+.modal-container {
+    display: flex;
+    height: 400px; // Ajustez selon vos besoins
+    width: 600px;  // Ajustez selon vos besoins
+
+    .left-section {
+      flex: 1;
+      padding: 20px;
+      border-right: 2px solid #ccc;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      .employee-photo {
+        width: 150px; // Ajustez la taille de la photo
+        height: 150px; // Ajustez la taille de la photo
+        border-radius: 50%;
+        object-fit: cover;
+        margin-bottom: 20px;
+      }
+
+      .employee-info {
+        text-align: center;
+        p {
+          margin: 5px 0;
+        }
+      }
+    }
+
+    .divider {
+      width: 2px;
+      background-color: #ccc;
+      height: 100%;
+    }
+
+    .right-section {
+      flex: 1;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+
+      button {
+        margin-top: auto; // Place le bouton en bas de la section
+      }
+    }
+  }
