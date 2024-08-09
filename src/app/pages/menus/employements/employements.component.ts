@@ -8,7 +8,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { Employee } from 'src/app/models/employee.model';
 import { NgxSpinnerService } from 'ngx-spinner';
 import Swal from 'sweetalert2';
-import { text } from 'body-parser';
+import { EditEmployeeComponent } from './edit-employee/edit-employee.component';
+import { UploaddocumentComponent } from './uploaddocument/uploaddocument.component';
 
 
 @Component({
@@ -90,8 +91,24 @@ export class EmployementsComponent implements OnInit {
     // Ouvre un dialog pour créer un nouvel employé
   }
 
-  openEditDialog(employee: any) {
-    // Ouvre un dialog pour modifier un employé existant
+  openEditDialog(employee: any): void {
+    const dialogRef = this.dialog.open(EditEmployeeComponent, {
+      width: '800px',
+      data: employee
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        console.log("4484484848448");
+        console.log(result);
+
+
+        this.employeeService.updateEmployee(result.id, result).subscribe(() => {
+          this.loadEmployees();
+        });
+      }
+    });
+
   }
 
   deleteEmployee(id: number) {
@@ -123,6 +140,21 @@ export class EmployementsComponent implements OnInit {
   onPageChange(event: any): void {
     this.loadEmployees(event.pageIndex, event.pageSize);
   }
+
+  openUploadDialog(employee: any): void {
+    const dialogRef = this.dialog.open(UploaddocumentComponent, {
+      width: '550px',
+      data: { employee }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+
+      }
+    });
+  }
+
+
 
 
 }
