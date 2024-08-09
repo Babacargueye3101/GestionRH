@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
@@ -7,9 +7,10 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
   templateUrl: './add-employee.component.html',
   styleUrls: ['./add-employee.component.scss']
 })
-export class AddEmployeeComponent {
+export class AddEmployeeComponent  implements OnInit{
 
   addEmployeeForm: FormGroup;
+  compagny: any;
 
   constructor(
     public dialogRef: MatDialogRef<AddEmployeeComponent>,
@@ -24,8 +25,21 @@ export class AddEmployeeComponent {
       lastName: [data?.last_name || '', Validators.required],
       email: [data?.email || '', [Validators.required, Validators.email]],
       position: [data?.position || '', Validators.required],
-      phone: [data?.phone || '', Validators.required]
+      phone: [data?.phone || '', Validators.required],
+      birthdate: [data?.birthdate || '', Validators.required],
+      gender: [data?.gender || '', Validators.required],
+      cniNumber: [data?.cniNumber || '', Validators.required],
+      compagny_id: this.compagny
     });
+  }
+  ngOnInit(): void {
+
+    const user = localStorage.getItem('currentUser');
+
+    if (user) {
+      var currentUser = JSON.parse(user);
+      this.compagny= currentUser.compagny_id;
+    }
   }
 
   onNoClick(): void {
@@ -33,7 +47,7 @@ export class AddEmployeeComponent {
   }
 
   onSaveClick(): void {
-    const updatedEmployee = {
+    const addEmployee = {
       id: this.data?.id,
       contrat_type: this.addEmployeeForm.value.contratType,
       salary: this.addEmployeeForm.value.salary,
@@ -41,8 +55,12 @@ export class AddEmployeeComponent {
       last_name: this.addEmployeeForm.value.lastName,
       email: this.addEmployeeForm.value.email,
       position: this.addEmployeeForm.value.position,
-      phone: this.addEmployeeForm.value.phone
+      phone: this.addEmployeeForm.value.phone,
+      birthdate: this.addEmployeeForm.value.birthdate,
+      gender: this.addEmployeeForm.value.gender,
+      cniNumber: this.addEmployeeForm.value.cniNumber,
+      compagny_id: this.compagny
     };
-    this.dialogRef.close(updatedEmployee);
+    this.dialogRef.close(addEmployee);
   }
 }

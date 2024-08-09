@@ -25,7 +25,10 @@ export class EditEmployeeComponent {
       lastName: [data.last_name || ''],
       email: [data.email || ''],
       position: [data.position || ''],
-      phone: [data.phone || '']
+      phone: [data.phone || ''],
+      birthdate: [data.birthdate || ''],
+      gender: [data.gender || ''],
+      cniNumber: [data.cniNumber || '']
     });
   }
 
@@ -41,7 +44,10 @@ export class EditEmployeeComponent {
       salary: this.editEmployeeForm.value.salary,
       first_name: this.editEmployeeForm.value.firstName,
       last_name: this.editEmployeeForm.value.lastName,
-      email: this.editEmployeeForm.value.email
+      email: this.editEmployeeForm.value.email,
+      birthdate: this.editEmployeeForm.value.birthdate,
+      gender: this.editEmployeeForm.value.gender,
+      cniNumber: this.editEmployeeForm.value.cniNumber,
     };
     this.dialogRef.close(updatedEmployee);
   }

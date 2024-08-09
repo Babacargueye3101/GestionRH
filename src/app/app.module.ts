@@ -58,7 +58,7 @@ import { ThousandSeparatorPipe } from './thousand-separator.pipe';
     EditEmployeeComponent,
     UploaddocumentComponent,
     DetailemployeeComponent,
-    ThousandSeparatorPipe
+    ThousandSeparatorPipe,
   ],
   imports: [
     BrowserModule,
