@@ -49,12 +49,11 @@ export class CompagnymodalComponent implements OnInit{
           this.spinnerService.hide();
           Swal.fire({
             title: 'Success',
-            text: 'Connexion réussie avec succès.',
+            text: 'Compagny crée  avec succès.',
             icon: 'success',
             showConfirmButton: true,
           })
           this.dialogRef.close();
-          console.log('Company created successfully', response);
         },
         error => {
           Swal.fire({
@@ -67,5 +66,6 @@ export class CompagnymodalComponent implements OnInit{
         }
       );
     }
+    this.ngOnInit();
   }
 }

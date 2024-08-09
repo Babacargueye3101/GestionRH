@@ -33,22 +33,13 @@ export class LoginComponent {
         response => {
           console.log('Login successful', response);
           localStorage.setItem('currentUser', JSON.stringify(response.user));
-          setTimeout(() => {
-            Swal.fire({
-              title: 'Success',
-              text: 'Connexion réussie avec succès.',
-              icon: 'success',
-              showConfirmButton: false,
-            }).then(() => {
-              window.location.href = '/dashboard';
-            });
-            this.spinner.hide();
-          });
+          this.spinner.hide();
+          window.location.href = '/dashboard';
         },
         error => {
           this.spinner.hide();
           Swal.fire({
-            title: 'Erreur',
+            title: error?.error?.message,
             text: 'Erreur de Connexion',
             icon: "error"
           });

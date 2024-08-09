@@ -16,8 +16,8 @@ export class AuthService {
     });
   }
 
-  register(email: string, password: string, passwordConfirmation: string, nom: string): Observable<any> {
-    return this.http.post(`${this.apiUrl}/users`, { user: { email, password, password_confirmation: passwordConfirmation, name: nom } }, {
+  register(email: string, password: string, passwordConfirmation: string, nom: string, compagnyId: string): Observable<any> {
+    return this.http.post(`${this.apiUrl}/users`, { user: { email, password, password_confirmation: passwordConfirmation, name: nom , compagny_id: compagnyId} }, {
       headers: { 'Content-Type': 'application/json' }
     });
   }

@@ -27,6 +27,15 @@
         </button>
       </mat-form-field>
 
+      <mat-form-field appearance="fill">
+        <mat-label>Entreprise</mat-label>
+        <mat-select formControlName="company" required>
+          <mat-option *ngFor="let company of compagnies" [value]="company.id">
+            {{ company.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
       <button mat-raised-button color="primary" type="submit" [disabled]="registerForm.invalid">S'inscrire</button>
     </form>
   </div>

@@ -9,7 +9,6 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { DashboardComponent } from './pages/menus/dashboard/dashboard.component';
-import { EmployementsComponent } from './pages/menus/employements/employements.component';
 import { CandidaturesComponent } from './pages/menus/candidatures/candidatures.component';
 import { PaiesComponent } from './pages/menus/paies/paies.component';
 import { FormationComponent } from './pages/menus/formation/formation.component';
@@ -30,13 +29,15 @@ import { MatButtonModule } from '@angular/material/button';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { HttpClientModule } from '@angular/common/http';
 import { CompagnymodalComponent } from './pages/menus/compagny/compagnymodal/compagnymodal.component';
-
+import { MatSelectModule } from '@angular/material/select';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { AddEmployeeComponent } from './pages/menus/employements/add-employee/add-employee.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
-    EmployementsComponent,
     CandidaturesComponent,
     PaiesComponent,
     FormationComponent,
@@ -48,7 +49,8 @@ import { CompagnymodalComponent } from './pages/menus/compagny/compagnymodal/com
     ProfilComponent,
     LoginComponent,
     RegisterComponent,
-    CompagnymodalComponent
+    CompagnymodalComponent,
+    AddEmployeeComponent
   ],
   imports: [
     BrowserModule,
@@ -65,7 +67,10 @@ import { CompagnymodalComponent } from './pages/menus/compagny/compagnymodal/com
     MatInputModule,
     MatButtonModule,
     NgxSpinnerModule,
-    HttpClientModule
+    HttpClientModule,
+    MatSelectModule,
+    MatDialogModule,
+    MatSnackBarModule
 
   ],
   providers: [],

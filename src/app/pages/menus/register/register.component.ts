@@ -21,7 +21,8 @@ export class RegisterComponent implements OnInit{
       username: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
-      confirmPassword: ['', Validators.required]
+      confirmPassword: ['', Validators.required],
+      company: ['', Validators.required]
     }, { validators: this.passwordMatchValidator });
   }
   ngOnInit(): void {
@@ -37,8 +38,8 @@ export class RegisterComponent implements OnInit{
       return;
     }
     this.spinnerService.show();
-    const { username, email, password, confirmPassword } = this.registerForm.value;
-    this.authService.register(email, password, confirmPassword, username).subscribe((res) => {
+    const { username, email, password, confirmPassword, company} = this.registerForm.value;
+    this.authService.register(email, password, confirmPassword, username, company).subscribe((res) => {
       this.authService.login(email,password).subscribe((res) =>{
         localStorage.setItem('currentUser', JSON.stringify(res.user))
         Swal.fire({
