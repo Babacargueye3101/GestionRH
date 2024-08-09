@@ -26,11 +26,17 @@
       <ng-container matColumnDef="actions">
         <th mat-header-cell *matHeaderCellDef>Actions</th>
         <td mat-cell *matCellDef="let employee">
-          <button mat-icon-button color="primary" (click)="openEditDialog(employee)">
+          <button mat-mini-fab aria-label="Edition d'employé" color="primary" (click)="openEditDialog(employee)" style="margin-right: 10px; margin-right: 10px;">
             <mat-icon>edit</mat-icon>
           </button>
-          <button mat-icon-button color="warn" (click)="deleteEmployee(employee.id)">
+          <button mat-mini-fab aria-label="suppression" color="warn" (click)="deleteEmployee(employee.id)" style="margin-right: 10px; margin-right: 10px;">
             <mat-icon>delete</mat-icon>
+          </button>
+          <button mat-mini-fab aria-label="ajouter contrat" (click)="openUploadDialog(employee)" style="margin-right: 10px; background-color:orange">
+            <mat-icon >attach_file</mat-icon>
+          </button>
+          <button mat-mini-fab aria-label="view"  color="cyan" style="margin-right: 10px;">
+            <mat-icon >visibility</mat-icon>
           </button>
         </td>
       </ng-container>

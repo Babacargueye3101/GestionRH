@@ -1,0 +1,9 @@
+<!-- src/app/components/upload-document-dialog/upload-document-dialog.component.html -->
+<h2 mat-dialog-title>Uploader le document du contrat</h2>
+<div mat-dialog-content>
+  <input type="file" (change)="onFileChange($event)" />
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Annuler</button>
+  <button mat-raised-button color="primary" (click)="uploadDocument()">Uploader</button>
+</div>

@@ -1,0 +1,49 @@
+<h2 mat-dialog-title class="dialog-title">Modifier les informations de l'employé</h2>
+<div mat-dialog-content class="dialog-content">
+  <form [formGroup]="editEmployeeForm" class="edit-form">
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Type de contrat</mat-label>
+      <mat-select formControlName="contratType">
+        <mat-option value="CDI">CDI</mat-option>
+        <mat-option value="CDD">CDD</mat-option>
+        <mat-option value="Stage">Stage</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Salaire</mat-label>
+      <input matInput formControlName="salary" type="number" placeholder="Salaire">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email" placeholder="Email">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Nom</mat-label>
+      <input matInput formControlName="lastName" placeholder="Nom">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Prénom</mat-label>
+      <input matInput formControlName="firstName" placeholder="Prénom">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Poste</mat-label>
+        <input matInput formControlName="position" placeholder="Poste Actuel">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Téléphone</mat-label>
+        <input matInput formControlName="phone" placeholder="Téléphone">
+      </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions class="dialog-actions">
+  <button mat-button (click)="onNoClick()" class="cancel-button">Annuler</button>
+  <button mat-raised-button color="primary" [mat-dialog-close]="editEmployeeForm.value" class="save-button" (click)="onSaveClick()">
+    Enregistrer
+  </button>
+</div>

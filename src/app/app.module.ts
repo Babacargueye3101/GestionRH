@@ -33,6 +33,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { AddEmployeeComponent } from './pages/menus/employements/add-employee/add-employee.component';
+import { EditEmployeeComponent } from './pages/menus/employements/edit-employee/edit-employee.component';
+import { UploaddocumentComponent } from './pages/menus/employements/uploaddocument/uploaddocument.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +52,9 @@ import { AddEmployeeComponent } from './pages/menus/employements/add-employee/ad
     LoginComponent,
     RegisterComponent,
     CompagnymodalComponent,
-    AddEmployeeComponent
+    AddEmployeeComponent,
+    EditEmployeeComponent,
+    UploaddocumentComponent
   ],
   imports: [
     BrowserModule,
