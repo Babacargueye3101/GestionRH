@@ -68,7 +68,7 @@
 
   <mat-sidenav-content>
     <mat-toolbar color="primary">
-      <span mat-icon-button (mouseenter)="mouseEnterButton()" (click)="mouseEnterButton()" (mouseleave)="mouseLeaveButton()" style="cursor: pointer; margin-top:8px;">
+      <span mat-icon-button (mouseenter)="mouseEnterButton()" (click)="mouseEnterButton()" (mouseleave)="mouseLeaveButton()" style="cursor: pointer; margin-top:8px;" *ngIf="currentUser">
         <mat-icon>menu</mat-icon>
       </span>
       <span><span class="sen">Gestion</span> <span class="guinar">RH</span></span>

@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { PerformanceComponent } from '../performance.component';
+import { AuthGuard } from 'src/app/auth.guard';
 
 const routes: Routes = [
-  { path: '', component: PerformanceComponent }
+  { path: '', component: PerformanceComponent,canActivate: [AuthGuard] }
 ];
 
 @NgModule({
