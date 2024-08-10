@@ -17,9 +17,11 @@
   <div class="right-section">
     <p><strong>Poste:</strong> {{ data.position }}</p>
     <p><strong>Salaire:</strong> {{ data.salary | thousandSeparator}} Fcfa</p>
-    <p><strong>Age:</strong> </p>
+    <p><strong>CNI:</strong> {{ data.cniNumber | thousandSeparator}}</p>
+    <p><strong>Date de Naissance: </strong> {{ data.birthdate | date: 'd MMMM yyyy' }}</p>
+    <p><strong>Sexe: </strong> {{ data.gender === 'male' ? 'Masculin' : 'Féminin' }}</p>
     <!-- Ajoutez d'autres champs ici -->
-    <button mat-raised-button color="primary" (click)="viewDocument()" *ngIf="data.url">Voir le contrat</button>
+    <a mat-raised-button color="primary" [href]="data.url" target="_blank" *ngIf="data.url">Voir le contrat</a>
   </div>
 </div>
 

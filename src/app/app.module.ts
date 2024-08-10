@@ -38,7 +38,12 @@ import { UploaddocumentComponent } from './pages/menus/employements/uploaddocume
 import { DetailemployeeComponent } from './pages/menus/employements/detailemployee/detailemployee.component';
 import { ThousandSeparatorPipe } from './thousand-separator.pipe';
 import { PdfcontratviewComponent } from './pages/menus/employements/pdfcontratview/pdfcontratview.component';
+import { LOCALE_ID } from '@angular/core';
+import { registerLocaleData } from '@angular/common';
+import localeFr from '@angular/common/locales/fr';
 
+
+registerLocaleData(localeFr, 'fr');
 @NgModule({
   declarations: [
     AppComponent,
@@ -83,7 +88,7 @@ import { PdfcontratviewComponent } from './pages/menus/employements/pdfcontratvi
     MatSnackBarModule
 
   ],
-  providers: [],
+  providers: [{ provide: LOCALE_ID, useValue: 'fr' }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

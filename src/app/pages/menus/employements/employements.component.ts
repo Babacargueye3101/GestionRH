@@ -190,8 +190,4 @@ export class EmployementsComponent implements OnInit {
     );
   }
 
-
-
-
-
 }
