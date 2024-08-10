@@ -1,1 +1,48 @@
-<p>dashboard works!</p>
+<mat-card class="employee-count-card">
+    <mat-card-content>
+        <span>
+            <span><h2>Employés</h2></span>
+            <span><h4>{{nbreTotal}}</h4></span>
+        </span>
+
+    </mat-card-content>
+</mat-card>
+
+<div class="dashboard-container">
+    <div class="dashboard-left">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>Statistiques par Sexe</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+            <!-- Colonne Catégorie -->
+            <ng-container matColumnDef="category">
+              <th mat-header-cell *matHeaderCellDef> Catégorie </th>
+              <td mat-cell *matCellDef="let element"> {{element.category}} </td>
+            </ng-container>
+
+            <!-- Colonne Nombre -->
+            <ng-container matColumnDef="count">
+              <th mat-header-cell *matHeaderCellDef> Nombre </th>
+              <td mat-cell *matCellDef="let element"> {{element.count}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="pourcentage">
+                <th mat-header-cell *matHeaderCellDef> % Pourcentage </th>
+                <td mat-cell *matCellDef="let element"> {{element.pourcentage.toFixed(2)}} % </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div class="dashboard-right">
+      <div echarts [options]="chartOptions" class="demo-chart"></div>
+    </div>
+</div>
+<div>
+    <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur cum voluptatibus doloremque aliquid iure tenetur? Qui, saepe veritatis tempore obcaecati illo ducimus nam harum, cum dicta aliquam eius quas odit!</h2>
+</div>

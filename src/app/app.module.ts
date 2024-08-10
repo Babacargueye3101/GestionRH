@@ -38,6 +38,12 @@ import { UploaddocumentComponent } from './pages/menus/employements/uploaddocume
 import { DetailemployeeComponent } from './pages/menus/employements/detailemployee/detailemployee.component';
 import { ThousandSeparatorPipe } from './thousand-separator.pipe';
 import { PdfcontratviewComponent } from './pages/menus/employements/pdfcontratview/pdfcontratview.component';
+import { NgxEchartsModule } from 'ngx-echarts';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatTableModule } from '@angular/material/table';
+
+
+
 import { LOCALE_ID } from '@angular/core';
 import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
@@ -85,7 +91,10 @@ registerLocaleData(localeFr, 'fr');
     HttpClientModule,
     MatSelectModule,
     MatDialogModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatGridListModule,
+    MatTableModule,
+    NgxEchartsModule.forRoot({ echarts: () => import('echarts') })
 
   ],
   providers: [{ provide: LOCALE_ID, useValue: 'fr' }],

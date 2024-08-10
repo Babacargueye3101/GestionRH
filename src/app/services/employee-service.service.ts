@@ -24,6 +24,10 @@ export class EmployeeServiceService {
     return this.http.get<Employee[]>(this.apiUrl, { headers: this.getHeaders(), params });
   }
 
+  getAll(compagny_id: number): Observable<any> {
+    return this.http.get<Employee[]>(`${this.apiUrl}/${compagny_id}/getAll`, { headers: this.getHeaders() });
+  }
+
 
   getEmployee(id: number): Observable<Employee> {
     return this.http.get<Employee>(`${this.apiUrl}/${id}`, { headers: this.getHeaders() });
