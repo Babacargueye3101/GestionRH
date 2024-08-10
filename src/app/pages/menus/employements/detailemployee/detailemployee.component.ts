@@ -1,5 +1,6 @@
 import { Component, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { PdfcontratviewComponent } from '../pdfcontratview/pdfcontratview.component';
 
 @Component({
   selector: 'app-detailemployee',
@@ -10,7 +11,8 @@ export class DetailemployeeComponent {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private dialogRef: MatDialogRef<DetailemployeeComponent>
+    private dialogRef: MatDialogRef<DetailemployeeComponent>,
+    private dialog: MatDialog
   ) {}
 
   onClose(): void {
@@ -18,6 +20,10 @@ export class DetailemployeeComponent {
   }
 
   viewDocument() {
-    throw new Error('Method not implemented.');
+    this.dialog.open(PdfcontratviewComponent, {
+      data: { url: this.data.documentUrl },
+      width: '90%',
+      height: '90%'
+    })
   }
 }

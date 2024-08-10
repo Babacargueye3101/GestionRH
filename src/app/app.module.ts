@@ -37,6 +37,7 @@ import { EditEmployeeComponent } from './pages/menus/employements/edit-employee/
 import { UploaddocumentComponent } from './pages/menus/employements/uploaddocument/uploaddocument.component';
 import { DetailemployeeComponent } from './pages/menus/employements/detailemployee/detailemployee.component';
 import { ThousandSeparatorPipe } from './thousand-separator.pipe';
+import { PdfcontratviewComponent } from './pages/menus/employements/pdfcontratview/pdfcontratview.component';
 
 @NgModule({
   declarations: [
@@ -59,6 +60,7 @@ import { ThousandSeparatorPipe } from './thousand-separator.pipe';
     UploaddocumentComponent,
     DetailemployeeComponent,
     ThousandSeparatorPipe,
+    PdfcontratviewComponent,
   ],
   imports: [
     BrowserModule,
