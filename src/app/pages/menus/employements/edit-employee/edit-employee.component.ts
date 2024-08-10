@@ -48,6 +48,8 @@ export class EditEmployeeComponent {
       birthdate: this.editEmployeeForm.value.birthdate,
       gender: this.editEmployeeForm.value.gender,
       cniNumber: this.editEmployeeForm.value.cniNumber,
+      position: this.editEmployeeForm.value.position,
+      phone: this.editEmployeeForm.value.phone
     };
     this.dialogRef.close(updatedEmployee);
   }

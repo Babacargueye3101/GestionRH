@@ -22,10 +22,29 @@ export class DetailemployeeComponent {
   }
 
   viewDocument() {
-    // this.dialog.open(PdfcontratviewComponent, {
-    //   data: { url: this.data.url },
-    //   width: '90%',
-    //   height: '90%'
-    // })
+    this.dialog.open(PdfcontratviewComponent, {
+      data: { url: this.data.url },
+      width: '90%',
+      height: '90%'
+    })
+  }
+  getAge(birthdate: string): number {
+    // Convertir la chaîne en un objet Date
+    if (birthdate) {
+      const birthdateObj = new Date(birthdate);
+      const today = new Date();
+      let age = today.getFullYear() - birthdateObj.getFullYear();
+      const monthDifference = today.getMonth() - birthdateObj.getMonth();
+
+      // Vérifier si l'anniversaire de cette année est déjà passé
+      if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthdateObj.getDate())) {
+        age--;
+      }
+
+      return age;
+    }else{
+
+      return 0;
+    }
   }
 }
