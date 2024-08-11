@@ -1,0 +1,45 @@
+<h2 mat-dialog-title class="dialog-title">Modifier les informations de l'enptrepise</h2>
+<div mat-dialog-content class="dialog-content">
+  <form [formGroup]="editCompagnyForm" class="edit-form">
+
+    <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Nom de l'entreprise</mat-label>
+        <input matInput formControlName="name" placeholder="Nom">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Pays</mat-label>
+        <input matInput formControlName="countrie" placeholder="Pays">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" placeholder="Email">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Address</mat-label>
+        <input matInput formControlName="address" type="text" placeholder="Address de l'entreprise">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Numéro téléphone</mat-label>
+        <input matInput formControlName="phoneNumber" placeholder="Numéro Téléphone">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Site Web</mat-label>
+      <input matInput formControlName="website" type="text" placeholder="Votre Site Web">
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Description du Boite</mat-label>
+        <textarea matInput formControlName="description" type="area" placeholder="Description de l'entreprise"></textarea>
+      </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions class="dialog-actions">
+  <button mat-button (click)="onNoClick()" class="cancel-button">Annuler</button>
+  <button mat-raised-button color="primary" [mat-dialog-close]="editCompagnyForm.value" class="save-button" (click)="onSaveClick()">
+    Enregistrer
+  </button>
+</div>

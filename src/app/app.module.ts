@@ -47,6 +47,8 @@ import { MatTableModule } from '@angular/material/table';
 import { LOCALE_ID } from '@angular/core';
 import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
+import { DetailCompagnyComponent } from './pages/menus/compagny/detail-compagny/detail-compagny.component';
+import { EditCompagnyComponent } from './pages/menus/compagny/edit-compagny/edit-compagny.component';
 
 
 registerLocaleData(localeFr, 'fr');
@@ -72,6 +74,8 @@ registerLocaleData(localeFr, 'fr');
     DetailemployeeComponent,
     ThousandSeparatorPipe,
     PdfcontratviewComponent,
+    DetailCompagnyComponent,
+    EditCompagnyComponent,
   ],
   imports: [
     BrowserModule,

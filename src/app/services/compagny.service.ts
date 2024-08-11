@@ -17,6 +17,11 @@ export class CompagnyService {
     return this.http.post<any>(this.apiUrl, { compagny: companyData }, { headers: headers });
   }
 
+  updateCompagny(id:number, companyData: any): Observable<any> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.http.put<any>(`${this.apiUrl}/${id}`, { compagny: companyData }, { headers: headers });
+  }
+
   getAllCompagny(){
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     return this.http.get<any>(this.apiUrl, { headers: headers });

@@ -4,6 +4,8 @@ import { CompagnymodalComponent } from './compagnymodal/compagnymodal.component'
 import { CompagnyService } from 'src/app/services/compagny.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import Swal from 'sweetalert2';
+import { DetailCompagnyComponent } from './detail-compagny/detail-compagny.component';
+import { EditCompagnyComponent } from './edit-compagny/edit-compagny.component';
 
 export interface Company {
   id: number;
@@ -52,14 +54,25 @@ export class CompagnyComponent implements OnInit{
   }
 
 
-  viewCompany(id: number): void {
-    // Logique pour afficher les détails d'une compagnie
-    console.log('Voir les détails de la compagnie', id);
-  }
-
   deleteCompany(id: number): void {
     // Logique pour supprimer une compagnie
     console.log('Supprimer la compagnie', id);
+  }
+
+
+  editCompagny(compagny: any){
+    const dialogRef=this.dialog.open(EditCompagnyComponent, {
+      data: compagny,
+      width: '900px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.compagnyService.updateCompagny(result.id, result).subscribe(() => {
+          this._fetchData();
+        });
+      }
+    });
   }
 
 
@@ -67,6 +80,13 @@ export class CompagnyComponent implements OnInit{
     this.dialog.open(CompagnymodalComponent, {
       width: '1150px',
       height: '750px'
+    });
+  }
+
+  viewCompany(compagny: any): void {
+    this.dialog.open(DetailCompagnyComponent, {
+      data: compagny,
+      width: '900px'
     });
   }
 
