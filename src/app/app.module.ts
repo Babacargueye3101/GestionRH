@@ -41,6 +41,9 @@ import { PdfcontratviewComponent } from './pages/menus/employements/pdfcontratvi
 import { NgxEchartsModule } from 'ngx-echarts';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatTableModule } from '@angular/material/table';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 
 
@@ -50,7 +53,8 @@ import localeFr from '@angular/common/locales/fr';
 import { DetailCompagnyComponent } from './pages/menus/compagny/detail-compagny/detail-compagny.component';
 import { EditCompagnyComponent } from './pages/menus/compagny/edit-compagny/edit-compagny.component';
 import { UploadLogComponent } from './pages/menus/compagny/upload-log/upload-log.component';
-
+import { DemandecongesComponent } from './pages/menus/conges/demandeconges/demandeconges.component';
+import { MatChipsModule } from '@angular/material/chips';
 
 registerLocaleData(localeFr, 'fr');
 @NgModule({
@@ -78,6 +82,7 @@ registerLocaleData(localeFr, 'fr');
     DetailCompagnyComponent,
     EditCompagnyComponent,
     UploadLogComponent,
+    DemandecongesComponent,
   ],
   imports: [
     BrowserModule,
@@ -100,8 +105,11 @@ registerLocaleData(localeFr, 'fr');
     MatSnackBarModule,
     MatGridListModule,
     MatTableModule,
-    NgxEchartsModule.forRoot({ echarts: () => import('echarts') })
-
+    NgxEchartsModule.forRoot({ echarts: () => import('echarts') }),
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatChipsModule,
+    MatPaginatorModule
   ],
   providers: [{ provide: LOCALE_ID, useValue: 'fr' }],
   bootstrap: [AppComponent]

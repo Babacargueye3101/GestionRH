@@ -1,0 +1,48 @@
+<h2 mat-dialog-title class="dialog-title">Formulaire de demande de Congés</h2>
+<div mat-dialog-content class="dialog-content">
+  <form [formGroup]="addConges" class="edit-form" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="fill">
+      <mat-label>Type de congé</mat-label>
+      <mat-select formControlName="leave_type">
+        <mat-option *ngFor="let type of leaveTypes" [value]="type.value">
+          {{type.viewValue}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Date de début</mat-label>
+      <input matInput [matDatepicker]="startDatePicker" formControlName="start_date" (dateChange)="calculateNumberOfDays()">
+      <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
+      <mat-datepicker #startDatePicker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Date de fin</mat-label>
+      <input matInput [matDatepicker]="endDatePicker" formControlName="end_date" (dateChange)="calculateNumberOfDays()">
+      <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+      <mat-datepicker #endDatePicker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Nombre de jours</mat-label>
+      <input matInput formControlName="nbreday" [value]="days_taken" readonly>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Motif</mat-label>
+      <textarea matInput formControlName="reason" placeholder="Décrivez le motif (facultatif)"></textarea>
+    </mat-form-field>
+
+    <div mat-dialog-actions class="dialog-actions">
+      <button mat-raised-button color="primary" type="submit" class="save-button">
+        Créer
+      </button>
+      <button mat-button class="cancel-button" (click)="onNoClick()">Annuler</button>
+    </div>
+  </form>
+</div>
+
+<ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="medium" color="#fff" type="Ball-Tail">
+  <p style="color: white">Veillez patienter un moment 😕 !!</p>
+</ngx-spinner>
