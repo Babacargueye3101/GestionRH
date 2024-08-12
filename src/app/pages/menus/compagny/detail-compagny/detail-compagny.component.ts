@@ -1,5 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { UploadLogComponent } from '../upload-log/upload-log.component';
 @Component({
   selector: 'app-detail-compagny',
   templateUrl: './detail-compagny.component.html',
@@ -19,4 +20,10 @@ export class DetailCompagnyComponent {
     this.dialogRef.close();
   }
 
+  viewCompany(compagny: any): void {
+    this.dialog.open(UploadLogComponent, {
+      data: compagny,
+      width: '300px'
+    });
+  }
 }

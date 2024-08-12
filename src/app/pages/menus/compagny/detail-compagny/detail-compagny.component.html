@@ -1,10 +1,13 @@
 <div mat-dialog-content class="modal-container">
   <!-- Partie gauche -->
   <div class="left-section">
-    <img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcR1bGGi3JK4IknHua3xDucgbe1ah0T2s2aQcm6AeXC5jEgRKKBz" alt="Photo de l'employé" class="employee-photo" />
+    <img [src]="'http://localhost:3000/' + data.url" alt="Photo de l'employé" class="employee-photo" />
     <div class="employee-info">
       <h4>{{data.name}}</h4>
     </div>
+    <div mat-dialog-actions>
+        <button mat-button (click)="viewCompany(data)" color="primary">Changer le logo</button>
+      </div>
   </div>
 
   <!-- Ligne verticale -->

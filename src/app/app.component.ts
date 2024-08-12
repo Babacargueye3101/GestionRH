@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 import { AuthService } from './services/auth.service';
 import { Router } from '@angular/router';
+import { CompagnyService } from './services/compagny.service';
 
 @Component({
   selector: 'app-root',
@@ -15,6 +16,8 @@ export class AppComponent implements OnInit {
   title = 'GestionRH';
   currentUser: any;
   showNestedMenu = false;
+  user:any;
+  compagny:any;
 
   @ViewChild('sidenav') sidenav!: MatSidenav;
 
@@ -24,18 +27,18 @@ export class AppComponent implements OnInit {
 
   currentYear: number = new Date().getFullYear();
 
-  constructor(private authService: AuthService, private router: Router){
+  constructor(private authService: AuthService, private router: Router, private compagnyService: CompagnyService){
 
   }
   ngOnInit(): void {
 
-    const user = localStorage.getItem('currentUser');
-    if (user) {
-      this.currentUser = JSON.parse(user);
+    this.user = localStorage.getItem('currentUser');
+    if (this.user) {
+      this.currentUser = JSON.parse(this.user);
       this.userEmail= this.currentUser.email;
       this.userName= this.currentUser.name;
       this.isLoggedIn= true;
-      console.log(this.userEmail);
+      this.getCurrentCompagny(this.currentUser.compagny_id);
     }
   }
 
@@ -69,6 +72,12 @@ export class AppComponent implements OnInit {
   }
   toggleNestedMenu() {
     this.showNestedMenu = !this.showNestedMenu;
+  }
+
+  getCurrentCompagny(id:any){
+    this.compagnyService.getCompagnyById(id).subscribe((res)=>{
+       this.compagny= res.currentCompagny
+    })
   }
 
 }

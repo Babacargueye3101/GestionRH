@@ -58,17 +58,20 @@
 }
 
 .cancel-button {
-  color: #f44336; // Couleur du texte pour le bouton Annuler
+  color: white;
+  background-color: #f44336; // Couleur du texte pour le bouton Annuler
 }
 
 .cancel-button:hover {
-  background-color: rgba(244, 67, 54, 0.1); // Couleur de fond en survol pour Annuler
+  background-color: red;
 }
 
 .create-button {
-  color: #3f51b5; // Couleur du texte pour le bouton Créer
+  color: white;
+  background-color: #3f51b5; // Couleur du texte pour le bouton Créer
+
 }
 
 .create-button:hover {
-  background-color: rgba(63, 81, 181, 0.1); // Couleur de fond en survol pour Créer
+  background-color: #3f51b5;
 }

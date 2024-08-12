@@ -49,6 +49,7 @@ import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
 import { DetailCompagnyComponent } from './pages/menus/compagny/detail-compagny/detail-compagny.component';
 import { EditCompagnyComponent } from './pages/menus/compagny/edit-compagny/edit-compagny.component';
+import { UploadLogComponent } from './pages/menus/compagny/upload-log/upload-log.component';
 
 
 registerLocaleData(localeFr, 'fr');
@@ -76,6 +77,7 @@ registerLocaleData(localeFr, 'fr');
     PdfcontratviewComponent,
     DetailCompagnyComponent,
     EditCompagnyComponent,
+    UploadLogComponent,
   ],
   imports: [
     BrowserModule,

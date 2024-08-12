@@ -78,8 +78,8 @@ export class CompagnyComponent implements OnInit{
 
   openCreateCompanyModal(): void {
     this.dialog.open(CompagnymodalComponent, {
-      width: '1150px',
-      height: '750px'
+      width: '950px',
+      height: '630px'
     });
   }
 
