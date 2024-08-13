@@ -24,14 +24,25 @@ export class CongesComponent implements OnInit{
 
   totalConges!: number;
 
-  displayedColumns: string[] = ['leave_type', 'start_date', 'end_date', 'days_taken','status', 'actions'];
+  displayedColumns: string[] = ['leave_type', 'start_date', 'end_date', 'days_taken','full_name','status', 'actions'];
   congeList = [];
+  filteredList= [];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   dataSource = new MatTableDataSource<Conge>();
 
   currentUser:any;
+
+
+  // Recherche détaillée
+  searchCriteria = {
+    name: '',
+    leaveType: '',
+    startDate: '',
+    endDate: '',
+    status: ''
+  };
 
 
   leaveTypes = [
@@ -147,6 +158,10 @@ export class CongesComponent implements OnInit{
     });
   }
 
+  viewDetailConge(){
+
+  }
+
 
   getLeaveViewValue(leaveValue: string): string | undefined {
     const leaveType = this.leaveTypes.find(leave => leave.value === leaveValue);
@@ -178,4 +193,29 @@ export class CongesComponent implements OnInit{
     return statusClass;
   }
 
+
+  resetSearch() {
+    this.searchCriteria = {
+      name: '',
+      leaveType: '',
+      startDate: '',
+      endDate: '',
+      status: ''
+    };
+    this.ngOnInit();
+  }
+
+  applyFilter(): void {
+    this.congeList = this.congeList.filter((conge: Conge) => {
+      return (!this.searchCriteria.name || conge.full_name.toLowerCase().includes(this.searchCriteria.name.toLowerCase())) &&
+             (!this.searchCriteria.leaveType || conge.leave_type === this.searchCriteria.leaveType) &&
+             (!this.searchCriteria.startDate || new Date(conge.start_date) >= new Date(this.searchCriteria.startDate)) &&
+             (!this.searchCriteria.endDate || new Date(conge.end_date) <= new Date(this.searchCriteria.endDate)) &&
+             (!this.searchCriteria.status || conge.status === this.searchCriteria.status);
+    });
+  }
+
+  onSearchCriteriaChange(): void {
+    this.applyFilter();
+  }
 }

@@ -8,4 +8,5 @@ export interface Conge {
     reason: string; // La raison du congé
     status: string; // Le statut du congé (ex: pending, approved, rejected)
     date_taken?: Date; // La date à laquelle la demande a été effectuée
+    full_name: string
 }

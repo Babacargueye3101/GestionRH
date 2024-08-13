@@ -56,6 +56,7 @@ import { UploadLogComponent } from './pages/menus/compagny/upload-log/upload-log
 import { DemandecongesComponent } from './pages/menus/conges/demandeconges/demandeconges.component';
 import { MatChipsModule } from '@angular/material/chips';
 import { ValidercongeComponent } from './pages/menus/conges/validerconge/validerconge.component';
+import { ViewdetailCongeComponent } from './pages/menus/conges/viewdetail-conge/viewdetail-conge.component';
 
 registerLocaleData(localeFr, 'fr');
 @NgModule({
@@ -85,6 +86,7 @@ registerLocaleData(localeFr, 'fr');
     UploadLogComponent,
     DemandecongesComponent,
     ValidercongeComponent,
+    ViewdetailCongeComponent,
   ],
   imports: [
     BrowserModule,

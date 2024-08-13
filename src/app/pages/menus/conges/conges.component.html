@@ -10,6 +10,43 @@
 
 <div class="leave-list">
     <h2>Liste des demandes de congés</h2>
+
+    <div class="filter-container">
+        <mat-form-field appearance="fill">
+          <mat-label>Nom</mat-label>
+          <input matInput [(ngModel)]="searchCriteria.name" (ngModelChange)="onSearchCriteriaChange()" placeholder="Rechercher par nom">
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Type de Congé</mat-label>
+          <mat-select [(ngModel)]="searchCriteria.leaveType" (ngModelChange)="onSearchCriteriaChange()">
+            <mat-option *ngFor="let type of leaveTypes" [value]="type.value">
+              {{ type.viewValue }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Date de début</mat-label>
+          <input matInput [(ngModel)]="searchCriteria.startDate" (ngModelChange)="onSearchCriteriaChange()" [matDatepicker]="picker1" placeholder="Choisir une date">
+          <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+          <mat-datepicker #picker1></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Date de fin</mat-label>
+          <input matInput [(ngModel)]="searchCriteria.endDate" (ngModelChange)="onSearchCriteriaChange()" [matDatepicker]="picker2" placeholder="Choisir une date">
+          <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+          <mat-datepicker #picker2></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Statut</mat-label>
+          <mat-select [(ngModel)]="searchCriteria.status" (ngModelChange)="onSearchCriteriaChange()">
+            <mat-option *ngFor="let status of leaveStatuses" [value]="status.value">
+              {{ status.viewValue }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <button mat-button color="accent" (click)="resetSearch()">Réinitialiser</button>
+      </div>
+
     <table mat-table [dataSource]="congeList" class="mat-elevation-z8">
 
       <!-- Type de congé Column -->
@@ -34,6 +71,13 @@
       <ng-container matColumnDef="days_taken">
         <th mat-header-cell *matHeaderCellDef> Nombre de jours </th>
         <td mat-cell *matCellDef="let conge"> {{conge.days_taken}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="full_name">
+        <th mat-header-cell *matHeaderCellDef> Employé </th>
+        <td mat-cell *matCellDef="let conge">
+          {{ conge?.full_name }}
+        </td>
       </ng-container>
 
       <ng-container matColumnDef="status">
@@ -78,6 +122,6 @@
     [pageSize]="10"
     showFirstLastButtons>
 </mat-paginator>
-  </div>
+</div>
 
 
