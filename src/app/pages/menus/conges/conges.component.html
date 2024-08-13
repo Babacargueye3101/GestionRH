@@ -62,10 +62,10 @@
             <mat-icon>edit</mat-icon>
           </button>
           <span class="spacer"></span>
-          <button mat-mini-fab aria-label="supprimé conge" color="primary" *ngIf="conge.status=='en_attente' && currentUser.role=='employee'">
+          <button mat-mini-fab aria-label="supprimé conge" color="primary" *ngIf="conge.status=='en_attente' && currentUser.role=='employee'" (click)="deleteConge(conge.id)">
             <mat-icon>delete</mat-icon>
           </button>
-          <button mat-mini-fab aria-label="supprimé conge" color="primary" *ngIf="currentUser.role=='admin'">
+          <button mat-mini-fab aria-label="supprimé conge" color="primary" *ngIf="currentUser.role=='admin'" (click)="deleteConge(conge.id)">
             <mat-icon>delete</mat-icon>
           </button>
         </td>

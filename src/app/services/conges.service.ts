@@ -39,5 +39,10 @@ export class CongesService {
     return this.http.put<any>(`${this.apiUrl}/${id}/changeStatus`, { leave: conge_params }, { headers: headers });
   }
 
+  deleteConge(id: any){
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.http.delete<any>(`${this.apiUrl}/${id}`, { headers: headers });
+  }
+
 
 }

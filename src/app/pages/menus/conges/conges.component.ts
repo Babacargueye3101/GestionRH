@@ -7,6 +7,10 @@ import { MatPaginator } from '@angular/material/paginator';
 import { Conge } from 'src/app/models/conge.model';
 import { MatTableDataSource } from '@angular/material/table';
 import { ValidercongeComponent } from './validerconge/validerconge.component';
+import Swal from 'sweetalert2';
+
+import {MatSnackBar} from '@angular/material/snack-bar';
+
 
 @Component({
   selector: 'app-conges',
@@ -53,10 +57,11 @@ export class CongesComponent implements OnInit{
     { value: 'termine', viewValue: 'Terminé' }
   ];
   user: any;
+  employee: any;
 
 
 
-  constructor(private dialog: MatDialog , private congeservice: CongesService)
+  constructor(private dialog: MatDialog , private congeservice: CongesService, private _snakbar: MatSnackBar)
   {
 
   }
@@ -102,6 +107,7 @@ export class CongesComponent implements OnInit{
       (response: any) => {
         this.congeList = response?.conges;
         this.totalConges=  response?.meta.total_count;
+        this.employee= response?.employee;
       },
       error => {
         console.error('Erreur lors du chargement des demandes de congés', error);
@@ -113,8 +119,24 @@ export class CongesComponent implements OnInit{
     // Logic to edit the leave request
   }
 
-  deleteConge(conge: any): void {
-    // Logic to delete the leave request
+  deleteConge(id: any): void {
+    Swal.fire({
+      title: 'Suppression',
+      text: 'Voulez-vous vraiment supprimé la demande',
+      icon: 'info',
+      showCancelButton: true,
+      confirmButtonText: 'Oui',
+      cancelButtonText: 'Non'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.congeservice.deleteConge(id).subscribe((res)=> {
+            this._snakbar.open("Congé supprimé avec Succes",'Fermer', { duration: 3000 })
+            this.getConges(0, 10, this.currentUser)
+        })
+      } else if (result.isDismissed) {
+
+      }
+    });
   }
 
   validerConge(conge: any){

@@ -30,13 +30,16 @@ export class ValidercongeComponent {
   changerStatus() {
     this.spinnerService.show();
     this.congeService.changeStatusConge(this.data.conge.id, this.selectedStatus, this.comment).subscribe((res)=> {
-      Swal.fire('Status Changé avec Success', 'Success', 'success');
-      this.spinnerService.hide();
-      this.congeService.getCongesList();
-    },(error)=>{
-      Swal.fire('Echec du Changement', 'Erreur', 'error');
-      this.spinnerService.hide();
-    })
+      Swal.fire('Status Changé avec Success', 'Success', 'success').then((result) => {
+        if (result.isConfirmed) {
+          location.reload();
+          this.spinnerService.hide();
+        }
+      });
+      },(error)=>{
+        Swal.fire('Echec du Changement', 'Erreur', 'error');
+        this.spinnerService.hide();
+      })
   }
 
 
