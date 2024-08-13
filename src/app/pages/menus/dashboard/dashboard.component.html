@@ -43,6 +43,21 @@
       <div echarts [options]="chartOptions" class="demo-chart"></div>
     </div>
 </div>
-<div>
-    <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur cum voluptatibus doloremque aliquid iure tenetur? Qui, saepe veritatis tempore obcaecati illo ducimus nam harum, cum dicta aliquam eius quas odit!</h2>
-</div>
+
+<mat-card class="summary-card">
+  <mat-card-content class="summary-content">
+      <div class="summary-section">
+          <div class="circle">{{statisqueConges?.approuve}}</div>
+          <h3>Nbre Employés en Congé</h3>
+      </div>
+      <div class="summary-section">
+          <div class="circle">{{nbreTotal-statisqueConges?.approuve}}</div>
+          <h3>Employés Disponibles</h3>
+      </div>
+      <div class="summary-section">
+          <div class="circle">{{leaves_this_month}}</div>
+          <h3>Nombre de Demandes de Congés du Mois</h3>
+      </div>
+  </mat-card-content>
+</mat-card>
+

@@ -22,7 +22,10 @@ export class DashboardComponent implements OnInit {
   displayedColumns: string[] = ['category', 'count', 'pourcentage'];
   dataSource: Statistic[] = [];  // Typage de dataSource
 
+  statisqueConges: any;
+
   nbreTotal: any;
+  leaves_this_month: any;
 
   constructor(private employeeService: EmployeeServiceService) { }
 
@@ -41,7 +44,8 @@ export class DashboardComponent implements OnInit {
         const total = res.total;
         this.nbreTotal= res.total
         const statistics = res.statistic_employees;
-
+        this.statisqueConges= res?.conge_statistique
+        this.leaves_this_month= res?.leaves_this_month;
         const pourcentageMascu = total ? (statistics.masculins * 100) / total : 0;
         const pourcentageFemin = total ? (statistics.feminins * 100) / total : 0;
         const pourcentageAutre = total ? (statistics.autres * 100) / total : 0;
