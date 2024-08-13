@@ -44,7 +44,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatPaginatorModule } from '@angular/material/paginator';
-
+import { FormsModule } from '@angular/forms';
 
 
 import { LOCALE_ID } from '@angular/core';
@@ -55,6 +55,7 @@ import { EditCompagnyComponent } from './pages/menus/compagny/edit-compagny/edit
 import { UploadLogComponent } from './pages/menus/compagny/upload-log/upload-log.component';
 import { DemandecongesComponent } from './pages/menus/conges/demandeconges/demandeconges.component';
 import { MatChipsModule } from '@angular/material/chips';
+import { ValidercongeComponent } from './pages/menus/conges/validerconge/validerconge.component';
 
 registerLocaleData(localeFr, 'fr');
 @NgModule({
@@ -83,6 +84,7 @@ registerLocaleData(localeFr, 'fr');
     EditCompagnyComponent,
     UploadLogComponent,
     DemandecongesComponent,
+    ValidercongeComponent,
   ],
   imports: [
     BrowserModule,
@@ -109,7 +111,8 @@ registerLocaleData(localeFr, 'fr');
     MatDatepickerModule,
     MatNativeDateModule,
     MatChipsModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    FormsModule
   ],
   providers: [{ provide: LOCALE_ID, useValue: 'fr' }],
   bootstrap: [AppComponent]

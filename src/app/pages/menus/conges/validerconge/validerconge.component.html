@@ -1,0 +1,18 @@
+<form>
+    <mat-form-field appearance="fill">
+      <mat-label>Statut de la demande</mat-label>
+      <mat-select [(ngModel)]="selectedStatus" name="status">
+        <mat-option *ngFor="let status of leaveStatuses" [value]="status.value">
+          {{ status.viewValue }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" >
+      <mat-label>Commentaire</mat-label>
+      <textarea matInput [(ngModel)]="comment" name="comment"></textarea>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" (click)="changerStatus()">Confirmer</button>
+
+</form>

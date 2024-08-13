@@ -75,6 +75,10 @@ export class DemandecongesComponent implements OnInit {
             text: 'Congé créé avec succès.',
             icon: 'success',
             showConfirmButton: true,
+          }).then((result) => {
+            if (result.isConfirmed) {
+              location.reload();
+            }
           });
           this.dialogRef.close();
         },

@@ -1,0 +1,21 @@
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px; // Ajoute un espace entre les champs
+    margin: 20px;
+
+    mat-form-field {
+      width: 100%;
+    }
+
+    mat-form-field {
+        textarea {
+          min-height: 260px; // Ajustez cette valeur pour augmenter la hauteur
+          resize: vertical;  // Permettre le redimensionnement vertical
+        }
+    }
+
+    button {
+      align-self: flex-start; // Place le bouton au début
+    }
+  }

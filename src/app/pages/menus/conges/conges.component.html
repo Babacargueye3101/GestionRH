@@ -48,15 +48,24 @@
       <!-- Actions Column -->
       <ng-container matColumnDef="actions">
         <th mat-header-cell *matHeaderCellDef style="text-align: right;"> Actions </th>
-        <td mat-cell *matCellDef="let company" class="text-right">
-            <button mat-mini-fab aria-label="supprimé compagny" style="margin-right: 10px; background-color:orange">
-              <mat-icon>visibility</mat-icon>
-            </button>
-          <button mat-mini-fab aria-label="voir compagny" color="accent"  style="margin-right: 10px;">
+        <td mat-cell *matCellDef="let conge" class="text-right">
+          <button mat-mini-fab aria-label="valider congé" style="margin-right: 10px; background-color:rgb(6, 188, 255); color:black" *ngIf="this.currentUser.role=='admin'" (click)="validerConge(conge)">
+            <mat-icon>check</mat-icon>
+          </button>
+          <button mat-mini-fab aria-label="voir congé" style="margin-right: 10px; background-color:orange">
+            <mat-icon>visibility</mat-icon>
+          </button>
+          <button mat-mini-fab aria-label="edit congé" color="accent"  style="margin-right: 10px;" *ngIf="conge.status=='en_attente' && currentUser.role=='employee'">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-mini-fab aria-label="edit congé" color="accent"  style="margin-right: 10px;" *ngIf="currentUser.role=='admin'">
             <mat-icon>edit</mat-icon>
           </button>
           <span class="spacer"></span>
-          <button mat-mini-fab aria-label="supprimé compagny" color="primary" >
+          <button mat-mini-fab aria-label="supprimé conge" color="primary" *ngIf="conge.status=='en_attente' && currentUser.role=='employee'">
+            <mat-icon>delete</mat-icon>
+          </button>
+          <button mat-mini-fab aria-label="supprimé conge" color="primary" *ngIf="currentUser.role=='admin'">
             <mat-icon>delete</mat-icon>
           </button>
         </td>

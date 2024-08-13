@@ -6,6 +6,7 @@ import { CongesService } from 'src/app/services/conges.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { Conge } from 'src/app/models/conge.model';
 import { MatTableDataSource } from '@angular/material/table';
+import { ValidercongeComponent } from './validerconge/validerconge.component';
 
 @Component({
   selector: 'app-conges',
@@ -25,6 +26,8 @@ export class CongesComponent implements OnInit{
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   dataSource = new MatTableDataSource<Conge>();
+
+  currentUser:any;
 
 
   leaveTypes = [
@@ -49,6 +52,7 @@ export class CongesComponent implements OnInit{
     { value: 'refuse', viewValue: 'Refusé' },
     { value: 'termine', viewValue: 'Terminé' }
   ];
+  user: any;
 
 
 
@@ -58,7 +62,11 @@ export class CongesComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.getConges();
+    this.user = localStorage.getItem('currentUser');
+    if (this.user) {
+      this.currentUser = JSON.parse(this.user);
+    }
+    this.getConges(0, 10, this.currentUser);
   }
 
   ngAfterViewInit() {
@@ -73,24 +81,24 @@ export class CongesComponent implements OnInit{
       }
       const startIndex = page * pageSize;
       const endIndex = startIndex < length ? Math.min(startIndex + pageSize, length) : startIndex + pageSize;
-      this.getConges(page, 10)
+      this.getConges(page, 10, this.currentUser)
       return `${startIndex + 1} - ${endIndex} sur ${length}`;
     };
   }
 
   onPageChange(event: any): void {
-    this.getConges(event.pageIndex, event.pageSize);
+    this.getConges(event.pageIndex, event.pageSize, this.currentUser);
   }
 
   demandeConges() {
     this.dialog.open(DemandecongesComponent, {
       width: '950px',
-      height: '630px'
+      height: '630px',
     });
   }
 
-  getConges(pageIndex: number = 0, pageSize: number = 10): void {
-    this.congeservice.getCongesList(pageIndex + 1,pageSize).subscribe(
+  getConges(pageIndex: number = 0, pageSize: number = 10, currentUser: any): void {
+    this.congeservice.getCongesList(pageIndex + 1,pageSize, currentUser).subscribe(
       (response: any) => {
         this.congeList = response?.conges;
         this.totalConges=  response?.meta.total_count;
@@ -107,6 +115,14 @@ export class CongesComponent implements OnInit{
 
   deleteConge(conge: any): void {
     // Logic to delete the leave request
+  }
+
+  validerConge(conge: any){
+    this.dialog.open(ValidercongeComponent, {
+       width: '500px',
+       height: '500px',
+       data: { conge }
+    });
   }
 
 
@@ -131,11 +147,11 @@ export class CongesComponent implements OnInit{
       case 'approuve':
         statusClass = 'status-approved';
         break;
-      case 'rejeté':
+      case 'refuse':
         statusClass = 'status-rejected';
         break;
       default:
-        statusClass = '';
+        statusClass = 'status-termine';
     }
     return statusClass;
   }
