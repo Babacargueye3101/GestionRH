@@ -3,8 +3,14 @@
     <button (click)="goToToday()">Aujourd'hui</button>
     <button (click)="navigate(1)">Semaine Suivante</button>
 </div>
+<div class="calendar-header">
+    <h2>{{ viewDate | date: 'MMMM yyyy' }}</h2>
+</div>
+<div class="calendar-container">
+    <mwl-calendar-month-view
+      [viewDate]="viewDate"
+      [events]="events"
+      (dayClicked)="handleDayClick($event)">
+    </mwl-calendar-month-view>
+</div>
 
-<mwl-calendar-month-view
-  [viewDate]="viewDate"
-  [events]="events">
-</mwl-calendar-month-view>

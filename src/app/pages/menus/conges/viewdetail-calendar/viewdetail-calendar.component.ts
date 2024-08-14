@@ -5,6 +5,10 @@ import { Conge } from 'src/app/models/conge.model';
 import { CongesService } from 'src/app/services/conges.service';
 import { addMonths, subMonths, startOfMonth, endOfMonth, startOfWeek, endOfWeek, isToday } from 'date-fns';
 import { fr } from 'date-fns/locale';
+import { CalendarMonthViewDay } from 'angular-calendar';
+import { DemandecongesComponent } from '../demandeconges/demandeconges.component';
+import { MatDialog } from '@angular/material/dialog';
+
 
 @Component({
   selector: 'app-viewdetail-calendar',
@@ -36,7 +40,7 @@ export class ViewdetailCalendarComponent implements OnInit {
     { value: 'travel', viewValue: 'Congés pour Voyage' }
   ];
 
-  constructor(private congeservice: CongesService) {}
+  constructor(private congeservice: CongesService, private dialog: MatDialog) {}
 
   async ngOnInit(): Promise<void> {
     this.user = localStorage.getItem('currentUser');
@@ -93,5 +97,13 @@ export class ViewdetailCalendarComponent implements OnInit {
     const date = parseISO(inputDate);
     // Formater la date en DD MMMM YYYY
     return format(date, 'dd MMMM yyyy', { locale: fr });
+  }
+
+  handleDayClick({ day, sourceEvent }: { day: CalendarMonthViewDay, sourceEvent: MouseEvent | KeyboardEvent }): void {
+
+    this.dialog.open(DemandecongesComponent, {
+      width: '950px',
+      height: '630px',
+    });
   }
 }
