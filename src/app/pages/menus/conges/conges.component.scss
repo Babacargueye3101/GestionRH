@@ -105,5 +105,18 @@
         background-color: orange;
       }
 
+      .calendar-container {
+        margin: 20px 0;
+        h2 {
+          text-align: center;
+          margin-bottom: 20px;
+          color: #333;
+        }
+        mwl-calendar-month-view {
+          margin: 0 auto;
+          // Ajoutez ici des styles spécifiques si nécessaire
+        }
+      }
+
 
 }

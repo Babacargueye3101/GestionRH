@@ -45,6 +45,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { FormsModule } from '@angular/forms';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 
 
 import { LOCALE_ID } from '@angular/core';
@@ -57,6 +59,7 @@ import { DemandecongesComponent } from './pages/menus/conges/demandeconges/deman
 import { MatChipsModule } from '@angular/material/chips';
 import { ValidercongeComponent } from './pages/menus/conges/validerconge/validerconge.component';
 import { ViewdetailCongeComponent } from './pages/menus/conges/viewdetail-conge/viewdetail-conge.component';
+import { ViewdetailCalendarComponent } from './pages/menus/conges/viewdetail-calendar/viewdetail-calendar.component';
 
 registerLocaleData(localeFr, 'fr');
 @NgModule({
@@ -87,6 +90,7 @@ registerLocaleData(localeFr, 'fr');
     DemandecongesComponent,
     ValidercongeComponent,
     ViewdetailCongeComponent,
+    ViewdetailCalendarComponent,
   ],
   imports: [
     BrowserModule,
@@ -114,7 +118,11 @@ registerLocaleData(localeFr, 'fr');
     MatNativeDateModule,
     MatChipsModule,
     MatPaginatorModule,
-    FormsModule
+    FormsModule,
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory,
+    }),
   ],
   providers: [{ provide: LOCALE_ID, useValue: 'fr' }],
   bootstrap: [AppComponent]

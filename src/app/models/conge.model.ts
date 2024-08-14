@@ -1,8 +1,8 @@
 export interface Conge {
     id: number; // Un identifiant unique pour le congé
     employee_id: number; // L'ID de l'employé
-    start_date: Date; // La date de début du congé
-    end_date: Date; // La date de fin du congé
+    start_date: string; // La date de début du congé
+    end_date: string; // La date de fin du congé
     days_taken: number; // Le nombre de jours pris
     leave_type: string; // Le type de congé (ex: paid, unpaid, etc.)
     reason: string; // La raison du congé
