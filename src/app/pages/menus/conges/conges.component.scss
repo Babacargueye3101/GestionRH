@@ -118,5 +118,34 @@
         }
       }
 
-
 }
+
+
+  .view-toggle-container {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    gap: 20px; /* Spacing between radio buttons */
+    margin-bottom: 20px; /* Spacing below the radio buttons */
+  }
+
+  .mat-radio-button {
+    font-size: 1.2rem; /* Augmente la taille du texte des étiquettes */
+    margin: 0 10px; /* Espacement horizontal entre les boutons radio */
+
+    .mat-radio-outer-circle {
+      width: 24px; /* Largeur du cercle extérieur */
+      height: 24px; /* Hauteur du cercle extérieur */
+    }
+
+    .mat-radio-inner-circle {
+      width: 24px; /* Largeur du cercle intérieur */
+      height: 24px; /* Hauteur du cercle intérieur */
+    }
+  }
+
+  .mat-radio-button .mat-radio-container {
+    width: 30px; /* Largeur du conteneur radio */
+    height: 30px; /* Hauteur du conteneur radio */
+  }
+
+

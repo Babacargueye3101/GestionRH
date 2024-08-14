@@ -22,6 +22,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 })
 export class CongesComponent implements OnInit{
 
+  isCalendarView: boolean = false;
   startDates: string[] = [];
 
   addConges!: FormGroup;
@@ -225,5 +226,9 @@ export class CongesComponent implements OnInit{
 
   onSearchCriteriaChange(): void {
     this.applyFilter();
+  }
+  selectedView: string = 'table';
+  onViewChange(view: string): void {
+    this.selectedView = view;
   }
 }

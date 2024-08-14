@@ -55,3 +55,26 @@
     color: #1976d2;
     display: block;
   }
+
+  .calendar-controls {
+    display: flex;            /* Utiliser Flexbox pour la disposition */
+    justify-content: center; /* Centrer les boutons horizontalement */
+    gap: 10px;                /* Ajouter un espace de 10px entre les boutons */
+    margin-bottom: 20px;      /* Ajouter une marge en bas pour séparer du calendrier */
+  }
+
+  .calendar-controls button {
+    background-color: #3f51b5;
+    color: white;
+    border: none;
+    padding: 10px 20px;      /* Padding pour rendre les boutons plus grands */
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;         /* Taille de police pour les boutons */
+  }
+
+  .calendar-controls button:hover {
+    background-color: #3f51b5;
+  }
+
+

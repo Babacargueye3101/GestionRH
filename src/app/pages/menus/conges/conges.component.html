@@ -7,8 +7,14 @@
       </button>
     </mat-toolbar>
 </div>
+<div class="view-toggle-container">
+  <mat-radio-group [(ngModel)]="selectedView" (ngModelChange)="onViewChange($event)">
+    <mat-radio-button value="table">Vue tabulaire</mat-radio-button>
+    <mat-radio-button value="calendar">Vue calendaire</mat-radio-button>
+  </mat-radio-group>
+</div>
 
-<div class="leave-list">
+<div class="leave-list" *ngIf="selectedView === 'table'">
     <h2>Liste des demandes de congés</h2>
 
     <div class="filter-container">
@@ -123,4 +129,4 @@
     showFirstLastButtons>
 </mat-paginator>
 </div>
-<app-viewdetail-calendar ></app-viewdetail-calendar>
+<app-viewdetail-calendar *ngIf="selectedView === 'calendar'"></app-viewdetail-calendar>

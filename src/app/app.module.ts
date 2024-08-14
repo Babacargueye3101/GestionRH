@@ -60,6 +60,8 @@ import { MatChipsModule } from '@angular/material/chips';
 import { ValidercongeComponent } from './pages/menus/conges/validerconge/validerconge.component';
 import { ViewdetailCongeComponent } from './pages/menus/conges/viewdetail-conge/viewdetail-conge.component';
 import { ViewdetailCalendarComponent } from './pages/menus/conges/viewdetail-calendar/viewdetail-calendar.component';
+import { MatRadioModule } from '@angular/material/radio';
+
 
 registerLocaleData(localeFr, 'fr');
 @NgModule({
@@ -123,6 +125,7 @@ registerLocaleData(localeFr, 'fr');
       provide: DateAdapter,
       useFactory: adapterFactory,
     }),
+    MatRadioModule
   ],
   providers: [{ provide: LOCALE_ID, useValue: 'fr' }],
   bootstrap: [AppComponent]
