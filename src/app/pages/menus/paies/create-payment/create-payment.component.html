@@ -1,0 +1,65 @@
+<form [formGroup]="paymentForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="fill">
+        <mat-label>Employé</mat-label>
+        <input type="text" matInput formControlName="employeeId" [matAutocomplete]="auto">
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let employee of filteredEmployees | async" [value]="employee.first_name+' '+employee.last_name">
+            {{ employee.first_name }} {{employee.last_name}}
+          </mat-option>
+        </mat-autocomplete>
+        <mat-error *ngIf="paymentForm.get('employeeId')?.invalid">
+          Sélectionnez un employé
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Date du paiement</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="paymentDate">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+      <mat-error *ngIf="paymentForm.get('paymentDate')?.invalid">
+        Date requise
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Montant</mat-label>
+      <input matInput type="number" formControlName="amount">
+      <mat-error *ngIf="paymentForm.get('amount')?.invalid">
+        Montant requis et doit être positif
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Méthode de paiement</mat-label>
+        <mat-select formControlName="paymentMethod">
+          <mat-option *ngFor="let method of paymentMethods" [value]="method.value">
+            {{ method.viewValue }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="paymentForm.get('paymentMethod')?.invalid">
+          Méthode requise
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Numéro de référence</mat-label>
+      <input matInput formControlName="referenceNumber">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Statut du paiement</mat-label>
+        <mat-select formControlName="status">
+          <mat-option *ngFor="let status of paymentStatus" [value]="status.value">
+            {{ status.viewValue }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="paymentForm.get('status')?.invalid">
+          Statut requis
+        </mat-error>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit" [disabled]="paymentForm.invalid">
+      Soumettre
+    </button>
+  </form>

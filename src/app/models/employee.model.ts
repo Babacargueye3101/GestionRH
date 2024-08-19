@@ -5,6 +5,6 @@ export interface Employee {
     email: string;
     phone: string;
     position: string;
-    company_id: number;
+    compagny_id: number;
     contrat_type: string;
 }

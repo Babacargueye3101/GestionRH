@@ -1,1 +1,63 @@
-<p>paies works!</p>
+<div class="company-container">
+  <mat-toolbar color="primary" class="toolbar">
+    <span class="toolbar-title">Gestion des paies</span>
+    <span class="spacer"></span>
+    <button mat-raised-button color="accent" class="create-button" (click)="creeNewPayment()">
+      <mat-icon>add</mat-icon> Créer des paiements
+    </button>
+  </mat-toolbar>
+
+  <!-- Nouvelle div pour la table -->
+  <div class="payments-table-container">
+    <table mat-table [dataSource]="payments" class="mat-elevation-z8">
+
+      <!-- Employee ID Column -->
+      <ng-container matColumnDef="employeeId">
+        <th mat-header-cell *matHeaderCellDef> Employé </th>
+        <td mat-cell *matCellDef="let payment"> {{payment.employeeId}} </td>
+      </ng-container>
+
+      <!-- Payment Date Column -->
+      <ng-container matColumnDef="paymentDate">
+        <th mat-header-cell *matHeaderCellDef> Date de paiement </th>
+        <td mat-cell *matCellDef="let payment"> {{payment.paymentDate | date}} </td>
+      </ng-container>
+
+      <!-- Amount Column -->
+      <ng-container matColumnDef="amount">
+        <th mat-header-cell *matHeaderCellDef> Montant </th>
+        <td mat-cell *matCellDef="let payment"> {{payment.amount | currency}} </td>
+      </ng-container>
+
+      <!-- Payment Method Column -->
+      <ng-container matColumnDef="paymentMethod">
+        <th mat-header-cell *matHeaderCellDef> Méthode de paiement </th>
+        <td mat-cell *matCellDef="let payment"> {{payment.paymentMethod}} </td>
+      </ng-container>
+
+      <!-- Reference Number Column -->
+      <ng-container matColumnDef="referenceNumber">
+        <th mat-header-cell *matHeaderCellDef> Numéro de référence </th>
+        <td mat-cell *matCellDef="let payment"> {{payment.referenceNumber}} </td>
+      </ng-container>
+
+      <!-- Status Column -->
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef> Statut </th>
+        <td mat-cell *matCellDef="let payment"> {{payment.status}} </td>
+      </ng-container>
+
+      <!-- Header and Row Definitions -->
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <mat-paginator [length]="totalPayments"
+        [pageSize]="10"
+        showFirstLastButtons>
+    </mat-paginator>
+  </div>
+</div>
+
+<ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="medium" color="#fff" type="Ball-Tail">
+  <p style="color: white">Veillez patienter un moment  😕 !!</p>
+</ngx-spinner>

@@ -47,6 +47,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { FormsModule } from '@angular/forms';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 
 import { LOCALE_ID } from '@angular/core';
@@ -61,6 +62,7 @@ import { ValidercongeComponent } from './pages/menus/conges/validerconge/valider
 import { ViewdetailCongeComponent } from './pages/menus/conges/viewdetail-conge/viewdetail-conge.component';
 import { ViewdetailCalendarComponent } from './pages/menus/conges/viewdetail-calendar/viewdetail-calendar.component';
 import { MatRadioModule } from '@angular/material/radio';
+import { CreatePaymentComponent } from './pages/menus/paies/create-payment/create-payment.component';
 
 
 registerLocaleData(localeFr, 'fr');
@@ -93,6 +95,7 @@ registerLocaleData(localeFr, 'fr');
     ValidercongeComponent,
     ViewdetailCongeComponent,
     ViewdetailCalendarComponent,
+    CreatePaymentComponent,
   ],
   imports: [
     BrowserModule,
@@ -125,7 +128,8 @@ registerLocaleData(localeFr, 'fr');
       provide: DateAdapter,
       useFactory: adapterFactory,
     }),
-    MatRadioModule
+    MatRadioModule,
+    MatAutocompleteModule
   ],
   providers: [{ provide: LOCALE_ID, useValue: 'fr' }],
   bootstrap: [AppComponent]
