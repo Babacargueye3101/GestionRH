@@ -10,6 +10,8 @@ import { Conge } from '../models/conge.model';
 export class CongesService {
   private apiUrl = environment.apiConges
 
+  private baseUrl = 'https://waapi.app/api/v1/instances';
+
 
   constructor(private http: HttpClient) { }
 
@@ -43,6 +45,22 @@ export class CongesService {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     return this.http.delete<any>(`${this.apiUrl}/${id}`, { headers: headers });
   }
+
+  sendMessageToUser(instanceId: string, phoneNumber: string, message: string): Observable<any> {
+    const url = `${this.baseUrl}/${instanceId}/client/action/send-message`;  // URL complète avec l'ID de l'instance
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer i2IUuiqFNSklnXhe5HgwtKL7iE1eTaoe29vpUM6A298d539a`, // Remplacez par votre clé API
+      'Content-Type': 'application/json'
+    });
+
+    const body = {
+      chatId: phoneNumber+"@c.us",  // Numéro de téléphone de l'utilisateur
+      message: message     // Contenu du message
+    };
+
+    return this.http.post(url, body, { headers });
+  }
+
 
 
 }

@@ -14,42 +14,66 @@
       <!-- Employee ID Column -->
       <ng-container matColumnDef="employeeId">
         <th mat-header-cell *matHeaderCellDef> Employé </th>
-        <td mat-cell *matCellDef="let payment"> {{payment.employeeId}} </td>
+        <td mat-cell *matCellDef="let payment"> {{payment.employee.first_name}}  {{payment.employee.last_name}}</td>
       </ng-container>
 
       <!-- Payment Date Column -->
       <ng-container matColumnDef="paymentDate">
         <th mat-header-cell *matHeaderCellDef> Date de paiement </th>
-        <td mat-cell *matCellDef="let payment"> {{payment.paymentDate | date}} </td>
+        <td mat-cell *matCellDef="let payment"> {{payment.payment_date | date}} </td>
       </ng-container>
 
       <!-- Amount Column -->
       <ng-container matColumnDef="amount">
         <th mat-header-cell *matHeaderCellDef> Montant </th>
-        <td mat-cell *matCellDef="let payment"> {{payment.amount | currency}} </td>
+        <td mat-cell *matCellDef="let payment"> {{payment.amount | currency:'FCFA':'symbol':'1.2-2':'fr-FR'}} </td>
       </ng-container>
 
       <!-- Payment Method Column -->
       <ng-container matColumnDef="paymentMethod">
         <th mat-header-cell *matHeaderCellDef> Méthode de paiement </th>
-        <td mat-cell *matCellDef="let payment"> {{payment.paymentMethod}} </td>
+        <td mat-cell *matCellDef="let payment"> {{payment.payment_method | uppercase}} </td>
       </ng-container>
 
       <!-- Reference Number Column -->
       <ng-container matColumnDef="referenceNumber">
         <th mat-header-cell *matHeaderCellDef> Numéro de référence </th>
-        <td mat-cell *matCellDef="let payment"> {{payment.referenceNumber}} </td>
+        <td mat-cell *matCellDef="let payment"> {{payment.reference_number}} </td>
       </ng-container>
 
       <!-- Status Column -->
       <ng-container matColumnDef="status">
         <th mat-header-cell *matHeaderCellDef> Statut </th>
-        <td mat-cell *matCellDef="let payment"> {{payment.status}} </td>
+        <td mat-cell *matCellDef="let payment"> {{getPaymentStatusViewValue(payment.status)}} </td>
       </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef> Actions </th>
+        <td mat-cell *matCellDef="let payment">
+          <button mat-icon-button [matMenuTriggerFor]="menu">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="viewPayment(payment.id)">
+              <mat-icon>visibility</mat-icon>
+              <span>Voir</span>
+            </button>
+            <button mat-menu-item (click)="editPayment(payment.id)">
+              <mat-icon>edit</mat-icon>
+              <span>Modifier</span>
+            </button>
+            <button mat-menu-item (click)="deletePayment(payment.id)">
+              <mat-icon>delete</mat-icon>
+              <span>Supprimer</span>
+            </button>
+          </mat-menu>
+        </td>
+      </ng-container>
+
 
       <!-- Header and Row Definitions -->
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{'row-approved': row.status === 'paye'}"></tr>
     </table>
     <mat-paginator [length]="totalPayments"
         [pageSize]="10"

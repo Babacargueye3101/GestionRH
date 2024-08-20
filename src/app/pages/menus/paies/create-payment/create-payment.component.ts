@@ -26,7 +26,8 @@ export class CreatePaymentComponent implements OnInit {
   paymentStatus = [
     { value: 'paye', viewValue: 'Payé' },
     { value: 'en_attente', viewValue: 'En attente' },
-    { value: 'annule', viewValue: 'Annulé' }
+    { value: 'annule', viewValue: 'Annulé' },
+    { value: 'echec', viewValue: "Echoué"}
   ];
   compagny: any;
   employees: Employee[] = [];

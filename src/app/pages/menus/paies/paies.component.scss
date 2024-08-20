@@ -51,9 +51,6 @@
           background-color: #f9f9f9;
         }
 
-        tr:hover {
-          background-color: #f1f1f1;
-        }
       }
 
       .mat-header-cell, .mat-cell {
@@ -63,5 +60,8 @@
       .mat-header-cell {
         font-weight: bold;
       }
+    }
+    .row-approved {
+      background-color: #d4edda; /* Couleur verte claire pour les lignes approuvées */
     }
   }

@@ -14,17 +14,41 @@ import { EmployeeServiceService } from 'src/app/services/employee-service.servic
   styleUrls: ['./paies.component.scss']
 })
 export class PaiesComponent implements OnInit {
+deletePayment(arg0: any) {
+throw new Error('Method not implemented.');
+}
+editPayment(arg0: any) {
+throw new Error('Method not implemented.');
+}
+viewPayment(arg0: any) {
+throw new Error('Method not implemented.');
+}
   compagny: any;
   payments: any []=[];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
 
-  displayedColumns: string[] = ['employeeId', 'paymentDate', 'amount', 'paymentMethod', 'referenceNumber', 'status'];
+  displayedColumns: string[] = ['employeeId', 'paymentDate', 'amount', 'paymentMethod', 'referenceNumber', 'status', 'actions'];
   totalPayments= 0;
 
   dataSource = new MatTableDataSource<Payment>();
 
   employee_name:any;
+
+
+  paymentMethods = [
+    { value: 'cheque', viewValue: 'Chèque' },
+    { value: 'virement', viewValue: 'Virement' },
+    { value: 'especes', viewValue: 'Espèces' },
+    { value: 'wave', viewValue: 'Wave' },
+    { value: 'om', viewValue: 'Orange Money' }
+  ];
+  paymentStatus = [
+    { value: 'paye', viewValue: 'Payé' },
+    { value: 'en_attente', viewValue: 'En attente' },
+    { value: 'annule', viewValue: 'Annulé' },
+    { value: 'echec', viewValue: "Echoué"}
+  ];
 
 
 
@@ -91,6 +115,21 @@ export class PaiesComponent implements OnInit {
     this.dialog.open(CreatePaymentComponent, {
       width: '650px',
       height: '630px',
+    });
+  }
+
+  getPaymentStatusViewValue(value: string): string | undefined {
+    const item = this.paymentStatus.find(el => el.value === value);
+    return item ? item.viewValue : undefined;
+  }
+
+  getEmpploye(id: number){
+    this.employeeService.getEmployee(id).subscribe((res) => {
+       console.log(res);
+
+    }, (error) => {
+       console.log(error);
+
     });
   }
 

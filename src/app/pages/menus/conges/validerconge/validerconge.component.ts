@@ -29,7 +29,22 @@ export class ValidercongeComponent {
 
   changerStatus() {
     this.spinnerService.show();
+    console.log(this.data);
+
+    const congeNom = this.data.conge.full_name; // Récupérez le nom du congé
+    const day_taken= this.data.conge.days_taken
+    const message = `Bonjour "${congeNom}", votre congé de "${day_taken} jours " a été approuvé. Bon congé !!!`;
     this.congeService.changeStatusConge(this.data.conge.id, this.selectedStatus, this.comment).subscribe((res)=> {
+      this.congeService.sendMessageToUser("18233", "221775857181", message)
+        .subscribe(
+          (res) => {
+            console.log("############# WAAPI TEST");
+            console.log(res);  // Affiche la réponse de l'API en cas de succès
+          },
+          (error) => {
+            console.log(error);  // Affiche l'erreur en cas d'échec
+          }
+      );
       Swal.fire('Status Changé avec Success', 'Success', 'success').then((result) => {
         if (result.isConfirmed) {
           location.reload();
