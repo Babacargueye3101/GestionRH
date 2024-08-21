@@ -7,6 +7,9 @@ import { Payment } from 'src/app/models/payment.model';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { EmployeeServiceService } from 'src/app/services/employee-service.service';
+import { MatCheckboxChange } from '@angular/material/checkbox';
+import { HttpClient } from '@angular/common/http';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-paies',
@@ -14,26 +17,21 @@ import { EmployeeServiceService } from 'src/app/services/employee-service.servic
   styleUrls: ['./paies.component.scss']
 })
 export class PaiesComponent implements OnInit {
-deletePayment(arg0: any) {
-throw new Error('Method not implemented.');
-}
-editPayment(arg0: any) {
-throw new Error('Method not implemented.');
-}
-viewPayment(arg0: any) {
-throw new Error('Method not implemented.');
-}
+
   compagny: any;
   payments: any []=[];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
 
-  displayedColumns: string[] = ['employeeId', 'paymentDate', 'amount', 'paymentMethod', 'referenceNumber', 'status', 'actions'];
+  displayedColumns: string[] = ['select','employeeId', 'paymentDate', 'amount', 'paymentMethod', 'referenceNumber', 'status', 'actions'];
   totalPayments= 0;
 
   dataSource = new MatTableDataSource<Payment>();
 
   employee_name:any;
+
+  selectedPayments: any = [];
+
 
 
   paymentMethods = [
@@ -52,7 +50,7 @@ throw new Error('Method not implemented.');
 
 
 
-  constructor(private dialog: MatDialog, private paymentService: PaymentService, private spinnerService: NgxSpinnerService, private employeeService: EmployeeServiceService){
+  constructor(private dialog: MatDialog, private http: HttpClient, private paymentService: PaymentService, private spinnerService: NgxSpinnerService, private employeeService: EmployeeServiceService){
 
   }
 
@@ -123,14 +121,129 @@ throw new Error('Method not implemented.');
     return item ? item.viewValue : undefined;
   }
 
-  getEmpploye(id: number){
-    this.employeeService.getEmployee(id).subscribe((res) => {
-       console.log(res);
 
-    }, (error) => {
-       console.log(error);
+  toggleSelection(payment: any) {
+    const index = this.selectedPayments.indexOf(payment);
+    if (index === -1) {
+      this.selectedPayments.push(payment);
+    } else {
+      this.selectedPayments.splice(index, 1);
+    }
+  }
 
+  selectAll(event: MatCheckboxChange) {
+    if (event.checked) {
+      this.selectedPayments = [...this.payments];
+    } else {
+      this.selectedPayments = [];
+    }
+  }
+
+  isAllSelected() {
+    return this.payments.length > 0 && this.selectedPayments.length === this.payments.length;
+  }
+
+  isSomeSelected() {
+    return this.selectedPayments.length > 0 && !this.isAllSelected();
+  }
+
+  ValiderSelectedPayments() {
+
+    Swal.fire({
+      title: 'Validation',
+      text: 'Voulez-vous valider les Paiements selectionnés',
+      icon: 'info',
+      showCancelButton: true,
+      confirmButtonText: 'Oui',
+      cancelButtonText: 'Non',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Code à exécuter si l'utilisateur clique sur "Oui"
+        console.log('Utilisateur a cliqué Oui');
+      } else if (result.isDismissed) {
+        // Code à exécuter si l'utilisateur clique sur "Non"
+        console.log('Utilisateur a cliqué Non');
+      }
+    });
+
+    console.log(this.selectedPayments);
+
+  }
+
+  exportToExcel() {
+    throw new Error('Method not implemented.');
+  }
+
+  exportToCSV() {
+    throw new Error('Method not implemented.');
+  }
+
+
+  deletePayment(arg0: any) {
+    throw new Error('Method not implemented.');
+  }
+
+  editPayment(arg0: any) {
+    throw new Error('Method not implemented.');
+  }
+
+  viewPayment(arg0: any) {
+    throw new Error('Method not implemented.');
+  }
+
+
+  downloadPayments() {
+    const compagnyId = 7; // Remplacez par l'ID de votre compagnie
+
+    this.paymentService.downloadCSV(compagnyId).subscribe(blob => {
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `payments-${new Date().toISOString().split('T')[0]}.csv`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      window.URL.revokeObjectURL(url);
+    }, error => {
+      console.error('Erreur lors du téléchargement du CSV', error);
     });
   }
+
+  downloadPdf(): void {
+    this.paymentService.downloadPaymentsPdf(this.compagny).subscribe(
+      (blob) => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `payments-${new Date().toISOString().slice(0, 10)}.pdf`;
+        a.click();
+        window.URL.revokeObjectURL(url);
+      },
+      error => {
+        console.error('Error downloading PDF', error);
+      }
+    );
+  }
+
+
+  generateInvoice(employeeId: number, id: number): void {
+    this.paymentService.downloadSignlePaymentsPdf(this.compagny, employeeId, id).subscribe(
+      (blob) => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `employee-${employeeId}-invoice-${new Date().toISOString().slice(0, 10)}.pdf`;
+        a.click();
+        window.URL.revokeObjectURL(url);
+      },
+      error => {
+        console.error('Error generating invoice', error);
+      }
+    );
+  }
+
+
+
+
 
 }

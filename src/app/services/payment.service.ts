@@ -1,8 +1,8 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Payment } from '../models/payment.model';
 import { environment } from 'src/environments/environment';
-import { Observable } from 'rxjs';
+import { Observable, filter, map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +26,25 @@ export class PaymentService {
   creatPayment(payment: any): Observable<Payment> {
     return this.http.post<Payment>(this.apiUrl, payment, { headers: this.getHeaders() });
   }
+
+  downloadCSV(compagnyId: number): Observable<Blob> {
+    return this.http.get(`${this.apiUrl}?compagny_id=${compagnyId}`+"&format=csv", {
+      responseType: 'blob',
+      observe: 'response' // Pour obtenir les headers
+    }).pipe(
+      map((response: HttpResponse<Blob>) => response.body),
+      filter((blob): blob is Blob => blob !== null) // Filtrer les valeurs nulles
+    );
+  }
+
+  downloadPaymentsPdf(companyId: number): Observable<Blob> {
+    return this.http.get(`${this.apiUrl}.pdf?compagny_id=${companyId}`, { responseType: 'blob' });
+  }
+
+  downloadSignlePaymentsPdf(companyId: number, employeeId: number, id: number): Observable<Blob> {
+    return this.http.get(`${this.apiUrl}.pdf?compagny_id=${companyId}&employee_id=${employeeId}&id=${id}`, { responseType: 'blob' });
+  }
+
 
 
 

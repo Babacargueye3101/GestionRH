@@ -48,6 +48,7 @@ import { FormsModule } from '@angular/forms';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 
 import { LOCALE_ID } from '@angular/core';
@@ -129,7 +130,8 @@ registerLocaleData(localeFr, 'fr');
       useFactory: adapterFactory,
     }),
     MatRadioModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatCheckboxModule
   ],
   providers: [{ provide: LOCALE_ID, useValue: 'fr' }],
   bootstrap: [AppComponent]

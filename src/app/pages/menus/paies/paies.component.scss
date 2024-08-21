@@ -64,4 +64,18 @@
     .row-approved {
       background-color: #d4edda; /* Couleur verte claire pour les lignes approuvées */
     }
+
+
+    // styles.scss ou le SCSS spécifique de votre composant
+    .download-button-container {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 20px; // Ajustez la marge selon vos besoins
+      margin-bottom: 20px;
+    }
+
+    .download-button {
+      margin-right: 10px; // Ajustez la marge si nécessaire
+    }
+
   }
