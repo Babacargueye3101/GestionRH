@@ -1,0 +1,59 @@
+<h2 mat-dialog-title>Créer une annonce</h2>
+<div mat-dialog-content>
+  <form [formGroup]="announcementForm" (ngSubmit)="onSubmit()" class="announcement-form">
+
+    <mat-form-field appearance="fill">
+      <mat-label>Titre</mat-label>
+      <input matInput formControlName="title">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Description</mat-label>
+      <textarea matInput formControlName="description"></textarea>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Date</mat-label>
+      <input matInput [matDatepicker]="datePicker" formControlName="date" required>
+      <mat-datepicker-toggle matSuffix [for]="datePicker"></mat-datepicker-toggle>
+      <mat-datepicker #datePicker></mat-datepicker>
+      <mat-error *ngIf="announcementForm.get('date')?.hasError('required')">
+        Date requise
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Type d'annonce</mat-label>
+      <mat-select formControlName="announcement_type">
+        <mat-option *ngFor="let type of announcementTypes" [value]="type">
+          {{ type }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Date de début</mat-label>
+      <input matInput [matDatepicker]="startDatePicker" formControlName="start_date" required>
+      <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
+      <mat-datepicker #startDatePicker></mat-datepicker>
+      <mat-error *ngIf="announcementForm.get('start_date')?.hasError('required')">
+        Date de début requise
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Date de fin</mat-label>
+      <input matInput [matDatepicker]="endDatePicker" formControlName="end_date" required>
+      <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+      <mat-datepicker #endDatePicker></mat-datepicker>
+      <mat-error *ngIf="announcementForm.get('end_date')?.hasError('required')">
+        Date de fin requise
+      </mat-error>
+    </mat-form-field>
+
+    <div class="form-actions">
+      <button mat-stroked-button (click)="onNoClick()" class="cancel-button">Annuler</button>
+      <button mat-stroked-button color="primary" type="submit" class="create-button">Créer</button>
+    </div>
+  </form>
+</div>

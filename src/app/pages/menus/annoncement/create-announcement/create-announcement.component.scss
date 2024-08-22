@@ -1,0 +1,22 @@
+.announcement-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 16px;
+  }
+
+  .cancel-button {
+    background-color:deeppink;
+    color: white;
+  }
+
+  .create-button {
+    background-color: #303f9f;
+    color: white;
+
+  }
