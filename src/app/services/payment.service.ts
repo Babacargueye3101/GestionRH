@@ -54,8 +54,10 @@ export class PaymentService {
     return this.http.get(`${this.apiUrl}.pdf?compagny_id=${companyId}&employee_id=${employeeId}&id=${id}`, { responseType: 'blob' });
   }
 
-
-
+  downloadSinglePaymentPdf(compagnyId: number, paymentId: number): Observable<Blob> {
+    const url = `${this.apiUrl}/${paymentId}.pdf?compagny_id=${compagnyId}`;
+    return this.http.get(url, { responseType: 'blob' });
+  }
 
 
   private getHeaders(): HttpHeaders {

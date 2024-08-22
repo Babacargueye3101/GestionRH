@@ -93,9 +93,9 @@
               <mat-icon>edit</mat-icon>
               <span>Modifier</span>
             </button>
-            <button mat-menu-item (click)="generateInvoice(payment.employee.id, payment.id)">
+            <button mat-menu-item (click)="downloadSinglePaymentPdf(payment.id)">
               <mat-icon>file_download</mat-icon>
-              <span>Télécharger la Facture</span>
+              <span>Télécharger Facture</span>
             </button>
           </mat-menu>
         </td>

@@ -247,6 +247,25 @@ export class PaiesComponent implements OnInit {
     );
   }
 
+  downloadSinglePaymentPdf(paymentId: number): void {
+    const compagnyId = this.compagny; // Récupérer l'ID de la compagnie
+    this.paymentService.downloadSinglePaymentPdf(compagnyId, paymentId).subscribe(
+      (blob) => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `facture-${paymentId}-${new Date().toISOString().slice(0, 10)}.pdf`;
+        a.click();
+        window.URL.revokeObjectURL(url);
+      },
+      error => {
+        console.error('Error downloading PDF', error);
+      }
+    );
+  }
+
+
+
 
 
 
