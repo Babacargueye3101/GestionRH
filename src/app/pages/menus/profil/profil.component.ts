@@ -1,18 +1,21 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-profil',
   templateUrl: './profil.component.html',
   styleUrls: ['./profil.component.scss']
 })
-export class ProfilComponent {
+export class ProfilComponent implements OnInit {
 
-  user = {
-    name: 'John Doe',
-    position: 'Software Engineer',
-    email: 'john.doe@example.com',
-    phone: '+123456789',
-    address: '123 Main St, City, Country'
-  };
+
+  currentUser: any;
+
+  ngOnInit(): void {
+    const user = localStorage.getItem('currentUser');
+
+    if (user) {
+      this.currentUser = JSON.parse(user);
+    }
+  }
 
 }

@@ -18,7 +18,9 @@ export class PaymentService {
     const params = {
       page: page.toString(),
       per_page: perPage.toString(),
-      compagny_id: compagny_id
+      compagny_id: compagny_id,
+      email: user_id.email,
+      role: user_id.role
     };
     return this.http.get<Payment[]>(this.apiUrl, { headers: this.getHeaders(), params })
   }
@@ -27,7 +29,7 @@ export class PaymentService {
     const params = {
       compagny_id: compagny_id
     };
-    return this.http.get<Payment[]>(this.apiUrl, { headers: this.getHeaders(), params })
+    return this.http.get<Payment[]>(this.apiUrl+"/"+compagny_id+"/getAllPayment", { headers: this.getHeaders(), params })
   }
 
   creatPayment(payment: any): Observable<Payment> {

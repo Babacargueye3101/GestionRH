@@ -68,26 +68,27 @@ export class EmployementsComponent implements OnInit {
     if (user) {
       var currentUser = JSON.parse(user);
       this.compagny= currentUser.compagny_id;
-    }
-    this.employeeService.getEmployees(pageIndex + 1, pageSize, this.compagny).subscribe(data => {
-      this.employees = data?.employees;
-      this.totalEmployees = data.meta.total_count;
-      this.filteredEmployees = this.employees;
-      this.spinnerService.hide();
-      },
-      error => {
-        console.error('Error fetching employees', error);
-        setTimeout(() => {
-          Swal.fire({
-            title: 'Erreur',
-            text: 'Une erreur est survenue',
-            icon: 'error',
-            showConfirmButton: false,
-          })
-        }, 1000);
+
+      this.employeeService.getEmployees(pageIndex + 1, pageSize, this.compagny, currentUser).subscribe(data => {
+        this.employees = data?.employees;
+        this.totalEmployees = data.meta.total_count;
+        this.filteredEmployees = this.employees;
         this.spinnerService.hide();
-      }
-    );
+        },
+        error => {
+          console.error('Error fetching employees', error);
+          setTimeout(() => {
+            Swal.fire({
+              title: 'Erreur',
+              text: 'Une erreur est survenue',
+              icon: 'error',
+              showConfirmButton: false,
+            })
+          }, 1000);
+          this.spinnerService.hide();
+        }
+      );
+    }
   }
 
   openCreateDialog() {
@@ -106,7 +107,7 @@ export class EmployementsComponent implements OnInit {
             Swal.fire('Succès', 'L\'employé a été ajouté avec succès', 'success');
           },
           (error) => {
-            Swal.fire('Erreur', 'Une erreur s\'est produite lors de l\'ajout de l\'employé', 'error');
+            Swal.fire('Erreur', error.error.error, 'error');
           }
         );
       }

@@ -16,11 +16,13 @@ export class EmployeeServiceService {
 
 
 
-  getEmployees(page: number = 1, perPage: number = 10, compagny_id: number): Observable<any> {
+  getEmployees(page: number = 1, perPage: number = 10, compagny_id: number, currentUser: any): Observable<any> {
     const params = {
       page: page.toString(),
       per_page: perPage.toString(),
-      compagny_id: compagny_id
+      compagny_id: compagny_id,
+      role: currentUser.role,
+      email: currentUser.email
     };
     return this.http.get<Employee[]>(this.apiUrl, { headers: this.getHeaders(), params });
   }

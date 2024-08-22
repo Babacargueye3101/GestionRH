@@ -98,19 +98,20 @@ export class CreatePaymentComponent implements OnInit {
     if (user) {
       var currentUser = JSON.parse(user);
       this.compagny = currentUser.compagny_id;
+
+      this.employeeService.getEmployees(pageIndex + 1, pageSize, this.compagny, currentUser).subscribe(
+        data => {
+          this.employees = data?.employees || [];
+          this.filteredEmployees = this.paymentForm.get('employeeId')!.valueChanges.pipe(
+            startWith(''),
+            map(value => this._filterEmployees(value || ''))
+          );
+        },
+        error => {
+          console.error('Error fetching employees', error);
+        }
+      );
     }
 
-    this.employeeService.getEmployees(pageIndex + 1, pageSize, this.compagny).subscribe(
-      data => {
-        this.employees = data?.employees || [];
-        this.filteredEmployees = this.paymentForm.get('employeeId')!.valueChanges.pipe(
-          startWith(''),
-          map(value => this._filterEmployees(value || ''))
-        );
-      },
-      error => {
-        console.error('Error fetching employees', error);
-      }
-    );
   }
 }
