@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateAnnouncementComponent } from './create-announcement/create-announcement.component';
 import { AnnouncementService } from 'src/app/services/announcement.service';
+import { EditAnnouncementComponent } from './edit-announcement/edit-announcement.component';
 
 @Component({
   selector: 'app-annoncement',
@@ -26,6 +27,20 @@ export class AnnoncementComponent implements OnInit{
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
       // Handle the result from the dialog if needed
+    });
+  }
+
+  openEditAnnouncementDialog(announcement: any): void {
+    const dialogRef = this.dialog.open(EditAnnouncementComponent, {
+      width: '500px',
+      data: announcement // Passez l'annonce à modifier comme données
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        // Handle the updated announcement here (e.g., refresh the list)
+        console.log('The dialog was closed, updated announcement:', result);
+      }
     });
   }
 

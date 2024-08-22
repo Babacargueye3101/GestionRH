@@ -23,4 +23,50 @@
         background-color: #303f9f; /* Couleur au survol */
       }
     }
+}
+
+.announcement-list-container {
+    padding: 16px;
+
+    h1 {
+      text-align: center;
+      margin-bottom: 24px;
+      font-weight: bold;
+      color: #3f51b5;
+    }
+
+    .announcement-card {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      mat-card-header {
+        background-color: #303f9f;
+        padding: 8px;
+      }
+
+      mat-card-title {
+        font-size: 18px;
+        font-weight: bold;
+        color: white;
+      }
+      mat-card-subtitle{
+        color: white;
+      }
+
+      mat-card-content {
+        flex-grow: 1;
+        padding: 16px;
+      }
+
+      mat-card-actions {
+        display: flex;
+        justify-content: flex-end;
+        padding: 8px;
+        button {
+          margin-left: 8px;
+        }
+      }
+    }
   }
+

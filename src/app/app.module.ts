@@ -49,6 +49,7 @@ import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 
 import { LOCALE_ID } from '@angular/core';
@@ -67,6 +68,7 @@ import { CreatePaymentComponent } from './pages/menus/paies/create-payment/creat
 import { ViewdetailPaymentComponent } from './pages/menus/paies/viewdetail-payment/viewdetail-payment.component';
 import { AnnoncementComponent } from './pages/menus/annoncement/annoncement.component';
 import { CreateAnnouncementComponent } from './pages/menus/annoncement/create-announcement/create-announcement.component';
+import { EditAnnouncementComponent } from './pages/menus/annoncement/edit-announcement/edit-announcement.component';
 
 
 registerLocaleData(localeFr, 'fr');
@@ -103,6 +105,7 @@ registerLocaleData(localeFr, 'fr');
     ViewdetailPaymentComponent,
     AnnoncementComponent,
     CreateAnnouncementComponent,
+    EditAnnouncementComponent,
   ],
   imports: [
     BrowserModule,
@@ -137,7 +140,8 @@ registerLocaleData(localeFr, 'fr');
     }),
     MatRadioModule,
     MatAutocompleteModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatExpansionModule
   ],
   providers: [{ provide: LOCALE_ID, useValue: 'fr' }],
   bootstrap: [AppComponent]

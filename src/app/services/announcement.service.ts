@@ -43,4 +43,10 @@ export class AnnouncementService {
     return this.http.get<any[]>(this.apiUrlAnnonce, { headers: headers, params });
   }
 
+  updateAnnouncement(announcement: any): Observable<any> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.http.put(this.apiUrlAnnonce+'/'+announcement.id, { announcement: announcement }, { headers: headers });
+  }
+
+
 }
