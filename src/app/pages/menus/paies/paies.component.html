@@ -85,7 +85,7 @@
             <mat-icon>more_vert</mat-icon>
           </button>
           <mat-menu #menu="matMenu">
-            <button mat-menu-item (click)="viewPayment(payment.id)">
+            <button mat-menu-item (click)="viewPayment(payment)">
               <mat-icon>visibility</mat-icon>
               <span>Voir</span>
             </button>
@@ -95,7 +95,7 @@
             </button>
             <button mat-menu-item (click)="generateInvoice(payment.employee.id, payment.id)">
               <mat-icon>file_download</mat-icon>
-              <span>Générer Facture</span>
+              <span>Télécharger la Facture</span>
             </button>
           </mat-menu>
         </td>

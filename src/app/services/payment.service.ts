@@ -14,10 +14,17 @@ export class PaymentService {
   apiUrl= environment.apiPayment;
 
 
-  getAllpayment(page: number = 1, perPage: number = 10, compagny_id: number): Observable<any> {
+  getAllpayment(page: number = 1, perPage: number = 10, compagny_id: number, user_id: any): Observable<any> {
     const params = {
       page: page.toString(),
       per_page: perPage.toString(),
+      compagny_id: compagny_id
+    };
+    return this.http.get<Payment[]>(this.apiUrl, { headers: this.getHeaders(), params })
+  }
+
+  getAllpaymentWithoutPage(compagny_id: number): Observable<any> {
+    const params = {
       compagny_id: compagny_id
     };
     return this.http.get<Payment[]>(this.apiUrl, { headers: this.getHeaders(), params })

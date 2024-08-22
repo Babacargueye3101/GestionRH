@@ -10,6 +10,7 @@ import { EmployeeServiceService } from 'src/app/services/employee-service.servic
 import { MatCheckboxChange } from '@angular/material/checkbox';
 import { HttpClient } from '@angular/common/http';
 import Swal from 'sweetalert2';
+import { ViewdetailPaymentComponent } from './viewdetail-payment/viewdetail-payment.component';
 
 @Component({
   selector: 'app-paies',
@@ -84,16 +85,16 @@ export class PaiesComponent implements OnInit {
     if (user) {
       var currentUser = JSON.parse(user);
       this.compagny= currentUser.compagny_id;
-    }
-    this.paymentService.getAllpayment(pageIndex, pageSize, this.compagny).subscribe((res)=>{
-      this.spinnerService.hide();
-      this.payments= res?.payments
-      this.totalPayments= this.payments.length;
-
-    }, (error) =>{
-      console.log(error);
+      this.paymentService.getAllpayment(pageIndex, pageSize, this.compagny, currentUser).subscribe((res)=>{
         this.spinnerService.hide();
-    });
+        this.payments= res?.payments
+        this.totalPayments= this.payments.length;
+
+      }, (error) =>{
+        console.log(error);
+          this.spinnerService.hide();
+      });
+    }
 
   }
 
@@ -187,8 +188,12 @@ export class PaiesComponent implements OnInit {
     throw new Error('Method not implemented.');
   }
 
-  viewPayment(arg0: any) {
-    throw new Error('Method not implemented.');
+  viewPayment(payment: any) {
+    this.dialog.open(ViewdetailPaymentComponent, {
+      data: payment,
+      width: '700px',
+      height: '500px'
+    });
   }
 
 
@@ -232,7 +237,7 @@ export class PaiesComponent implements OnInit {
         const url = window.URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = `employee-${employeeId}-invoice-${new Date().toISOString().slice(0, 10)}.pdf`;
+        a.download = `facture-${employeeId}-invoice-${new Date().toISOString().slice(0, 10)}.pdf`;
         a.click();
         window.URL.revokeObjectURL(url);
       },

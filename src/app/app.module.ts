@@ -64,6 +64,7 @@ import { ViewdetailCongeComponent } from './pages/menus/conges/viewdetail-conge/
 import { ViewdetailCalendarComponent } from './pages/menus/conges/viewdetail-calendar/viewdetail-calendar.component';
 import { MatRadioModule } from '@angular/material/radio';
 import { CreatePaymentComponent } from './pages/menus/paies/create-payment/create-payment.component';
+import { ViewdetailPaymentComponent } from './pages/menus/paies/viewdetail-payment/viewdetail-payment.component';
 
 
 registerLocaleData(localeFr, 'fr');
@@ -97,6 +98,7 @@ registerLocaleData(localeFr, 'fr');
     ViewdetailCongeComponent,
     ViewdetailCalendarComponent,
     CreatePaymentComponent,
+    ViewdetailPaymentComponent,
   ],
   imports: [
     BrowserModule,

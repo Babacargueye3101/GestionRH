@@ -63,3 +63,26 @@ mat-card {
     }
   }
 }
+
+.payment-stats-card {
+  margin-top: 20px;
+
+  mat-card-header {
+    background-color: #3f51b5; // Couleur d'arrière-plan de l'en-tête
+    color: white; // Couleur du texte
+  }
+
+
+}
+
+// Responsive design pour les petits écrans
+@media (max-width: 600px) {
+  .payment-stats-card {
+    margin: 10px;
+
+    .payment-stats-container {
+      flex-direction: column; // Les éléments se placeront en colonne pour les petits écrans
+    }
+  }
+}
+
