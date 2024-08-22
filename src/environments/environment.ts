@@ -4,5 +4,6 @@ export const environment = {
     apiEmployee: 'http://localhost:3000/api/employees',
     apiCompagnies: 'http://localhost:3000/api/companies',
     apiConges: 'http://localhost:3000/api/leaves',
-    apiPayment: 'http://localhost:3000/api/payments'
+    apiPayment: 'http://localhost:3000/api/payments',
+    apiUrlAnnonce: 'http://localhost:3000/api/announcements'
 };

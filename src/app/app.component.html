@@ -13,10 +13,18 @@
         <mat-icon>people</mat-icon>
         <span>Employés</span>
       </a>
-      <a mat-list-item routerLink="/candidatures">
+      <a mat-list-item routerLink="/candidatures" (click)="showNestedMenuCandidat()">
         <mat-icon>work</mat-icon>
         <span>Candidatures</span>
+        <mat-icon class="expand-icon">{{ showNestedMenu ? 'expand_less' : 'expand_more' }}</mat-icon>
+
       </a>
+      <div class="nested-menu" *ngIf="showNestedMenucandidats">
+        <a mat-list-item routerLink="/annonces" class="nested-link">
+          <mat-icon>announcement</mat-icon>
+          <span>Annonces</span>
+        </a>
+      </div>
       <a mat-list-item routerLink="/paies">
         <mat-icon>attach_money</mat-icon>
         <span>Paies</span>
@@ -80,6 +88,7 @@
       <ng-template #loggedInMenu>
         <span style="font-size: 16px;">{{ userName }}</span>
         <mat-menu #appMenu="matMenu">
+          <button mat-menu-item routerLink="/profil">Profil</button>
           <button mat-menu-item (click)="logout()">Déconnexion</button>
         </mat-menu>
         <button mat-icon-button [matMenuTriggerFor]="appMenu">

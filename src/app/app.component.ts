@@ -16,6 +16,7 @@ export class AppComponent implements OnInit {
   title = 'GestionRH';
   currentUser: any;
   showNestedMenu = false;
+  showNestedMenucandidats= false
   user:any;
   compagny:any;
 
@@ -72,6 +73,9 @@ export class AppComponent implements OnInit {
   }
   toggleNestedMenu() {
     this.showNestedMenu = !this.showNestedMenu;
+  }
+  showNestedMenuCandidat(){
+    this.showNestedMenucandidats = !this.showNestedMenucandidats;
   }
 
   getCurrentCompagny(id:any){

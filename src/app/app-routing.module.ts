@@ -16,6 +16,8 @@ const routes: Routes = [
   { path: 'login', loadChildren: () => import('./pages/menus/login/login/login.module').then(m => m.LoginModule) },
   { path: 'register', loadChildren: () => import('./pages/menus/register/register/register.module').then(m => m.RegisterModule) },
   { path: 'compagnies', loadChildren: () => import('./pages/menus/compagny/compagny/compagny.module').then(m => m.CompagnyModule) },
+  { path: 'annonces', loadChildren: () => import('./pages/menus/annoncement/annoncement/annoncement.module').then(m => m.AnnoncementModule) },
+
   { path: '', redirectTo: '/login', pathMatch: 'full' }
 ];
 
