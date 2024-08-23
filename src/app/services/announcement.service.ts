@@ -48,5 +48,12 @@ export class AnnouncementService {
     return this.http.put(this.apiUrlAnnonce+'/'+announcement.id, { announcement: announcement }, { headers: headers });
   }
 
+  downloadAnnouncementPdf(announcementId: number): Observable<Blob> {
+    return this.http.get(this.apiUrlAnnonce + '/' + announcementId + '.pdf', {
+      responseType: 'blob' // Spécifie que la réponse sera un blob (dans ce cas, un fichier PDF)
+    });
+  }
+
+
 
 }

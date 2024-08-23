@@ -1,6 +1,6 @@
 <h2 mat-dialog-title>Modifier l'annonce</h2>
 <div mat-dialog-content>
-  <form [formGroup]="announcementForm" (ngSubmit)="onSubmit()" class="announcement-form">
+  <form [formGroup]="announcementForm" class="announcement-form">
 
     <mat-form-field appearance="fill">
       <mat-label>Titre</mat-label>
@@ -53,7 +53,7 @@
 
     <div class="form-actions">
       <button mat-stroked-button (click)="onNoClick()" class="cancel-button">Annuler</button>
-      <button mat-stroked-button color="primary" type="submit" class="create-button">Modifier</button>
+      <button mat-stroked-button color="primary" type="submit" class="create-button" (click)="onSubmit()">Modifier</button>
     </div>
   </form>
 </div>

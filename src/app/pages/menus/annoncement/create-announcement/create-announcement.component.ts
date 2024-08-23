@@ -13,7 +13,18 @@ export class CreateAnnouncementComponent {
 
 
   announcementForm!: FormGroup;
-  announcementTypes: string[] = ['Type 1', 'Type 2', 'Type 3']; // Remplacez par les types d'annonces réels
+  announcementTypes: string[] = [
+    'Directeur Général (CEO)',
+    'Directeur des Ressources Humaines (DRH)',
+    'Directeur de la Communication',
+    'Responsable des Opérations',
+    'Manager de Département',
+    'Assistant de Direction',
+    'Chef de Projet',
+    'Responsable RH',
+    'Chef d’Équipe',
+    'Responsable Communication Interne'
+  ];
 
   constructor(
     public dialogRef: MatDialogRef<CreateAnnouncementComponent>,
@@ -70,9 +81,6 @@ export class CreateAnnouncementComponent {
                 location.reload();
               }
             });
-
-            console.log('Announcement created:', response);
-            // Handle success, e.g., show a success message or navigate away
           },
           error: (error) => {
             console.error('Error creating announcement:', error);

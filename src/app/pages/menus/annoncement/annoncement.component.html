@@ -24,12 +24,14 @@
                     Description
                   </mat-panel-title>
                 </mat-expansion-panel-header>
-                <p>{{ announcement.description }}</p>
+                <div class="scrollable-content">
+                    <p>{{ announcement.description }}</p>
+                  </div>
               </mat-expansion-panel>
             </mat-card-content>
 
             <mat-card-actions>
-              <button mat-button color="primary">Télecharger</button>
+              <button mat-button color="primary" (click)="downloadAnnouncement(announcement.id)">Télecharger</button>
               <button mat-button color="accent" (click)="openEditAnnouncementDialog(announcement)">Modifier</button>
             </mat-card-actions>
           </mat-card>

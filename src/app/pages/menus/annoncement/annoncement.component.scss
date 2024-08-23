@@ -69,4 +69,20 @@
       }
     }
   }
+  .scrollable-content {
+    max-height: 150px;  // Définir la hauteur maximale pour le contenu
+    overflow-y: auto;   // Activer le défilement vertical si le contenu dépasse la hauteur maximale
+    padding: 8px;       // Ajouter du padding pour l'espacement
+  }
+
+  .announcement-list-container {
+    .announcement-card {
+      mat-expansion-panel {
+        .mat-expansion-panel-content {
+          overflow: hidden;
+        }
+      }
+    }
+  }
+
 

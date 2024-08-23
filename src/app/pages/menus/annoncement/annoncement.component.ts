@@ -58,4 +58,18 @@ export class AnnoncementComponent implements OnInit{
     });
   }
 
+
+  downloadAnnouncement(announcementId: number): void {
+    this.announcementService.downloadAnnouncementPdf(announcementId)
+      .subscribe((response) => {
+        const blob = new Blob([response], { type: 'application/pdf' });
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `annonce_${announcementId}.pdf`;
+        a.click();
+        window.URL.revokeObjectURL(url);
+      });
+  }
+
 }

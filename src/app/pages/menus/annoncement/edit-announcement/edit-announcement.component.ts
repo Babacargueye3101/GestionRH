@@ -11,7 +11,18 @@ import Swal from 'sweetalert2';
 })
 export class EditAnnouncementComponent {
   announcementForm!: FormGroup;
-  announcementTypes: string[] = ['Type 1', 'Type 2', 'Type 3']; // Remplacez par les types d'annonces réels
+  announcementTypes: string[] = [
+    'Directeur Général (CEO)',
+    'Directeur des Ressources Humaines (DRH)',
+    'Directeur de la Communication',
+    'Responsable des Opérations',
+    'Manager de Département',
+    'Assistant de Direction',
+    'Chef de Projet',
+    'Responsable RH',
+    'Chef d’Équipe',
+    'Responsable Communication Interne'
+  ];
 
   constructor(
     public dialogRef: MatDialogRef<EditAnnouncementComponent>,
@@ -59,9 +70,12 @@ export class EditAnnouncementComponent {
               text: 'Annonce modifiée avec succès.',
               icon: 'success',
               showConfirmButton: true,
-            }).then(() => {
-              this.dialogRef.close(this.announcementForm.value);
+            }).then((result) => {
+              if (result.isConfirmed) {
+                location.reload();
+              }
             });
+            this.dialogRef.close(this.announcementForm.value);
           },
           error: (error) => {
             console.error('Error updating announcement:', error);
