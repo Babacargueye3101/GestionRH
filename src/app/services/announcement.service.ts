@@ -33,11 +33,13 @@ export class AnnouncementService {
   }
 
 
-  getAnnouncements(page: number = 1, perPage: number = 10){
+  getAnnouncements(page: number = 1, perPage: number = 10, user: any){
 
     const params = {
       page: page.toString(),
-      per_page: perPage.toString()
+      per_page: perPage.toString(),
+      compagny_id: user.compagny_id,
+      role: user.role
     };
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     return this.http.get<any[]>(this.apiUrlAnnonce, { headers: headers, params });

@@ -1,0 +1,46 @@
+<mat-dialog-content>
+    <button mat-icon-button (click)="onClose()">
+      <mat-icon>close</mat-icon>
+    </button>
+    <h4>Ajouter un Rendez-vous</h4>
+    <form [formGroup]="appointmentForm" (ngSubmit)="onSubmit()" class="appointment-form">
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Date du rendez-vous</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="date">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Heure du rendez-vous</mat-label>
+        <input matInput type="time" formControlName="time">
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Type de rendez-vous</mat-label>
+        <mat-select formControlName="appointmentType">
+          <mat-option *ngFor="let type of appointmentTypes" [value]="type">{{ type }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Statut du rendez-vous</mat-label>
+        <mat-select formControlName="status">
+          <mat-option *ngFor="let status of appointmentStatuses" [value]="status">{{ status }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Description</mat-label>
+        <textarea matInput formControlName="description"></textarea>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Location</mat-label>
+        <input matInput formControlName="location">
+      </mat-form-field>
+
+
+      <button mat-raised-button color="primary" type="submit">Enregistrer</button>
+    </form>
+  </mat-dialog-content>

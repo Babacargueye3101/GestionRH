@@ -5,5 +5,6 @@ export const environment = {
     apiCompagnies: 'http://localhost:3000/api/companies',
     apiConges: 'http://localhost:3000/api/leaves',
     apiPayment: 'http://localhost:3000/api/payments',
-    apiUrlAnnonce: 'http://localhost:3000/api/announcements'
+    apiUrlAnnonce: 'http://localhost:3000/api/announcements',
+    apiUrlRdv: 'http://localhost:3000/api/v1/appointments'
 };

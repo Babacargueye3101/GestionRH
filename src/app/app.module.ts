@@ -69,6 +69,8 @@ import { ViewdetailPaymentComponent } from './pages/menus/paies/viewdetail-payme
 import { AnnoncementComponent } from './pages/menus/annoncement/annoncement.component';
 import { CreateAnnouncementComponent } from './pages/menus/annoncement/create-announcement/create-announcement.component';
 import { EditAnnouncementComponent } from './pages/menus/annoncement/edit-announcement/edit-announcement.component';
+import { RdvComponent } from './pages/menus/rdv/rdv.component';
+import { CreateRdvComponent } from './pages/menus/rdv/create-rdv/create-rdv.component';
 
 
 registerLocaleData(localeFr, 'fr');
@@ -106,6 +108,8 @@ registerLocaleData(localeFr, 'fr');
     AnnoncementComponent,
     CreateAnnouncementComponent,
     EditAnnouncementComponent,
+    RdvComponent,
+    CreateRdvComponent,
   ],
   imports: [
     BrowserModule,

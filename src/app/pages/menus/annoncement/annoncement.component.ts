@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateAnnouncementComponent } from './create-announcement/create-announcement.component';
-import { AnnouncementService } from 'src/app/services/announcement.service';
+import { Announcement, AnnouncementService } from 'src/app/services/announcement.service';
 import { EditAnnouncementComponent } from './edit-announcement/edit-announcement.component';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-annoncement',
@@ -10,13 +12,41 @@ import { EditAnnouncementComponent } from './edit-announcement/edit-announcement
   styleUrls: ['./annoncement.component.scss']
 })
 export class AnnoncementComponent implements OnInit{
+  user: any;
+  currentUser: any;
+  totalAnnonces= 0;
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
+  dataSource = new MatTableDataSource<Announcement>();
 
   constructor(public dialog: MatDialog, private announcementService: AnnouncementService) {}
 
   announcements: any[] = [];
+
+
   ngOnInit(): void {
     this.loadAnnouncements()
   }
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    // Optionally, set custom labels here if needed
+    this.paginator._intl.itemsPerPageLabel = 'Éléments par page:';
+    this.paginator._intl.nextPageLabel = 'Page suivante';
+    this.paginator._intl.previousPageLabel = 'Page précédente';
+    this.paginator._intl.lastPageLabel = 'Derniére page';
+    this.paginator._intl.getRangeLabel = (page: number, pageSize: number, length: number) => {
+      if (length === 0 || pageSize === 0) {
+        return `0 sur ${length}`;
+      }
+      const startIndex = page * pageSize;
+      const endIndex = startIndex < length ? Math.min(startIndex + pageSize, length) : startIndex + pageSize;
+      this.loadAnnouncements(page, 10)
+      return `${startIndex + 1} - ${endIndex} sur ${length}`;
+    };
+  }
+
 
   openCreateAnnouncementDialog(): void {
     const dialogRef = this.dialog.open(CreateAnnouncementComponent, {
@@ -45,17 +75,22 @@ export class AnnoncementComponent implements OnInit{
   }
 
 
-  loadAnnouncements(): void {
-    this.announcementService.getAnnouncements().subscribe({
-      next: (data) => {
-        this.announcements = data;
-        console.log(this.announcements);
+  loadAnnouncements(pageIndex: number = 0, pageSize: number = 10): void {
+    const user = localStorage.getItem('currentUser');
 
-      },
-      error: (error) => {
-        console.error('Error fetching announcements:', error);
-      }
-    });
+    if (user) {
+      var currentUser = JSON.parse(user);
+      this.announcementService.getAnnouncements(pageIndex, pageSize, currentUser).subscribe({
+        next: (data) => {
+          this.announcements = data;
+          this.totalAnnonces= this.announcements?.length;
+        },
+        error: (error) => {
+          console.error('Error fetching announcements:', error);
+        }
+      });
+    }
+
   }
 
 
