@@ -53,20 +53,23 @@ export class RdvComponent implements OnInit {
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
-    // Optionally, set custom labels here if needed
     this.paginator._intl.itemsPerPageLabel = 'Éléments par page:';
     this.paginator._intl.nextPageLabel = 'Page suivante';
     this.paginator._intl.previousPageLabel = 'Page précédente';
-    this.paginator._intl.lastPageLabel = 'Derniére page';
+    this.paginator._intl.lastPageLabel = 'Dernière page';
     this.paginator._intl.getRangeLabel = (page: number, pageSize: number, length: number) => {
       if (length === 0 || pageSize === 0) {
         return `0 sur ${length}`;
       }
       const startIndex = page * pageSize;
       const endIndex = startIndex < length ? Math.min(startIndex + pageSize, length) : startIndex + pageSize;
-      this.loadAppointments(page, 10)
       return `${startIndex + 1} - ${endIndex} sur ${length}`;
     };
+
+    // Ajoutez cet événement pour charger les données lors du changement de page
+    this.paginator.page.subscribe(() => {
+      this.loadAppointments(this.paginator.pageIndex, this.paginator.pageSize);
+    });
   }
 
   loadAppointments(pageIndex: number = 0, pageSize: number = 10): void {
@@ -76,11 +79,9 @@ export class RdvComponent implements OnInit {
       this.compagny= currentUser.compagny_id;
     }
     this.appointmentService.getAppointments(pageIndex, pageSize,this.compagny, currentUser).subscribe(
-      (data: any[]) => {
-        this.appointments = data;
-        this.totalAppointments= this.appointments.length
-        console.log(this.appointments);
-
+      (data: any) => {
+        this.totalAppointments = data.total_count;
+        this.appointments = data.appointments;
       },
       error => {
         console.error('Error loading appointments:', error);
