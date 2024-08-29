@@ -5,5 +5,5 @@ export interface Appointment {
     location: string;
     description: string;
     status: string;
-    type: string;
+    appointment_type: string;
 }

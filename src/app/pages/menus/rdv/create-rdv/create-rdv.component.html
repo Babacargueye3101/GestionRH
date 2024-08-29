@@ -18,7 +18,7 @@
 
       <mat-form-field appearance="fill" class="full-width">
         <mat-label>Type de rendez-vous</mat-label>
-        <mat-select formControlName="appointmentType">
+        <mat-select formControlName="type">
           <mat-option *ngFor="let type of appointmentTypes" [value]="type">{{ type }}</mat-option>
         </mat-select>
       </mat-form-field>
@@ -26,7 +26,7 @@
       <mat-form-field appearance="fill" class="full-width">
         <mat-label>Statut du rendez-vous</mat-label>
         <mat-select formControlName="status">
-          <mat-option *ngFor="let status of appointmentStatuses" [value]="status">{{ status }}</mat-option>
+          <mat-option *ngFor="let status of appointmentStatuses" [value]="status.value">{{ status.viewValue }}</mat-option>
         </mat-select>
       </mat-form-field>
 

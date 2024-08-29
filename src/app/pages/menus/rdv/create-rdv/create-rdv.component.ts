@@ -8,92 +8,102 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-create-rdv',
   templateUrl: './create-rdv.component.html',
-  styleUrls: ['./create-rdv.component.scss']
+  styleUrls: ['./create-rdv.component.scss'],
 })
 export class CreateRdvComponent implements OnInit {
-
-
-
   appointmentForm!: FormGroup;
 
   appointmentTypes: string[] = [
-    'Entretien d\'embauche',
+    "Entretien d'embauche",
     'Entretien annuel',
     'Entretien professionnel',
-    'Réunion d\'équipe',
+    "Réunion d'équipe",
     'Suivi post-recrutement',
     'Gestion des conflits',
     'Bilan de compétences',
     'Entretien de départ',
     'Réunion de planification des ressources humaines',
-    'Entretien de retour après une absence prolongée'
+    'Entretien de retour après une absence prolongée',
   ];
 
-  appointmentStatuses: string[] = [
-    'Planifié',
-    'En cours',
-    'Terminé',
-    'Annulé'
+  appointmentStatuses: { value: string; viewValue: string }[] = [
+    { value: 'planned', viewValue: 'Planifié' },
+    { value: 'in_progress', viewValue: 'En cours' },
+    { value: 'completed', viewValue: 'Terminé' },
+    { value: 'canceled', viewValue: 'Annulé' },
   ];
 
-
-  constructor(private fb: FormBuilder, private dialogRef: MatDialogRef<CreateRdvComponent>, private rdvService: RdvService, private spinnerService: NgxSpinnerService){
-
+  constructor(
+    private fb: FormBuilder,
+    private dialogRef: MatDialogRef<CreateRdvComponent>,
+    private rdvService: RdvService,
+    private spinnerService: NgxSpinnerService
+  ) {
     this.appointmentForm = this.fb.group({
       date: ['', Validators.required],
       time: ['', Validators.required],
-      appointmentType: ['', Validators.required],
+      type: ['', Validators.required],
       status: ['', Validators.required],
       description: [''],
-      location: ['']
+      location: [''],
+      compagny_id: ['']
     });
   }
 
+  ngOnInit(): void {}
 
-  ngOnInit(): void {
-
-  }
-
-
-
+  compagny: any;
   onSubmit() {
     if (this.appointmentForm.valid) {
       this.spinnerService.show();
-      var appointment= {
-        start_time: this.appointmentForm.get('date')?.value,
-        end_time: this.combineDateAndTime(this.appointmentForm.get('date')?.value, this.appointmentForm.get('time')?.value),
-        location: this.appointmentForm.get('location')?.value,
-        description: this.appointmentForm.get('description')?.value,
-        status: this.appointmentForm.get('status')?.value,
-        type: this.appointmentForm.get('type')?.value
-      }
+      const user = localStorage.getItem('currentUser');
 
-      this.rdvService.createAppointment(appointment).subscribe((res)=>{
-         this.spinnerService.hide();
-         Swal.fire({
-          title: 'Création de RDV',
-          text: 'Rendez-vous planifié avec Success',
-          icon: 'success'
-        })
-        setTimeout(() => {
-          location.reload
-        }, 1000);
-         console.log(res);
+      if (user) {
+        var currentUser = JSON.parse(user);
+        this.compagny = currentUser.compagny_id;
 
-      },(error) =>{
-        this.spinnerService.hide();
-        Swal.fire({
-          title: 'Erreur de Création',
-          text: error,
-          icon: 'error',
-          showCancelButton: true
-        }).then((result) => {
-          if (result.isConfirmed) {
-            // Code à exécuter si l'utilisateur clique sur "Oui"
-            console.log('Utilisateur a cliqué Oui');
+        var appointment = {
+          start_time: this.appointmentForm.get('date')?.value,
+          end_time: this.combineDateAndTime(
+            this.appointmentForm.get('date')?.value,
+            this.appointmentForm.get('time')?.value
+          ),
+          location: this.appointmentForm.get('location')?.value,
+          description: this.appointmentForm.get('description')?.value,
+          status: this.appointmentForm.get('status')?.value,
+          appointment_type: this.appointmentForm.get('type')?.value,
+          compagny_id: this.compagny
+        };
+
+        this.rdvService.createAppointment(appointment).subscribe(
+          (res) => {
+            this.spinnerService.hide();
+            Swal.fire({
+              title: 'Création de RDV',
+              text: 'Rendez-vous planifié avec Success',
+              icon: 'success',
+            });
+            setTimeout(() => {
+              location.reload;
+            }, 1000);
+            console.log(res);
+          },
+          (error) => {
+            this.spinnerService.hide();
+            Swal.fire({
+              title: 'Erreur de Création',
+              text: error,
+              icon: 'error',
+              showCancelButton: true,
+            }).then((result) => {
+              if (result.isConfirmed) {
+                // Code à exécuter si l'utilisateur clique sur "Oui"
+                console.log('Utilisateur a cliqué Oui');
+              }
+            });
           }
-        });
-      })
+        );
+      }
     }
   }
 
@@ -108,5 +118,4 @@ export class CreateRdvComponent implements OnInit {
     const timeStr = time;
     return `${dateStr}T${timeStr}`;
   }
-
 }

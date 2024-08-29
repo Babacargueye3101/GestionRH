@@ -21,8 +21,15 @@ export class RdvService {
   }
 
   // Méthode pour obtenir tous les rendez-vous
-  getAppointments(): Observable<Appointment[]> {
-    return this.http.get<Appointment[]>(this.apiUrl, { headers: this.getHeaders() });
+  getAppointments(startIndex=0, pageSize=10 ,compagny_id: number,user: any): Observable<Appointment[]> {
+    const params = {
+      page: startIndex.toString(),
+      per_page: pageSize.toString(),
+      compagny_id: compagny_id,
+      email: user.email,
+      role: user.role
+    };
+    return this.http.get<Appointment[]>(this.apiUrl, { headers: this.getHeaders(), params });
   }
 
   // Méthode pour obtenir un rendez-vous par ID

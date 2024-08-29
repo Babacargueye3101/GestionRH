@@ -71,6 +71,7 @@ import { CreateAnnouncementComponent } from './pages/menus/annoncement/create-an
 import { EditAnnouncementComponent } from './pages/menus/annoncement/edit-announcement/edit-announcement.component';
 import { RdvComponent } from './pages/menus/rdv/rdv.component';
 import { CreateRdvComponent } from './pages/menus/rdv/create-rdv/create-rdv.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 
 registerLocaleData(localeFr, 'fr');
@@ -145,7 +146,8 @@ registerLocaleData(localeFr, 'fr');
     MatRadioModule,
     MatAutocompleteModule,
     MatCheckboxModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatTooltipModule
   ],
   providers: [{ provide: LOCALE_ID, useValue: 'fr' }],
   bootstrap: [AppComponent]
