@@ -3,6 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { HttpClient } from '@angular/common/http';
 import { NgxSpinnerService } from 'ngx-spinner';
 import Swal from 'sweetalert2';
+import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-upload-log',
   templateUrl: './upload-log.component.html',
@@ -33,7 +34,7 @@ export class UploadLogComponent {
       const formData = new FormData();
       formData.append('logo_compagny', this.selectedFile);
 
-      this.http.post(`http://localhost:3000/api/companies/${this.data.id}/upload_logo`, formData)
+      this.http.post(`${environment.apiCompagnies}/${this.data.id}/upload_logo`, formData)
         .subscribe(response => {
           console.log('Document uploaded successfully', response);
           this.dialogRef.close(true);

@@ -1,11 +1,11 @@
 export const environment = {
     production: true,
-    apiUrl: 'http://localhost:3000/api',
-    apiEmployee: 'http://localhost:3000/api/employees',
-    apiCompagnies: 'http://localhost:3000/api/companies',
-    apiConges: 'http://localhost:3000/api/leaves',
-    apiPayment: 'http://localhost:3000/api/payments',
-    apiUrlAnnonce: 'http://localhost:3000/api/announcements',
-    apiUrlRdv: 'http://localhost:3000/api/v1/appointments',
-    apiUrlFolder: 'http://localhost:3000/api/folders'
+    apiUrl: 'https://gestionrhback.onrender.com/api',
+    apiEmployee: 'https://gestionrhback.onrender.com/api/employees',
+    apiCompagnies: 'https://gestionrhback.onrender.com/api/companies',
+    apiConges: 'https://gestionrhback.onrender.com/api/leaves',
+    apiPayment: 'https://gestionrhback.onrender.com/api/payments',
+    apiUrlAnnonce: 'https://gestionrhback.onrender.com/api/announcements',
+    apiUrlRdv: 'https://gestionrhback.onrender.com/api/v1/appointments',
+    apiUrlFolder: 'https://gestionrhback.onrender.com/api/folders'
 };
