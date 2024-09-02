@@ -20,7 +20,7 @@ const routes: Routes = [
   { path: 'rendez-vous', loadChildren: () => import('./pages/menus/rdv/rdv/rdv.module').then(m => m.RdvModule) },
 
 
-  { path: '', redirectTo: '/login', pathMatch: 'full' }
+  { path: '', redirectTo: '/register', pathMatch: 'full' }
 ];
 
 @NgModule({

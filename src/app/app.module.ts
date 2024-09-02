@@ -72,6 +72,8 @@ import { EditAnnouncementComponent } from './pages/menus/annoncement/edit-announ
 import { RdvComponent } from './pages/menus/rdv/rdv.component';
 import { CreateRdvComponent } from './pages/menus/rdv/create-rdv/create-rdv.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { CreateFolderDialogComponent } from './pages/menus/documents/create-folder-dialog/create-folder-dialog.component';
+import { ListDocumentComponent } from './pages/menus/documents/list-document/list-document.component';
 
 
 registerLocaleData(localeFr, 'fr');
@@ -111,6 +113,8 @@ registerLocaleData(localeFr, 'fr');
     EditAnnouncementComponent,
     RdvComponent,
     CreateRdvComponent,
+    CreateFolderDialogComponent,
+    ListDocumentComponent,
   ],
   imports: [
     BrowserModule,

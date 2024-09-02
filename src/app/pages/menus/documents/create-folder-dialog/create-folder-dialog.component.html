@@ -1,0 +1,14 @@
+<h1 mat-dialog-title>Créer un nouveau dossier</h1>
+
+<div mat-dialog-content>
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Nom du dossier</mat-label>
+    <input matInput [(ngModel)]="folderName">
+    <mat-icon matSuffix>folder</mat-icon> <!-- Ajout d'une icône pour améliorer l'UI -->
+  </mat-form-field>
+</div>
+
+<div mat-dialog-actions align="end">
+  <button mat-button (click)="onNoClick()">Annuler</button>
+  <button mat-raised-button color="primary" [mat-dialog-close]="folderName" cdkFocusInitial>Créer</button>
+</div>

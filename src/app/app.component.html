@@ -2,7 +2,7 @@
   <mat-sidenav #sidenav mode="side" [opened]="isOpen" class="custom-sidenav"
     (mouseenter)="mouseEnterSidenav()" (mouseleave)="mouseLeaveSidenav()">
     <div class="logo-container">
-      <img [src]="'http://localhost:3000/' + compagny?.url" alt="Logo" class="logo" />
+      <img [src]="compagny?.url" alt="Logo" class="logo" />
     </div>
     <mat-nav-list>
       <a mat-list-item routerLink="/dashboard">

@@ -15,7 +15,7 @@
         width: 150px; // Ajustez la taille de la photo
         height: 150px; // Ajustez la taille de la photo
         border-radius: 50%;
-        object-fit: cover;
+        object-fit: contain;
         margin-bottom: 20px;
       }
 

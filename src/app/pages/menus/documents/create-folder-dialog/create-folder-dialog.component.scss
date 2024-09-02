@@ -1,0 +1,31 @@
+.full-width {
+    width: 100%;
+  }
+
+  mat-dialog-content {
+    padding-bottom: 16px; // Espace entre le contenu du formulaire et les actions
+  }
+
+  mat-dialog-actions {
+    margin-top: 16px; // Espace entre le formulaire et les boutons d'action
+    display: flex;
+    justify-content: flex-end; // Aligne les boutons à droite
+  }
+
+  mat-form-field {
+    margin-bottom: 16px; // Espace entre les champs si tu en ajoutes plusieurs
+  }
+
+  button[mat-raised-button] {
+    min-width: 100px; // Définit une largeur minimum pour les boutons pour un look plus cohérent
+  }
+
+  button[mat-button] {
+    color: #757575; // Change la couleur du bouton "Annuler" pour un aspect plus discret
+  }
+
+  h1[mat-dialog-title] {
+    font-size: 20px; // Ajuste la taille du titre pour qu'il soit plus équilibré
+    font-weight: 500;
+    margin-bottom: 12px; // Ajoute un espace sous le titre pour le séparer du contenu
+  }

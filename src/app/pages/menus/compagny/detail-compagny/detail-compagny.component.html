@@ -1,7 +1,7 @@
 <div mat-dialog-content class="modal-container">
   <!-- Partie gauche -->
   <div class="left-section">
-    <img [src]="'http://localhost:3000/' + data.url" alt="Photo de l'employé" class="employee-photo" />
+    <img [src]="data.url" alt="Photo de l'employé" class="employee-photo" height="200" width="200" />
     <div class="employee-info">
       <h4>{{data.name}}</h4>
     </div>

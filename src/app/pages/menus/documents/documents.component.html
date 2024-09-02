@@ -1,1 +1,22 @@
-<p>documents works!</p>
+<mat-toolbar color="primary">
+    <span>Gestion des Documents</span>
+    <span class="spacer"></span>
+    <button mat-raised-button color="accent" (click)="openCreateFolderDialog()">
+      Créer un Dossier
+    </button>
+</mat-toolbar>
+
+<div class="folder-card-list">
+    <h2>Liste des dossiers</h2>
+
+    <div class="card-container">
+      <mat-card *ngFor="let folder of folders" class="folder-card" [routerLink]="['/documents', folder.id]">
+        <img mat-card-image src="assets/images/dossier.png" alt="Dossier">
+        <mat-card-content>
+          <h3 class="folder-name" style="text-align: center;">{{ folder.name }}</h3>
+        </mat-card-content>
+      </mat-card>
+    </div>
+</div>
+
+

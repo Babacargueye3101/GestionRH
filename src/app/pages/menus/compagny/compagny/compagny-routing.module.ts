@@ -4,7 +4,7 @@ import { CompagnyComponent } from '../compagny.component';
 import { AuthGuard } from 'src/app/auth.guard';
 
 const routes: Routes = [
-  { path: '', component: CompagnyComponent,canActivate: [AuthGuard] }
+  { path: '', component: CompagnyComponent }
 ];
 
 @NgModule({
