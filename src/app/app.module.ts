@@ -74,6 +74,7 @@ import { CreateRdvComponent } from './pages/menus/rdv/create-rdv/create-rdv.comp
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { CreateFolderDialogComponent } from './pages/menus/documents/create-folder-dialog/create-folder-dialog.component';
 import { ListDocumentComponent } from './pages/menus/documents/list-document/list-document.component';
+import { AssignRoleComponent } from './pages/assign-role/assign-role.component';
 
 
 registerLocaleData(localeFr, 'fr');
@@ -115,6 +116,7 @@ registerLocaleData(localeFr, 'fr');
     CreateRdvComponent,
     CreateFolderDialogComponent,
     ListDocumentComponent,
+    AssignRoleComponent,
   ],
   imports: [
     BrowserModule,

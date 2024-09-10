@@ -5,7 +5,7 @@
       <img [src]="compagny?.url" alt="Logo" class="logo" />
     </div>
     <mat-nav-list>
-      <a mat-list-item routerLink="/dashboard">
+      <a mat-list-item routerLink="/dashboard" *ngIf="currentUser?.can_see_dashboard">
         <mat-icon>dashboard</mat-icon>
         <span>Dashboard</span>
       </a>

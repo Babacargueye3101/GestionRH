@@ -1,1 +1,56 @@
-<p>parametres works!</p>
+<h2>Role Management</h2>
+<table mat-table [dataSource]="users" class="mat-elevation-z8">
+    <!-- Colonne Nom -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Nom </th>
+      <td mat-cell *matCellDef="let user">{{ user.name }}</td>
+    </ng-container>
+
+    <!-- Colonne Peut Voir le Dashboard -->
+    <ng-container matColumnDef="canSeeDashboard">
+      <th mat-header-cell *matHeaderCellDef> Peut voir le Dashboard </th>
+      <td mat-cell *matCellDef="let user">
+        <mat-checkbox [checked]="user.can_see_dashboard" (change)="onCheckboxChange($event, user, 'can_see_dashboard')">
+        </mat-checkbox>
+      </td>
+    </ng-container>
+
+    <!-- Colonne Peut Voir les Employés -->
+    <ng-container matColumnDef="canSeeEmployee">
+        <th mat-header-cell *matHeaderCellDef> Peut voir les Employés </th>
+        <td mat-cell *matCellDef="let user">
+          <mat-checkbox [checked]="user.can_see_employee" (change)="onCheckboxChange($event, user, 'can_see_employee')">
+          </mat-checkbox>
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="canSeeFormation">
+      <th mat-header-cell *matHeaderCellDef> Peut voir les Formations </th>
+      <td mat-cell *matCellDef="let user">
+        <mat-checkbox [checked]="user.can_see_formation" (change)="onCheckboxChange($event, user, 'can_see_formation')">
+        </mat-checkbox>
+      </td>
+    </ng-container>
+
+    <!-- Colonne Peut Voir les Candidatures -->
+    <ng-container matColumnDef="canSeeCandidature">
+        <th mat-header-cell *matHeaderCellDef> Peut voir les Candidatures </th>
+        <td mat-cell *matCellDef="let user">
+          <mat-checkbox [checked]="user.can_see_candidature" (change)="onCheckboxChange($event, user, 'can_see_candidature')">
+          </mat-checkbox>
+        </td>
+    </ng-container>
+
+    <!-- Colonne Peut Voir les Paies -->
+    <ng-container matColumnDef="canSeePaies">
+        <th mat-header-cell *matHeaderCellDef> Peut voir les Paiements </th>
+        <td mat-cell *matCellDef="let user">
+          <mat-checkbox [checked]="user.can_see_paies" (change)="onCheckboxChange($event, user, 'can_see_paies')">
+          </mat-checkbox>
+        </td>
+    </ng-container>
+
+    <!-- En-têtes et lignes -->
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
