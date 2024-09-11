@@ -1,1 +1,14 @@
-<p>list-document works!</p>
+<div class="breadcrumb">
+    <a mat-button routerLink="/documents" routerLinkActive="active-link">Retour</a>
+    <span> > </span>
+    <a mat-button routerLink="/paies" class="active" routerLinkActive="active-link">Paies</a>
+</div>
+<div class="company-container">
+    <mat-toolbar color="primary" class="toolbar">
+      <span class="toolbar-title">Liste des documents</span>
+      <span class="spacer"></span>
+      <button mat-raised-button color="accent" class="create-button" >
+        <mat-icon>add</mat-icon> Ajouter un Document
+      </button>
+    </mat-toolbar>
+</div>

@@ -1,3 +1,8 @@
+<div class="breadcrumb">
+  <a mat-button routerLink="/employements" routerLinkActive="active-link">Employés</a>
+  <span> > </span>
+  <a mat-button routerLink="/paies" class="active" routerLinkActive="active-link">Paies</a>
+</div>
 <div class="company-container">
   <mat-toolbar color="primary" class="toolbar">
     <span class="toolbar-title">Gestion des paies</span>
@@ -5,28 +10,29 @@
     <button mat-raised-button color="accent" class="create-button" (click)="creeNewPayment()">
       <mat-icon>add</mat-icon> Créer des paiements
     </button>
-    <button mat-raised-button style="color: black; margin: 10px" class="delete-button" (click)="ValiderSelectedPayments()" [disabled]="selectedPayments.length === 0">
+    <button mat-raised-button style="color: black; margin: 10px" class="delete-button"
+      (click)="ValiderSelectedPayments()" [disabled]="selectedPayments.length === 0">
       <mat-icon>save</mat-icon> Valider les paiements
     </button>
   </mat-toolbar>
 
 
   <!-- Dans le template Angular -->
-<div class="download-button-container">
-  <button mat-raised-button [matMenuTriggerFor]="downloadMenu" color="primary" class="download-button">
-    <mat-icon>download</mat-icon> Télécharger
-  </button>
-  <mat-menu #downloadMenu="matMenu">
-    <button mat-menu-item (click)="downloadPayments()">
-      <mat-icon>file_download</mat-icon>
-      <span>CSV</span>
+  <div class="download-button-container">
+    <button mat-raised-button [matMenuTriggerFor]="downloadMenu" color="primary" class="download-button">
+      <mat-icon>download</mat-icon> Télécharger
     </button>
-    <button mat-menu-item (click)="downloadPdf()">
-      <mat-icon>file_download</mat-icon>
-      <span>PDF</span>
-    </button>
-  </mat-menu>
-</div>
+    <mat-menu #downloadMenu="matMenu">
+      <button mat-menu-item (click)="downloadPayments()">
+        <mat-icon>file_download</mat-icon>
+        <span>CSV</span>
+      </button>
+      <button mat-menu-item (click)="downloadPdf()">
+        <mat-icon>file_download</mat-icon>
+        <span>PDF</span>
+      </button>
+    </mat-menu>
+  </div>
 
 
   <!-- Nouvelle div pour la table -->
@@ -35,7 +41,8 @@
 
       <ng-container matColumnDef="select">
         <th mat-header-cell *matHeaderCellDef>
-          <mat-checkbox (change)="selectAll($event)" [checked]="isAllSelected()" [indeterminate]="isSomeSelected()"></mat-checkbox>
+          <mat-checkbox (change)="selectAll($event)" [checked]="isAllSelected()"
+            [indeterminate]="isSomeSelected()"></mat-checkbox>
         </th>
         <td mat-cell *matCellDef="let payment">
           <mat-checkbox (change)="toggleSelection(payment)" [checked]="isAllSelected()"></mat-checkbox>
@@ -45,7 +52,7 @@
       <!-- Employee ID Column -->
       <ng-container matColumnDef="employeeId">
         <th mat-header-cell *matHeaderCellDef> Employé </th>
-        <td mat-cell *matCellDef="let payment"> {{payment.employee.first_name}}  {{payment.employee.last_name}}</td>
+        <td mat-cell *matCellDef="let payment"> {{payment.employee.first_name}} {{payment.employee.last_name}}</td>
       </ng-container>
 
       <!-- Payment Date Column -->
@@ -105,15 +112,14 @@
 
       <!-- Header and Row Definitions -->
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{'row-approved': row.status === 'paye'}"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{'row-approved': row.status === 'paye'}">
+      </tr>
     </table>
-    <mat-paginator [length]="totalPayments"
-        [pageSize]="10"
-        showFirstLastButtons>
+    <mat-paginator [length]="totalPayments" [pageSize]="10" showFirstLastButtons>
     </mat-paginator>
   </div>
 </div>
 
 <ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="medium" color="#fff" type="Ball-Tail">
-  <p style="color: white">Veillez patienter un moment  😕 !!</p>
+  <p style="color: white">Veillez patienter un moment 😕 !!</p>
 </ngx-spinner>
