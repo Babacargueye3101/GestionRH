@@ -19,16 +19,12 @@ export class FolderService {
   constructor(private http: HttpClient) {}
 
   // Méthode pour obtenir les headers avec le token d'authentification
-  private getHeaders(): HttpHeaders {
+  private getHeaders() {
+    const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+    const token = currentUser.token;
     return new HttpHeaders({
-      'Authorization': `Bearer ${this.getAuthToken()}`, // Exemple de token
-      'Content-Type': 'application/json'
+      Authorization: `Bearer ${token}`,
     });
-  }
-
-  // Extrait le token d'authentification (ajuste cette méthode selon ta logique)
-  private getAuthToken(): string {
-    return localStorage.getItem('auth_token') || ''; // Exemple : récupération du token depuis localStorage
   }
 
   // Récupérer tous les dossiers

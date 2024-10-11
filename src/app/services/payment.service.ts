@@ -14,6 +14,15 @@ export class PaymentService {
   apiUrl= environment.apiPayment;
 
 
+  private getHeaders() {
+    const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+    const token = currentUser.token;
+    return new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+  }
+
+
   getAllpayment(page: number = 1, perPage: number = 10, compagny_id: number, user_id: any): Observable<any> {
     const params = {
       page: page.toString(),
@@ -39,7 +48,7 @@ export class PaymentService {
   downloadCSV(compagnyId: number): Observable<Blob> {
     return this.http.get(`${this.apiUrl}?compagny_id=${compagnyId}`+"&format=csv", {
       responseType: 'blob',
-      observe: 'response' // Pour obtenir les headers
+      observe: 'response', headers: this.getHeaders()
     }).pipe(
       map((response: HttpResponse<Blob>) => response.body),
       filter((blob): blob is Blob => blob !== null) // Filtrer les valeurs nulles
@@ -47,22 +56,16 @@ export class PaymentService {
   }
 
   downloadPaymentsPdf(companyId: number): Observable<Blob> {
-    return this.http.get(`${this.apiUrl}.pdf?compagny_id=${companyId}`, { responseType: 'blob' });
+    return this.http.get(`${this.apiUrl}.pdf?compagny_id=${companyId}`, { responseType: 'blob', headers: this.getHeaders() });
   }
 
   downloadSignlePaymentsPdf(companyId: number, employeeId: number, id: number): Observable<Blob> {
-    return this.http.get(`${this.apiUrl}.pdf?compagny_id=${companyId}&employee_id=${employeeId}&id=${id}`, { responseType: 'blob' });
+    return this.http.get(`${this.apiUrl}.pdf?compagny_id=${companyId}&employee_id=${employeeId}&id=${id}`, { responseType: 'blob', headers: this.getHeaders() });
   }
 
   downloadSinglePaymentPdf(compagnyId: number, paymentId: number): Observable<Blob> {
     const url = `${this.apiUrl}/${paymentId}.pdf?compagny_id=${compagnyId}`;
-    return this.http.get(url, { responseType: 'blob' });
+    return this.http.get(url, { responseType: 'blob', headers: this.getHeaders() });
   }
 
-
-  private getHeaders(): HttpHeaders {
-    return new HttpHeaders({
-      'Content-Type': 'application/json'
-    });
-  }
 }

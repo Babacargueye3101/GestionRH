@@ -135,10 +135,10 @@ export class RdvComponent implements OnInit {
     `Type : ${clickedEvent.meta.appointment_type}\n\n` +
     `Date : ${new Date(clickedEvent.meta.start_time).toLocaleDateString()}\n\n` +
     `Heure de début : ${new Date(clickedEvent.meta.start_time).toLocaleTimeString()}\n\n` +
-    `Heure de fin : ${new Date(clickedEvent.meta.end_time).toLocaleTimeString()}\n` +
-    `Lieu : ${clickedEvent.meta.location}\n` +
-    `Description : ${clickedEvent.meta.description}\n` +
-    `Statut : ${clickedEvent.meta.status}`;
+    `Heure de fin : ${new Date(clickedEvent.meta.end_time).toLocaleTimeString()}\n\n` +
+    `Lieu : ${clickedEvent.meta.location}\n\n` +
+    `Description : ${clickedEvent.meta.description}\n\n` +
+    `Statut : ${clickedEvent.meta.status}`;;
     Swal.fire({
       title: clickedEvent.title,
       text: message,

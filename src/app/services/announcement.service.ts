@@ -22,14 +22,21 @@ export class AnnouncementService {
 
   constructor(private http: HttpClient) { }
 
+
+  private getHeaders() {
+    const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+    const token = currentUser.token;
+    return new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+  }
+
   createAnnouncement(announcement: Announcement): Observable<Announcement> {
 
 
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json'
-    });
 
-    return this.http.post<Announcement>(this.apiUrlAnnonce, announcement, { headers });
+
+    return this.http.post<Announcement>(this.apiUrlAnnonce, announcement, { headers: this.getHeaders() });
   }
 
 
@@ -42,17 +49,17 @@ export class AnnouncementService {
       role: user.role
     };
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.get<any[]>(this.apiUrlAnnonce, { headers: headers, params });
+    return this.http.get<any[]>(this.apiUrlAnnonce, { headers: this.getHeaders(), params });
   }
 
   updateAnnouncement(announcement: any): Observable<any> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.put(this.apiUrlAnnonce+'/'+announcement.id, { announcement: announcement }, { headers: headers });
+    return this.http.put(this.apiUrlAnnonce+'/'+announcement.id, { announcement: announcement }, { headers: this.getHeaders() });
   }
 
   downloadAnnouncementPdf(announcementId: number): Observable<Blob> {
     return this.http.get(this.apiUrlAnnonce + '/' + announcementId + '.pdf', {
-      responseType: 'blob' // Spécifie que la réponse sera un blob (dans ce cas, un fichier PDF)
+      responseType: 'blob', headers: this.getHeaders()
     });
   }
 

@@ -16,9 +16,17 @@ export class CongesService {
   constructor(private http: HttpClient) { }
 
 
+  private getHeaders() {
+    const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+    const token = currentUser.token;
+    return new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+  }
+
+
   createConge(conge: any): Observable<any> {
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.post<any>(this.apiUrl, { leave: conge }, { headers: headers });
+    return this.http.post<any>(this.apiUrl, { leave: conge }, { headers: this.getHeaders() });
   }
 
 
@@ -32,18 +40,18 @@ export class CongesService {
     };
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
-    return this.http.get<Conge[]>(this.apiUrl, { headers: headers, params });
+    return this.http.get<Conge[]>(this.apiUrl, { headers: this.getHeaders(), params });
   }
 
   changeStatusConge(id: number, status: string, comment: string){
     var conge_params= { id: id , status: status, comment: comment}
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.put<any>(`${this.apiUrl}/${id}/changeStatus`, { leave: conge_params }, { headers: headers });
+    return this.http.put<any>(`${this.apiUrl}/${id}/changeStatus`, { leave: conge_params }, { headers: this.getHeaders() });
   }
 
   deleteConge(id: any){
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.delete<any>(`${this.apiUrl}/${id}`, { headers: headers });
+    return this.http.delete<any>(`${this.apiUrl}/${id}`, { headers: this.getHeaders() });
   }
 
   sendMessageToUser(instanceId: string, phoneNumber: string, message: string): Observable<any> {

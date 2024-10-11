@@ -10,9 +10,13 @@ export class UsersService {
 
   private baseUrl = environment.apiUser;
 
-  private httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-  };
+  private getHeaders() {
+    const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+    const token = currentUser.token;
+    return new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+  }
 
   constructor(private http: HttpClient) { }
 
@@ -20,7 +24,7 @@ export class UsersService {
    * Récupère la liste des utilisateurs.
    */
   getUsers(): Observable<any[]> {
-    return this.http.get<any[]>(this.baseUrl, this.httpOptions);
+    return this.http.get<any[]>(this.baseUrl, {headers: this.getHeaders()});
   }
 
   /**
@@ -31,6 +35,6 @@ export class UsersService {
    */
   updateRole(userId: number, role: string, value: boolean): Observable<any> {
     const url = `${this.baseUrl}/${userId}/update_role`;
-    return this.http.patch(url, { user: { [role]: value } }, this.httpOptions);
+    return this.http.patch(url, { user: { [role]: value } },  {headers: this.getHeaders()});
   }
 }

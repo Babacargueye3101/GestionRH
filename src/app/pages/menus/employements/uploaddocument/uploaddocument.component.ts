@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -31,7 +31,7 @@ export class UploaddocumentComponent {
       const formData = new FormData();
       formData.append('contract_document', this.selectedFile);
 
-      this.http.post(`${environment.apiEmployee}/${this.data.employee.id}/upload_document`, formData)
+      this.http.post(`${environment.apiEmployee}/${this.data.employee.id}/upload_document`, formData, {headers: this.getHeaders()})
         .subscribe(response => {
           console.log('Document uploaded successfully', response);
           this.dialogRef.close(true);
@@ -42,5 +42,13 @@ export class UploaddocumentComponent {
     } else {
       console.error('No file selected');
     }
+  }
+
+  private getHeaders() {
+    const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+    const token = currentUser.token;
+    return new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
   }
 }

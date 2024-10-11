@@ -48,9 +48,11 @@ export class EmployeeServiceService {
     return this.http.delete<void>(`${this.apiUrl}/${id}`, { headers: this.getHeaders() });
   }
 
-  private getHeaders(): HttpHeaders {
+  private getHeaders() {
+    const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+    const token = currentUser.token;
     return new HttpHeaders({
-      'Content-Type': 'application/json'
+      Authorization: `Bearer ${token}`,
     });
   }
 }

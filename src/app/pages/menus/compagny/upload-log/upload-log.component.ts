@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { NgxSpinnerService } from 'ngx-spinner';
 import Swal from 'sweetalert2';
 import { environment } from 'src/environments/environment';
@@ -34,7 +34,7 @@ export class UploadLogComponent {
       const formData = new FormData();
       formData.append('logo_compagny', this.selectedFile);
 
-      this.http.post(`${environment.apiCompagnies}/${this.data.id}/upload_logo`, formData)
+      this.http.post(`${environment.apiCompagnies}/${this.data.id}/upload_logo`, formData, {headers: this.getHeaders()})
         .subscribe(response => {
           console.log('Document uploaded successfully', response);
           this.dialogRef.close(true);
@@ -48,5 +48,13 @@ export class UploadLogComponent {
     } else {
       console.error('No file selected');
     }
+  }
+
+  private getHeaders() {
+    const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+    const token = currentUser.token;
+    return new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
   }
 }

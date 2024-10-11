@@ -15,21 +15,29 @@ export class CompagnyService {
 
   createCompany(companyData: any): Observable<any> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.post<any>(this.apiUrl, { compagny: companyData }, { headers: headers });
+    return this.http.post<any>(this.apiUrl, { compagny: companyData }, { headers: this.getHeaders() });
   }
 
   updateCompagny(id:number, companyData: any): Observable<any> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.put<any>(`${this.apiUrl}/${id}`, { compagny: companyData }, { headers: headers });
+    return this.http.put<any>(`${this.apiUrl}/${id}`, { compagny: companyData }, { headers: this.getHeaders() });
   }
 
   getAllCompagny(){
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.get<any>(this.apiUrl, { headers: headers });
+    return this.http.get<any>(this.apiUrl, { headers: this.getHeaders() });
   }
 
   getCompagnyById(id:any){
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.get<any>(`${this.apiUrl}/${id}`, { headers: headers });
+    return this.http.get<any>(`${this.apiUrl}/${id}`, { headers: this.getHeaders() });
+  }
+
+
+  private getHeaders() {
+    const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+    const token = currentUser.token;
+    return new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
   }
 }
