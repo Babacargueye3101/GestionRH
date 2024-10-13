@@ -8,5 +8,6 @@ export const environment = {
     apiUrlAnnonce: 'http://localhost:3000//api/announcements',
     apiUrlRdv: 'http://localhost:3000//api/v1/appointments',
     apiUrlFolder: 'http://localhost:3000//api/folders',
-    apiUser: 'http://localhost:3000//api/users'
+    apiUser: 'http://localhost:3000//api/users',
+    apiDocument: 'http://localhost:3000//api/documents'
 };

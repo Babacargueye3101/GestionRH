@@ -1,0 +1,24 @@
+<h2 mat-dialog-title>Créer un Document</h2>
+<mat-dialog-content>
+  <mat-form-field>
+    <mat-label>Nom du document</mat-label>
+    <input matInput placeholder="Titre du document" [(ngModel)]="document.title" name="title">
+  </mat-form-field>
+
+  <mat-form-field style="width: auto;">
+    <mat-label>Description</mat-label>
+    <textarea matInput placeholder="Description" [(ngModel)]="document.description" name="description"></textarea>
+  </mat-form-field>
+
+  <!-- Champ de fichier pour uploader un document -->
+  <div class="file-input">
+    <label for="file-upload">Choisir un fichier</label>
+    <input id="file-upload" type="file" (change)="onFileSelected($event)">
+    <span class="file-name" *ngIf="selectedFile"></span>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Annuler</button>
+  <button mat-raised-button color="primary" (click)="createDocument()">Créer</button>
+</mat-dialog-actions>

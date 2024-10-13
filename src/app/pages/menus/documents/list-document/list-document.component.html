@@ -7,8 +7,25 @@
     <mat-toolbar color="primary" class="toolbar">
       <span class="toolbar-title">Liste des documents</span>
       <span class="spacer"></span>
-      <button mat-raised-button color="accent" class="create-button" >
+      <button mat-raised-button color="accent" class="create-button" (click)="openCreateDocumentModal()">
         <mat-icon>add</mat-icon> Ajouter un Document
       </button>
     </mat-toolbar>
+</div>
+
+
+<div class="search-container">
+  <input type="text" [(ngModel)]="searchTerm" placeholder="Rechercher par titre" />
+  <input type="date" [(ngModel)]="searchDate" (change)="filterByDate()" />
+</div>
+
+<div class="document-container" style="margin-left: 10px;">
+  <div *ngFor="let document of filteredDocuments()" class="document-item">
+    <a [href]="document.file_url" target="_blank">
+      <img src="assets/pdf-icon.png" alt="PDF" style="cursor: pointer; width: 100px; height: 100px;">
+    </a>
+    <h3 class="document-title">{{ document.title }}</h3>
+    <p class="document-date">Créé le {{ document.created_at | date }}</p>
+    <p class="document-size">Taille : {{ convertFileSize(document.file_size) }}</p>
+  </div>
 </div>

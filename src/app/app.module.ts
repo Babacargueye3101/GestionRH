@@ -75,6 +75,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { CreateFolderDialogComponent } from './pages/menus/documents/create-folder-dialog/create-folder-dialog.component';
 import { ListDocumentComponent } from './pages/menus/documents/list-document/list-document.component';
 import { AssignRoleComponent } from './pages/assign-role/assign-role.component';
+import { AddDocumentComponent } from './pages/menus/documents/add-document/add-document.component';
 
 
 registerLocaleData(localeFr, 'fr');
@@ -117,6 +118,7 @@ registerLocaleData(localeFr, 'fr');
     CreateFolderDialogComponent,
     ListDocumentComponent,
     AssignRoleComponent,
+    AddDocumentComponent,
   ],
   imports: [
     BrowserModule,

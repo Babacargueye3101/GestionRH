@@ -79,3 +79,61 @@
     }
 
   }
+
+  $border-color: #ccc;
+  $border-radius: 5px;
+  $box-shadow-light: rgba(0, 0, 0, 0.1);
+  $box-shadow-hover: rgba(0, 0, 0, 0.2);
+  $margin: 10px;
+  $padding: 15px;
+  $column-width: calc(20% - #{$margin * 2}); // 4 colonnes par ligne
+
+  .document-container {
+    display: flex;
+    flex-wrap: wrap; // Permet aux éléments de passer à la ligne suivante
+    justify-content: flex-start; // Aligner les éléments à gauche
+
+    .document-item {
+      margin: $margin; // Espacement autour des éléments
+      text-align: center; // Centrer le texte
+      border: 1px solid $border-color; // Couleur de la bordure
+      border-radius: $border-radius; // Arrondir les coins
+      padding: $padding; // Espace interne
+      box-shadow: 2px 2px 5px $box-shadow-light; // Ombre légère
+      transition: box-shadow 0.3s; // Transition pour l'effet de survol
+      flex: 0 0 $column-width; // Chaque élément prend 25% de la largeur de la ligne, sans flexibilité
+
+      &:hover {
+        box-shadow: 4px 4px 10px $box-shadow-hover; // Ombre plus forte au survol
+      }
+    }
+  }
+
+  // Ajustements pour les écrans plus petits
+  @media (max-width: 768px) {
+    .document-item {
+      flex: 0 0 calc(50% - #{$margin * 2}); // 2 éléments par ligne sur des écrans moyens
+    }
+  }
+
+  @media (max-width: 480px) {
+    .document-item {
+      flex: 0 0 calc(100% - #{$margin * 2}); // 1 élément par ligne sur des petits écrans
+    }
+  }
+
+  .search-container {
+    display: flex;  /* Utiliser Flexbox pour aligner les éléments sur la même ligne */
+    align-items: center;  /* Centrer verticalement les éléments */
+    gap: 16px;  /* Espace entre les éléments, ajustez la valeur selon vos besoins */
+    margin-left: 20px;
+
+    input[type="text"],
+    input[type="date"] {
+      padding: 8px;  /* Ajoutez du rembourrage à vos inputs pour un meilleur look */
+      border: 1px solid #ccc;  /* Une bordure simple */
+      border-radius: 4px;  /* Coins arrondis */
+      font-size: 16px;  /* Taille de police */
+      width: 200px;  /* Largeur fixe, ajustez selon vos besoins */
+    }
+  }
