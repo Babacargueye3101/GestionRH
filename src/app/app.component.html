@@ -7,9 +7,22 @@
     <mat-nav-list>
       <a mat-list-item routerLink="/dashboard" *ngIf="currentUser?.can_see_dashboard">
         <mat-icon>dashboard</mat-icon>
-        <span>Dashboard</span>
+        <span>Tableau de Bord et Statistiques</span>
       </a>
-      <a mat-list-item routerLink="/employements">
+
+      <a mat-list-item routerLink="">
+        <mat-icon>sell</mat-icon>
+        <span>Gestion Boutique</span>
+      </a>
+      <a mat-list-item routerLink="/paies">
+        <mat-icon>shop_card</mat-icon>
+        <span>Gestion des Ventes</span>
+      </a>
+      <a mat-list-item routerLink="">
+        <mat-icon>person</mat-icon>
+        <span>Gestion des Clients</span>
+      </a>
+      <!-- <a mat-list-item routerLink="/employements">
         <mat-icon>people</mat-icon>
         <span>Employés</span>
       </a>
@@ -17,9 +30,8 @@
         <mat-icon>work</mat-icon>
         <span>Candidatures</span>
         <mat-icon class="expand-icon">{{ showNestedMenu ? 'expand_less' : 'expand_more' }}</mat-icon>
-
-      </a>
-      <div class="nested-menu" *ngIf="showNestedMenucandidats">
+      </a> -->
+      <!-- <div class="nested-menu" *ngIf="showNestedMenucandidats">
         <a mat-list-item routerLink="/annonces" class="nested-link">
           <mat-icon>announcement</mat-icon>
           <span>Annonces</span>
@@ -28,11 +40,8 @@
           <mat-icon>schedule</mat-icon>
           <span>Rendez-vous</span>
         </a>
-      </div>
-      <a mat-list-item routerLink="/paies">
-        <mat-icon>attach_money</mat-icon>
-        <span>Paies</span>
-      </a>
+      </div> -->
+
       <a mat-list-item routerLink="/formation">
         <mat-icon>event</mat-icon>
         <span>Formation</span>

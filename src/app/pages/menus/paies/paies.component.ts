@@ -88,7 +88,7 @@ export class PaiesComponent implements OnInit {
       this.paymentService.getAllpayment(pageIndex, pageSize, this.compagny, currentUser).subscribe((res)=>{
         this.spinnerService.hide();
         this.payments= res?.payments
-        this.totalPayments= this.payments.length;
+        this.totalPayments= this.payments?.length;
 
       }, (error) =>{
         console.log(error);
@@ -141,11 +141,11 @@ export class PaiesComponent implements OnInit {
   }
 
   isAllSelected() {
-    return this.payments.length > 0 && this.selectedPayments.length === this.payments.length;
+    return this.payments?.length > 0 && this.selectedPayments?.length === this.payments?.length;
   }
 
   isSomeSelected() {
-    return this.selectedPayments.length > 0 && !this.isAllSelected();
+    return this.selectedPayments?.length > 0 && !this.isAllSelected();
   }
 
   ValiderSelectedPayments() {

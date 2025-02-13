@@ -1,146 +1,147 @@
-// SCSS pour le style du mat-sidenav-container
 
 .example-container {
-    height: 100vh;
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+}
+
+.custom-sidenav {
+  width: 250px;
+  background: linear-gradient(135deg, #e6b8b7, #c9a173, #a67c52);  color: #ecf0f1; // Couleur du texte
+  transition: width 0.3s;
+  display: flex;
+  flex-direction: column;
+
+  .logo-container {
+    padding: 16px;
     display: flex;
-    flex-direction: row;
-  }
+    justify-content: center;
 
-
-  .custom-sidenav {
-    width: 250px;
-    background-color: #3f51b5; // Couleur de fond du sidenav
-    color: #ecf0f1; // Couleur du texte
-    transition: width 0.3s;
-    display: flex;
-    flex-direction: column; // Assure que le sidenav et le contenu se placent verticalement
-
-    .logo-container {
-      padding: 16px;
-      display: flex;
-      justify-content: center;
-
-      .logo {
-        width: 200px; // Ajustez la taille selon vos besoins
-        height: 100px; // Assurez-vous que la hauteur soit égale à la largeur pour un cercle parfait
-        border-radius: 10%; // Rend le logo circulaire
-        object-fit: contain; // Assure que l'image couvre bien le cercle sans déformation
-      }
-    }
-
-    mat-nav-list {
-      padding: 0;
-      margin: 0;
-      flex: 1; // Permet à la liste de navigation de s'étendre pour remplir l'espace disponible
-      overflow-y: auto; // Active le défilement vertical si nécessaire
-
-
-      a {
-        display: flex;
-        align-items: center;
-        padding: 10px;
-        color: white;
-        margin-bottom: 10px;
-        text-decoration: none;
-        font-size: 20px;
-        transition: background-color 0.3s, color 0.3s;
-
-        mat-icon {
-          margin-right: 16px;
-          color: white;
-          vertical-align: middle
-        }
-
-        span {
-          color: white;
-          vertical-align:middle
-        }
-
-        &:hover {
-          background-color: #f39c12;
-          color: #ffffff;
-        }
-      }
-    }
-    .nested-menu {
-      padding-left: 30px;
-
-      .nested-link {
-        font-size: 14px;
-        color: #f39c12;
-
-        &:hover {
-          background-color: #f39c12;
-        }
-
-        mat-icon {
-          font-size: 20px;
-        }
-
-        span {
-          font-size: 14px;
-        }
-      }
-    }
-
-    .footer {
-      padding: 16px;
-      background-color: #3f51b5; // Couleur de fond du footer
-      text-align: center;
-      color: #ffffff;
-      font-size: 14px;
+    .logo {
+      width: 200px;
+      height: 100px;
+      border-radius: 10%;
+      object-fit: contain;
     }
   }
 
-  mat-sidenav-content {
+  mat-nav-list {
+    padding: 10px;
+    margin: 0;
     flex: 1;
-    display: flex;
-    flex-direction: column;
+    overflow-y: auto;
 
-    mat-toolbar {
-      background-color: #3f51b5; // Couleur de fond de la toolbar
-      color: #ffffff;
+    a {
+      display: flex;
+      align-items: center;
+      padding: 10px;
+      color: white;
+      margin-bottom: 10px;
+      text-decoration: none;
+      font-size: 20px;
+      transition: background-color 0.3s, color 0.3s;
 
-      .spacer {
-        flex: 1;
+      mat-icon {
+        margin-right: 16px;
+        color: white;
+        vertical-align: middle;
       }
 
-      .auth-buttons {
-        a {
-          color: #ffffff;
-          font-size: 14px;
-          margin-left: 16px;
-          text-decoration: none;
+      span {
+        color: white;
+        vertical-align: middle;
+      }
 
-          &:hover {
-            color: #d5dbdb; // Couleur des liens au survol
-          }
-        }
+      &:hover {
+        background-color: #1a1a1b;
+        border-radius: 20px;
+        color: #ffffff;
       }
     }
+  }
 
-    .content {
-      padding: 16px;
-      background-color: #f4f4f4; // Couleur de fond du contenu
+  .nested-menu {
+    padding-left: 30px;
+
+    .nested-link {
+      font-size: 14px;
+      color: #f39c12;
+
+      &:hover {
+        background-color: #1a1a1b;
+        border-radius: 20px;
+        color: #ffffff;
+      }
+
+      mat-icon {
+        font-size: 20px;
+      }
+
+      span {
+        font-size: 14px;
+      }
+    }
+  }
+
+  .footer {
+    padding: 16px;
+    background-color: linear-gradient(135deg, #e6b8b7, #c9a173, #a67c52);
+    text-align: center;
+    color: #ffffff;
+    font-size: 14px;
+  }
+}
+
+mat-sidenav-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+
+  mat-toolbar {
+    background: linear-gradient(135deg, #e6b8b7, #c9a173, #a67c52);
+    color: #ffffff;
+
+    .spacer {
       flex: 1;
     }
-  }
 
-  // Styles pour les titres dans la toolbar
-  .sen {
-    color: #e74c3c; // Couleur de "Sen"
-  }
+    .auth-buttons {
+      a {
+        color: #ffffff;
+        font-size: 14px;
+        margin-left: 16px;
+        text-decoration: none;
 
-  .guinar {
-    color: #f39c12; // Couleur de "Guinar"
-  }
-  .mat-icon-button {
-    background-color: transparent; // Fond transparent
-    color: #ffffff; // Couleur de l'icône
-    border: none; // Retire la bordure
-    padding: 8px; // Ajuste le padding pour le bouton
-
-    &:hover {
-      background-color: rgba(255, 255, 255, 0.1); // Couleur de fond légèrement visible au survol
+        &:hover {
+          color: #d5dbdb;
+        }
+      }
     }
   }
+
+  .content {
+    padding: 16px;
+    background-color: #f4f4f4;
+    flex: 1;
+  }
+}
+
+// Styles pour les titres dans la toolbar
+.sen {
+  color: #e74c3c;
+}
+
+.guinar {
+  color: #f39c12;
+}
+
+.mat-icon-button {
+  background-color: transparent;
+  color: #ffffff;
+  border: none;
+  padding: 8px;
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+}
