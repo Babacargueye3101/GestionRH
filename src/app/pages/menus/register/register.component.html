@@ -1,4 +1,4 @@
-<div class="container" style="background-color: #f39c12;">
+<div class="container">
     <h1 style="color: white;">Inscription</h1>
     <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
       <mat-form-field appearance="fill">
@@ -36,7 +36,7 @@
         </mat-select>
       </mat-form-field>
 
-      <button mat-raised-button color="primary" type="submit" [disabled]="registerForm.invalid">S'inscrire</button>
+      <button mat-raised-button class="button-submit" type="submit" [disabled]="registerForm.invalid">S'inscrire</button>
     </form>
   </div>
 

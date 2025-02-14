@@ -1,20 +1,54 @@
 .login-card {
-    max-width: 400px;
-    margin: 50px auto;
-    padding: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    border-radius: 8px;
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  background: linear-gradient(135deg, #e6b8b7, #c9a173, #a67c52);
+  color: #ecf0f1;
+  text-align: center;
 
-    mat-card-header {
-      text-align: center;
-    }
-
-    mat-form-field {
-      width: 100%;
-      margin-bottom: 20px;
-    }
-
-    button {
-      width: 100%;
-    }
+  mat-card-header {
+    text-align: center;
   }
+
+  mat-form-field {
+    width: 100%;
+    margin-bottom: 15px;
+  }
+
+  button {
+    width: 100%;
+  }
+}
+
+/* Réduction de la hauteur des champs de saisie */
+::ng-deep .mat-mdc-text-field-wrapper {
+  border-radius: 20px !important;
+  overflow: hidden;
+  min-height: 36px !important; /* Réduction de la hauteur */
+}
+
+/* Ajustement du padding pour éviter que le texte soit trop bas */
+::ng-deep .mat-mdc-input-element {
+  padding: 6px 10px !important; /* Ajuste la hauteur du texte */
+  font-size: 14px; /* Réduit la taille du texte */
+}
+
+/* Bouton de soumission */
+.button-submit {
+  background-color: #ecf0f1;
+  color: black;
+  border-radius: 20px;
+  transition: background-color 0.3s ease-in-out;
+  height: 50px;
+}
+
+.button-submit:hover {
+  background-color: #f7aead;
+}
+
+/* Icône du champ de mot de passe */
+::ng-deep .mat-mdc-icon-button {
+  color: #c9a173 !important;
+}

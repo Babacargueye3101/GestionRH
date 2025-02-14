@@ -10,7 +10,7 @@
         <span>Tableau de Bord et Statistiques</span>
       </a>
 
-      <a mat-list-item routerLink="">
+      <a mat-list-item routerLink="/admin/boutique">
         <mat-icon>sell</mat-icon>
         <span>Gestion Boutique</span>
       </a>
@@ -95,8 +95,8 @@
       <span>{{compagny?.name}}</span>
       <span class="spacer"></span>
       <div class="auth-buttons" *ngIf="!isLoggedIn; else loggedInMenu">
-        <a mat-button routerLink="/login" style="color: white; background-color:#f39c12;">Login</a>
-        <a mat-button routerLink="/register" style="color: white; background-color:#f39c12;">Register</a>
+        <a mat-button routerLink="/login" style="color: white; ">Login</a>
+        <a mat-button routerLink="/register" style="color: white;">Register</a>
       </div>
       <ng-template #loggedInMenu>
         <span style="font-size: 16px;">{{ userName }}</span>

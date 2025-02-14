@@ -1,23 +1,59 @@
 .container {
-    max-width: 400px;
-    margin: auto;
-    padding: 20px;
-    background: white;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
+  max-width: 400px;
+  margin: auto;
+  padding: 20px;
+  background: linear-gradient(135deg, #e6b8b7, #c9a173, #a67c52);
+  border-radius: 10px; // Légèrement plus arrondi
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  color: #ecf0f1;
+}
 
-  h1 {
-    text-align: center;
-    margin-bottom: 20px;
-  }
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
 
-  mat-form-field {
-    width: 100%;
-    margin: 10px 0;
-  }
+/* Styles des champs de saisie */
+mat-form-field {
+  width: 100%;
+  margin: 10px 0;
+}
 
-  button {
-    width: 100%;
-    margin-top: 20px;
-  }
+/* Appliquer l'arrondi aux champs de saisie */
+::ng-deep .mdc-text-field {
+  border-radius: 20px !important;
+  overflow: hidden;
+}
+
+/* Ajuster la couleur de fond et les bordures des champs */
+::ng-deep .mdc-text-field--filled {
+  background-color: white !important;
+}
+
+/* Styliser le texte à l'intérieur des champs */
+::ng-deep .mat-mdc-input-element {
+  border-radius: 20px;
+  padding: 10px;
+  font-size: 16px;
+}
+
+/* Bouton de soumission */
+.button-submit {
+  width: 100%;
+  padding: 10px;
+  border-radius: 20px;
+  background-color: #ecf0f1;
+  color: black;
+  font-weight: bold;
+  transition: background 0.3s ease;
+  height: 50px;
+}
+
+.button-submit:hover {
+  background-color: #f7aead;
+}
+
+/* Icône du champ de mot de passe */
+::ng-deep .mat-mdc-icon-button {
+  color: #c9a173 !important;
+}

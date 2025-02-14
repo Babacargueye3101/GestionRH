@@ -76,6 +76,8 @@ import { CreateFolderDialogComponent } from './pages/menus/documents/create-fold
 import { ListDocumentComponent } from './pages/menus/documents/list-document/list-document.component';
 import { AssignRoleComponent } from './pages/assign-role/assign-role.component';
 import { AddDocumentComponent } from './pages/menus/documents/add-document/add-document.component';
+import { BoutiqueComponent } from './pages/admin/boutique/boutique.component';
+import { BoutiqueModule } from './pages/admin/boutique/boutique.module';
 
 
 registerLocaleData(localeFr, 'fr');
@@ -119,6 +121,7 @@ registerLocaleData(localeFr, 'fr');
     ListDocumentComponent,
     AssignRoleComponent,
     AddDocumentComponent,
+    BoutiqueComponent,
   ],
   imports: [
     BrowserModule,
@@ -155,7 +158,8 @@ registerLocaleData(localeFr, 'fr');
     MatAutocompleteModule,
     MatCheckboxModule,
     MatExpansionModule,
-    MatTooltipModule
+    MatTooltipModule,
+    BoutiqueModule
   ],
   providers: [{ provide: LOCALE_ID, useValue: 'fr' }],
   bootstrap: [AppComponent]
