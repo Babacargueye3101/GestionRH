@@ -1,0 +1,78 @@
+// Définition des variables pour un design cohérent
+$primary-color: #e9c0df;
+$hover-color: darken($primary-color, 10%);
+$border-radius: 8px;
+
+h2[mat-dialog-title] {
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+  color: $primary-color;
+  margin-bottom: 16px;
+}
+
+mat-dialog-content {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  gap: 16px; // Espacement entre les éléments
+  height: 100%; // Permet à l'input de s'étendre si possible
+
+  .full-width {
+    width: 100%;
+    flex-grow: 1;  // Permet à l'input de prendre toute la place
+  }
+
+  mat-form-field {
+    width: 100%;
+    display: flex;
+    flex-grow: 1;
+  }
+
+  input {
+    width: 100%;
+    height: 100%; // Permet à l'input d'occuper tout l'espace verticalement
+    border-color: $primary-color;
+  }
+
+  // Appliquer la couleur verte au hint text
+  ::ng-deep mat-hint {
+    color: green !important;
+  }
+}
+
+// Style du bouton "Créer"
+.btn-save {
+  background-color: #7b628d;
+  color: white;
+  &:hover {
+    background-color: darken(#7b628d, 10%);
+  }
+}
+
+mat-dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 16px;
+
+  button {
+    min-width: 100px;
+    padding: 8px 16px;
+    border-radius: $border-radius;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+
+    &.mat-button {
+      color: #666;
+    }
+
+    &.mat-raised-button {
+      background-color: $primary-color;
+      color: white;
+
+      &:hover {
+        background-color: $hover-color;
+      }
+    }
+  }
+}

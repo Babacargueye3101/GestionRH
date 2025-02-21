@@ -1,0 +1,18 @@
+<h2 mat-dialog-title>Créer une nouvelle boutique</h2>
+
+<div mat-dialog-content class="full-width">
+  <mat-form-field appearance="outline" class="full-width" style="width: 100%; padding-top: 20px">
+    <mat-label>Nom de la boutique</mat-label>
+    <input matInput [(ngModel)]="shopName">
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="full-width" style="width: 100%; padding-top: 20px">
+    <mat-label>Localisation</mat-label>
+    <input matInput [(ngModel)]="shopLocation">
+  </mat-form-field>
+</div>
+
+<div mat-dialog-actions align="end">
+  <button mat-button (click)="closeDialog()">Annuler</button>
+  <button mat-raised-button class="btn-save" (click)="saveShop()">Créer</button>
+</div>

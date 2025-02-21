@@ -1,0 +1,15 @@
+<h2 mat-dialog-title>Ajouter une Catégorie</h2>
+
+<div mat-dialog-content>
+  <form (ngSubmit)="onSubmit()" #categoryForm="ngForm">
+    <mat-form-field appearance="outline" class="full-width" style="margin-top: 10px;">
+      <mat-label>Nom de la Catégorie</mat-label>
+      <input matInput type="text" [(ngModel)]="categoryName" name="categoryName" required>
+    </mat-form-field>
+  </form>
+</div>
+
+<div mat-dialog-actions align="end">
+  <button mat-button (click)="onCancel()">Annuler</button>
+  <button mat-raised-button color="primary" type="submit" (click)="onSubmit()">Créer</button>
+</div>

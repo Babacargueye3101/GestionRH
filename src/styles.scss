@@ -1,7 +1,130 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 
 /* angular-cli file: src/styles.scss */
 @import "../node_modules/angular-calendar/css/angular-calendar.css";
+
+
+
+// Variables de couleurs pour une personnalisation facile
+$confirm-color: #ec7bbf; // Vert
+$cancel-color: #484343; // Rouge
+
+// Mixin pour réutiliser les styles
+@mixin swal-button($bg-color, $hover-color) {
+  background-color: $bg-color !important;
+  color: white !important;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-weight: bold;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: $hover-color !important;
+  }
+}
+
+// Personnalisation des boutons de SweetAlert2
+.swal-confirm-button {
+  @include swal-button($confirm-color, darken($confirm-color, 10%));
+}
+
+.swal-cancel-button {
+  @include swal-button($cancel-color, darken($cancel-color, 10%));
+}
+
+
+.button-primary {
+  background: #b57f50;
+  color: #ecf0f1;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: 0.3s ease-in-out;
+
+  &:hover {
+    background: #cfa37b;
+  }
+}
+
+.button-secondary {
+  background: #d4af7a;
+  color: #4a2c1d;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: 0.3s ease-in-out;
+
+  &:hover {
+    background: #e6c49d;
+  }
+}
+
+.button-danger {
+  background: #c95c47;
+  color: #ecf0f1;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: 0.3s ease-in-out;
+
+  &:hover {
+    background: #d97b65;
+  }
+}
+
+.icon-create {
+  color: #a8c686;
+  font-size: 20px;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+
+  &:hover {
+    color: #98b675;
+  }
+}
+
+.icon-read {
+  color: #8196a3;
+  font-size: 20px;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+
+  &:hover {
+    color: #718593;
+  }
+}
+
+.icon-update {
+  color: #d4af7a;
+  font-size: 20px;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+
+  &:hover {
+    color: #e6c49d;
+  }
+}
+
+.icon-delete {
+  color: #c95c47;
+  font-size: 20px;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+
+  &:hover {
+    color: #d97b65;
+  }
+}
