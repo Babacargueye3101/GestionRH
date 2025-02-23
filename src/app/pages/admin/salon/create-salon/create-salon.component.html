@@ -1,0 +1,37 @@
+<h2>Créer un Salon</h2>
+
+<form [formGroup]="salonForm" (ngSubmit)="onSubmit()">
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Boutique</mat-label>
+    <mat-select formControlName="shop_id">
+      <mat-option *ngFor="let shop of listShop" [value]="shop.id">
+        {{ shop.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Nom du Salon</mat-label>
+    <input matInput formControlName="name" placeholder="Entrez le nom du salon">
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Adresse</mat-label>
+    <input matInput formControlName="address" placeholder="Entrez l'adresse">
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Téléphone</mat-label>
+    <input matInput formControlName="phone" placeholder="+221 77 123 45 67">
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Description</mat-label>
+    <textarea matInput formControlName="description" rows="3" placeholder="Description du salon"></textarea>
+  </mat-form-field>
+
+  <div class="form-actions">
+    <button mat-button type="button" (click)="onCancel()">Annuler</button>
+    <button mat-raised-button color="primary" type="submit" [disabled]="salonForm.invalid">Créer</button>
+  </div>
+</form>

@@ -35,8 +35,8 @@
   </mat-form-field>
 
   <div class="actions">
-    <button mat-button (click)="close()">Annuler</button>
-    <button mat-raised-button color="primary" (click)="save()" [disabled]="productForm.invalid || isSubmitting">Créer</button>
+    <button mat-button color="secondary" (click)="close()">Annuler</button>
+    <button mat-raised-button (click)="save()" [disabled]="productForm.invalid || isSubmitting" style="background-color: #b57f50">Créer</button>
   </div>
 </form>
 

@@ -78,6 +78,8 @@ import { AssignRoleComponent } from './pages/assign-role/assign-role.component';
 import { AddDocumentComponent } from './pages/menus/documents/add-document/add-document.component';
 import { BoutiqueComponent } from './pages/admin/boutique/boutique.component';
 import { BoutiqueModule } from './pages/admin/boutique/boutique.module';
+import { SalonComponent } from './pages/admin/salon/salon.component';
+import { ListSalonComponent } from './pages/admin/salon/list-salon/list-salon.component';
 
 
 registerLocaleData(localeFr, 'fr');
@@ -122,6 +124,8 @@ registerLocaleData(localeFr, 'fr');
     AssignRoleComponent,
     AddDocumentComponent,
     BoutiqueComponent,
+    SalonComponent,
+    ListSalonComponent,
   ],
   imports: [
     BrowserModule,

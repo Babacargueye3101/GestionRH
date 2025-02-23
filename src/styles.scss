@@ -86,7 +86,8 @@ $cancel-color: #484343; // Rouge
 }
 
 .icon-create {
-  color: #a8c686;
+  color: white;
+  background-color: #a8c686;
   font-size: 20px;
   cursor: pointer;
   transition: 0.3s ease-in-out;
@@ -97,7 +98,8 @@ $cancel-color: #484343; // Rouge
 }
 
 .icon-read {
-  color: #8196a3;
+  color: white;
+  background-color: #8196a3;
   font-size: 20px;
   cursor: pointer;
   transition: 0.3s ease-in-out;
@@ -108,7 +110,8 @@ $cancel-color: #484343; // Rouge
 }
 
 .icon-update {
-  color: #d4af7a;
+
+  background-color: #d4af7a;
   font-size: 20px;
   cursor: pointer;
   transition: 0.3s ease-in-out;
@@ -119,12 +122,13 @@ $cancel-color: #484343; // Rouge
 }
 
 .icon-delete {
-  color: #c95c47;
+  color: white;
+  background-color: #c95c47;
   font-size: 20px;
   cursor: pointer;
   transition: 0.3s ease-in-out;
 
   &:hover {
-    color: #d97b65;
+    color: #f83f15;
   }
 }
