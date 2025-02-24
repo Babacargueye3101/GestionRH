@@ -29,10 +29,13 @@
       <ng-container matColumnDef="actions">
         <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
         <mat-cell *matCellDef="let salon">
-          <button mat-icon-button  (click)="editSalon(salon)" style="color:green;">
+          <button mat-icon-button (click)="viewSalons(salon)" style="color: rgb(33, 150, 243);">
+            <mat-icon>visibility</mat-icon>
+          </button>
+          <button mat-icon-button  (click)="editSalon(salon)" style="color:rgb(165, 246, 165);">
             <mat-icon>edit</mat-icon>
           </button>
-          <button mat-icon-button (click)="deleteSalon(salon.id)" style="color: red;">
+          <button mat-icon-button (click)="deleteSalon(salon.id)" style="color: rgb(244, 72, 72);">
             <mat-icon>delete</mat-icon>
           </button>
         </mat-cell>

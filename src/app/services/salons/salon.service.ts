@@ -28,6 +28,25 @@ export class SalonService {
     return this.http.delete(`${this.apiUrl}/${shopId}/salons/${salonId}`, { headers: this.getHeaders() });
   }
 
+
+
+  createService(shopId: number, salonId: number, serviceData: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/${shopId}/salons/${salonId}/services`, serviceData, { headers: this.getHeaders() });
+  }
+
+  getSalonServices(shopId: number, salonId: number): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/${shopId}/salons/${salonId}/services`, { headers: this.getHeaders() });
+  }
+
+  deleteService(shopId: number, salonId: number, serviceId: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/${shopId}/salons/${salonId}/services/${serviceId}`, { headers: this.getHeaders() });
+  }
+
+  // Mettre à jour un service dans un salon
+  updateService(shopId: number, salonId: number, serviceId: number, serviceData: any): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}/${shopId}/salons/${salonId}/services/${serviceId}`, serviceData, { headers: this.getHeaders() });
+  }
+
   private getHeaders() {
     const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
     const token = currentUser.token;

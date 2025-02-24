@@ -1,0 +1,29 @@
+<div class="breadcrumb">
+    <a mat-button routerLink="/employements" routerLinkActive="active-link"
+      >Gestion des ventes</a
+    >
+    <span> > </span>
+    <a
+      mat-button
+      routerLink="/paies"
+      class="active"
+      routerLinkActive="active-link"
+      >Gestion des Clients</a
+    >
+  </div>
+
+  <div class="services-salon-container">
+    <mat-toolbar class="toolbar">
+      <span class="toolbar-title">Gestion des Services</span>
+      <span class="spacer"></span>
+      <button mat-raised-button class="create-button" (click)="createService()">
+        <mat-icon>add</mat-icon> Créer une Service
+      </button>
+    </mat-toolbar>
+  </div>
+
+  <div class="container">
+    <div>
+      <app-list-salon-service [shopId]="shopId" [salonId]="salonId"></app-list-salon-service>
+    </div>
+  </div>

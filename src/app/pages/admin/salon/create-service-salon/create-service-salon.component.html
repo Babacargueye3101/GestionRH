@@ -1,0 +1,40 @@
+<div class="form-container">
+    <h2>Ajouter un Nouveau Service</h2>
+
+    <form [formGroup]="serviceForm" (ngSubmit)="onSubmit()">
+      <div class="form-grid">
+        <mat-form-field appearance="outline">
+          <mat-label>Nom du Service</mat-label>
+          <mat-icon matPrefix>spa</mat-icon>
+          <input matInput formControlName="name" required>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Description</mat-label>
+          <mat-icon matPrefix>description</mat-icon>
+          <textarea matInput formControlName="description"></textarea>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Prix (CFA)</mat-label>
+          <mat-icon matPrefix>attach_money</mat-icon>
+          <input matInput type="number" formControlName="price" required>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Durée (minutes)</mat-label>
+          <mat-icon matPrefix>timer</mat-icon>
+          <input matInput type="number" formControlName="duration" required>
+        </mat-form-field>
+      </div>
+
+      <div class="button-group">
+        <button mat-raised-button color="primary" type="submit" [disabled]="serviceForm.invalid">
+          <mat-icon>check_circle</mat-icon> Ajouter
+        </button>
+        <button mat-raised-button color="warn" type="button" (click)="closeDialog()">
+          <mat-icon>close</mat-icon> Annuler
+        </button>
+      </div>
+    </form>
+  </div>

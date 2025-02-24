@@ -17,12 +17,20 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
 import { CreateSalonComponent } from './create-salon/create-salon.component';
 import { UpdateSalonComponent } from './update-salon/update-salon.component';
+import { ViewSalonComponent } from './view-salon/view-salon.component';
+import { ListSalonServiceComponent } from './list-salon-service/list-salon-service.component';
+import { CreateServiceSalonComponent } from './create-service-salon/create-service-salon.component';
+import { UpdateServiceComponent } from './update-service/update-service.component';
 
 
 @NgModule({
   declarations: [
     CreateSalonComponent,
-    UpdateSalonComponent
+    UpdateSalonComponent,
+    ViewSalonComponent,
+    ListSalonServiceComponent,
+    CreateServiceSalonComponent,
+    UpdateServiceComponent
   ],
   imports: [
     CommonModule,

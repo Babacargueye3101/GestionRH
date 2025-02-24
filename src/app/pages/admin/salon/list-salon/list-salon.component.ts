@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ShopService } from 'src/app/services/boutique/shop.service';
 import { SalonService } from 'src/app/services/salons/salon.service';
 import Swal from 'sweetalert2';
-import { CreateSalonComponent } from '../create-salon/create-salon.component';
 import { MatDialog } from '@angular/material/dialog';
 import { UpdateSalonComponent } from '../update-salon/update-salon.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-list-salon',
@@ -20,7 +20,8 @@ export class ListSalonComponent implements OnInit {
   constructor(
     private salonService: SalonService,
     private shopService: ShopService,
-    private dialog: MatDialog // Ajouter le service de dialog
+    private dialog: MatDialog,
+    private routes: Router
   ) {}
 
   ngOnInit(): void {
@@ -90,6 +91,10 @@ export class ListSalonComponent implements OnInit {
         this.loadSalons();
       }
     });
+  }
+
+  viewSalons(salon: any) {
+    this.routes.navigate([`admin/salon/shop/${salon.shop_id}/detail-salon/${salon.id}`]);
   }
 
 }
