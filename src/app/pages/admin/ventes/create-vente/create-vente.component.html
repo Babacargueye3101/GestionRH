@@ -1,0 +1,73 @@
+<h2 mat-dialog-title>Créer une Vente</h2>
+
+<mat-dialog-content>
+  <form [formGroup]="venteForm" (ngSubmit)="onSubmit()">
+
+    <mat-form-field appearance="fill">
+      <mat-label>Nom de l'acheteur</mat-label>
+      <input matInput formControlName="buyer_name" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Prénom de l'acheteur</mat-label>
+      <input matInput formControlName="buyer_surname" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Canal</mat-label>
+      <input matInput formControlName="channel" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Prix total</mat-label>
+      <input matInput type="number" formControlName="total_price" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Montant payé</mat-label>
+      <input matInput type="number" formControlName="paid_amount" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Boutique</mat-label>
+        <mat-select formControlName="shop_id">
+          <mat-option *ngFor="let shop of listShop" [value]="shop.id">
+            {{ shop.name }}
+          </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Produits</mat-label>
+        <mat-select formControlName="products" multiple>
+          <mat-option *ngFor="let product of listProducts" [value]="product.id">
+            {{ product.name }} - {{ product.price }} FCFA
+          </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Montant restant</mat-label>
+      <input matInput type="number" formControlName="remaining_amount" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Méthode de paiement</mat-label>
+      <input matInput formControlName="payment_method" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Date de la vente</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="sale_date">
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-checkbox formControlName="delivered">Livré</mat-checkbox>
+
+    <div class="form-actions">
+      <button mat-raised-button  type="submit">Créer</button>
+      <button mat-button (click)="onCancel()">Annuler</button>
+    </div>
+  </form>
+</mat-dialog-content>

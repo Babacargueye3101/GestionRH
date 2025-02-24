@@ -80,6 +80,7 @@ import { BoutiqueComponent } from './pages/admin/boutique/boutique.component';
 import { BoutiqueModule } from './pages/admin/boutique/boutique.module';
 import { SalonComponent } from './pages/admin/salon/salon.component';
 import { ListSalonComponent } from './pages/admin/salon/list-salon/list-salon.component';
+import { VentesComponent } from './pages/admin/ventes/ventes.component';
 
 
 registerLocaleData(localeFr, 'fr');
@@ -126,6 +127,7 @@ registerLocaleData(localeFr, 'fr');
     BoutiqueComponent,
     SalonComponent,
     ListSalonComponent,
+    VentesComponent,
   ],
   imports: [
     BrowserModule,

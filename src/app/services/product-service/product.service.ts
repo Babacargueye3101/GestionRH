@@ -27,6 +27,12 @@ export class ProductService {
     return this.http.get<Product[]>(`${this.baseUrl}/${shopId}/products`, { headers: this.getHeaders() });
   }
 
+  getProductsByShop(shopId: number): Observable<Product[]> {
+    return this.http.get<Product[]>(`${environment.apiUrl}/shops/${shopId}/products`, {
+      headers: this.getHeaders()
+    });
+  }
+
   createProduct(shopId: number, product: Product): Observable<Product> {
     return this.http.post<Product>(`${this.baseUrl}/${shopId}/products`, { product: product }, { headers: this.getHeaders() });
   }
