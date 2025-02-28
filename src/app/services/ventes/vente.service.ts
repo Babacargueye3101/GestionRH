@@ -22,8 +22,10 @@ export class VenteService {
     return this.http.post<any>(`${this.apiUrl}/${shopId}/sales`, venteData, { headers: this.getHeaders() });
   }
 
-  deleteVente(id: number): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/${id}`, { headers: this.getHeaders() });
+  deleteVente(id: number, shop_id: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/${shop_id}/sales/${id}`, {
+      headers: this.getHeaders()
+    });
   }
 
   // Mettre à jour une vente existante

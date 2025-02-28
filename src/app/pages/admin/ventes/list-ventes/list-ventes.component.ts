@@ -6,6 +6,7 @@ import { SalonService } from 'src/app/services/salons/salon.service';
 import { VenteService } from 'src/app/services/ventes/vente.service';
 import { VenteDetailsDialogComponent } from '../vente-details-dialog/vente-details-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-list-ventes',
@@ -85,9 +86,29 @@ export class ListVentesComponent {
   }
 
   // Supprimer une vente
-  deleteVente(id: number): void {
-    this.ventesService.deleteVente(id).subscribe(() => {
-      this.loadVentes();
+  deleteVente(id: number, shop_id: number) {
+    Swal.fire({
+      title: 'Êtes-vous sûr ?',
+      text: 'Cette action est irréversible !',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Oui, supprimer !',
+      cancelButtonText: 'Annuler'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.ventesService.deleteVente(id, shop_id).subscribe({
+          next: () => {
+            Swal.fire('Supprimé !', 'La vente a été supprimée avec succès.', 'success');
+            this.ventes = this.ventes.filter(vente => vente.id !== id);
+          },
+          error: (err) => {
+            console.error('Erreur de suppression :', err);
+            Swal.fire('Erreur', 'Une erreur est survenue lors de la suppression.', 'error');
+          }
+        });
+      }
     });
   }
   openVenteDetails(venteId: number,shopId: number): void {
