@@ -3,70 +3,111 @@
 <mat-dialog-content>
   <form [formGroup]="venteForm" (ngSubmit)="onSubmit()">
 
-    <mat-form-field appearance="fill">
+    <!-- Sélection de la boutique -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Boutique</mat-label>
+      <mat-select formControlName="shop_id">
+        <mat-option *ngFor="let shop of listShop" [value]="shop.id">
+          {{ shop.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- Sélection du produit -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Produit</mat-label>
+      <mat-select (selectionChange)="onProductSelect($event)">
+        <mat-option *ngFor="let product of listProducts" [value]="product">
+          {{ product.name }} - {{ product.price }} FCFA
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- Champs dynamiques de quantité et prix -->
+    <div *ngIf="selectedProduct">
+      <mat-form-field appearance="fill">
+        <mat-label>Quantité</mat-label>
+        <input matInput type="number" formControlName="productQuantity" min="1"/>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Prix</mat-label>
+        <input matInput type="number" [value]="productPrice" disabled />
+      </mat-form-field>
+
+      <button mat-icon-button color="primary" style="margin-left: 10px;" (click)="addProduct()">
+        <mat-icon>check</mat-icon>
+      </button>
+
+      <button mat-icon-button color="warn" (click)="clearSelectedProduct()">
+        <mat-icon>cancel</mat-icon>
+      </button>
+    </div>
+
+    <!-- Liste des produits ajoutés -->
+    <h3>Produits sélectionnés</h3>
+    <mat-list *ngIf="selectedProducts.length > 0">
+      <mat-list-item *ngFor="let item of selectedProducts; let i = index">
+        {{ item.name }} - Quantité: {{ item.quantity }} - Prix: {{ item.price }} FCFA
+        <button mat-icon-button color="warn" (click)="removeProduct(i)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </mat-list-item>
+    </mat-list>
+
+    <!-- Informations de paiement -->
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Montant total</mat-label>
+      <input matInput type="number" formControlName="total_price" [value]="calculateTotal()" [disabled]="true" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Montant payé</mat-label>
+      <input matInput type="number" formControlName="paid_amount" (input)="calculateRemaining()" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Montant restant</mat-label>
+      <input matInput type="number" formControlName="remaining_amount" [value]="remainingAmount" [disabled]="true" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Méthode de paiement</mat-label>
+      <mat-select formControlName="payment_method">
+        <mat-option value="cash">Espèces</mat-option>
+        <mat-option value="card">Carte Bancaire</mat-option>
+        <mat-option value="mobile">Paiement Mobile</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-checkbox formControlName="delivered">Commande livrée</mat-checkbox>
+
+    <!-- Informations de l'acheteur -->
+    <mat-form-field appearance="fill" class="full-width">
       <mat-label>Nom de l'acheteur</mat-label>
       <input matInput formControlName="buyer_name" />
     </mat-form-field>
 
-    <mat-form-field appearance="fill">
+    <mat-form-field appearance="fill" class="full-width">
       <mat-label>Prénom de l'acheteur</mat-label>
       <input matInput formControlName="buyer_surname" />
     </mat-form-field>
 
-    <mat-form-field appearance="fill">
-      <mat-label>Canal</mat-label>
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Canal de vente</mat-label>
       <input matInput formControlName="channel" />
     </mat-form-field>
 
-    <mat-form-field appearance="fill">
-      <mat-label>Prix total</mat-label>
-      <input matInput type="number" formControlName="total_price" />
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Date de la vente</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="sale_date" />
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
 
-    <mat-form-field appearance="fill">
-      <mat-label>Montant payé</mat-label>
-      <input matInput type="number" formControlName="paid_amount" />
-    </mat-form-field>
-
-    <mat-form-field appearance="outline" class="full-width">
-        <mat-label>Boutique</mat-label>
-        <mat-select formControlName="shop_id">
-          <mat-option *ngFor="let shop of listShop" [value]="shop.id">
-            {{ shop.name }}
-          </mat-option>
-        </mat-select>
-    </mat-form-field>
-
-    <mat-form-field appearance="outline" class="full-width">
-        <mat-label>Produits</mat-label>
-        <mat-select formControlName="products" multiple>
-          <mat-option *ngFor="let product of listProducts" [value]="product.id">
-            {{ product.name }} - {{ product.price }} FCFA
-          </mat-option>
-        </mat-select>
-    </mat-form-field>
-
-    <mat-form-field appearance="fill">
-      <mat-label>Montant restant</mat-label>
-      <input matInput type="number" formControlName="remaining_amount" />
-    </mat-form-field>
-
-    <mat-form-field appearance="fill">
-      <mat-label>Méthode de paiement</mat-label>
-      <input matInput formControlName="payment_method" />
-    </mat-form-field>
-
-    <mat-form-field appearance="fill">
-        <mat-label>Date de la vente</mat-label>
-        <input matInput [matDatepicker]="picker" formControlName="sale_date">
-        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-    </mat-form-field>
-
-    <mat-checkbox formControlName="delivered">Livré</mat-checkbox>
-
+    <!-- Boutons de validation -->
     <div class="form-actions">
-      <button mat-raised-button  type="submit">Créer</button>
+      <button mat-raised-button type="submit" color="primary">Créer</button>
       <button mat-button (click)="onCancel()">Annuler</button>
     </div>
   </form>

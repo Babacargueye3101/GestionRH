@@ -17,11 +17,19 @@ import { MatNativeDateModule, MatOptionModule } from '@angular/material/core';
 import { CreateVenteComponent } from './create-vente/create-vente.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatListModule } from '@angular/material/list';
+import { ListVentesComponent } from './list-ventes/list-ventes.component';
+import { VenteDetailsDialogComponent } from './vente-details-dialog/vente-details-dialog.component';
 
 
 @NgModule({
   declarations: [
-    CreateVenteComponent
+    CreateVenteComponent,
+    ListVentesComponent,
+    VenteDetailsDialogComponent
+  ],
+  exports: [
+    ListVentesComponent
   ],
   imports: [
     CommonModule,
@@ -41,7 +49,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MatOptionModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatListModule
   ]
 })
 export class VentesModule { }

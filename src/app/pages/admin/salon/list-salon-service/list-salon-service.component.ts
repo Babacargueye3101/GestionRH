@@ -51,37 +51,22 @@ export class ListSalonServiceComponent implements OnInit {
         const name = (document.getElementById('serviceName') as HTMLInputElement).value;
         const price = +(document.getElementById('servicePrice') as HTMLInputElement).value;
         const description = (document.getElementById('serviceDescription') as HTMLTextAreaElement).value;
-        console.log(name);
-        console.log(price);
-        console.log(description);
-
-
-
-
-        // Validation des champs
         if (!name || !price || !description) {
           Swal.showValidationMessage('Tous les champs sont obligatoires');
           return false;
         }
-
         return { name, price , description};
       }
     }).then((result) => {
       if (result.isConfirmed) {
         const updatedService = { ...service, ...result.value };
-        console.log("/////");
-        console.log(result.value);
-
-
-
-        // Appel à la méthode de mise à jour du service
         this.salonService.updateService(this.shopId, this.salonId, service.id, updatedService).subscribe(
           () => {
             Swal.fire('Succès', 'Service mis à jour avec succès', 'success');
-            this.getSalonServices();  // Recharger la liste des services après mise à jour
+            this.getSalonServices();
           },
           (error) => {
-            Swal.fire('Erreur', 'Une erreur est survenue lors de la mise à jour du service', 'error');
+            Swal.fire('Erreur', 'Une erreur est survenue lors de la mise à jour du service', error);
           }
         );
       }

@@ -1,0 +1,94 @@
+<h2>Liste des ventes</h2>
+
+<!-- Sélection de la boutique -->
+<mat-form-field appearance="outline" style="margin-right: 20px;">
+  <mat-label>Choisir une boutique</mat-label>
+  <mat-select [(value)]="selectedShopId" (selectionChange)="loadSalons()">
+    <mat-option *ngFor="let shop of shops" [value]="shop.id">
+      {{ shop.name }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+<!-- Sélection du salon (chargé dynamiquement après la boutique) -->
+<mat-form-field appearance="outline" *ngIf="salons.length > 0">
+  <mat-label>Choisir un salon</mat-label>
+  <mat-select [(value)]="selectedSalonId" (selectionChange)="loadVentes()">
+    <mat-option *ngFor="let salon of salons" [value]="salon.id">
+      {{ salon.name }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+<!-- Tableau des ventes -->
+<h2>Liste des ventes</h2>
+
+<div style="overflow-x: auto; width: 100%;">
+    <table mat-table [dataSource]="ventes" *ngIf="ventes.length > 0">
+    <!-- Colonnes -->
+    <ng-container matColumnDef="buyer_name">
+        <th mat-header-cell *matHeaderCellDef>Prénom</th>
+        <td mat-cell *matCellDef="let vente">{{ vente.buyer_name }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="buyer_surname">
+        <th mat-header-cell *matHeaderCellDef>Nom</th>
+        <td mat-cell *matCellDef="let vente">{{ vente.buyer_surname }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="channel">
+        <th mat-header-cell *matHeaderCellDef>Canal</th>
+        <td mat-cell *matCellDef="let vente">{{ vente.channel }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="total_price">
+        <th mat-header-cell *matHeaderCellDef>Montant total</th>
+        <td mat-cell *matCellDef="let vente">{{ vente.total_price }} FCFA</td>
+    </ng-container>
+
+    <ng-container matColumnDef="paid_amount">
+        <th mat-header-cell *matHeaderCellDef>Montant payé</th>
+        <td mat-cell *matCellDef="let vente">{{ vente.paid_amount }} FCFA</td>
+    </ng-container>
+
+    <ng-container matColumnDef="remaining_amount">
+        <th mat-header-cell *matHeaderCellDef>Montant restant</th>
+        <td mat-cell *matCellDef="let vente">{{ vente.remaining_amount }} FCFA</td>
+    </ng-container>
+
+    <ng-container matColumnDef="payment_method">
+        <th mat-header-cell *matHeaderCellDef>Méthode de paiement</th>
+        <td mat-cell *matCellDef="let vente">{{ vente.payment_method }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="delivered">
+        <th mat-header-cell *matHeaderCellDef>Livré</th>
+        <td mat-cell *matCellDef="let vente">
+        <mat-icon *ngIf="vente.delivered" style="color: greenyellow">check_circle</mat-icon>
+        <mat-icon *ngIf="!vente.delivered" style="color: rgb(247, 46, 46);">remove_circle</mat-icon>
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="sale_date">
+        <th mat-header-cell *matHeaderCellDef>Date de vente</th>
+        <td mat-cell *matCellDef="let vente">{{ vente.sale_date | date: 'dd/MM/yyyy' }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>Actions</th>
+        <td mat-cell *matCellDef="let vente">
+        <button mat-icon-button color="primary" (click)="openVenteDetails(vente.id,vente.shop_id)">
+            <mat-icon>visibility</mat-icon>
+        </button>
+        <button mat-icon-button color="warn" (click)="deleteVente(vente.id)">
+            <mat-icon>delete</mat-icon>
+        </button>
+        </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+</div>
+
+<p *ngIf="ventes.length === 0 && selectedSalonId">Aucune vente trouvée.</p>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { Product } from 'src/app/models/product';
@@ -15,18 +15,20 @@ import Swal from 'sweetalert2';
   styleUrls: ['./create-vente.component.scss']
 })
 export class CreateVenteComponent implements OnInit {
-
   venteForm: FormGroup;
   listShop: Shop[] = [];
-  shopId!: number;
   listProducts: Product[] = [];
+  selectedProducts: any[] = [];
+  selectedProduct: Product | null = null;
+  productQuantity: number = 1;
+  productPrice: number = 0;
+  remainingAmount: number = 0;
 
   constructor(
     private fb: FormBuilder,
     private venteService: VenteService,
     private dialogRef: MatDialogRef<CreateVenteComponent>,
     private shopService: ShopService,
-    private route: ActivatedRoute,
     private productService: ProductService
   ) {
     this.venteForm = this.fb.group({
@@ -34,73 +36,97 @@ export class CreateVenteComponent implements OnInit {
       buyer_name: ['', Validators.required],
       buyer_surname: ['', Validators.required],
       channel: ['', Validators.required],
-      total_price: ['', Validators.required],
+      total_price: [{ value: '', disabled: true }, Validators.required],
       paid_amount: ['', Validators.required],
-      remaining_amount: ['', Validators.required],
+      remaining_amount: [{ value: '', disabled: true }],
       payment_method: ['', Validators.required],
       delivered: [false],
       sale_date: ['', Validators.required],
-      products: [[]]
     });
   }
 
   ngOnInit(): void {
-
-    this.route.paramMap.subscribe(params => {
-      this.shopId = Number(params.get('shopId'));
-      console.log(`Shop ID: ${this.shopId}`);
-    });
     this.shopService.getShops().subscribe(
-      (response) => {
-        this.listShop = response;
-      },
-      (error) => {
-        console.error("Erreur de récupération des boutiques :", error);
-      }
+      (response) => this.listShop = response,
+      (error) => console.error("Erreur de récupération des boutiques :", error)
     );
 
-    this.venteForm.get('shop_id')?.valueChanges.subscribe(() => {
-      this.onShopChange();
-    });
+    this.venteForm.get('shop_id')?.valueChanges.subscribe(() => this.onShopChange());
   }
 
   onShopChange() {
     const shopId = this.venteForm.get('shop_id')?.value;
-
     if (shopId) {
       this.productService.getProductsByShop(shopId).subscribe(
-        (response) => {
-          this.listProducts = response;
-        },
-        (error) => {
-          console.error("Erreur de récupération des produits :", error);
-        }
+        (response) => this.listProducts = response,
+        (error) => console.error("Erreur de récupération des produits :", error)
       );
     }
   }
 
-  onSubmit(): void {
-    if (this.venteForm.invalid) {
-      Swal.fire('Erreur', 'Veuillez remplir tous les champs', 'error');
+  onProductSelect(event: any) {
+    if (!event.value) return;
+
+    this.selectedProduct = event.value;
+
+    // Vérification pour éviter l'accès à null
+    if (this.selectedProduct) {
+      this.productPrice = this.selectedProduct.price;
+    }
+  }
+
+  addProduct() {
+    if (!this.selectedProduct || this.venteForm.get('productQuantity')?.invalid) {
+      Swal.fire('Erreur', 'Veuillez sélectionner un produit et une quantité valide', 'error');
       return;
     }
 
-    const shopId = 2; // À rendre dynamique selon le contexte
-    const venteData = this.venteForm.value;
+    this.selectedProducts.push({
+      id: this.selectedProduct.id,
+      name: this.selectedProduct.name,
+      quantity: this.venteForm.get('productQuantity')?.value,
+      price: this.productPrice
+    });
 
-    this.venteService.createVente(shopId, venteData).subscribe(
-      (response) => {
-        Swal.fire('Succès', 'Vente créée avec succès', 'success');
-        this.dialogRef.close(response);
-      },
-      (error) => {
-        Swal.fire('Erreur', 'Une erreur est survenue', 'error');
-        console.error(error);
-      }
-    );
+    this.clearSelectedProduct();
   }
 
-  onCancel(): void {
+  removeProduct(index: number) {
+    this.selectedProducts.splice(index, 1);
+  }
+
+  clearSelectedProduct() {
+    this.selectedProduct = null;
+    this.venteForm.patchValue({ productQuantity: 1 });
+    this.productPrice = 0;
+  }
+
+  calculateTotal() {
+    return this.selectedProducts.reduce((total, p) => total + (p.quantity * p.price), 0);
+  }
+
+  calculateRemaining() {
+    this.remainingAmount = this.calculateTotal() - this.venteForm.get('paid_amount')?.value;
+  }
+
+  onSubmit() {
+    if (this.venteForm.invalid || this.selectedProducts.length === 0) {
+      Swal.fire('Erreur', 'Veuillez remplir tous les champs et ajouter au moins un produit', 'error');
+      return;
+    }
+
+    const venteData = {
+      sale: this.venteForm.value,
+      products: this.selectedProducts
+    };
+
+    this.venteService.createVente(venteData.sale.shop_id, venteData).subscribe(() => {
+      Swal.fire('Succès', 'Vente créée avec succès', 'success');
+      this.dialogRef.close();
+    });
+  }
+
+  onCancel() {
     this.dialogRef.close();
   }
 }

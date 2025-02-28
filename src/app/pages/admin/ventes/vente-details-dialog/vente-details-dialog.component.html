@@ -1,0 +1,64 @@
+<h1 mat-dialog-title class="dialog-title">
+  <mat-icon class="title-icon">receipt_long</mat-icon>
+  Détails de la vente
+</h1>
+
+<div mat-dialog-content class="dialog-content">
+  <div class="info-container">
+    <div class="info-group">
+      <p>
+        <strong>Nom :</strong> {{ data.buyer_name }} {{ data.buyer_surname }}
+      </p>
+      <p><strong>Canal :</strong> {{ data.channel }}</p>
+    </div>
+
+    <div class="info-group">
+      <p>
+        <strong>Total :</strong>
+        <span class="price">{{ data.total_price }} FCFA</span>
+      </p>
+      <p>
+        <strong>Montant payé :</strong>
+        <span class="paid">{{ data.paid_amount }} FCFA</span>
+      </p>
+    </div>
+
+    <p class="payment-info">
+      <strong>Méthode de paiement :</strong>
+      <span class="payment-method">{{ data.payment_method }}</span>
+    </p>
+  </div>
+
+  <h3 class="product-title">
+    <mat-icon>shopping_basket</mat-icon> Produits commandés :
+  </h3>
+
+  <div class="table-container">
+    <table class="product-table">
+      <thead>
+        <tr>
+          <th>Produit</th>
+          <th>Quantité</th>
+          <th>Prix unitaire</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of data.sale_items">
+          <td>{{ item.product_name }}</td>
+          <td>{{ item.quantity }}</td>
+          <td>{{ item.price }} FCFA</td>
+          <td>
+            <strong>{{ item.subtotal }} FCFA</strong>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close class="close-btn">
+    <mat-icon>close</mat-icon> Fermer
+  </button>
+</div>

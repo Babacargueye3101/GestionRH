@@ -81,6 +81,7 @@ import { BoutiqueModule } from './pages/admin/boutique/boutique.module';
 import { SalonComponent } from './pages/admin/salon/salon.component';
 import { ListSalonComponent } from './pages/admin/salon/list-salon/list-salon.component';
 import { VentesComponent } from './pages/admin/ventes/ventes.component';
+import { VentesModule } from "./pages/admin/ventes/ventes.module";
 
 
 registerLocaleData(localeFr, 'fr');
@@ -157,16 +158,17 @@ registerLocaleData(localeFr, 'fr');
     MatPaginatorModule,
     FormsModule,
     CalendarModule.forRoot({
-      provide: DateAdapter,
-      useFactory: adapterFactory,
+        provide: DateAdapter,
+        useFactory: adapterFactory,
     }),
     MatRadioModule,
     MatAutocompleteModule,
     MatCheckboxModule,
     MatExpansionModule,
     MatTooltipModule,
-    BoutiqueModule
-  ],
+    BoutiqueModule,
+    VentesModule
+],
   providers: [{ provide: LOCALE_ID, useValue: 'fr' }],
   bootstrap: [AppComponent]
 })
