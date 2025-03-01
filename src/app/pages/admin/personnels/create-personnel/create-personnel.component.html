@@ -1,0 +1,55 @@
+<h2 mat-dialog-title class="dialog-title">Ajouter un personnel</h2>
+<mat-dialog-content>
+  <form [formGroup]="personnelForm" class="form-container">
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Prénom</mat-label>
+      <input matInput formControlName="first_name" required class="input-field">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Nom</mat-label>
+      <input matInput formControlName="last_name" required class="input-field">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Adresse</mat-label>
+      <input matInput formControlName="address" class="input-field">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Téléphone</mat-label>
+      <input matInput formControlName="phone" class="input-field">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email" type="email" class="input-field">
+    </mat-form-field>
+
+    <!-- Sélection d'une seule boutique -->
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Choisir une boutique</mat-label>
+      <mat-select formControlName="shop_id" (selectionChange)="onShopChange()">
+        <mat-option *ngFor="let shop of shops" [value]="shop.id">{{ shop.name }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- Sélection multiple des salons liés à la boutique sélectionnée -->
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Choisir les salons</mat-label>
+      <mat-select formControlName="salon_ids" multiple>
+        <mat-option *ngFor="let salon of salons" [value]="salon.id">{{ salon.name }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- Switch pour activer la visualisation des statistiques -->
+    <mat-slide-toggle formControlName="can_view_statistics" class="toggle-statistics">
+      Peut voir les statistiques
+    </mat-slide-toggle>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="onCancel()" class="btn-cancel">Annuler</button>
+  <button mat-raised-button color="primary" (click)="onSubmit()" class="btn-submit" style="background: linear-gradient(135deg, #e6b8b7, #c9a173, #a67c52);;">Enregistrer</button>
+</mat-dialog-actions>

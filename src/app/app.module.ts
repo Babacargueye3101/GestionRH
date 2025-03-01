@@ -82,6 +82,7 @@ import { SalonComponent } from './pages/admin/salon/salon.component';
 import { ListSalonComponent } from './pages/admin/salon/list-salon/list-salon.component';
 import { VentesComponent } from './pages/admin/ventes/ventes.component';
 import { VentesModule } from "./pages/admin/ventes/ventes.module";
+import { PersonnelsComponent } from './pages/admin/personnels/personnels.component';
 
 
 registerLocaleData(localeFr, 'fr');
@@ -129,6 +130,7 @@ registerLocaleData(localeFr, 'fr');
     SalonComponent,
     ListSalonComponent,
     VentesComponent,
+    PersonnelsComponent,
   ],
   imports: [
     BrowserModule,

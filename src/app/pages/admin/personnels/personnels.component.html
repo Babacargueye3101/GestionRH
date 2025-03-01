@@ -1,0 +1,27 @@
+<div class="breadcrumb">
+    <a mat-button routerLink="/employements" routerLinkActive="active-link"
+      >Gestion des ventes</a
+    >
+    <span> > </span>
+    <a
+      mat-button
+      routerLink="/paies"
+      class="active"
+      routerLinkActive="active-link"
+      >Gestion des Clients</a
+    >
+  </div>
+
+  <div class="personnel-container">
+    <mat-toolbar class="toolbar">
+      <span class="toolbar-title">Gestion des Personnels</span>
+      <span class="spacer"></span>
+      <button mat-raised-button class="create-button" (click)="openCreatePersonnelModal()">
+        <mat-icon>add</mat-icon> Créer une Personne
+      </button>
+    </mat-toolbar>
+  </div>
+
+  <div class="container">
+
+  </div>
