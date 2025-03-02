@@ -1,0 +1,54 @@
+// Couleurs
+$primary-color: #3f51b5;  // Bleu principal
+$secondary-color: #f44336;  // Rouge pour le bouton annuler
+
+// Style général des champs de saisie
+.mat-form-field {
+  width: 100%; // Chaque champ prendra toute la largeur du conteneur
+  margin-bottom: 16px; // Espacement entre chaque champ
+
+  .mat-form-field-flex {
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+}
+
+// Appliquer la classe full-width pour s'assurer que chaque champ occupe toute la largeur
+.full-width {
+  width: 100%;
+}
+
+// Style du bouton Annuler
+.btn-cancel {
+  background-color: $secondary-color;
+  color: white;
+  border-radius: 4px;
+  padding: 8px 16px;
+  margin-right: 10px; // Espace entre les boutons
+}
+
+// Style du bouton Enregistrer
+.btn-submit {
+  background-color: $primary-color;
+  color: white;
+  border-radius: 4px;
+  padding: 8px 16px;
+
+  &:hover {
+    background-color: darken($primary-color, 10%);
+  }
+}
+
+// Titre du dialog
+.dialog-title {
+  color: linear-gradient(135deg, #e6b8b7, #c9a173, #a67c52);
+  font-size: 1.6rem;
+  margin-bottom: 20px;
+}
+
+// Appliquer aux inputs, selects et toggles
+input, mat-select, mat-slide-toggle {
+  width: 100%; // Assurer que chaque élément prend toute la largeur
+  margin-bottom: 16px; // Espacement entre chaque champ
+}

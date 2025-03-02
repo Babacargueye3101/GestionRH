@@ -1,0 +1,49 @@
+<div class="container">
+  <h2>Liste des Personnels</h2>
+
+  <table mat-table [dataSource]="personnels" class="mat-elevation-z8">
+    <!-- Nom -->
+    <ng-container matColumnDef="nom">
+      <th mat-header-cell *matHeaderCellDef> Nom </th>
+      <td mat-cell *matCellDef="let personnel"> {{ personnel.last_name }} </td>
+    </ng-container>
+
+    <!-- Prénom -->
+    <ng-container matColumnDef="prenom">
+      <th mat-header-cell *matHeaderCellDef> Prénom </th>
+      <td mat-cell *matCellDef="let personnel"> {{ personnel.first_name }} </td>
+    </ng-container>
+
+    <!-- Email -->
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef> Email </th>
+      <td mat-cell *matCellDef="let personnel"> {{ personnel.email }} </td>
+    </ng-container>
+
+    <!-- Téléphone -->
+    <ng-container matColumnDef="phone">
+      <th mat-header-cell *matHeaderCellDef> Téléphone </th>
+      <td mat-cell *matCellDef="let personnel"> {{ personnel.phone }} </td>
+    </ng-container>
+
+    <!-- Actions -->
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef> Actions </th>
+      <td mat-cell *matCellDef="let personnel">
+        <button mat-icon-button color="primary" (click)="openDetailDialog(personnel)">
+          <mat-icon>visibility</mat-icon>
+        </button>
+        <button mat-icon-button color="accent" (click)="openEditDialog(personnel)">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button color="warn" (click)="deletePersonnel(personnel)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <!-- Header & Rows -->
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>

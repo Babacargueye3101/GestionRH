@@ -11,11 +11,20 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { ListPersonnelComponent } from './list-personnel/list-personnel.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatIconModule } from '@angular/material/icon';
+import { MatCardModule } from '@angular/material/card';
+import { DetailPersonnelComponent } from './detail-personnel/detail-personnel.component';
+import { UpdatePersonnelComponent } from './update-personnel/update-personnel.component';
 
 
 @NgModule({
   declarations: [
-    CreatePersonnelComponent
+    CreatePersonnelComponent,
+    ListPersonnelComponent,
+    DetailPersonnelComponent,
+    UpdatePersonnelComponent
   ],
   imports: [
     CommonModule,
@@ -27,7 +36,11 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     MatInputModule,
     MatSelectModule,
     MatButtonModule,
-    MatSlideToggleModule
-  ]
+    MatSlideToggleModule,
+    MatTableModule,
+    MatIconModule,
+    MatCardModule,
+  ],
+  exports: [ListPersonnelComponent]
 })
 export class PersonnelsModule { }

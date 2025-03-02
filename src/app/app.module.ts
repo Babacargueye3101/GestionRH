@@ -83,6 +83,7 @@ import { ListSalonComponent } from './pages/admin/salon/list-salon/list-salon.co
 import { VentesComponent } from './pages/admin/ventes/ventes.component';
 import { VentesModule } from "./pages/admin/ventes/ventes.module";
 import { PersonnelsComponent } from './pages/admin/personnels/personnels.component';
+import { PersonnelsModule } from "./pages/admin/personnels/personnels.module";
 
 
 registerLocaleData(localeFr, 'fr');
@@ -169,7 +170,8 @@ registerLocaleData(localeFr, 'fr');
     MatExpansionModule,
     MatTooltipModule,
     BoutiqueModule,
-    VentesModule
+    VentesModule,
+    PersonnelsModule
 ],
   providers: [{ provide: LOCALE_ID, useValue: 'fr' }],
   bootstrap: [AppComponent]

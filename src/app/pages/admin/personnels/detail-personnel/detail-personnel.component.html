@@ -1,0 +1,19 @@
+<h2 mat-dialog-title>Détails du Personnel</h2>
+
+<mat-dialog-content>
+  <p><strong>Nom:</strong> {{ data.first_name }} {{ data.last_name }}</p>
+  <p><strong>Email:</strong> {{ data.email }}</p>
+  <p><strong>Téléphone:</strong> {{ data.phone }}</p>
+  <p><strong>Adresse:</strong> {{ data.address }}</p>
+
+  <h4>Salons :</h4>
+  <ul>
+    <li *ngFor="let salon of data.salons">
+      {{ salon.name }} -  ( Lieux : {{ salon.address }} )
+    </li>
+  </ul>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="closeDialog()">Fermer</button>
+</mat-dialog-actions>
