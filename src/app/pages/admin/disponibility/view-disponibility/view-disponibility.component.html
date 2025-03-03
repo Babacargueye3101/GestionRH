@@ -1,0 +1,11 @@
+<h2>Détails de la Disponibilité</h2>
+
+<div>
+  <p><strong>Salon:</strong> {{ data.availability.salon?.name }}</p>
+  <p><strong>Date:</strong> {{ data.availability.date }}</p>
+  <p><strong>Créneaux:</strong> {{ data.availability.time_slots.join('⏰ ') }}</p>
+</div>
+
+<div>
+  <button mat-button (click)="closeDialog()">Fermer</button>
+</div>

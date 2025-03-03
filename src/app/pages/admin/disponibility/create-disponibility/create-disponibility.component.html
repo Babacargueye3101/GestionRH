@@ -1,0 +1,51 @@
+<h2 mat-dialog-title class="dialog-title">Créer une Disponibilité</h2>
+
+<mat-dialog-content>
+  <form [formGroup]="availabilityForm" class="form-container">
+    <!-- Sélection de la boutique -->
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Boutique</mat-label>
+      <mat-select formControlName="shop_id" (selectionChange)="onShopChange($event)">
+        <mat-option *ngFor="let shop of shops" [value]="shop.id">
+          {{ shop.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- Sélection du salon -->
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Salon</mat-label>
+      <mat-select formControlName="salon_id">
+        <mat-option *ngFor="let salon of salons" [value]="salon.id">
+          {{ salon.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- Sélection de la date -->
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Date</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="date">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <!-- Sélection des créneaux horaires -->
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Créneaux horaires</mat-label>
+      <mat-select formControlName="time_slots" multiple>
+        <mat-option *ngFor="let slot of availableTimeSlots" [value]="slot">
+          {{ slot }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- Boutons -->
+    <div class="button-container">
+      <button mat-button (click)="onCancel()" class="btn-cancel">Annuler</button>
+      <button mat-raised-button color="primary" (click)="onSubmit()" class="btn-submit">
+        Enregistrer
+      </button>
+    </div>
+  </form>
+</mat-dialog-content>

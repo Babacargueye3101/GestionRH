@@ -1,0 +1,24 @@
+.form-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .full-width {
+    width: 100%;
+  }
+
+  .button-container {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+  }
+
+  .btn-submit {
+    background: linear-gradient(135deg, #e6b8b7, #c9a173, #a67c52);
+    color: white;
+  }
+
+  .btn-cancel {
+    color: red;
+  }

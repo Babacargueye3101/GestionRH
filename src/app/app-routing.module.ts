@@ -8,6 +8,7 @@ const routes: Routes = [
   { path: 'admin/ventes', loadChildren: () => import('./pages/admin/ventes/ventes.module').then(m => m.VentesModule) },
   { path: 'admin/personnels', loadChildren: () => import('./pages/admin/personnels/personnels.module').then(m => m.PersonnelsModule) },
   { path: 'admin/reservations', loadChildren: () => import('./pages/admin/reservations/reservations.module').then(m => m.ReservationsModule) },
+  { path: 'admin/availabilities', loadChildren: () => import('./pages/admin/disponibility/disponibility.module').then(m => m.DisponibilityModule) },
   { path: 'employements', loadChildren: () => import('./pages/menus/employements/employements/employements.module').then(m => m.EmployementsModule) },
   { path: 'candidatures', loadChildren: () => import('./pages/menus/candidatures/candidatures/candidatures.module').then(m => m.CandidaturesModule) },
   { path: 'paies', loadChildren: () => import('./pages/menus/paies/paies/paies.module').then(m => m.PaiesModule) },
