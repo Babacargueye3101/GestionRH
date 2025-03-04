@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ReservationsRoutingModule } from './reservations-routing.module';
 import { CreateReservationComponent } from './create-reservation/create-reservation.component';
 import { MatDialogModule } from '@angular/material/dialog';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -34,6 +34,7 @@ import { MatCardModule } from '@angular/material/card';
     MatTableModule,
     MatIconModule,
     MatCardModule,
+    FormsModule
   ]
 })
 export class ReservationsModule { }

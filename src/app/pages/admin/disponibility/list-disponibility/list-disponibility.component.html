@@ -39,14 +39,6 @@
     <td mat-cell *matCellDef="let availability">{{ availability.date }}</td>
   </ng-container>
 
-  <!-- Créneaux Column -->
-  <ng-container matColumnDef="time_slots">
-    <th mat-header-cell *matHeaderCellDef>Créneaux</th>
-    <td mat-cell *matCellDef="let availability">
-      {{ availability.time_slots.join('⏰') }}
-    </td>
-  </ng-container>
-
   <!-- Actions Column -->
   <ng-container matColumnDef="actions">
     <th mat-header-cell *matHeaderCellDef>Actions</th>

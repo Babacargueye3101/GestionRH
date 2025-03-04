@@ -1,61 +1,67 @@
-.dialog-title {
-    font-size: 24px;
-    font-weight: bold;
-    color: #2f3d56;
-  }
-
-  .mat-form-field {
-    margin-bottom: 16px;
-  }
-
-  .full-width {
-    width: 100%;
-  }
-
-  input, mat-select {
-    font-size: 16px;
-    padding: 10px;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  }
-
-  input.mat-input-element, mat-select.mat-select {
-    font-weight: normal;
-  }
-
-  input.mat-input-element:focus {
-    border-color: #1976d2;
-  }
-
-  button {
-    font-size: 16px;
-    font-weight: bold;
-    padding: 10px 20px;
-    border-radius: 8px;
-  }
-
-  .btn-submit {
-    background-color: #4caf50;
-    color: white;
-    margin-left: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
-
-  .btn-submit:hover {
-    background-color: #45a049;
-  }
-
-  .btn-cancel {
-    background-color: #e3e3e3;
-    color: #333;
-    margin-right: 10px;
-  }
-
-  .btn-cancel:hover {
-    background-color: #c8c8c8;
-  }
-
-  .mat-dialog-actions {
+.reservation-form {
     display: flex;
-    justify-content: flex-end;
+    flex-direction: column;
+    padding: 20px;
+    max-height: 80vh; // Ajuster la hauteur selon vos besoins
+    overflow-y: auto; // Ajouter un scroll vertical quand le contenu dépasse la taille du conteneur
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    background-color: #fafafa;
+
+    .form-section {
+      margin-bottom: 15px;
+    }
+
+    .form-section label {
+      font-weight: 600;
+      margin-bottom: 5px;
+      display: block;
+      color: #333;
+    }
+
+    .form-section input,
+    .form-section mat-select {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+
+    .form-section button {
+      background-color: #ff6f61; /* Exemple de couleur */
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+
+      &:hover {
+        background-color: #ff4c3f; /* Couleur au survol */
+      }
+    }
+  }
+
+  .scroll-container {
+    max-height: 400px;  /* Limiter la hauteur selon l'écran */
+    overflow-y: auto;   /* Défilement vertical */
+    margin-top: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 15px;
+    background-color: #f9f9f9;
+
+    &::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: #888;
+      border-radius: 10px;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      background-color: #555;
+    }
   }

@@ -20,7 +20,7 @@ export class ListDisponibilityComponent implements OnInit{
   selectedShopId?: number;
   selectedSalonId?: number;
 
-  displayedColumns: string[] = ['salon', 'date', 'time_slots', 'actions'];
+  displayedColumns: string[] = ['salon', 'date', 'actions'];
 
   constructor(
     private disponibilityService: DisponibilityService,

@@ -1,130 +1,131 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatSelectChange } from '@angular/material/select';
 import { Router } from '@angular/router';
+import { Shop } from 'src/app/models/shop';
 import { ShopService } from 'src/app/services/boutique/shop.service';
 import { DisponibilityService } from 'src/app/services/disponibility/disponibility.service';
 import { ReservationService } from 'src/app/services/reservations/reservation.service';
 import { SalonService } from 'src/app/services/salons/salon.service';
 import Swal from 'sweetalert2';
+export interface Salon {
+  id: number;
+  name: string;
+  // Ajoutez d'autres propriétés selon votre modèle Salon
+}
 
+export interface Availability {
+  id: number;
+  date: Date;
+  time_slots: string[];
+  // Ajoutez d'autres propriétés selon votre modèle Availability
+}
 @Component({
   selector: 'app-create-reservation',
   templateUrl: './create-reservation.component.html',
   styleUrls: ['./create-reservation.component.scss']
 })
 export class CreateReservationComponent implements OnInit{
-  // reservationForm: FormGroup;
-  // availabilitySlots: any[] = [];  // Liste des créneaux de disponibilité
+  shops: Shop[] = [];  // Liste des boutiques
+  salons: Salon[] = []; // Liste des salons
+  availabilities: Availability[] = []; // Liste des disponibilités
+  selectedAvailabilityId: number | null = null; // La disponibilité sélectionnée
+  selectedTimeSlot: string | null = null; // Le créneau horaire sélectionné
+  reservationForm: FormGroup;
 
-  // shops: any[] = [];
-  // salons: any[] = [];
-
-  // constructor(
-  //   private fb: FormBuilder,
-  //   private reservationService: ReservationService,
-  //   private router: Router,
-  //   private dialogRef: MatDialogRef<CreateReservationComponent>,
-  //   private disponibilityService: DisponibilityService,
-  //   private shopService: ShopService,
-  //   private salonService: SalonService
-  // ) {
-  //   this.reservationForm = this.fb.group({
-  //     name: ['', Validators.required],
-  //     surname: ['', Validators.required],
-  //     email: ['', [Validators.required, Validators.email]],
-  //     phone: ['', Validators.required],
-  //     shop_id: ['', Validators.required],
-  //     salon_id: ['', Validators.required],
-  //     availability_id: ['', Validators.required],
-  //     time: ['', Validators.required]
-  //   });
-  // }
-
-  ngOnInit(): void {
-    // this.fetchShops();
+  constructor(
+    private fb: FormBuilder,
+    private shopService: ShopService,
+    private salonService: SalonService,
+    private disponibilityService: DisponibilityService,
+    private reservationService: ReservationService
+  ) {
+    // Initialisation du formulaire
+    this.reservationForm = this.fb.group({
+      name: ['', Validators.required],
+      surname: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      phone: ['', [Validators.required]],
+      shop: [null, Validators.required],
+      salon: [null, Validators.required],
+      availability: [null, Validators.required],
+      timeSlot: [null, Validators.required]
+    });
   }
 
-  // fetchShops() {
-  //   // Charger les boutiques
-  //   this.shopService.getShops().subscribe((response) => {
-  //     this.shops = response;
-  //   }, (error) => {
-  //     console.error('Erreur lors du chargement des boutiques', error);
-  //   });
-  // }
+  ngOnInit(): void {
+    this.loadShops(); // Charger les boutiques au démarrage
+  }
 
-  // onShopChange(event: MatSelectChange): void {
-  //   const shopId = event.value;
-  //   console.log("Boutique sélectionnée :", shopId);
+  loadShops() {
+    this.shopService.getShops().subscribe(shops => {
+      this.shops = shops;
+    });
+  }
 
-  //   if (!shopId) return;
+  onShopChange() {
+    this.salons = [];
+    this.availabilities = []; // Réinitialiser les disponibilités
+    this.selectedAvailabilityId = null; // Réinitialiser la disponibilité sélectionnée
+    this.selectedTimeSlot = null; // Réinitialiser le créneau horaire
+    this.reservationForm.patchValue({ salon: null, availability: null, timeSlot: null });
+    this.loadSalons();
+  }
 
-  //   // Charger les salons selon la boutique sélectionnée
-  //   this.salonService.getSalons(shopId).subscribe(
-  //     (salons) => {
-  //       console.log("Salons récupérés :", salons);
-  //       this.salons = salons;
-  //       // Réinitialiser la sélection de salon et créneaux
-  //       this.reservationForm.patchValue({ salon_id: '', availability_id: '' });
-  //       this.availabilitySlots = [];  // Vider les créneaux
-  //     },
-  //     (error) => {
-  //       console.error("Erreur lors du chargement des salons :", error);
-  //     }
-  //   );
-  // }
+  loadSalons() {
+    if (this.reservationForm.value.shop) {
+      this.salonService.getSalons(this.reservationForm.value.shop).subscribe(salons => {
+        this.salons = salons;
+      });
+    }
+  }
 
-  // onSalonChange(event: MatSelectChange): void {
-  //   const salonId = event.value;
-  //   console.log("Salon sélectionné :", salonId);
+  onSalonChange() {
+    this.availabilities = []; // Réinitialiser les disponibilités
+    this.selectedAvailabilityId = null; // Réinitialiser la disponibilité sélectionnée
+    this.selectedTimeSlot = null; // Réinitialiser le créneau horaire
+    this.reservationForm.patchValue({ availability: null, timeSlot: null });
+    this.loadAvailabilities();
+  }
 
-  //   if (!salonId) return;
+  loadAvailabilities() {
+    const { shop, salon } = this.reservationForm.value;
+    if (shop && salon) {
+      this.disponibilityService.getAvailabilitiesByShopAndSalon(shop, salon)
+        .subscribe(availabilities => {
+          this.availabilities = availabilities || [];
+        });
+    }
+  }
 
-  //   // Charger les créneaux de disponibilité pour le salon sélectionné
-  //   this.disponibilityService.getAvailabilitiesBySalon(salonId).subscribe(
-  //     (slots) => {
-  //       console.log("Créneaux récupérés :", slots);
-  //       this.availabilitySlots = slots;
-  //     },
-  //     (error) => {
-  //       console.error("Erreur lors du chargement des créneaux :", error);
-  //     }
-  //   );
-  // }
+  // Obtenir les créneaux horaires pour une disponibilité donnée
+  getTimeSlotsForAvailability(availabilityId: number) {
+    const availability = this.availabilities.find(avail => avail.id === availabilityId);
+    return availability ? availability.time_slots : [];
+  }
 
-  // onSubmit() {
-  //   if (this.reservationForm.invalid) {
-  //     return;
-  //   }
+  createReservation() {
+    if (this.reservationForm.valid) {
+      const formValue = this.reservationForm.value;
+      const reservationData = {
+        client: {
+          name: formValue.name,
+          surname: formValue.surname,
+          email: formValue.email,
+          phone: formValue.phone
+        },
+        availability_id: formValue.availability,
+        time: formValue.timeSlot
+      };
 
-  //   const reservationData = {
-  //     client: {
-  //       name: this.reservationForm.value.name,
-  //       surname: this.reservationForm.value.surname,
-  //       email: this.reservationForm.value.email,
-  //       phone: this.reservationForm.value.phone
-  //     },
-  //     shop_id: this.reservationForm.value.shop_id,
-  //     salon_id: this.reservationForm.value.salon_id,
-  //     availability_id: this.reservationForm.value.availability_id,
-  //     time: this.reservationForm.value.time
-  //   };
-
-  //   this.reservationService.createReservation(reservationData).subscribe(
-  //     (response) => {
-  //       Swal.fire('Succès', 'Réservation créée avec succès', 'success');
-  //       this.dialogRef.close();  // Fermer le modal
-  //       this.router.navigate(['/reservations']);  // Rediriger vers la liste des réservations
-  //     },
-  //     (error) => {
-  //       Swal.fire('Erreur', 'Impossible de créer la réservation', 'error');
-  //     }
-  //   );
-  // }
-
-  // onCancel() {
-  //   this.dialogRef.close();  // Ferme le modal sans effectuer d'action
-  // }
+      this.reservationService.createReservation(reservationData).subscribe(response => {
+        Swal.fire('Réservation créée avec succès', '', 'success');
+      }, error => {
+        Swal.fire('Erreur', 'Une erreur est survenue', 'error');
+      });
+    } else {
+      Swal.fire('Formulaire invalide', 'Veuillez remplir tous les champs', 'warning');
+    }
+  }
 }
