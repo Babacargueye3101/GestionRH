@@ -1,0 +1,120 @@
+h2 {
+    text-align: center;
+    color: #a67c52;
+    margin-bottom: 20px;
+    font-weight: bold;
+  }
+
+  label {
+    font-weight: 600;
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+  }
+
+  select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    margin-bottom: 15px;
+    transition: border-color 0.3s ease;
+
+    &:focus {
+      border-color: #a67c52;
+      outline: none;
+    }
+  }
+
+  /* Container principal */
+  .container {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+    background: #fff;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+  }
+
+  /* Tableau stylisé */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+
+    th, td {
+      padding: 12px;
+      text-align: left;
+    }
+
+    th {
+      background: #a67c52;
+      color: white;
+      text-transform: uppercase;
+    }
+
+    tr:nth-child(even) {
+      background: #f9f9f9;
+    }
+
+    tr:hover {
+      background: rgba(63, 81, 181, 0.1);
+    }
+  }
+
+  /* Icônes des actions */
+  .mat-icon-button {
+    margin-right: 5px;
+  }
+
+  /* Bouton d'ajout */
+  button.mat-raised-button {
+    background: #a67c52;
+    color: red;
+    font-weight: bold;
+    padding: 8px 16px;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+
+    &:hover {
+      background: #a67c52;
+    }
+  }
+
+  /* Bouton de suppression */
+  button[color="warn"] {
+    color: red;
+
+    &:hover {
+      background: #b71c1c;
+    }
+  }
+
+
+  /* Conteneur des filtres */
+.filters {
+    display: flex;
+    gap: 20px; /* Espacement entre les éléments */
+    align-items: center; /* Alignement vertical */
+    margin-bottom: 15px;
+
+    label {
+      font-weight: 600;
+      color: #333;
+    }
+
+    select {
+      flex: 1; /* Permet aux selects de prendre un espace équitable */
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 16px;
+      transition: border-color 0.3s ease;
+
+      &:focus {
+        border-color: #a67c52;
+        outline: none;
+      }
+    }
+  }

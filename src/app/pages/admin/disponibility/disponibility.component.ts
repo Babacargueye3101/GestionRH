@@ -8,20 +8,10 @@ import { DisponibilityService } from 'src/app/services/disponibility/disponibili
   templateUrl: './disponibility.component.html',
   styleUrls: ['./disponibility.component.scss']
 })
-export class DisponibilityComponent implements OnInit {
+export class DisponibilityComponent{
   availabilities: any[] = [];
 
   constructor(private dialog: MatDialog, private disponibilityService: DisponibilityService){}
-
-  ngOnInit(): void {
-    this.getAvailabilities();
-  }
-
-  getAvailabilities() {
-    this.disponibilityService.getAvailabilities().subscribe((data) => {
-      this.availabilities = data;
-    });
-  }
 
 
   openCreateDisponibilitylModal() {

@@ -18,6 +18,12 @@ export class DisponibilityService {
     return this.http.get<any[]>(url, { headers: this.getHeaders() });
   }
 
+
+  getAvailabilitiesByShopAndSalon(shopId: number, salonId: number): Observable<any[]> {
+    const url = `${this.apiUrl}/shops/${shopId}/salons/${salonId}/availabilities`;
+    return this.http.get<any[]>(url, { headers: this.getHeaders() });
+  }
+
   createAvailability(salonId: number, availabilityData: any): Observable<any> {
     const url = `${this.apiUrl}/salons/${salonId}/availabilities`;
     return this.http.post(url, availabilityData,{ headers: this.getHeaders() });

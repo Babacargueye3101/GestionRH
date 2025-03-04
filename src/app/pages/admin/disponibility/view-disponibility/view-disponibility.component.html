@@ -3,7 +3,14 @@
 <div>
   <p><strong>Salon:</strong> {{ data.availability.salon?.name }}</p>
   <p><strong>Date:</strong> {{ data.availability.date }}</p>
-  <p><strong>Créneaux:</strong> {{ data.availability.time_slots.join('⏰ ') }}</p>
+
+  <!-- Liste des créneaux horaires -->
+  <p><strong>Créneaux:</strong></p>
+  <ul>
+    <li *ngFor="let slot of data.availability.time_slots">
+      {{ slot }}
+    </li>
+  </ul>
 </div>
 
 <div>

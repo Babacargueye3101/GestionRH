@@ -1,6 +1,32 @@
 <h2>Liste des Disponibilités</h2>
 
-<table mat-table [dataSource]="availabilities" class="mat-elevation-z8">
+<!-- Sélecteurs Shop et Salon sur la même ligne -->
+<div class="filters">
+    <!-- Sélection du Shop -->
+    <div>
+      <label for="shop">Sélectionner une boutique :</label>
+      <select id="shop" [(ngModel)]="selectedShopId" (change)="onShopChange()">
+        <option *ngFor="let shop of shops" [value]="shop.id">
+          {{ shop.name }}
+        </option>
+      </select>
+    </div>
+
+    <!-- Sélection du Salon (uniquement si un Shop est sélectionné) -->
+    <div *ngIf="salons.length > 0">
+      <label for="salon">Sélectionner un salon :</label>
+      <select id="salon" [(ngModel)]="selectedSalonId" (change)="onSalonChange()">
+        <option value="" disabled selected>-- Sélectionnez un salon --</option>
+        <option *ngFor="let salon of salons" [value]="salon.id">
+          {{ salon.name }}
+        </option>
+      </select>
+    </div>
+  </div>
+
+<p *ngIf="availabilities.length === 0" class="no-data">Aucune donnée disponible</p>
+<!-- Tableau des disponibilités -->
+<table mat-table [dataSource]="availabilities" class="mat-elevation-z8" *ngIf="availabilities.length > 0">
   <!-- Salon Column -->
   <ng-container matColumnDef="salon">
     <th mat-header-cell *matHeaderCellDef>Salon</th>
@@ -25,9 +51,9 @@
   <ng-container matColumnDef="actions">
     <th mat-header-cell *matHeaderCellDef>Actions</th>
     <td mat-cell *matCellDef="let availability">
-        <button mat-icon-button color="primary" (click)="viewDetails(availability)">
-            <mat-icon>visibility</mat-icon>
-          </button>
+      <button mat-icon-button color="primary" (click)="viewDetails(availability)">
+        <mat-icon>visibility</mat-icon>
+      </button>
       <button mat-icon-button color="warn" (click)="deleteAvailability(availability.id)">
         <mat-icon>delete</mat-icon>
       </button>

@@ -4,6 +4,8 @@ import { DisponibilityService } from 'src/app/services/disponibility/disponibili
 import { UpdateDisponibilityComponent } from '../update-disponibility/update-disponibility.component';
 import Swal from 'sweetalert2';
 import { ViewDisponibilityComponent } from '../view-disponibility/view-disponibility.component';
+import { ShopService } from 'src/app/services/boutique/shop.service';
+import { SalonService } from 'src/app/services/salons/salon.service';
 
 @Component({
   selector: 'app-list-disponibility',
@@ -11,53 +13,73 @@ import { ViewDisponibilityComponent } from '../view-disponibility/view-disponibi
   styleUrls: ['./list-disponibility.component.scss']
 })
 export class ListDisponibilityComponent implements OnInit{
-
+  shops: any[] = [];
+  salons: any[] = [];
   @Input() availabilities: any[] = [];
+
+  selectedShopId?: number;
+  selectedSalonId?: number;
+
   displayedColumns: string[] = ['salon', 'date', 'time_slots', 'actions'];
 
   constructor(
     private disponibilityService: DisponibilityService,
+    private shopService: ShopService,
+    private salonService: SalonService,
     private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
-    this.loadAvailabilities();
+    this.loadShops();
   }
 
-  loadAvailabilities() {
-    this.disponibilityService.getAvailabilities().subscribe(
+  loadShops() {
+    this.shopService.getShops().subscribe(
       (data) => {
-        this.availabilities = data;
+        this.shops = data;
       },
       (error) => {
-        console.error("Erreur lors du chargement des disponibilités", error);
+        console.error('Erreur lors du chargement des shops', error);
       }
     );
   }
 
+  onShopChange() {
+    if (this.selectedShopId) {
+      this.salonService.getSalons(this.selectedShopId).subscribe(
+        (data) => {
+          this.salons = data;
+          this.availabilities = []; // Réinitialiser les disponibilités
+          this.selectedSalonId = undefined;
+        },
+        (error) => {
+          console.error('Erreur lors du chargement des salons', error);
+        }
+      );
+    }
+  }
+
+  onSalonChange() {
+    if (this.selectedShopId && this.selectedSalonId) {
+      this.disponibilityService
+        .getAvailabilitiesByShopAndSalon(this.selectedShopId, this.selectedSalonId)
+        .subscribe(
+          (data) => {
+            this.availabilities = data;
+          },
+          (error) => {
+            console.error('Erreur lors du chargement des disponibilités', error);
+          }
+        );
+    }
+  }
+
   viewDetails(availability: any) {
-    const dialogRef = this.dialog.open(ViewDisponibilityComponent, {
+    this.dialog.open(ViewDisponibilityComponent, {
       width: '500px',
       data: { availability }
     });
-
-    dialogRef.afterClosed().subscribe((result) => {
-      // Aucun changement nécessaire après la fermeture du modal, mais tu peux rafraîchir les données si nécessaire
-    });
   }
-
-  // editAvailability(availability: any) {
-  //   const dialogRef = this.dialog.open(UpdateDisponibilityComponent, {
-  //     width: '500px',
-  //     data: { availability }
-  //   });
-
-  //   dialogRef.afterClosed().subscribe((result) => {
-  //     if (result) {
-  //       this.loadAvailabilities();
-  //     }
-  //   });
-  // }
 
   deleteAvailability(id: number) {
     Swal.fire({
@@ -72,7 +94,7 @@ export class ListDisponibilityComponent implements OnInit{
         this.disponibilityService.deleteAvailability(id).subscribe(
           () => {
             Swal.fire('Supprimé!', 'La disponibilité a été supprimée.', 'success');
-            this.loadAvailabilities();
+            this.onSalonChange(); // Recharger les disponibilités
           },
           (error) => {
             console.error('Erreur lors de la suppression', error);
