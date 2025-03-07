@@ -75,12 +75,6 @@ export class ListVentesComponent {
     if (this.selectedSalonId) {
       this.ventesService.getVentes(this.selectedSalonId).subscribe(data => {
         this.ventes = data;
-        console.log("/////////");
-        console.log(this.ventes);
-        console.log("/////////");
-
-
-
       });
     }
   }
@@ -115,7 +109,7 @@ export class ListVentesComponent {
     this.ventesService.getVenteDetails(venteId, shopId).subscribe(response => {
       this.dialog.open(VenteDetailsDialogComponent, {
         width: '600px',
-        data: response.sale
+        data: { ...response, venteId, shopId }
       });
     });
   }

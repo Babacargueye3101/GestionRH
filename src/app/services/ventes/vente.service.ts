@@ -37,6 +37,13 @@ export class VenteService {
     return this.http.get<any>(`${this.apiUrl}/${shopId}/sales/${venteId}`, { headers: this.getHeaders() });
   }
 
+  downloadInvoice(venteId: number, shopId: number): Observable<Blob> {
+    return this.http.get<Blob>(`${this.apiUrl}/${shopId}/sales/${venteId}/download_invoice`, {
+      responseType: 'blob' as 'json', // Force le type de réponse en blob
+      headers: this.getHeaders(),
+    });
+  }
+
   // Fonction pour obtenir les headers avec le token Bearer
   private getHeaders(): HttpHeaders {
     const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');

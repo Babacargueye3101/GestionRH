@@ -7,25 +7,25 @@
   <div class="info-container">
     <div class="info-group">
       <p>
-        <strong>Nom :</strong> {{ data.buyer_name }} {{ data.buyer_surname }}
+        <strong>Nom :</strong> {{ data.sale.buyer_name }} {{ data.sale.buyer_surname }}
       </p>
-      <p><strong>Canal :</strong> {{ data.channel }}</p>
+      <p><strong>Canal :</strong> {{ data.sale.channel }}</p>
     </div>
 
     <div class="info-group">
       <p>
         <strong>Total :</strong>
-        <span class="price">{{ data.total_price }} FCFA</span>
+        <span class="price">{{ data.sale.total_price }} FCFA</span>
       </p>
       <p>
         <strong>Montant payé :</strong>
-        <span class="paid">{{ data.paid_amount }} FCFA</span>
+        <span class="paid">{{ data.sale.paid_amount }} FCFA</span>
       </p>
     </div>
 
     <p class="payment-info">
       <strong>Méthode de paiement :</strong>
-      <span class="payment-method">{{ data.payment_method }}</span>
+      <span class="payment-method">{{ data.sale.payment_method }}</span>
     </p>
   </div>
 
@@ -44,7 +44,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let item of data.sale_items">
+        <tr *ngFor="let item of data.sale.sale_items">
           <td>{{ item.product_name }}</td>
           <td>{{ item.quantity }}</td>
           <td>{{ item.price }} FCFA</td>
@@ -58,6 +58,9 @@
 </div>
 
 <div mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close style="background-color: darkgreen;" (click)="downloadInvoice(data.sale.shopId, data.sale.venteId)">
+    <mat-icon>file</mat-icon> Telecharger la facture
+  </button>
   <button mat-button mat-dialog-close class="close-btn">
     <mat-icon>close</mat-icon> Fermer
   </button>

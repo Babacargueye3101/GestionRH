@@ -87,6 +87,8 @@ import { PersonnelsModule } from "./pages/admin/personnels/personnels.module";
 import { ReservationsComponent } from './pages/admin/reservations/reservations.component';
 import { DisponibilityComponent } from './pages/admin/disponibility/disponibility.component';
 import { DisponibilityModule } from "./pages/admin/disponibility/disponibility.module";
+import { ReservationsModule } from "./pages/admin/reservations/reservations.module";
+
 
 
 registerLocaleData(localeFr, 'fr');
@@ -177,7 +179,8 @@ registerLocaleData(localeFr, 'fr');
     BoutiqueModule,
     VentesModule,
     PersonnelsModule,
-    DisponibilityModule
+    DisponibilityModule,
+    ReservationsModule
 ],
   providers: [{ provide: LOCALE_ID, useValue: 'fr' }],
   bootstrap: [AppComponent]

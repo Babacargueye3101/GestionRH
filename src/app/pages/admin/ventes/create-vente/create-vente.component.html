@@ -74,9 +74,9 @@
     <mat-form-field appearance="fill" class="full-width">
       <mat-label>Méthode de paiement</mat-label>
       <mat-select formControlName="payment_method">
-        <mat-option value="cash">Espèces</mat-option>
-        <mat-option value="card">Carte Bancaire</mat-option>
-        <mat-option value="mobile">Paiement Mobile</mat-option>
+        <mat-option *ngFor="let method of paymentList" [value]="method.name">
+          {{ method.name }}
+        </mat-option>
       </mat-select>
     </mat-form-field>
 
@@ -95,7 +95,11 @@
 
     <mat-form-field appearance="fill" class="full-width">
       <mat-label>Canal de vente</mat-label>
-      <input matInput formControlName="channel" />
+      <mat-select formControlName="channel">
+        <mat-option *ngFor="let channel of canalList" [value]="channel.name">
+          {{ channel.name }}
+        </mat-option>
+      </mat-select>
     </mat-form-field>
 
     <mat-form-field appearance="fill" class="full-width">

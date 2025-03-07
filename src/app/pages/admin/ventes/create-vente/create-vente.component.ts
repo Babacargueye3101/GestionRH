@@ -5,6 +5,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Product } from 'src/app/models/product';
 import { Shop } from 'src/app/models/shop';
 import { ShopService } from 'src/app/services/boutique/shop.service';
+import { CanalService } from 'src/app/services/canal.service';
+import { PaymentMethodeService } from 'src/app/services/payment-methode.service';
 import { ProductService } from 'src/app/services/product-service/product.service';
 import { VenteService } from 'src/app/services/ventes/vente.service';
 import Swal from 'sweetalert2';
@@ -23,13 +25,17 @@ export class CreateVenteComponent implements OnInit {
   productQuantity: number = 1;
   productPrice: number = 0;
   remainingAmount: number = 0;
+  canalList : any[] = [];
+  paymentList : any[] = [];
 
   constructor(
     private fb: FormBuilder,
     private venteService: VenteService,
     private dialogRef: MatDialogRef<CreateVenteComponent>,
     private shopService: ShopService,
-    private productService: ProductService
+    private productService: ProductService,
+    private canalService: CanalService,
+    private paymentMethodeService: PaymentMethodeService
   ) {
     this.venteForm = this.fb.group({
       shop_id: [null, Validators.required],
@@ -42,6 +48,7 @@ export class CreateVenteComponent implements OnInit {
       payment_method: ['', Validators.required],
       delivered: [false],
       sale_date: ['', Validators.required],
+      productQuantity: [1, [Validators.required, Validators.min(1)]]
     });
   }
 
@@ -50,6 +57,18 @@ export class CreateVenteComponent implements OnInit {
       (response) => this.listShop = response,
       (error) => console.error("Erreur de récupération des boutiques :", error)
     );
+
+    this.canalService.getChannels().subscribe((response) => {
+       this.canalList =response;
+
+    },(error) =>{
+       console.log(error);
+    });
+    this.paymentMethodeService.getPaymentMethodes().subscribe((response) =>{
+       this.paymentList = response
+    },(error) => {
+       console.log(error);
+    });
 
     this.venteForm.get('shop_id')?.valueChanges.subscribe(() => this.onShopChange());
   }
@@ -85,9 +104,8 @@ export class CreateVenteComponent implements OnInit {
       id: this.selectedProduct.id,
       name: this.selectedProduct.name,
       quantity: this.venteForm.get('productQuantity')?.value,
-      price: this.productPrice
+      price: Number(this.selectedProduct.price)
     });
-
     this.clearSelectedProduct();
   }
 

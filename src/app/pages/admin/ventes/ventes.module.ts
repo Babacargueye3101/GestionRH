@@ -20,13 +20,19 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatListModule } from '@angular/material/list';
 import { ListVentesComponent } from './list-ventes/list-ventes.component';
 import { VenteDetailsDialogComponent } from './vente-details-dialog/vente-details-dialog.component';
+import { PaymentMethodeComponent } from './payment-methode/payment-methode.component';
+import { CanalComponent } from './canal/canal.component';
+
+
 
 
 @NgModule({
   declarations: [
     CreateVenteComponent,
     ListVentesComponent,
-    VenteDetailsDialogComponent
+    VenteDetailsDialogComponent,
+    PaymentMethodeComponent,
+    CanalComponent
   ],
   exports: [
     ListVentesComponent

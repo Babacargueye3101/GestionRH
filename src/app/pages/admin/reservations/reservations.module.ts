@@ -14,11 +14,13 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
+import { ListReservationComponent } from './list-reservation/list-reservation.component';
 
 
 @NgModule({
   declarations: [
-    CreateReservationComponent
+    CreateReservationComponent,
+    ListReservationComponent
   ],
   imports: [
     CommonModule,
@@ -35,6 +37,7 @@ import { MatCardModule } from '@angular/material/card';
     MatIconModule,
     MatCardModule,
     FormsModule
-  ]
+  ],
+  exports: [ListReservationComponent]
 })
 export class ReservationsModule { }
