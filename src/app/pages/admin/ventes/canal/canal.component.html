@@ -1,0 +1,22 @@
+<div class="canal-container">
+    <h2>Ajouter un Channel</h2>
+
+    <form [formGroup]="channelForm" (ngSubmit)="addChannel()">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Nom du Channel</mat-label>
+        <input matInput formControlName="name" placeholder="Entrez un nom">
+        <mat-error *ngIf="channelForm.get('name')?.invalid && channelForm.get('name')?.touched">
+          Le nom est requis et doit contenir au moins 3 caractères.
+        </mat-error>
+      </mat-form-field>
+
+      <div class="button-group">
+        <button mat-raised-button color="primary" type="submit" [disabled]="channelForm.invalid">
+            Ajouter
+        </button>&nbsp;&nbsp;
+        <button mat-raised-button color="warn" type="button" (click)="closeModal()">
+          Annuler
+        </button>
+    </div>
+</form>
+  </div>
