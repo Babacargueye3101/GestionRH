@@ -13,6 +13,8 @@ import { ProductService } from 'src/app/services/product-service/product.service
 })
 export class AddProduitComponent implements OnInit{
   productForm: FormGroup;
+  imagePreview: string | ArrayBuffer | null = null;
+  selectedFile: File | null = null;
   errorMessage: string = '';
   shopId!: number;
 
@@ -46,6 +48,21 @@ export class AddProduitComponent implements OnInit{
     this.loadCategories();
   }
 
+
+  onFileSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      this.selectedFile = input.files[0];
+
+      // Prévisualisation de l'image
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.imagePreview = reader.result;
+      };
+      reader.readAsDataURL(this.selectedFile);
+    }
+  }
+
   save() {
     if (this.productForm.invalid) {
       this.errorMessage = "Veuillez remplir tous les champs correctement.";
@@ -53,24 +70,35 @@ export class AddProduitComponent implements OnInit{
     }
 
     this.spinner.show();
-    const newProduct = this.productForm.value;
 
-    // Désactiver le bouton pour empêcher le double envoi
     this.isSubmitting = true;
+  
+    const formData = new FormData();
+    formData.append('name', this.productForm.value.name);
+    formData.append('description', this.productForm.value.description);
+    formData.append('price', this.productForm.value.price.toString());
+    formData.append('stock', this.productForm.value.stock.toString());
+    formData.append('category_id', this.productForm.value.category_id);
+  
+    // ✅ Vérifier si un fichier a été sélectionné avant de l'ajouter
+    if (this.selectedFile) {
+      formData.append('image', this.selectedFile);
+    }
 
-    this.productService.createProduct(this.shopId, newProduct).subscribe({
+    this.productService.createProduct(this.shopId, formData).subscribe({
       next: (product) => {
+        console.log('Produit créé avec succès:', product);
         this.productForm.reset();
         this.errorMessage = '';
-        this.dialogRef.close(product); // ✅ Fermer le modal après succès
+        this.dialogRef.close(product);
       },
       error: (err) => {
+        console.error('Erreur lors de la création du produit:', err);
         this.errorMessage = "Erreur lors de la création du produit.";
-        console.error(err);
       },
       complete: () => {
         this.spinner.hide();
-        this.isSubmitting = false; // Réactiver après le complet
+        this.isSubmitting = false;
       }
     });
   }

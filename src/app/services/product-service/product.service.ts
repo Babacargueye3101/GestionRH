@@ -23,6 +23,16 @@ export class ProductService {
     });
   }
 
+  private getHeader() {
+    const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+    const token = currentUser.token;
+
+
+    return new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
+  }
+
   getProducts(shopId: number): Observable<Product[]> {
     return this.http.get<Product[]>(`${this.baseUrl}/${shopId}/products`, { headers: this.getHeaders() });
   }
@@ -33,13 +43,13 @@ export class ProductService {
     });
   }
 
-  createProduct(shopId: number, product: Product): Observable<Product> {
-    return this.http.post<Product>(`${this.baseUrl}/${shopId}/products`, { product: product }, { headers: this.getHeaders() });
+  createProduct(shopId: number, formData: FormData): Observable<Product> {
+    return this.http.post<Product>(`${this.baseUrl}/${shopId}/products`, formData, { headers: this.getHeader() });
   }
 
-  updateProduct(shopId: number, productId: number, product: Product): Observable<Product> {
+  updateProduct(shopId: number, productId: number, formData: FormData): Observable<Product> {
 
-    return this.http.put<Product>(`${this.baseUrl}/${shopId}/products/${productId}`, { product }, { headers: this.getHeaders() });
+    return this.http.put<Product>(`${this.baseUrl}/${shopId}/products/${productId}`, formData, { headers: this.getHeader() });
   }
 
   deleteProduct(shopId: number, productId: number): Observable<void> {

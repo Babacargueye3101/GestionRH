@@ -34,6 +34,14 @@
     <mat-error *ngIf="productForm.get('stock')?.invalid">Stock invalide</mat-error>
   </mat-form-field>
 
+  <div class="left-section">
+    <img [src]="imagePreview || 'assets/default-product.png'" alt="Image du produit" class="product-photo" height="200" width="200" />
+    <div mat-dialog-actions>
+      <input type="file" (change)="onFileSelected($event)" accept="image/*" hidden #fileInput>
+      <button mat-button (click)="fileInput.click()" color="primary">Choisir une image</button>
+    </div>
+  </div>
+  
   <div class="actions">
     <button mat-button color="secondary" (click)="close()">Annuler</button>
     <button mat-raised-button (click)="save()" [disabled]="productForm.invalid || isSubmitting" style="background-color: #b57f50">Créer</button>
