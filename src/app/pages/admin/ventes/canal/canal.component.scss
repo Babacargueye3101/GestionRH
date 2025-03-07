@@ -13,7 +13,24 @@
 
   .button-group {
     display: flex;
-    justify-content: center;
-    margin-top: 15px;
-    margin-left: 4px;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 1.5rem;
+
+    button {
+      font-size: 1rem;
+      padding: 0.5rem 1.5rem;
+      border-radius: 6px;
+    }
+
+    button[type="submit"] {
+      background: linear-gradient(135deg, #e6b8b7, #c9a173, #a67c52);
+      color: #ecf0f1;
+      font-weight: bold;
+    }
+
+    button[type="button"] {
+      background: #ccc;
+      color: black;
+    }
   }

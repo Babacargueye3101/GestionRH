@@ -88,6 +88,8 @@ import { ReservationsComponent } from './pages/admin/reservations/reservations.c
 import { DisponibilityComponent } from './pages/admin/disponibility/disponibility.component';
 import { DisponibilityModule } from "./pages/admin/disponibility/disponibility.module";
 import { ReservationsModule } from "./pages/admin/reservations/reservations.module";
+import { AbonnementsComponent } from './pages/admin/abonnements/abonnements.component';
+import { StatistiquesComponent } from './pages/admin/statistiques/statistiques.component';
 
 
 
@@ -138,7 +140,9 @@ registerLocaleData(localeFr, 'fr');
     VentesComponent,
     PersonnelsComponent,
     ReservationsComponent,
-    DisponibilityComponent
+    DisponibilityComponent,
+    AbonnementsComponent,
+    StatistiquesComponent
   ],
   imports: [
     BrowserModule,
