@@ -1,0 +1,18 @@
+<h2 mat-dialog-title>Détails de la Réservation</h2>
+
+<mat-dialog-content *ngIf="reservation">
+  <p><strong>ID:</strong> {{ reservation.reservation.id }}</p>
+  <p><strong>Date:</strong> {{ reservation.availability.date }}</p>
+  <p><strong>Heure:</strong> {{ reservation.reservation.time }}</p>
+  <p><strong>Statut:</strong> 
+    <span [ngClass]="{'status-confirmed': reservation.reservation.status === 'confirmed', 'status-pending': reservation.reservation.status !== 'confirmed'}">
+      {{ reservation.reservation.status === 'confirmed' ? 'Confirmé' : 'En attente' }}
+    </span>
+  </p>
+  <p><strong>Client:</strong> {{ reservation.client.name }} {{ reservation.client.surname }} ({{ reservation.client.phone }})</p>
+  <p><strong>Email:</strong> {{ reservation.client.email }}</p>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="closeDialog()">Fermer</button>
+</mat-dialog-actions>

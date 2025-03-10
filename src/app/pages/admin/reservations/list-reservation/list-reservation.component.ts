@@ -2,6 +2,9 @@ import { Component, Input } from '@angular/core';
 import { ShopService } from 'src/app/services/boutique/shop.service';
 import { ReservationService } from 'src/app/services/reservations/reservation.service';
 import { SalonService } from 'src/app/services/salons/salon.service';
+import Swal from 'sweetalert2';
+import { DetailReservationComponent } from '../detail-reservation/detail-reservation.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-list-reservation',
@@ -16,8 +19,10 @@ export class ListReservationComponent {
 
   selectedShopId: number | null = null;
   selectedSalonId: number | null = null;
+  selectedReservation: any; // Propriété pour stocker la réservation sélectionnée
 
   constructor(
+    public dialog: MatDialog,
     private reservationService: ReservationService,
     private shopService: ShopService,
     private salonService: SalonService
@@ -66,6 +71,31 @@ export class ListReservationComponent {
         }
       );
     }
+  }
+
+  updateReservationStatus(reservation: any, status: string): void {
+    console.log('Mettre à jour le statut de la réservation:', reservation.id, status);
+    this.reservationService.updateReservationStatus(reservation.id, status).subscribe({
+      next: (updatedReservation) => {
+        reservation.status = status;
+        if (status === 'confirmed') {
+          Swal.fire('Succès', 'Le statut de la réservation a été mis à jour. Et le client recevera un email pour lui notifier de la confirmation de son rendez vous ', 'success');
+        }
+        else {
+          Swal.fire('Succès', 'Le statut de la réservation a été mis à jour.', 'success');
+        }
+      },
+      error: (err) => {
+        Swal.fire('Erreur', 'Impossible de mettre à jour le statut de la réservation.', 'error');
+      }
+    });
+  }
+
+  openDetailDialog(reservation: any): void {
+    this.dialog.open(DetailReservationComponent, {
+      width: '600px',
+      data: { id: reservation.id }
+    });
   }
 
 }

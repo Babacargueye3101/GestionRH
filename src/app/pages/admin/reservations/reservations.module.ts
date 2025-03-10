@@ -15,12 +15,15 @@ import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { ListReservationComponent } from './list-reservation/list-reservation.component';
+import { MatMenuModule } from '@angular/material/menu';
+import { DetailReservationComponent } from './detail-reservation/detail-reservation.component';
 
 
 @NgModule({
   declarations: [
     CreateReservationComponent,
-    ListReservationComponent
+    ListReservationComponent,
+    DetailReservationComponent
   ],
   imports: [
     CommonModule,
@@ -36,7 +39,9 @@ import { ListReservationComponent } from './list-reservation/list-reservation.co
     MatTableModule,
     MatIconModule,
     MatCardModule,
-    FormsModule
+    FormsModule,
+    MatMenuModule,
+    MatDialogModule
   ],
   exports: [ListReservationComponent]
 })

@@ -21,6 +21,13 @@ export class ReservationService {
     return this.http.get<any[]>(`${this.apiUrl}/shops/${shopId}/salons/${salonId}/reservations`, { headers: this.getHeaders() });
   }
 
+  updateReservationStatus(id: number, status: string): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}/reservations/${id}?status=${status}`, {}, { headers: this.getHeaders() });
+  }
+
+  getReservationById(id: number): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/reservations/${id}`, { headers: this.getHeaders() });
+  }
 
   private getHeaders() {
     const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
