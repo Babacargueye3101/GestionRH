@@ -1,0 +1,92 @@
+// Conteneur du modal
+.mat-dialog-container {
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    margin: 0 auto;
+    font-family: 'Roboto', sans-serif;
+
+    // Titre du modal
+    mat-dialog-title {
+      font-size: 24px;
+      font-weight: 500;
+      color: #00796b;
+      text-align: center;
+      margin-bottom: 20px;
+      border-bottom: 2px solid #f0f0f0;
+      padding-bottom: 10px;
+    }
+
+    // Contenu du modal
+    mat-dialog-content {
+      p {
+        font-size: 16px;
+        color: #555;
+        line-height: 1.5;
+        margin-bottom: 15px;
+      }
+
+      strong {
+        font-weight: 600;
+        color: #00796b;
+      }
+
+      h4 {
+        font-size: 18px;
+        font-weight: 600;
+        margin-top: 20px;
+        color: #00796b;
+      }
+
+      ul {
+        padding-left: 20px;
+        list-style-type: none;
+        margin-top: 10px;
+
+        li {
+          font-size: 16px;
+          color: #555;
+          padding: 8px 0;
+          border-bottom: 1px solid #f1f1f1;
+        }
+      }
+    }
+
+    // Actions du modal
+    mat-dialog-actions {
+      display: flex;
+      justify-content: flex-end;
+      padding-top: 20px;
+
+      button {
+        font-size: 16px;
+        padding: 10px 20px;
+        border-radius: 4px;
+        background-color: #00796b;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+
+        &:hover {
+          background-color: #004d40;
+          transform: scale(1.05);
+        }
+
+        &:focus {
+          outline: none;
+        }
+      }
+    }
+  }
+
+  /* filepath: /Users/xsorcier/Desktop/GestionRH/src/app/pages/admin/clients/detail-client/detail-client.component.scss */
+.status-confirmed {
+    color: green;
+  }
+  
+  .status-pending {
+    color: orange;
+  }

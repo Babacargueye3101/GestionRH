@@ -90,6 +90,8 @@ import { DisponibilityModule } from "./pages/admin/disponibility/disponibility.m
 import { ReservationsModule } from "./pages/admin/reservations/reservations.module";
 import { AbonnementsComponent } from './pages/admin/abonnements/abonnements.component';
 import { StatistiquesComponent } from './pages/admin/statistiques/statistiques.component';
+import { ClientsComponent } from './pages/admin/clients/clients.component';
+import { ClientsModule } from './pages/admin/clients/clients.module';
 
 
 
@@ -142,7 +144,8 @@ registerLocaleData(localeFr, 'fr');
     ReservationsComponent,
     DisponibilityComponent,
     AbonnementsComponent,
-    StatistiquesComponent
+    StatistiquesComponent,
+    ClientsComponent
   ],
   imports: [
     BrowserModule,
@@ -184,7 +187,8 @@ registerLocaleData(localeFr, 'fr');
     VentesModule,
     PersonnelsModule,
     DisponibilityModule,
-    ReservationsModule
+    ReservationsModule,
+    ClientsModule
 ],
   providers: [{ provide: LOCALE_ID, useValue: 'fr' }],
   bootstrap: [AppComponent]

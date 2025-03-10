@@ -1,0 +1,19 @@
+<div class="breadcrumb">
+    <a mat-button routerLink="/employements" routerLinkActive="active-link">Gestion des ventes</a>
+    <span> > </span>
+    <a mat-button routerLink="/clients" class="active" routerLinkActive="active-link">Gestion des Clients</a>
+  </div>
+  
+  <div class="personnel-container">
+    <mat-toolbar class="toolbar">
+      <span class="toolbar-title">Gestion des Clients</span>
+      <span class="spacer"></span>
+      <button mat-raised-button class="create-button" (click)="openCreateClientModal()">
+        <mat-icon>add</mat-icon> Créer un Client
+      </button>
+    </mat-toolbar>
+  </div>
+  
+  <div class="container">
+    <app-list-client [clients]="clients"></app-list-client>
+  </div>
