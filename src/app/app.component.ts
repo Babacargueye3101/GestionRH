@@ -27,6 +27,7 @@ export class AppComponent implements OnInit {
   buttonTimeout: any;
 
   currentYear: number = new Date().getFullYear();
+  showSubCategories= false;
 
   constructor(private authService: AuthService, private router: Router, private compagnyService: CompagnyService){
 
@@ -82,6 +83,14 @@ export class AppComponent implements OnInit {
     this.compagnyService.getCompagnyById(id).subscribe((res)=>{
        this.compagny= res.currentCompagny
     })
+  }
+
+  toggleSidenav() {
+    this.isOpen = !this.isOpen;
+  }
+  
+  toggleCategoryMenu() {
+    this.showSubCategories = !this.showSubCategories;
   }
 
 }

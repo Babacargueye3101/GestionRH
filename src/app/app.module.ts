@@ -51,7 +51,6 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatExpansionModule } from '@angular/material/expansion';
 
-
 import { LOCALE_ID } from '@angular/core';
 import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
@@ -92,6 +91,9 @@ import { AbonnementsComponent } from './pages/admin/abonnements/abonnements.comp
 import { StatistiquesComponent } from './pages/admin/statistiques/statistiques.component';
 import { ClientsComponent } from './pages/admin/clients/clients.component';
 import { ClientsModule } from './pages/admin/clients/clients.module';
+import { HomeComponent } from './pages/public/home/home.component';
+import { CartComponent } from './pages/public/cart/cart.component';
+import { NgbCarouselModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -145,7 +147,9 @@ registerLocaleData(localeFr, 'fr');
     DisponibilityComponent,
     AbonnementsComponent,
     StatistiquesComponent,
-    ClientsComponent
+    ClientsComponent,
+    HomeComponent,
+    CartComponent
   ],
   imports: [
     BrowserModule,
@@ -188,7 +192,9 @@ registerLocaleData(localeFr, 'fr');
     PersonnelsModule,
     DisponibilityModule,
     ReservationsModule,
-    ClientsModule
+    ClientsModule,
+    NgbModule,
+    NgbCarouselModule // Ajoutez cette ligne
 ],
   providers: [{ provide: LOCALE_ID, useValue: 'fr' }],
   bootstrap: [AppComponent]

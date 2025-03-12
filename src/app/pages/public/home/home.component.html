@@ -1,0 +1,84 @@
+<mat-sidenav-container class="home-container">
+  <mat-sidenav-content>
+    <!-- Barre de navigation -->
+    <mat-toolbar class="main-toolbar light-blue-toolbar">
+      <span class="app-title">{{ compagny?.name }}</span>
+      <span class="spacer"></span>
+      <mat-form-field class="search-bar">
+        <input matInput placeholder="Rechercher des produits">
+        <button mat-icon-button matSuffix>
+          <mat-icon>search</mat-icon>
+        </button>
+      </mat-form-field>
+      <button mat-icon-button routerLink="/public/cart">
+        <mat-icon>shopping_cart</mat-icon>
+        <span class="cart-badge" *ngIf="cartItemCount > 0">{{ cartItemCount }}</span>
+      </button>
+    </mat-toolbar>
+
+    <!-- Sous-barre de navigation -->
+    <mat-toolbar class="sub-toolbar black-toolbar">
+      <mat-form-field class="category-select">
+        <mat-select placeholder="Show All Categories">
+          <mat-option *ngFor="let category of categories" [value]="category.name">
+            {{ category.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <a mat-button routerLink="/home">Home</a>
+      <a mat-button routerLink="/products">Products</a>
+      <a mat-button routerLink="/products">Reservations</a>
+      <a mat-button routerLink="/products">Abonnnement</a>
+      <a mat-button routerLink="/products">Salons</a>
+
+    </mat-toolbar>
+
+    <!-- Bannière du salon -->
+    <div class="salon-banner">
+      <ngb-carousel *ngIf="images.length">
+        <ng-template ngbSlide *ngFor="let image of images">
+          <div class="picsum-img-wrapper">
+            <img [src]="image.imageUrl" [alt]="image.label" />
+          </div>
+          <div class="carousel-caption">
+            <h3>{{ image.label }}</h3>
+            <p>{{ image.description }}</p>
+          </div>
+        </ng-template>
+      </ngb-carousel>
+    </div>
+
+    <!-- Sections de la page d'accueil -->
+    <div class="home-sections">
+      <section class="product-section">
+        <h2>Nos Produits</h2>
+        <div class="product-list">
+          <mat-card class="product-item" *ngFor="let product of products">
+            <mat-card-header>
+              <mat-card-title>{{ product.title }}</mat-card-title>
+              <mat-card-subtitle>{{ product.subtitle }}</mat-card-subtitle>
+            </mat-card-header>
+            <img mat-card-image [src]="product.image" alt="{{ product.title }}">
+            <mat-card-content>
+              <p>{{ product.price }}</p>
+            </mat-card-content>
+            <mat-card-actions>
+              <button mat-button color="primary" (click)="addToCart(product)">Buy</button>
+              <button mat-button color="accent" (click)="addToCart(product)">Add to Cart</button>
+            </mat-card-actions>
+          </mat-card>
+        </div>
+      </section>
+    </div>
+
+    <!-- Pied de page -->
+    <div class="footer">
+      <span>&copy; {{ currentYear }} {{ compagny?.name }}</span>
+      <span class="social-links">
+        <a href="https://facebook.com"><mat-icon>facebook</mat-icon></a>
+        <a href="https://twitter.com"><mat-icon>twitter</mat-icon></a>
+        <a href="https://instagram.com"><mat-icon>instagram</mat-icon></a>
+      </span>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

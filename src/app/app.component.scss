@@ -145,3 +145,39 @@ mat-sidenav-content {
     background-color: rgba(255, 255, 255, 0.1);
   }
 }
+.main-nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #2196F3; /* Couleur de fond */
+}
+
+.main-nav a {
+  font-size: 16px;
+  color: white;
+  text-decoration: none;
+  padding: 10px 15px;
+}
+
+.main-nav a:hover {
+  background-color: #1976D2;
+  border-radius: 4px;
+}
+
+.nested-menu {
+  padding-left: 20px;
+}
+
+.nested-link {
+  font-size: 14px;
+  padding-left: 20px;
+}
+
+.mat-toolbar {
+  background-color: #1976D2; /* Couleur de fond du toolbar */
+}
+
+.mat-icon {
+  margin-right: 8px;
+}
+

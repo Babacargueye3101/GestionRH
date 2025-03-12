@@ -1,0 +1,70 @@
+<mat-sidenav-container class="cart-container">
+  <mat-sidenav-content>
+    <!-- Barre de navigation -->
+    <mat-toolbar  class="main-toolbar light-blue-toolbar">
+      <span class="app-title">{{ compagny?.name }}</span>
+      <span class="spacer"></span>
+      <button mat-icon-button routerLink="/home">
+        <mat-icon>home</mat-icon>
+      </button>
+      <button mat-icon-button routerLink="/cart">
+        <mat-icon>shopping_cart</mat-icon>
+        <span class="cart-badge" *ngIf="cartItemCount > 0">{{ cartItemCount }}</span>
+      </button>
+    </mat-toolbar>
+
+    <div class="cart-content">
+      <div class="cart-items">
+        <h2>Votre Panier</h2>
+        <div *ngIf="cart.length === 0" class="empty-cart">
+          <img src="/assets/images/panier_vide.jpg" alt="Panier vide">
+          <p>Votre panier est vide!</p>
+          <p>Parcourez nos catégories et découvrez nos meilleures offres!</p>
+        </div>
+        <div *ngIf="cart.length > 0">
+          <div *ngFor="let product of cart" class="cart-item">
+            <img [src]="product.image" alt="{{ product.title }}">
+            <div class="cart-item-details">
+              <h3>{{ product.title }}</h3>
+              <p>{{ product.subtitle }}</p>
+              <p>{{ product.price }}</p>
+              <button mat-button color="warn" (click)="removeFromCart(product)">Remove</button>
+            </div>
+          </div>
+          <button mat-button color="primary" (click)="clearCart()">Clear Cart</button>
+        </div>
+      </div>
+      <div class="cart-summary">
+        <h2>Résumé de la commande</h2>
+        <p>Total: {{ getTotalPrice() }}</p>
+        <h3>Options de paiement</h3>
+        <mat-radio-group [(ngModel)]="selectedPaymentMethod">
+          <mat-radio-button value="card">Carte</mat-radio-button>
+          <mat-radio-button value="wave">Wave</mat-radio-button>
+          <mat-radio-button value="orangeMoney">Orange Money</mat-radio-button>
+        </mat-radio-group>
+        <div *ngIf="selectedPaymentMethod === 'card'" class="payment-form">
+          <mat-form-field>
+            <mat-label>Numéro de carte</mat-label>
+            <input matInput placeholder="1234 5678 9012 3456">
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Date d'expiration</mat-label>
+            <input matInput placeholder="MM/AA">
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>CVV</mat-label>
+            <input matInput placeholder="123">
+          </mat-form-field>
+        </div>
+        <div *ngIf="selectedPaymentMethod === 'wave' || selectedPaymentMethod === 'orangeMoney'" class="payment-form">
+          <mat-form-field>
+            <mat-label>Numéro de téléphone</mat-label>
+            <input matInput placeholder="77 123 45 67">
+          </mat-form-field>
+        </div>
+        <button mat-raised-button color="accent">Procéder au paiement</button>
+      </div>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

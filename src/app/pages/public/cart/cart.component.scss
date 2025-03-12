@@ -1,0 +1,104 @@
+/* filepath: /Users/xsorcier/Desktop/GestionRH/src/app/pages/public/cart/cart.component.scss */
+.cart-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.main-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.cart-content {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.cart-items, .cart-summary {
+  width: 48%;
+}
+
+.cart-items {
+  width: 50%;
+  overflow-y: auto;
+  padding-left: 10px;
+  padding-right: 20px;
+  border-radius: 3px;
+  border: 1px solid #10c2e6;
+}
+
+.cart-item img {
+  width: 370px;
+  height: 270px;
+  object-fit: cover;
+  margin-right: 20px;
+}
+
+.cart-item-details {
+  flex: 1;
+}
+
+.cart-item-details h3 {
+  margin: 0;
+}
+
+.cart-item-details p {
+  margin: 5px 0;
+}
+
+.cart-summary {
+  width: 45%;
+  padding: 20px;
+  border: 1px solid #10c2e6;
+  border-radius: 8px;
+  height: calc(55vh - 64px - 40px); /* Ajustez la hauteur en fonction de la hauteur de la barre de navigation et du padding */
+  overflow-y: auto;
+}
+
+.cart-summary h2 {
+  margin-top: 0;
+}
+
+.payment-form {
+  margin-top: 20px;
+}
+
+.cart-badge {
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  padding: 2px 8px;
+  font-size: 12px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.light-blue-toolbar {
+  background-color: #64b5f6 !important; /* Bleu clair */
+  color: white !important;
+}
+
+.black-toolbar {
+  background-color: black !important;
+  color: white !important;
+}
+
+
+.empty-cart {
+  text-align: center;
+  padding: 20px;
+}
+
+.empty-cart img {
+  width: 200px;
+  height: auto;
+  margin-bottom: 20px;
+}
