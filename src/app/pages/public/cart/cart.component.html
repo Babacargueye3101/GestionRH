@@ -4,7 +4,7 @@
     <mat-toolbar  class="main-toolbar light-blue-toolbar">
       <span class="app-title">{{ compagny.name }}</span>
       <span class="spacer"></span>
-      <button mat-icon-button routerLink="/home">
+      <button mat-icon-button routerLink="">
         <mat-icon>home</mat-icon>
       </button>
       <button mat-icon-button routerLink="/cart">
@@ -28,10 +28,10 @@
               <h3>{{ product.title }}</h3>
               <p>{{ product.subtitle }}</p>
               <p>{{ product.price }}</p>
-              <button mat-button color="warn" (click)="removeFromCart(product)">Remove</button>
+              <button mat-button (click)="removeFromCart(product)" style="color: rgb(247, 39, 39);">Remove</button>
             </div>
           </div>
-          <button mat-button color="primary" (click)="clearCart()">Clear Cart</button>
+          <button mat-button (click)="clearCart()" style="color:gray">Clear Cart</button>
         </div>
       </div>
       <div class="cart-summary">
@@ -63,7 +63,7 @@
             <input matInput placeholder="77 123 45 67">
           </mat-form-field>
         </div>
-        <button mat-raised-button color="accent">Procéder au paiement</button>
+        <button mat-raised-button style="color: white; background-color: #a67c52">Procéder au paiement</button>
       </div>
     </div>
   </mat-sidenav-content>

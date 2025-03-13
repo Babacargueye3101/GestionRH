@@ -10,26 +10,22 @@
           <mat-icon>search</mat-icon>
         </button>
       </mat-form-field>
-      <button mat-icon-button routerLink="/public/cart">
-        <mat-icon>shopping_cart</mat-icon>
-        <span class="cart-badge" *ngIf="cartItemCount > 0">{{ cartItemCount }}</span>
-      </button>
     </mat-toolbar>
 
     <!-- Sous-barre de navigation -->
     <mat-toolbar class="sub-toolbar black-toolbar">
       <mat-form-field class="category-select" style="margin-top: 20px;">
-        <mat-select placeholder="Show All Categories">
-          <mat-option *ngFor="let category of categories" [value]="category.name">
+        <mat-select placeholder="Show All Categories" (selectionChange)="onCategorySelected($event)">
+          <mat-option *ngFor="let category of categories" [value]="category.id">
             {{ category.name }}
           </mat-option>
         </mat-select>
       </mat-form-field>
       <div class="d-flex justify-content-center align-items-center mx-auto">
-        <a mat-button routerLink="/home">Home</a>
+        <a mat-button routerLink="/home">Accueil</a>
         <a mat-button routerLink="/products">Products</a>
         <a mat-button routerLink="/products">Reservations</a>
-        <a mat-button routerLink="/products">Abonnnement</a>
+        <a mat-button routerLink="/products">Abonnnements</a>
         <a mat-button routerLink="/products">Salons</a>
       </div>
 
@@ -47,29 +43,33 @@
       <!-- <div class="swiper-pagination"></div> -->
 
       <!-- Boutons de navigation -->
-      <div class="swiper-button-prev"></div>
-      <div class="swiper-button-next"></div>
+      <!-- <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next"></div> -->
     </div>
 
     <!-- Sections de la page d'accueil -->
     <div class="home-sections">
       <section class="product-section">
         <h2>Nos Produits</h2>
-        <div class="product-list">
-          <mat-card class="product-item" *ngFor="let product of products">
-            <mat-card-header>
-              <mat-card-title>{{ product.title }}</mat-card-title>
-              <mat-card-subtitle>{{ product.subtitle }}</mat-card-subtitle>
-            </mat-card-header>
-            <img mat-card-image [src]="product.image" alt="{{ product.title }}">
-            <mat-card-content>
-              <p>{{ product.price }}</p>
-            </mat-card-content>
-            <mat-card-actions>
-              <button mat-button color="primary" (click)="addToCart(product)">Buy</button>
-              <button mat-button color="accent" (click)="addToCart(product)">Add to Cart</button>
-            </mat-card-actions>
-          </mat-card>
+        <div class="container">
+          <div class="row">
+            <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-4" *ngFor="let product of products">
+              <mat-card class="product-item">
+                <mat-card-header>
+                  <mat-card-title>{{ product.name }}</mat-card-title>
+                  <mat-card-subtitle>{{ product.subtitle }}</mat-card-subtitle>
+                </mat-card-header>
+                <img mat-card-image [src]="product.image_url" alt="{{ product.title }}" class="img-fluid">
+                <mat-card-content>
+                  <p>{{ product.price }}</p>
+                </mat-card-content>
+                <mat-card-actions>
+                  <button mat-button color="primary" (click)="addToCart(product)">Buy</button>
+                  <button mat-button color="accent" (click)="addToCart(product)">Add to Cart</button>
+                </mat-card-actions>
+              </mat-card>
+            </div>
+          </div>
         </div>
       </section>
     </div>
@@ -83,5 +83,13 @@
         <a href="https://instagram.com"><mat-icon>instagram</mat-icon></a>
       </span>
     </div>
+
+    <div class="fab-cart-container">
+      <button mat-fab class="fab-cart" (click)="goToCart()">
+        <mat-icon>shopping_cart</mat-icon>
+        <span class="cart-badge">{{ cartItemCount }}</span>
+      </button>
+    </div>
   </mat-sidenav-content>
+
 </mat-sidenav-container>
