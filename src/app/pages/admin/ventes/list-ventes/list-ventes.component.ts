@@ -70,10 +70,10 @@ export class ListVentesComponent {
     }
   }
 
-  // Charger les ventes du salon sélectionné
+  // Charger les ventes du boutique sélectionnée
   loadVentes(): void {
-    if (this.selectedSalonId) {
-      this.ventesService.getVentes(this.selectedSalonId).subscribe(data => {
+    if (this.selectedShopId) {
+      this.ventesService.getVentes(this.selectedShopId).subscribe(data => {
         this.ventes = data;
       });
     }

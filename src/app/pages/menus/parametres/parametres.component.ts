@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from 'src/app/services/users.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-parametres',
@@ -10,7 +11,20 @@ export class ParametresComponent implements OnInit{
 
   users: any[] = [];
 
-  displayedColumns: string[] = ['name', 'canSeeDashboard', 'canSeeEmployee', 'canSeeFormation', 'canSeeCandidature', 'canSeePaies'];
+ 
+  displayedColumns: string[] = [
+    'name', 
+    'canSeeDashboard', 
+    'canSeeShop', 
+    'canSeeEmployee', 
+    'canSeeVente', 
+    'canSeeReservation', 
+    'canSeeDispo', 
+    'canSeeClient', 
+    'canSeeSubscription', 
+    'canSeeConfiguration',
+    'canSeeSalon'
+  ];
 
   constructor(private userService: UsersService){}
 
@@ -39,9 +53,9 @@ export class ParametresComponent implements OnInit{
     console.log(`Rôle "${role}" assigné à l'utilisateur : ${user.name}`);
 
     this.userService.updateRole(user.id, role, true).subscribe(response => {
-      localStorage.removeItem('currentUser');
-      localStorage.setItem('currentUser', JSON.stringify(response));
+      //.setItem('currentUser', JSON.stringify(response));
       console.log(response);
+      Swal.fire('Succès', `Rôle "${role}" assigné à l'utilisateur : ${user.name}`, 'success');
     });
   }
 
@@ -51,9 +65,9 @@ export class ParametresComponent implements OnInit{
     console.log(`Rôle "${role}" supprimé pour l'utilisateur : ${user.name}`);
 
     this.userService.updateRole(user.id, role, false).subscribe(response => {
-      localStorage.removeItem('currentUser');
-      localStorage.setItem('currentUser', JSON.stringify(response));
+      //localStorage.setItem('currentUser', JSON.stringify(response));
       console.log(response);
+      Swal.fire('Succès', `Rôle "${role}" supprimé pour l'utilisateur : ${user.name}`, 'success');
     });
   }
 

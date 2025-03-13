@@ -1,0 +1,47 @@
+/* filepath: /Users/xsorcier/Desktop/GestionRH/src/app/pages/admin/abonnements/abonnements.component.scss */
+.abonnements-container {
+    padding: 20px;
+  }
+  
+  .subscription-types {
+    width: 100%;
+  }
+  
+  .mat-elevation-z8 {
+    margin-top: 20px;
+  }
+  ::ng-deep .produits-container {
+    display: flex;
+    flex-direction: column;
+    background: #f4f4f4;
+    padding: 20px;
+
+    .toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      background: linear-gradient(135deg, #e6b8b7, #c9a173, #a67c52);
+      color: #ecf0f1;
+      padding: 10px;
+    }
+
+    .toolbar-title {
+      font-size: 20px;
+      font-weight: 500;
+      color: white;
+    }
+
+    .spacer {
+      flex: 1 1 auto;
+    }
+
+    .create-button {
+      margin-left: 10px;
+      background-color: linear-gradient(135deg, #e6b8b7, #c9a173, #a67c52);
+    }
+    .create-button:hover{
+        background-color: #e6b8b7;
+        color: white;
+    }
+}

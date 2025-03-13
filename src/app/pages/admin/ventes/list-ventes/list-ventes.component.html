@@ -3,25 +3,16 @@
 <!-- Sélection de la boutique -->
 <mat-form-field appearance="outline" style="margin-right: 20px;">
   <mat-label>Choisir une boutique</mat-label>
-  <mat-select [(value)]="selectedShopId" (selectionChange)="loadSalons()">
+  <mat-select [(value)]="selectedShopId" (selectionChange)="loadVentes()">
     <mat-option *ngFor="let shop of shops" [value]="shop.id">
       {{ shop.name }}
     </mat-option>
   </mat-select>
 </mat-form-field>
 
-<!-- Sélection du salon (chargé dynamiquement après la boutique) -->
-<mat-form-field appearance="outline" *ngIf="salons.length > 0">
-  <mat-label>Choisir un salon</mat-label>
-  <mat-select [(value)]="selectedSalonId" (selectionChange)="loadVentes()">
-    <mat-option *ngFor="let salon of salons" [value]="salon.id">
-      {{ salon.name }}
-    </mat-option>
-  </mat-select>
-</mat-form-field>
 
 <!-- Tableau des ventes -->
-<h2>Liste des ventes</h2>
+<h2 *ngIf="ventes.length > 0">Liste des ventes</h2>
 
 <div style="overflow-x: auto; width: 100%;">
     <table mat-table [dataSource]="ventes" *ngIf="ventes.length > 0">

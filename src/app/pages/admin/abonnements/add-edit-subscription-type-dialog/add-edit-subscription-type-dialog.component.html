@@ -1,0 +1,26 @@
+<h2 mat-dialog-title>{{ data ? 'Modifier' : 'Ajouter' }} un type d'abonnement</h2>
+<mat-dialog-content>
+  <form [formGroup]="form">
+    <mat-form-field>
+      <mat-label>Nom</mat-label>
+      <input matInput formControlName="name">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Prix</mat-label>
+      <input matInput formControlName="price">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Description</mat-label>
+      <input matInput formControlName="description">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Lettre</mat-label>
+      <input matInput formControlName="letter">
+    </mat-form-field><br>
+    <mat-checkbox formControlName="active">Activé</mat-checkbox>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="onCancel()">Annuler</button>
+  <button mat-button (click)="onSave()">{{ data ? 'Modifier' : 'Ajouter' }}</button>
+</mat-dialog-actions>
