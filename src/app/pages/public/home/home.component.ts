@@ -1,18 +1,20 @@
-import { Component, OnInit } from '@angular/core';
-
+import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { Autoplay, Navigation, Pagination } from 'swiper/modules';
+import Swiper from 'swiper';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, AfterViewInit {
   compagny = { name: 'Votre Compagnie' };
   currentYear = new Date().getFullYear();
   cartItemCount = 0;
-  images: { imageUrl: string, label: string, description: string }[] = [
-    { imageUrl: '/assets/images/salon-banner.jpg', label: 'First slide label', description: 'Nulla vitae elit libero, a pharetra augue mollis interdum.' },
-    { imageUrl: '/assets/images/salon-banner.jpg', label: 'Second slide label', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' },
-    { imageUrl: '/assets/images/salon-banner.jpg', label: 'Third slide label', description: 'Praesent commodo cursus magna, vel scelerisque nisl consectetur.' }
+
+  images: string[] = [
+    'https://images.unsplash.com/photo-1631679706909-1844bbd07221?q=80&w=2892&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    'https://images.unsplash.com/photo-1632210370137-4088c0e38de6?q=80&w=3132&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    'https://images.unsplash.com/photo-1631510083755-11ecb5172d81?q=80&w=3090&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
   ];
   categories = [
     { name: 'Catégorie 1', imageUrl: '/assets/category1.jpg' },
@@ -96,7 +98,27 @@ export class HomeComponent implements OnInit {
 
   constructor() {}
 
+  ngAfterViewInit(): void {
+    new Swiper('.swiper-container', {
+      modules: [Autoplay, Navigation, Pagination],
+      loop: true,
+      autoplay: {
+        delay: 3000, // Change d'image toutes les 3 secondes
+        disableOnInteraction: false
+      },
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev'
+      }
+    });
+  }
+
   ngOnInit(): void {
+
     this.updateCartItemCount();
   }
 

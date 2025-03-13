@@ -2,9 +2,9 @@
   <mat-sidenav-content>
     <!-- Barre de navigation -->
     <mat-toolbar class="main-toolbar light-blue-toolbar">
-      <span class="app-title">{{ compagny?.name }}</span>
+      <span class="app-title">{{ compagny.name }}</span>
       <span class="spacer"></span>
-      <mat-form-field class="search-bar">
+      <mat-form-field class="search-bar" style="margin-top: 10px;">
         <input matInput placeholder="Rechercher des produits">
         <button mat-icon-button matSuffix>
           <mat-icon>search</mat-icon>
@@ -18,34 +18,37 @@
 
     <!-- Sous-barre de navigation -->
     <mat-toolbar class="sub-toolbar black-toolbar">
-      <mat-form-field class="category-select">
+      <mat-form-field class="category-select" style="margin-top: 20px;">
         <mat-select placeholder="Show All Categories">
           <mat-option *ngFor="let category of categories" [value]="category.name">
             {{ category.name }}
           </mat-option>
         </mat-select>
       </mat-form-field>
-      <a mat-button routerLink="/home">Home</a>
-      <a mat-button routerLink="/products">Products</a>
-      <a mat-button routerLink="/products">Reservations</a>
-      <a mat-button routerLink="/products">Abonnnement</a>
-      <a mat-button routerLink="/products">Salons</a>
+      <div class="d-flex justify-content-center align-items-center mx-auto">
+        <a mat-button routerLink="/home">Home</a>
+        <a mat-button routerLink="/products">Products</a>
+        <a mat-button routerLink="/products">Reservations</a>
+        <a mat-button routerLink="/products">Abonnnement</a>
+        <a mat-button routerLink="/products">Salons</a>
+      </div>
 
     </mat-toolbar>
 
     <!-- Bannière du salon -->
-    <div class="salon-banner">
-      <ngb-carousel *ngIf="images.length">
-        <ng-template ngbSlide *ngFor="let image of images">
-          <div class="picsum-img-wrapper">
-            <img [src]="image.imageUrl" [alt]="image.label" />
-          </div>
-          <div class="carousel-caption">
-            <h3>{{ image.label }}</h3>
-            <p>{{ image.description }}</p>
-          </div>
-        </ng-template>
-      </ngb-carousel>
+    <div class="swiper-container">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide" *ngFor="let image of images">
+          <img [src]="image" alt="Image slider" class="slider-img">
+        </div>
+      </div>
+
+      <!-- Pagination -->
+      <!-- <div class="swiper-pagination"></div> -->
+
+      <!-- Boutons de navigation -->
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next"></div>
     </div>
 
     <!-- Sections de la page d'accueil -->
@@ -73,7 +76,7 @@
 
     <!-- Pied de page -->
     <div class="footer">
-      <span>&copy; {{ currentYear }} {{ compagny?.name }}</span>
+      <span>&copy; {{ currentYear }} {{ compagny.name }}</span>
       <span class="social-links">
         <a href="https://facebook.com"><mat-icon>facebook</mat-icon></a>
         <a href="https://twitter.com"><mat-icon>twitter</mat-icon></a>

@@ -93,7 +93,6 @@ import { ClientsComponent } from './pages/admin/clients/clients.component';
 import { ClientsModule } from './pages/admin/clients/clients.module';
 import { HomeComponent } from './pages/public/home/home.component';
 import { CartComponent } from './pages/public/cart/cart.component';
-import { NgbCarouselModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -192,9 +191,7 @@ registerLocaleData(localeFr, 'fr');
     PersonnelsModule,
     DisponibilityModule,
     ReservationsModule,
-    ClientsModule,
-    NgbModule,
-    NgbCarouselModule // Ajoutez cette ligne
+    ClientsModule
 ],
   providers: [{ provide: LOCALE_ID, useValue: 'fr' }],
   bootstrap: [AppComponent]

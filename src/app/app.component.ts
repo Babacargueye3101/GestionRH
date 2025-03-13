@@ -1,8 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 import { AuthService } from './services/auth.service';
-import { Router } from '@angular/router';
 import { CompagnyService } from './services/compagny.service';
+import { NavigationEnd, Router } from '@angular/router';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -29,6 +30,10 @@ export class AppComponent implements OnInit {
   currentYear: number = new Date().getFullYear();
   showSubCategories= false;
 
+
+  isSidenavVisible: boolean = true;
+  isNavbarVisible: boolean = true;
+
   constructor(private authService: AuthService, private router: Router, private compagnyService: CompagnyService){
 
   }
@@ -42,6 +47,19 @@ export class AppComponent implements OnInit {
       this.isLoggedIn= true;
       this.getCurrentCompagny(this.currentUser.compagny_id);
     }
+
+    // Filter for NavigationEnd and use type assertion
+    this.router.events.pipe(
+      filter((event): event is NavigationEnd => event instanceof NavigationEnd) // type guard
+    ).subscribe((event: NavigationEnd) => {
+      if (event.urlAfterRedirects.includes('public')) {
+        this.isSidenavVisible = false; // Set this based on your logic
+        this.isNavbarVisible = false;  // Set this based on your logic
+      } else {
+        this.isSidenavVisible = true;
+        this.isNavbarVisible = true;
+      }
+    });
   }
 
   mouseEnterButton() {
@@ -88,7 +106,7 @@ export class AppComponent implements OnInit {
   toggleSidenav() {
     this.isOpen = !this.isOpen;
   }
-  
+
   toggleCategoryMenu() {
     this.showSubCategories = !this.showSubCategories;
   }
