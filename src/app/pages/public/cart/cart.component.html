@@ -1,10 +1,10 @@
 <mat-sidenav-container class="cart-container">
   <mat-sidenav-content>
     <!-- Barre de navigation -->
-    <mat-toolbar  class="main-toolbar light-blue-toolbar">
+    <mat-toolbar class="main-toolbar light-blue-toolbar">
       <span class="app-title">{{ compagny.name }}</span>
       <span class="spacer"></span>
-      <button mat-icon-button routerLink="">
+      <button mat-icon-button routerLink="/">
         <mat-icon>home</mat-icon>
       </button>
       <button mat-icon-button routerLink="/cart">
@@ -14,57 +14,86 @@
     </mat-toolbar>
 
     <div class="cart-content">
-      <div class="cart-items">
-        <h2>Votre Panier</h2>
-        <div *ngIf="cart.length === 0" class="empty-cart">
-          <img src="/assets/images/panier_vide.jpg" alt="Panier vide">
-          <p>Votre panier est vide!</p>
-          <p>Parcourez nos catégories et découvrez nos meilleures offres!</p>
-        </div>
-        <div *ngIf="cart.length > 0">
-          <div *ngFor="let product of cart" class="cart-item">
-            <img [src]="product.image" alt="{{ product.title }}">
-            <div class="cart-item-details">
-              <h3>{{ product.title }}</h3>
-              <p>{{ product.subtitle }}</p>
-              <p>{{ product.price }}</p>
-              <button mat-button (click)="removeFromCart(product)" style="color: rgb(247, 39, 39);">Remove</button>
-            </div>
+      <h2>Votre Panier</h2>
+
+      <mat-horizontal-stepper #stepper labelPosition="bottom" color="warn">
+        <!-- Étape 1: Panier -->
+        <mat-step [stepControl]="cartForm">
+          <ng-template matStepLabel>Panier</ng-template>
+          <div *ngIf="cart.length === 0" class="empty-cart">
+            <img src="/assets/images/panier_vide.jpg" alt="Panier vide">
+            <p>Votre panier est vide!</p>
           </div>
-          <button mat-button (click)="clearCart()" style="color:gray">Clear Cart</button>
-        </div>
-      </div>
-      <div class="cart-summary">
-        <h2>Résumé de la commande</h2>
-        <p>Total: {{ getTotalPrice() }}</p>
-        <h3>Options de paiement</h3>
-        <mat-radio-group [(ngModel)]="selectedPaymentMethod">
-          <mat-radio-button value="card">Carte</mat-radio-button>
-          <mat-radio-button value="wave">Wave</mat-radio-button>
-          <mat-radio-button value="orangeMoney">Orange Money</mat-radio-button>
-        </mat-radio-group>
-        <div *ngIf="selectedPaymentMethod === 'card'" class="payment-form">
-          <mat-form-field>
-            <mat-label>Numéro de carte</mat-label>
-            <input matInput placeholder="1234 5678 9012 3456">
-          </mat-form-field>
-          <mat-form-field>
-            <mat-label>Date d'expiration</mat-label>
-            <input matInput placeholder="MM/AA">
-          </mat-form-field>
-          <mat-form-field>
-            <mat-label>CVV</mat-label>
-            <input matInput placeholder="123">
-          </mat-form-field>
-        </div>
-        <div *ngIf="selectedPaymentMethod === 'wave' || selectedPaymentMethod === 'orangeMoney'" class="payment-form">
-          <mat-form-field>
-            <mat-label>Numéro de téléphone</mat-label>
-            <input matInput placeholder="77 123 45 67">
-          </mat-form-field>
-        </div>
-        <button mat-raised-button style="color: white; background-color: #a67c52">Procéder au paiement</button>
-      </div>
+          <div *ngIf="cart.length > 0">
+            <div *ngFor="let product of cart" class="cart-item">
+              <img [src]="product.image_url" alt="{{ product.name }}">
+              <div class="cart-item-details">
+                <h3>{{ product.name }}</h3>
+                <p>{{ product.description }}</p>
+                <p>{{ product.price }}</p>
+                <button mat-button (click)="removeFromCart(product)" style="background-color:#c9a173;">Retirer</button>
+              </div>
+            </div>
+            <p class="total-price">Total: {{ getTotalPrice() }}</p>
+            <button mat-raised-button style="background-color: #c9a173;" (click)="stepper.next()">Suivant</button>
+          </div>
+        </mat-step>
+
+        <!-- Étape 2: Informations Client -->
+        <mat-step [stepControl]="clientForm">
+          <ng-template matStepLabel>Informations</ng-template>
+          <form [formGroup]="clientForm">
+            <mat-form-field appearance="outline">
+              <mat-label>Nom complet</mat-label>
+              <input matInput formControlName="name">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Numéro de téléphone</mat-label>
+              <input matInput formControlName="phone">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Adresse de livraison</mat-label>
+              <input matInput formControlName="address" style="border-color: #c9a173;">
+            </mat-form-field>
+
+            <button mat-raised-button style="background-color: #c9a173;" (click)="stepper.next()" [disabled]="clientForm.invalid">
+              Suivant
+            </button>
+          </form>
+        </mat-step>
+
+        <!-- Étape 3: Mode de Paiement -->
+        <mat-step [stepControl]="paymentForm">
+          <ng-template matStepLabel>Paiement</ng-template>
+
+          <mat-radio-group [(ngModel)]="selectedPaymentMethod">
+            <mat-radio-button value="mobile">Paiement Mobile</mat-radio-button>
+            <mat-radio-button value="delivery">Paiement à la livraison</mat-radio-button>
+          </mat-radio-group>
+
+          <div *ngIf="selectedPaymentMethod === 'mobile'">
+            <mat-form-field appearance="outline">
+              <mat-label>Numéro de téléphone</mat-label>
+              <input matInput placeholder="77 123 45 67">
+            </mat-form-field>
+          </div>
+
+          <button mat-raised-button style="background-color: #c9a173;" (click)="stepper.next()">Suivant</button>
+        </mat-step>
+
+        <!-- Étape 4: Confirmation -->
+        <mat-step>
+          <ng-template matStepLabel>Confirmation</ng-template>
+          <p><strong>Nom :</strong> {{ clientForm.value.name }}</p>
+          <p><strong>Téléphone :</strong> {{ clientForm.value.phone }}</p>
+          <p><strong>Adresse :</strong> {{ clientForm.value.address }}</p>
+          <p><strong>Total :</strong> {{ getTotalPrice() }}</p>
+          <p><strong>Mode de paiement :</strong> {{ selectedPaymentMethod }}</p>
+          <button mat-raised-button style="background-color: #c9a173;" (click)="confirmOrder()">Confirmer la commande</button>
+        </mat-step>
+      </mat-horizontal-stepper>
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>

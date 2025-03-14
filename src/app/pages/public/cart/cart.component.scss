@@ -1,96 +1,105 @@
-/* filepath: /Users/xsorcier/Desktop/GestionRH/src/app/pages/public/cart/cart.component.scss */
+/* ✅ STYLE GLOBAL */
 .cart-container {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: 100%;
 }
 
 .main-toolbar {
+  background-color: #c9a173; /* Couleur du navbar */
+  color: white;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  padding: 0 20px;
+}
+
+.app-title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  flex: 1;
 }
 
 .spacer {
-  flex: 1 1 auto;
+  flex: 1;
+}
+
+.mat-toolbar .cart-badge {
+  position: absolute;
+  top: 0;
+  right: 10px;
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  padding: 5px 8px;
+  font-size: 12px;
 }
 
 .cart-content {
+  padding: 20px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* ✅ DESIGN DES ÉTAPES (STEP) */
+.mat-horizontal-stepper {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.mat-step-label {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #c9a173; /* Couleur des titres des étapes */
+}
+
+.mat-step-header {
+  background-color: #f0f0f0;
+  border: 1px solid #c9a173;
+}
+
+.mat-step-header-active {
+  background-color: #c9a173;
+  color: white;
+}
+
+.mat-step-header-completed {
+  background-color: #c9a173;
+  color: white;
+}
+
+/* ✅ DESIGN DES ARTICLES DU PANIER */
+.cart-item {
   display: flex;
   justify-content: space-between;
-  padding: 20px;
-}
-
-.cart-items, .cart-summary {
-  width: 48%;
-}
-
-.cart-items {
-  width: 50%;
-  overflow-y: auto;
-  padding-left: 10px;
-  padding-right: 20px;
-  border-radius: 3px;
-  border: 1px solid #a67c52;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
 }
 
 .cart-item img {
-  width: 370px;
-  height: 270px;
-  object-fit: cover;
-  margin-right: 20px;
+  max-width: 80px;
+  height: auto;
 }
 
 .cart-item-details {
   flex: 1;
+  margin-left: 10px;
 }
 
 .cart-item-details h3 {
   margin: 0;
+  font-size: 1.1rem;
 }
 
 .cart-item-details p {
   margin: 5px 0;
+  color: #777;
 }
 
-.cart-summary {
-  width: 45%;
-  padding: 20px;
-  border: 1px solid #a67c52;
-  border-radius: 8px;
-  height: calc(55vh - 64px - 40px); /* Ajustez la hauteur en fonction de la hauteur de la barre de navigation et du padding */
-  overflow-y: auto;
+.cart-item button {
+  margin-top: 10px;
 }
-
-.cart-summary h2 {
-  margin-top: 0;
-}
-
-.payment-form {
-  margin-top: 20px;
-}
-
-.cart-badge {
-  background-color: #ffffff;
-  color: red;
-  border-radius: 50%;
-  padding: 2px 8px;
-  font-size: 12px;
-  position: absolute;
-  top: 10px;
-  right: 10px;
-}
-
-.light-blue-toolbar {
-  background-color: #a67c52 !important; /* Bleu clair */
-  color: white !important;
-}
-
-.black-toolbar {
-  background-color: black !important;
-  color: white !important;
-}
-
 
 .empty-cart {
   text-align: center;
@@ -98,7 +107,68 @@
 }
 
 .empty-cart img {
-  width: 200px;
-  height: auto;
+  max-width: 150px;
+  margin-bottom: 10px;
+}
+
+.total-price {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+/* ✅ FORMULAIRE CLIENT & PAIEMENT */
+mat-form-field {
+  width: 100%;
   margin-bottom: 20px;
+}
+
+mat-radio-group {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
+mat-radio-button {
+  margin: 10px 0;
+}
+
+/* ✅ RESPONSIVITÉ */
+@media (max-width: 768px) {
+  .mat-toolbar {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px;
+  }
+
+  .app-title {
+    font-size: 1.5rem;
+    text-align: center;
+  }
+
+  .cart-content {
+    padding: 10px;
+  }
+
+  .cart-item {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 15px;
+  }
+
+  .cart-item img {
+    max-width: 100px;
+  }
+
+  .cart-item-details h3 {
+    font-size: 1rem;
+  }
+
+  .cart-item-details p {
+    font-size: 0.9rem;
+  }
+
+  .total-price {
+    font-size: 1rem;
+  }
 }

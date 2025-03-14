@@ -58,7 +58,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
         console.log(response);
     }, (error)=> {
       console.log(error);
-
     })
 
     this.homeService.getAllProduct().subscribe((respone) => {

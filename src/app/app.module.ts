@@ -50,6 +50,7 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatStepperModule } from '@angular/material/stepper';
 
 import { LOCALE_ID } from '@angular/core';
 import { registerLocaleData } from '@angular/common';
@@ -156,6 +157,7 @@ registerLocaleData(localeFr, 'fr');
     BrowserAnimationsModule,
     MatSidenavModule,
     MatToolbarModule,
+    MatStepperModule,
     MatListModule,
     MatIconModule,
     ReactiveFormsModule,

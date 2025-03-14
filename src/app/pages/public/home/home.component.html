@@ -15,14 +15,14 @@
     <!-- Sous-barre de navigation -->
     <mat-toolbar class="sub-toolbar black-toolbar">
       <mat-form-field class="category-select" style="margin-top: 20px;">
-        <mat-select placeholder="Show All Categories" (selectionChange)="onCategorySelected($event)">
+        <mat-select placeholder="Afficher les catégories disponible" (selectionChange)="onCategorySelected($event)">
           <mat-option *ngFor="let category of categories" [value]="category.id">
             {{ category.name }}
           </mat-option>
         </mat-select>
       </mat-form-field>
       <div class="d-flex justify-content-center align-items-center mx-auto">
-        <a mat-button routerLink="/home">Accueil</a>
+        <a mat-button routerLink="">Accueil</a>
         <a mat-button routerLink="/products">Products</a>
         <a mat-button routerLink="/products">Reservations</a>
         <a mat-button routerLink="/products">Abonnnements</a>
@@ -61,11 +61,16 @@
                 </mat-card-header>
                 <img mat-card-image [src]="product.image_url" alt="{{ product.title }}" class="img-fluid">
                 <mat-card-content>
-                  <p>{{ product.price }}</p>
+                  <p>{{ product.price }} Fcfa</p>
                 </mat-card-content>
                 <mat-card-actions>
-                  <button mat-button color="primary" (click)="addToCart(product)">Buy</button>
-                  <button mat-button color="accent" (click)="addToCart(product)">Add to Cart</button>
+                  <button mat-button color="primary" (click)="addToCart(product)">
+                    <mat-icon>shopping_cart</mat-icon>
+                  </button>
+
+                  <button mat-button color="accent" (click)="addToCart(product)">
+                    <mat-icon>add_shopping_cart</mat-icon>
+                  </button>
                 </mat-card-actions>
               </mat-card>
             </div>
@@ -75,13 +80,14 @@
     </div>
 
     <!-- Pied de page -->
+    <!-- Pied de page -->
     <div class="footer">
       <span>&copy; {{ currentYear }} {{ compagny.name }}</span>
-      <span class="social-links">
+      <div class="social-links">
         <a href="https://facebook.com"><mat-icon>facebook</mat-icon></a>
         <a href="https://twitter.com"><mat-icon>twitter</mat-icon></a>
         <a href="https://instagram.com"><mat-icon>instagram</mat-icon></a>
-      </span>
+      </div>
     </div>
 
     <div class="fab-cart-container">
