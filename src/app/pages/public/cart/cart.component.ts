@@ -10,7 +10,6 @@ export class CartComponent implements OnInit {
   cart: any[] = [];
   compagny = { name: 'Votre Compagnie' };
   cartItemCount = 0;
-  selectedPaymentMethod: string = '';
   clientForm!: FormGroup;
   paymentForm!: FormGroup;
   cartForm!: FormGroup;
@@ -20,6 +19,7 @@ export class CartComponent implements OnInit {
   ngOnInit(): void {
     this.loadCart();
     this.updateCartItemCount();
+
     this.clientForm = this.fb.group({
       name: ['', Validators.required],
       phone: ['', [Validators.required, Validators.pattern('[0-9]{9}')]],
@@ -27,16 +27,19 @@ export class CartComponent implements OnInit {
     });
 
     this.paymentForm = this.fb.group({
-      paymentMethod: ['', Validators.required]
+      paymentMethod: ['', Validators.required],
+      mobilePhone: ['']
     });
 
-    this.cartForm = this.fb.group({
-      fullName: ['', Validators.required],
-      phone: ['', [Validators.required, Validators.pattern('[0-9]{9}')]],
-      address: ['', Validators.required],
-      paymentMethod: ['card', Validators.required]
+    // Validation conditionnelle pour le téléphone mobile
+    this.paymentForm.get('paymentMethod')?.valueChanges.subscribe(value => {
+      if (value === 'mobile') {
+        this.paymentForm.get('mobilePhone')?.setValidators([Validators.required, Validators.pattern('[0-9]{9}')]);
+      } else {
+        this.paymentForm.get('mobilePhone')?.clearValidators();
+      }
+      this.paymentForm.get('mobilePhone')?.updateValueAndValidity();
     });
-
   }
 
   loadCart(): void {
@@ -59,7 +62,21 @@ export class CartComponent implements OnInit {
   }
 
   confirmOrder(): void {
+    if (this.clientForm.invalid || this.paymentForm.invalid) {
+      alert('Veuillez remplir tous les champs obligatoires.');
+      return;
+    }
+
+    const order = {
+      client: this.clientForm.value,
+      payment: this.paymentForm.value,
+      products: this.cart,
+      total: this.getTotalPrice()
+    };
+
+    console.log('Commande passée :', order);
     alert('Commande confirmée ! Merci pour votre achat.');
+
     this.cart = [];
     localStorage.removeItem('cart');
     this.updateCartItemCount();
