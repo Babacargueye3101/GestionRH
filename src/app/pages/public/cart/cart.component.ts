@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ViewChild, ElementRef, Renderer2 } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
@@ -14,7 +15,7 @@ export class CartComponent implements OnInit {
   paymentForm!: FormGroup;
   cartForm!: FormGroup;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private snackBar: MatSnackBar) {}
 
   ngOnInit(): void {
     this.loadCart();
@@ -75,7 +76,10 @@ export class CartComponent implements OnInit {
     };
 
     console.log('Commande passée :', order);
-    alert('Commande confirmée ! Merci pour votre achat.');
+    this.snackBar.open('Commande confirmée avec succès ! 🎉', 'Fermer', {
+      duration: 5000,
+      panelClass: 'snackbar-success',
+    });
 
     this.cart = [];
     localStorage.removeItem('cart');
