@@ -1,0 +1,41 @@
+<mat-sidenav-container class="home-container">
+    <mat-sidenav-content>
+      <!-- Barre de navigation -->
+      <mat-toolbar class="main-toolbar light-blue-toolbar">
+        <span class="app-title">{{ compagny.name }}</span>
+        <span class="spacer"></span>
+        <mat-form-field class="search-bar" style="margin-top: 10px;">
+          <input matInput placeholder="Rechercher des produits">
+          <button mat-icon-button matSuffix>
+            <mat-icon>search</mat-icon>
+          </button>
+        </mat-form-field>
+      </mat-toolbar>
+
+      <!-- Sous-barre de navigation -->
+      <mat-toolbar class="sub-toolbar black-toolbar">
+        <div class="d-flex justify-content-center align-items-center mx-auto">
+          <a mat-button routerLink="">Products</a>
+          <a mat-button routerLink="/public/reservations">Reservations</a>
+          <a mat-button routerLink="/products">Abonnnements</a>
+        </div>
+
+      </mat-toolbar>
+
+
+
+      <!-- Pied de page -->
+      <!-- Pied de page -->
+      <div class="footer">
+        <span>&copy; {{ currentYear }} {{ compagny.name }}</span>
+        <div class="social-links">
+          <a href="https://facebook.com"><mat-icon>facebook</mat-icon></a>
+          <a href="https://twitter.com"><mat-icon>twitter</mat-icon></a>
+          <a href="https://instagram.com"><mat-icon>instagram</mat-icon></a>
+        </div>
+      </div>
+
+
+    </mat-sidenav-content>
+
+  </mat-sidenav-container>
