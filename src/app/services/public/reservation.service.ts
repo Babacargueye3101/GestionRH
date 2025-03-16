@@ -25,10 +25,6 @@ export class ReservationService {
   }
 
   createReservation(reservationData: any) {
-    this.http.post(`${this.apiUrl}/reservations`, reservationData).subscribe((response) => {
-      console.log('Réservation créée:', response);
-    }, (error) => {
-      console.log(error);
-    });
+    return this.http.post<any>(`${this.apiUrl}/reservations`, reservationData)
   }
 }

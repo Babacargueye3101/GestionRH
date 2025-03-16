@@ -1,1 +1,37 @@
-<p>show-availibility works!</p>
+<h2>Réserver une disponibilité</h2>
+<form [formGroup]="reservationForm" (ngSubmit)="onSubmit()">
+
+  <div formGroupName="client">
+    <mat-form-field appearance="outline">
+      <mat-label>Nom</mat-label>
+      <input matInput formControlName="name" required>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Prénom</mat-label>
+      <input matInput formControlName="surname" required>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email" type="email" required>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Numéro de téléphone</mat-label>
+      <input matInput formControlName="phone" required>
+    </mat-form-field>
+  </div>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Heure</mat-label>
+    <mat-select formControlName="time" required>
+      <mat-option *ngIf="availability?.time_slots?.length === 0" disabled>Aucune disponibilité</mat-option>
+      <mat-option *ngFor="let slot of availability?.time_slots" [value]="slot">
+        {{ slot }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" type="submit">Réserver</button>
+</form>

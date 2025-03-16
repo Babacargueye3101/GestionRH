@@ -10,6 +10,9 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { ShowAvailibilityComponent } from './show-availibility/show-availibility.component';
+import { MatSelectModule } from '@angular/material/select';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -23,7 +26,10 @@ import { ShowAvailibilityComponent } from './show-availibility/show-availibility
     MatToolbarModule,
     MatSidenavModule,
     MatFormFieldModule,
-    MatIconModule
+    MatIconModule,
+    MatSelectModule,
+    ReactiveFormsModule,
+    MatInputModule
   ]
 })
 export class ReservationPublicModule { }
