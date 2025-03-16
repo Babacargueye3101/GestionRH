@@ -99,9 +99,52 @@
     margin-top: 20px;
     overflow: hidden;
   }
+  .swiper-container {
+    width: 100%;
+    height: 400px;
+    margin-top: -100px;
+  }
+
+  .swiper-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .slider-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 
 
+  /* Changer la couleur et la taille des flèches */
+  .swiper-button-prev, .swiper-button-next {
+    color: #ff6600 !important; /* Change la couleur */
+    font-size: 24px !important; /* Ajuste la taille */
+  }
 
+  /* Personnaliser le bouton précédent */
+  .swiper-button-prev {
+    background-color: rgba(0, 0, 0, 0.5); /* Ajoute un fond semi-transparent */
+    border-radius: 50%; /* Rend le bouton rond */
+    width: 50px; /* Largeur */
+    height: 50px; /* Hauteur */
+  }
+
+  /* Personnaliser le bouton suivant */
+  .swiper-button-next {
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+  }
+
+  /* Changer l'icône des flèches */
+  .swiper-button-prev::after, .swiper-button-next::after {
+    font-size: 20px !important; /* Modifier la taille de l'icône */
+    color: white !important; /* Couleur blanche */
+  }
 
   .salon-banner img {
     width: 100%;
@@ -140,7 +183,22 @@
     margin-bottom: 40px;
   }
 
+  .product-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
 
+  .product-item {
+    flex: 1 1 calc(25% - 20px);
+    text-align: center;
+  }
+
+  .product-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
 
   .footer {
     display: flex;
@@ -190,7 +248,16 @@
     }
   }
 
-
+  .cart-badge {
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    padding: 2px 8px;
+    font-size: 12px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
 
   .light-blue-toolbar {
     background-color: #a67c52 !important; /* Bleu clair */
@@ -229,9 +296,23 @@
     color: black !important;
   }
 
+  /* Optionnel : Ajuster la couleur du panier uniquement */
+  .shopping-cart-icon {
+    color: black !important;
+  }
 
+  /* RESPONSIVE DESIGN */
 
+  /* Écrans moyens (tablettes) */
+  @media (max-width: 1024px) {
+    .search-bar {
+      width: 60%;
+    }
 
+    .product-item {
+      flex: 1 1 calc(50% - 20px); /* Affiche 2 produits par ligne */
+    }
+  }
 
   /* Petits écrans (mobiles) */
   @media (max-width: 768px) {
@@ -258,7 +339,14 @@
       margin-top: 10px;
     }
 
+    .salon-banner {
+      height: 250px; /* Réduit la hauteur de la bannière */
+    }
 
+    .swiper-container {
+      height: 250px;
+      margin-top: 30px;
+    }
 
     .product-list {
       flex-direction: column;
@@ -271,102 +359,5 @@
 
     .footer {
       font-size: 14px;
-    }
-  }
-
-
-/* filepath: /Users/babacargueye/Mes Dcouments/GESTION RH /GestionRH/src/app/pages/public/reservation-public/reservation-public.component.scss */
-.shop-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    padding: 20px;
-  }
-
-  .shop-card {
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin: 10px;
-    width: 300px;
-    cursor: pointer;
-    transition: transform 0.3s ease;
-
-    &:hover {
-      transform: translateY(-5px);
-    }
-
-    .shop-card-image {
-      overflow: hidden;
-      border-top-left-radius: 8px;
-      border-top-right-radius: 8px;
-
-      img {
-        width: 100%;
-        height: auto;
-        display: block;
-        border-bottom-left-radius: 8px;
-        border-bottom-right-radius: 8px;
-      }
-    }
-
-    .shop-card-content {
-      padding: 15px;
-      text-align: center;
-
-      h3 {
-        margin: 0 0 10px;
-        font-size: 1.5em;
-        color: #333;
-      }
-
-      p {
-        color: #666;
-        font-size: 1em;
-      }
-    }
-  }
-
-  .search-bar {
-    width: 300px;
-    margin-top: 10px;
-
-    mat-form-field {
-      width: 100%;
-
-      input {
-        padding: 10px;
-      }
-
-      button {
-        margin-right: 10px;
-      }
-
-      mat-icon {
-        color: #757575;
-      }
-    }
-  }
-
-  .footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-    background-color: #f1f1f1;
-    border-top: 1px solid #e0e0e0;
-
-    .social-links {
-      display: flex;
-      gap: 10px;
-
-      a {
-        color: #757575;
-        text-decoration: none;
-
-        mat-icon {
-          font-size: 24px;
-        }
-      }
     }
   }

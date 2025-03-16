@@ -1,0 +1,39 @@
+<mat-sidenav-container class="home-container">
+  <mat-sidenav-content>
+    <!-- Barre de navigation -->
+    <mat-toolbar class="main-toolbar light-blue-toolbar">
+      <span class="app-title">Ma Boutique</span>
+      <span class="spacer"></span>
+    </mat-toolbar>
+
+    <div *ngIf="salons.length > 0">
+      <h3>Salons disponibles :</h3>
+      <div class="row">
+        <div *ngFor="let salon of salons" class="col-md-3 mb-4">
+          <div class="card h-100" style="cursor: pointer;" (click)="showAvailibility(salon)">
+            <div class="card-body">
+              <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" style="width: 100%; height: auto; display:block;">
+              <h4 class="card-title">{{ salon.name }}</h4>
+              <p class="card-text">{{ salon.address }}</p>
+              <p class="card-text">{{ salon.phone }}</p>
+              <p class="card-text">{{ salon.description }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="salons.length === 0">
+      <p>Aucun salon disponible.</p>
+    </div>
+
+    <!-- Pied de page -->
+    <div class="footer">
+      <span>&copy; {{ currentYear }} {{ compagny.name }}</span>
+      <div class="social-links">
+        <a href="https://facebook.com"><mat-icon>facebook</mat-icon></a>
+        <a href="https://twitter.com"><mat-icon>twitter</mat-icon></a>
+        <a href="https://instagram.com"><mat-icon>instagram</mat-icon></a>
+      </div>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

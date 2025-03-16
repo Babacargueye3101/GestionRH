@@ -1,0 +1,34 @@
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class ReservationService {
+
+  private apiUrl = environment.apiUrl;
+
+  constructor(private http: HttpClient) { }
+
+
+  getAllShops(){
+    return this.http.get<any>(this.apiUrl+'/public/all_shops');
+  }
+
+  getAllSalonByShop(id: number){
+    return this.http.get<any>(`${this.apiUrl}/public/shops/${id}/salons`);
+  }
+
+  getAvailabilities(shopId: number, salonId: number) {
+    return this.http.get<any>(`${this.apiUrl}/shops/${shopId}/salons/${salonId}/availabilities`);
+  }
+
+  createReservation(reservationData: any) {
+    this.http.post(`${this.apiUrl}/reservations`, reservationData).subscribe((response) => {
+      console.log('Réservation créée:', response);
+    }, (error) => {
+      console.log(error);
+    });
+  }
+}
