@@ -15,6 +15,8 @@ export class CartComponent implements OnInit {
   paymentForm!: FormGroup;
   cartForm!: FormGroup;
 
+  currentYear: number = new Date().getFullYear();
+
   constructor(private fb: FormBuilder, private snackBar: MatSnackBar) {}
 
   ngOnInit(): void {

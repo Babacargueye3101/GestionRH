@@ -7,10 +7,6 @@
       <button mat-icon-button routerLink="/">
         <mat-icon>home</mat-icon>
       </button>
-      <button mat-icon-button routerLink="/cart">
-        <mat-icon>shopping_cart</mat-icon>
-        <span class="cart-badge" *ngIf="cartItemCount > 0">{{ cartItemCount }}</span>
-      </button>
     </mat-toolbar>
 
     <div class="cart-content">
@@ -98,6 +94,15 @@
           <button mat-raised-button style="background-color: #c9a173;" (click)="confirmOrder()">Confirmer la commande</button>
         </mat-step>
       </mat-horizontal-stepper>
+    </div>
+    <!-- Pied de page -->
+    <div class="footer">
+      <span>&copy; {{ currentYear }} {{ compagny.name }}</span>
+      <div class="social-links">
+        <a href="https://facebook.com"><mat-icon>facebook</mat-icon></a>
+        <a href="https://twitter.com"><mat-icon>twitter</mat-icon></a>
+        <a href="https://instagram.com"><mat-icon>instagram</mat-icon></a>
+      </div>
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>

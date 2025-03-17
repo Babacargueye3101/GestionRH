@@ -38,11 +38,11 @@ form {
       border-radius: 8px;
       cursor: pointer;
       transition: 0.3s ease-in-out;
-      background: linear-gradient(45deg, #ff6b6b, #ff8e53);
+      background: linear-gradient(45deg, #a67c52, #a67c52);
       color: white;
 
       &:hover {
-        background: linear-gradient(45deg, #ff8e53, #ff6b6b);
+        background: linear-gradient(45deg, #a67c52, #a67c52);
         transform: scale(1.02);
       }
     }
