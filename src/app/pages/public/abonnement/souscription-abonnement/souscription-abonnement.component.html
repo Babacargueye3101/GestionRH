@@ -1,0 +1,27 @@
+<h2 class="text-center">Informations du client</h2>
+<form [formGroup]="clientForm" (ngSubmit)="onSubmit()" class="client-form">
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Nom</mat-label>
+    <input matInput formControlName="name" required>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Prénom</mat-label>
+    <input matInput formControlName="surname" required>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Email</mat-label>
+    <input matInput formControlName="email" type="email" required>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Numéro de téléphone</mat-label>
+    <input matInput formControlName="phone" required>
+  </mat-form-field>
+
+  <div class="button-group">
+    <button mat-raised-button style="background-color: #a67c52; margin-right: 20px; color:white;" type="submit" class="submit-button">Soumettre</button>
+    <button mat-raised-button style="background-color: red; color: white;" type="button" (click)="onCancel()">Annuler</button>
+  </div>
+</form>
