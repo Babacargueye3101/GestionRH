@@ -14,11 +14,21 @@ import { response } from 'express';
 export class ListPersonnelComponent {
 
   @Input() personnels: any[] = [];
-
+  filteredPersonnels: any[] = [];
   displayedColumns: string[] = ['nom', 'prenom', 'email', 'phone', 'actions'];
 
   constructor(public dialog: MatDialog, private personnelService: PersonnelService) {}
 
+  ngOnInit(): void {
+    this.loadPersonnels();
+  }
+
+  loadPersonnels(): void {
+    this.personnelService.getPersonnels().subscribe(data => {
+      this.personnels = data;
+      this.filteredPersonnels = data; // Initialisation des données filtrées
+    });
+  }
   // Ouvrir le dialogue de détail du personnel
   openDetailDialog(personnel: any) {
     this.dialog.open(DetailPersonnelComponent, {
@@ -78,5 +88,16 @@ export class ListPersonnelComponent {
 
       }
     });
+  }
+
+  applyFilter(event: Event): void {
+    const filterValue = (event.target as HTMLInputElement).value.trim().toLowerCase();
+
+    this.filteredPersonnels = this.personnels.filter(personnel => 
+      personnel.last_name.toLowerCase().includes(filterValue) ||
+      personnel.first_name.toLowerCase().includes(filterValue) ||
+      personnel.email.toLowerCase().includes(filterValue) ||
+      personnel.phone.toLowerCase().includes(filterValue)
+    );
   }
 }

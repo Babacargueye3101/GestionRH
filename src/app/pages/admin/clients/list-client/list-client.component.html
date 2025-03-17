@@ -1,5 +1,11 @@
 <div class="client-list">
-    <table mat-table [dataSource]="clients" class="mat-elevation-z8">
+    <!-- Barre de recherche -->
+    <mat-form-field appearance="outline" class="search-bar">
+      <mat-label>Rechercher un client</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Nom, prénom, email ou téléphone">
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+    <table mat-table [dataSource]="filteredClients" class="mat-elevation-z8">
       <!-- Nom Column -->
       <ng-container matColumnDef="nom">
         <th mat-header-cell *matHeaderCellDef> Nom </th>

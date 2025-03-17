@@ -14,7 +14,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./list-ventes.component.scss']
 })
 export class ListVentesComponent {
-
+  filteredVentes: any[] = [];
   ventes: any[] = [];
   shops: any[] = [];
   salons: any[] = [];
@@ -75,6 +75,7 @@ export class ListVentesComponent {
     if (this.selectedShopId) {
       this.ventesService.getVentes(this.selectedShopId).subscribe(data => {
         this.ventes = data;
+        this.filteredVentes = data;
       });
     }
   }
@@ -112,5 +113,19 @@ export class ListVentesComponent {
         data: { ...response, venteId, shopId }
       });
     });
+  }
+
+  // Appliquer le filtre de recherche
+  applyFilter(event: Event): void {
+    const filterValue = (event.target as HTMLInputElement).value.trim().toLowerCase();
+
+    this.filteredVentes = this.ventes.filter(vente => 
+      vente.buyer_name.toLowerCase().includes(filterValue) ||
+      vente.buyer_surname.toLowerCase().includes(filterValue) ||
+      vente.total_price.toString().includes(filterValue) ||
+      vente.channel.toLowerCase().includes(filterValue) ||
+      vente.payment_method.toLowerCase().includes(filterValue) ||
+      (vente.delivered ? 'délivré' : 'en attente').toLowerCase().includes(filterValue)
+    );
   }
 }

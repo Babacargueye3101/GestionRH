@@ -1,6 +1,8 @@
 <div class="container">
     <h2>Liste des Boutiques</h2>
-    <table mat-table [dataSource]="shops" class="mat-elevation-z8">
+     <!-- Barre de recherche -->
+    <input matInput placeholder="Rechercher..." [(ngModel)]="searchText" (input)="filterShops()" class="search-bar"/>
+    <table mat-table [dataSource]="filteredShops" class="mat-elevation-z8">
 
       <!-- Nom -->
       <ng-container matColumnDef="name">

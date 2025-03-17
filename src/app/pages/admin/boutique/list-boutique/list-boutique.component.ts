@@ -11,6 +11,8 @@ import Swal from 'sweetalert2';
 })
 export class ListBoutiqueComponent implements OnInit{
   shops: Shop[] = [];
+  searchText: string = '';
+  filteredShops: Shop[] = [];
 
   constructor(private shopService: ShopService, private router: Router) {}
 
@@ -21,6 +23,7 @@ export class ListBoutiqueComponent implements OnInit{
   loadShops() {
     this.shopService.getShops().subscribe(shops => {
       this.shops = shops;
+      this.filteredShops = shops; // Initialisation
     });
   }
 
@@ -96,6 +99,14 @@ export class ListBoutiqueComponent implements OnInit{
         });
       }
     });
+  }
+
+  filterShops() {
+    const search = this.searchText.toLowerCase().trim();
+    this.filteredShops = this.shops.filter(shop =>
+      shop.name.toLowerCase().includes(search) || 
+      shop.location.toLowerCase().includes(search)
+    );
   }
 
 }

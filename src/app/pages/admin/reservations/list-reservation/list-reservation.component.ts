@@ -16,7 +16,7 @@ export class ListReservationComponent {
   @Input() reservations: any[] = [];
   shops: any[] = []; // Liste des boutiques
   salons: any[] = []; // Liste des salons
-
+  filteredReservations: any[] = [];
   selectedShopId: number | null = null;
   selectedSalonId: number | null = null;
   selectedReservation: any; // Propriété pour stocker la réservation sélectionnée
@@ -65,12 +65,26 @@ export class ListReservationComponent {
       this.reservationService.getReservations(this.selectedShopId, this.selectedSalonId).subscribe(
         (data) => {
           this.reservations = data;
+          this.filteredReservations = data; // Initialisation des données filtrées
         },
         (error) => {
           console.error('Erreur lors du chargement des réservations:', error);
         }
       );
     }
+  }
+
+  applyFilter(event: Event): void {
+    const filterValue = (event.target as HTMLInputElement).value.trim().toLowerCase();
+
+    this.filteredReservations = this.reservations.filter(reservation => 
+      reservation.date.toLowerCase().includes(filterValue) ||
+      reservation.time.toLowerCase().includes(filterValue) ||
+      reservation.client.name.toLowerCase().includes(filterValue) ||
+      reservation.client.prenom.toLowerCase().includes(filterValue) ||
+      reservation.client.phone.toLowerCase().includes(filterValue) ||
+      (reservation.status === 'confirmed' ? 'confirmé' : 'en attente').toLowerCase().includes(filterValue)
+    );
   }
 
   updateReservationStatus(reservation: any, status: string): void {

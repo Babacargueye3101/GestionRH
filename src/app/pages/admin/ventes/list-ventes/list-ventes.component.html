@@ -13,9 +13,13 @@
 
 <!-- Tableau des ventes -->
 <h2 *ngIf="ventes.length > 0">Liste des ventes</h2>
-
+    <mat-form-field appearance="outline" class="search-bar">
+        <mat-label>Rechercher une vente</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Nom de l'acheteur, total, canal ou statut">
+        <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
 <div style="overflow-x: auto; width: 100%;">
-    <table mat-table [dataSource]="ventes" *ngIf="ventes.length > 0">
+    <table mat-table [dataSource]="filteredVentes" *ngIf="ventes.length > 0">
     <!-- Colonnes -->
     <ng-container matColumnDef="buyer_name">
         <th mat-header-cell *matHeaderCellDef>Prénom</th>

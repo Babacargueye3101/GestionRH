@@ -13,11 +13,16 @@ import { UpdateClientComponent } from '../update-client/update-client.component'
 export class ListClientComponent {
 
   @Input() clients: any[] = [];
+  filteredClients: any[] = [];
 
   displayedColumns: string[] = ['nom', 'prenom', 'email', 'phone', 'actions'];
 
   constructor(public dialog: MatDialog, private clientService: ClientService) {}
 
+
+  ngOnInit(): void {
+    this.loadClients();
+  }
   // Ouvrir le dialogue de détail du client
   openDetailDialog(client: any) {
     this.dialog.open(DetailClientComponent, {
@@ -83,11 +88,23 @@ export class ListClientComponent {
     this.clientService.getClients().subscribe({
       next: (data) => {
         console.log('Clients:', data);
+        this.filteredClients = data; // Initialisation des données filtrées
         this.clients = data;
       },
       error: (err) => {
         console.error('Erreur lors du chargement des clients:', err);
       }
     });
+  }
+
+  applyFilter(event: Event): void {
+    const filterValue = (event.target as HTMLInputElement).value.trim().toLowerCase();
+
+    this.filteredClients = this.clients.filter(client => 
+      client.name.toLowerCase().includes(filterValue) ||
+      client.surname.toLowerCase().includes(filterValue) ||
+      client.email.toLowerCase().includes(filterValue) ||
+      client.phone.toLowerCase().includes(filterValue)
+    );
   }
 }

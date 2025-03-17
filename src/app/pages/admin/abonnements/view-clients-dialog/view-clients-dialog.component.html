@@ -1,6 +1,13 @@
 <h2 mat-dialog-title>Clients abonnés</h2>
 <mat-dialog-content>
-  <table mat-table [dataSource]="clients" class="mat-elevation-z8">
+  <!-- Barre de recherche -->
+  <mat-form-field appearance="outline" class="search-bar">
+    <mat-label>Rechercher un client</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Nom, email, type d'abonnement ou numéro de carte">
+    <mat-icon matSuffix>search</mat-icon>
+  </mat-form-field>
+  
+  <table mat-table [dataSource]="filteredClients" class="mat-elevation-z8">
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef>Nom</th>
       <td mat-cell *matCellDef="let client">{{ client.name }}</td>

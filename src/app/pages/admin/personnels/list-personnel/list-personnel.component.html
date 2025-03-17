@@ -1,7 +1,14 @@
 <div class="container">
   <h2>Liste des Personnels</h2>
 
-  <table mat-table [dataSource]="personnels" class="mat-elevation-z8">
+  <!-- Barre de recherche -->
+  <mat-form-field appearance="outline" class="search-bar">
+    <mat-label>Rechercher un personnel</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Nom, prénom, email ou téléphone">
+    <mat-icon matSuffix>search</mat-icon>
+  </mat-form-field>
+
+  <table mat-table [dataSource]="filteredPersonnels" class="mat-elevation-z8">
     <!-- Nom -->
     <ng-container matColumnDef="nom">
       <th mat-header-cell *matHeaderCellDef> Nom </th>

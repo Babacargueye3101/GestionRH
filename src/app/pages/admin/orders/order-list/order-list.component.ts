@@ -9,6 +9,7 @@ import Swal from 'sweetalert2';
 })
 export class OrderListComponent implements OnInit {
   orders: any[] = [];
+  filteredOrders: any[] = [];
 
   constructor(private orderService: OrderService) {}
 
@@ -19,7 +20,18 @@ export class OrderListComponent implements OnInit {
   loadOrders(): void {
     this.orderService.getOrders().subscribe(data => {
       this.orders = data;
+      this.filteredOrders = data; // Initialisation des données filtrées
     });
+  }
+
+  applyFilter(event: Event): void {
+    const filterValue = (event.target as HTMLInputElement).value.trim().toLowerCase();
+
+    this.filteredOrders = this.orders.filter(order => 
+      order.client_name.toLowerCase().includes(filterValue) ||
+      order.total.toString().includes(filterValue) ||
+      (order.status === 'delivered' ? 'délivré' : 'en attente').toLowerCase().includes(filterValue)
+    );
   }
 
   deleteOrder(id: number): void {
