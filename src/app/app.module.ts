@@ -98,6 +98,7 @@ import { ReservationPublicComponent } from './pages/public/reservation-public/re
 import { OrdersComponent } from './pages/admin/orders/orders.component';
 import { OrderListComponent } from './pages/admin/orders/order-list/order-list.component';
 import { OrderDetailsComponent } from './pages/admin/orders/order-details/order-details.component';
+import { AbonnementComponent } from './pages/public/abonnement/abonnement.component';
 
 
 
@@ -157,7 +158,8 @@ registerLocaleData(localeFr, 'fr');
     ReservationPublicComponent,
     OrdersComponent,
     OrderListComponent,
-    OrderDetailsComponent
+    OrderDetailsComponent,
+    AbonnementComponent
   ],
   imports: [
     BrowserModule,
