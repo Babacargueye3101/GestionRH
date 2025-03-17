@@ -1,60 +1,57 @@
 <div class="profile-container">
   <div class="profile-details">
-    <mat-card class="mat-card">
+    <mat-card class="profile-card">
       <mat-card-header>
-        <mat-card-title>Détails de l'utilisateur</mat-card-title>
+        <mat-card-title>Profil de l'utilisateur</mat-card-title>
       </mat-card-header>
       <mat-card-content>
-        <p><strong>Nom :</strong> {{ currentUser.name }}</p>
-        <p><strong>Email :</strong> {{ currentUser.email }}</p>
-        <p><strong>Téléphone :</strong> {{ currentUser.phone }}</p>
-        <p><strong>Adresse :</strong> {{ currentUser.address }}</p>
-        <p><strong>Rôle :</strong> {{ currentUser.role }}</p>
+        <div class="user-info">
+          <div class="user-text">
+            <p><strong>Nom :</strong> {{ currentUser.name }}</p>
+            <p><strong>Email :</strong> {{ currentUser.email }}</p>
+            <p><strong>Téléphone :</strong> {{ currentUser.phone }}</p>
+            <p><strong>Adresse :</strong> {{ currentUser.address }}</p>
+            <p><strong>Rôle :</strong> {{ currentUser.role }}</p>
+          </div>
+        </div>
       </mat-card-content>
     </mat-card>
   </div>
 
   <div class="profile-password">
-    <mat-card class="mat-card">
+    <mat-card class="profile-card">
       <mat-card-header>
         <mat-card-title>Changer le mot de passe</mat-card-title>
       </mat-card-header>
-      <mat-card-content>
+      <mat-card-content style="margin-top: 10px;">
         <form [formGroup]="passwordForm" (ngSubmit)="onSubmit()">
-          <mat-form-field>
+          <mat-form-field appearance="outline">
             <mat-label>Mot de passe actuel</mat-label>
             <input matInput [type]="hideCurrentPassword ? 'password' : 'text'" formControlName="currentPassword">
-            <button mat-icon-button matSuffix (click)="hideCurrentPassword = !hideCurrentPassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideCurrentPassword">
+            <button mat-icon-button matSuffix (click)="hideCurrentPassword = !hideCurrentPassword">
               <mat-icon>{{hideCurrentPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
             </button>
-            <mat-error *ngIf="passwordForm.get('currentPassword')?.invalid && passwordForm.get('currentPassword')?.touched">
-              Mot de passe actuel requis
-            </mat-error>
           </mat-form-field>
-          <br>
-          <mat-form-field>
+
+          <mat-form-field appearance="outline">
             <mat-label>Nouveau mot de passe</mat-label>
             <input matInput [type]="hideNewPassword ? 'password' : 'text'" formControlName="newPassword">
-            <button mat-icon-button matSuffix (click)="hideNewPassword = !hideNewPassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideNewPassword">
+            <button mat-icon-button matSuffix (click)="hideNewPassword = !hideNewPassword">
               <mat-icon>{{hideNewPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
             </button>
-            <mat-error *ngIf="passwordForm.get('newPassword')?.invalid && passwordForm.get('newPassword')?.touched">
-              Nouveau mot de passe requis (minimum 6 caractères)
-            </mat-error>
           </mat-form-field>
-          <br>
-          <mat-form-field>
+
+          <mat-form-field appearance="outline">
             <mat-label>Confirmer le nouveau mot de passe</mat-label>
             <input matInput [type]="hideConfirmPassword ? 'password' : 'text'" formControlName="confirmPassword">
-            <button mat-icon-button matSuffix (click)="hideConfirmPassword = !hideConfirmPassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideConfirmPassword">
+            <button mat-icon-button matSuffix (click)="hideConfirmPassword = !hideConfirmPassword">
               <mat-icon>{{hideConfirmPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
             </button>
-            <mat-error *ngIf="passwordForm.errors?.['mismatch'] && passwordForm.get('confirmPassword')?.touched">
-              Les mots de passe ne correspondent pas
-            </mat-error>
           </mat-form-field>
-          <br>
-          <button mat-raised-button color="primary" type="submit" [disabled]="passwordForm.invalid">Mettre à jour le mot de passe</button>
+
+          <button mat-raised-button color="primary" type="submit" [disabled]="passwordForm.invalid">
+            Mettre à jour le mot de passe
+          </button>
         </form>
       </mat-card-content>
     </mat-card>

@@ -3,46 +3,77 @@
   grid-template-columns: 1fr 1fr;
   gap: 20px;
   padding: 20px;
-}
-.mat-card {
-  padding: 40px; // Réduction du padding pour un meilleur rendu
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr; // Mobile : une seule colonne
+  }
 }
 
-.mat-card-header {
-  background-color: #f5f5f5;
-  border-bottom: 1px solid #ddd;
+.profile-card {
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15);
+  }
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+
+
+
+  .user-text {
+    p {
+      font-size: 1.1rem;
+      margin: 5px 0;
+      color: #333;
+    }
+  }
+}
+
+mat-card-header {
+  background: linear-gradient(135deg, #c9a173, #c9a173);
   padding: 16px;
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
+  border-radius: 12px 12px 0 0;
+  color: white;
+
+  mat-card-title {
+    font-size: 1.4rem;
+    font-weight: bold;
+  }
 }
 
-.mat-card-title {
-  font-size: 1.5em;
-  font-weight: bold;
-  color: #333;
-}
-
-.mat-card-content {
-  padding: 16px;
-}
-
-.mat-form-field {
-  width: 100%; // Assure que le champ prend toute la largeur
+mat-form-field {
+  width: 100%;
   margin-bottom: 16px;
-}
 
-.mat-form-field input {
-  font-size: 1em; // Taille normale du texte
-  padding: 12px; // Réduction du padding pour un rendu propre
+  input {
+    font-size: 1rem;
+    padding: 12px;
+  }
 }
 
 button[mat-icon-button] {
-  margin-left: -40px;
+  color: #c9a173;
 }
 
 button[mat-raised-button] {
-  margin-top: 16px;
   width: 100%;
+  margin-top: 16px;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+  transition: background 0.3s ease;
+
+  &:hover {
+    background: #c9a173;
+  }
 }
