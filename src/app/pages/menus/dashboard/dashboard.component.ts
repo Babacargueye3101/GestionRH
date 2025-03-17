@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { EChartsOption } from 'echarts';
 import { EmployeeServiceService } from 'src/app/services/employee-service.service';
 import { PaymentService } from 'src/app/services/payment.service';
+import { StatisticsService } from 'src/app/services/statistics.service';
 
 interface Statistic {
   category: string;
@@ -24,6 +25,12 @@ export class DashboardComponent implements OnInit {
 
   chartOptions: EChartsOption = {};
   chartOptionsPaiement: EChartsOption = {};
+  chartOptionsSalesByChannel: EChartsOption = {};
+  chartOptionsSalesTrends: EChartsOption = {};
+  chartOptionsTopSalesAndLoyalCustomers: EChartsOption = {};
+  chartOptionsSalesByEmployee: EChartsOption = {};
+  chartOptionsAllPersonnel: EChartsOption = {};
+
   nbreMascu = 0;
   nbreFemin = 0;
   nbreAutre = 0;
@@ -35,14 +42,29 @@ export class DashboardComponent implements OnInit {
   leaves_this_month: any;
   payments: any;
   totalPayments: any;
+  nombre_employe: any;
+  total_sales: any;
+  pending_reservations: any;
+  total_subscriptions: any;
 
   paymentStats: PaymentStat[] = [];  // Pour stocker les statistiques de paiement
 
-  constructor(private employeeService: EmployeeServiceService, private paymentService: PaymentService) { }
+  constructor(
+    private employeeService: EmployeeServiceService,
+    private paymentService: PaymentService,
+    private statisticsService: StatisticsService
+  ) { }
 
   ngOnInit(): void {
     this.getStaticBySex();
     this.getAllPayment();
+    this.getSalesByChannel();
+    this.getSalesTrends();
+    this.getTopSalesAndLoyalCustomers();
+    this.getPaymentUsageStats();
+    this.getSalesByEmployee();
+    this.getAllPersonnel();
+    this.summary_stats();
   }
 
   getStaticBySex(): void {
@@ -174,8 +196,180 @@ export class DashboardComponent implements OnInit {
     }));
   }
 
+  getSalesByChannel(): void {
+    this.statisticsService.getSalesByChannel().subscribe(data => {
+      const salesByChannel = data.sales_by_channel;
+      this.chartOptionsSalesByChannel = {
+        tooltip: {},
+        legend: {
+          data: ['Ventes par canal']
+        },
+        xAxis: {
+          type: 'category',
+          data: Object.keys(salesByChannel)
+        },
+        yAxis: {
+          type: 'value'
+        },
+        series: [
+          {
+            name: 'Ventes par canal',
+            type: 'bar',
+            data: Object.values(salesByChannel),
+            itemStyle: {
+              color: '#efc900'
+            }
+          }
+        ]
+      };
+    });
+  }
 
+  getSalesTrends(): void {
+    this.statisticsService.getSalesTrends().subscribe(data => {
+      const salesTrends = data.sales_trends;
+      this.chartOptionsSalesTrends = {
+        tooltip: {},
+        legend: {
+          data: ['Tendances des ventes']
+        },
+        xAxis: {
+          type: 'category',
+          data: Object.keys(salesTrends)
+        },
+        yAxis: {
+          type: 'value'
+        },
+        series: [
+          {
+            name: 'Tendances des ventes',
+            type: 'line',
+            data: Object.values(salesTrends),
+            itemStyle: {
+              color: '#ff5722'
+            }
+          }
+        ]
+      };
+    });
+  }
 
+  getTopSalesAndLoyalCustomers(): void {
+    this.statisticsService.getTopSalesAndLoyalCustomers().subscribe(data => {
+      const topSales = data.top_sales;
+      const loyalCustomers = data.loyal_customers;
+  
+      const loyalCustomerNames = loyalCustomers.map((item: any) => `${item.name} ${item.surname}`);
+      const loyalCustomerPurchaseCounts = loyalCustomers.map((item: any) => item.purchase_count);
+  
+      this.chartOptionsTopSalesAndLoyalCustomers = {
+        tooltip: {},
+        legend: {
+          data: ['Top ventes', 'Clients fidèles']
+        },
+        xAxis: {
+          type: 'category',
+          data: topSales.map((item: any) => item.product_name).concat(loyalCustomerNames)
+        },
+        yAxis: {
+          type: 'value'
+        },
+        series: [
+          {
+            name: 'Top ventes',
+            type: 'bar',
+            data: topSales.map((item: any) => item.quantity_sold),
+            itemStyle: {
+              color: '#4caf50'
+            }
+          },
+          {
+            name: 'Clients fidèles',
+            type: 'bar',
+            data: loyalCustomerPurchaseCounts,
+            itemStyle: {
+              color: '#ffeb3b'
+            }
+          }
+        ]
+      };
+    });
+  }
+
+  getPaymentUsageStats(): void {
+    this.statisticsService.getPaymentUsageStats().subscribe(data => {
+      const paymentUsage = data.payment_usage;
+      this.chartOptionsPaiement = {
+        tooltip: {},
+        legend: {
+          data: ['Utilisation des paiements']
+        },
+        xAxis: {
+          type: 'category',
+          data: Object.keys(paymentUsage)
+        },
+        yAxis: {
+          type: 'value'
+        },
+        series: [
+          {
+            name: 'Utilisation des paiements',
+            type: 'bar',
+            data: Object.values(paymentUsage),
+            itemStyle: {
+              color: '#efbb60c8'
+            }
+          }
+        ]
+      };
+    });
+  }
+
+  getSalesByEmployee(): void {
+    this.statisticsService.getSalesByEmployee().subscribe(data => {
+      const salesByEmployee = data.sales_by_employee;
+      const employeeNames = salesByEmployee.map((item: any) => item.user_name);
+      const salesCounts = salesByEmployee.map((item: any) => item.sales_count);
+  
+      this.chartOptionsSalesByEmployee = {
+        tooltip: {},
+        legend: {
+          data: ['Ventes par employé']
+        },
+        xAxis: {
+          type: 'category',
+          data: employeeNames
+        },
+        yAxis: {
+          type: 'value'
+        },
+        series: [
+          {
+            name: 'Ventes par employé',
+            type: 'bar',
+            data: salesCounts,
+            itemStyle: {
+              color: '#ffeb3b'
+            }
+          }
+        ]
+      };
+    });
+  }
+
+  getAllPersonnel(): void {
+    this.statisticsService.getAllPersonnel().subscribe(data => {
+      this.nombre_employe = data.count
+    })
+  }
+
+  summary_stats(): void {
+    this.statisticsService.SummaryStats().subscribe(data => {
+      this.total_sales= data.total_sales
+      this.pending_reservations= data.pending_reservations
+      this.total_subscriptions = data.total_subscriptions
+    })
+  }
 
 
 }

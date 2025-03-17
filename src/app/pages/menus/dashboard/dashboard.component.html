@@ -7,61 +7,24 @@
     <mat-card-content>
         <span>
             <span><h2>Total Employés</h2></span>
-            <span><h4>{{nbreTotal}}</h4></span>
+            <span><h4>{{nombre_employe}}</h4></span>
         </span>
-
     </mat-card-content>
 </mat-card>
-
-<div class="dashboard-container">
-    <div class="dashboard-left">
-      <mat-card>
-        <mat-card-header>
-          <mat-card-title>Statistiques par Sexe</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-          <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-            <!-- Colonne Catégorie -->
-            <ng-container matColumnDef="category">
-              <th mat-header-cell *matHeaderCellDef> Catégorie </th>
-              <td mat-cell *matCellDef="let element"> {{element.category}} </td>
-            </ng-container>
-
-            <!-- Colonne Nombre -->
-            <ng-container matColumnDef="count">
-              <th mat-header-cell *matHeaderCellDef> Nombre </th>
-              <td mat-cell *matCellDef="let element"> {{element.count}} </td>
-            </ng-container>
-
-            <ng-container matColumnDef="pourcentage">
-                <th mat-header-cell *matHeaderCellDef> % Pourcentage </th>
-                <td mat-cell *matCellDef="let element"> {{element.pourcentage.toFixed(2)}} % </td>
-            </ng-container>
-
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-          </table>
-        </mat-card-content>
-      </mat-card>
-    </div>
-    <div class="dashboard-right">
-      <div echarts [options]="chartOptions" class="demo-chart"></div>
-    </div>
-</div>
 
 <mat-card class="summary-card">
   <mat-card-content class="summary-content">
       <div class="summary-section">
-          <div class="circle">{{statisqueConges?.approuve}}</div>
-          <h3>Nbre Employés en Congé</h3>
+          <div class="circle">{{total_sales}}</div>
+          <h3>Nombre total de ventes</h3>
       </div>
       <div class="summary-section">
-          <div class="circle">{{nbreTotal-statisqueConges?.approuve}}</div>
-          <h3>Employés Disponibles</h3>
+          <div class="circle">{{pending_reservations}}</div>
+          <h3>Nombre total de réservation en attente</h3>
       </div>
       <div class="summary-section">
-          <div class="circle">{{leaves_this_month}}</div>
-          <h3>Nombre de Demandes de Congés du Mois</h3>
+          <div class="circle">{{total_subscriptions}}</div>
+          <h3>Nombre de subsription aux cartes</h3>
       </div>
   </mat-card-content>
 </mat-card>
@@ -76,3 +39,40 @@
   </mat-card-content>
 </mat-card>
 
+<!-- Ajout des nouvelles sections pour les statistiques -->
+
+<mat-card class="sales-by-channel-card">
+  <mat-card-header>
+    <mat-card-title>Ventes par Canal</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div echarts [options]="chartOptionsSalesByChannel" class="sales-by-channel-chart" style="height: 400px;"></div>
+  </mat-card-content>
+</mat-card>
+
+<mat-card class="sales-trends-card">
+  <mat-card-header>
+    <mat-card-title>Tendances des Ventes</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div echarts [options]="chartOptionsSalesTrends" class="sales-trends-chart" style="height: 400px;"></div>
+  </mat-card-content>
+</mat-card>
+
+<mat-card class="top-sales-and-loyal-customers-card">
+  <mat-card-header>
+    <mat-card-title>Top Ventes et Clients Fidèles</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div echarts [options]="chartOptionsTopSalesAndLoyalCustomers" class="top-sales-and-loyal-customers-chart" style="height: 400px;"></div>
+  </mat-card-content>
+</mat-card>
+
+<mat-card class="sales-by-employee-card">
+  <mat-card-header>
+    <mat-card-title>Ventes par Employé</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div echarts [options]="chartOptionsSalesByEmployee" class="sales-by-employee-chart" style="height: 400px;"></div>
+  </mat-card-content>
+</mat-card>

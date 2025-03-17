@@ -1,0 +1,44 @@
+/* filepath: /Users/xsorcier/Desktop/GestionRH/src/app/pages/admin/orders/order-details/order-details.component.scss */
+.order-details-container {
+  padding: 20px;
+}
+
+h2 {
+  margin-bottom: 20px;
+}
+
+p {
+  margin: 8px 0;
+}
+
+h3 {
+  margin-top: 20px;
+}
+
+table {
+  width: 100%;
+}
+
+th.mat-header-cell {
+  font-weight: bold;
+}
+
+td.mat-cell {
+  padding: 8px;
+}
+
+.status-delivered {
+  color: green;
+  font-weight: bold;
+}
+
+.status-pending {
+  color: orange;
+  font-weight: bold;
+}
+
+.mark-delivered-button {
+  background-color: green;
+  color: white;
+  margin-left: 10px;
+}

@@ -4,6 +4,8 @@ import { HomeComponent } from './pages/public/home/home.component';
 import { ShopComponent } from './pages/public/shop/shop.component';
 import { ProductDetailComponent } from './pages/public/product-detail/product-detail.component';
 import { CartComponent } from './pages/public/cart/cart.component';
+import { OrderDetailsComponent } from './pages/admin/orders/order-details/order-details.component';
+import { OrderListComponent } from './pages/admin/orders/order-list/order-list.component';
 
 const routes: Routes = [
   { path: 'dashboard', loadChildren: () => import('./pages/menus/dashboard/dashboard/dashboard.module').then(m => m.DashboardModule) },
@@ -32,7 +34,8 @@ const routes: Routes = [
   { path: 'compagnies', loadChildren: () => import('./pages/menus/compagny/compagny/compagny.module').then(m => m.CompagnyModule) },
   { path: 'annonces', loadChildren: () => import('./pages/menus/annoncement/annoncement/annoncement.module').then(m => m.AnnoncementModule) },
   { path: 'rendez-vous', loadChildren: () => import('./pages/menus/rdv/rdv/rdv.module').then(m => m.RdvModule) },
-
+  { path: 'admin/orders', component: OrderListComponent },
+  { path: 'admin/orders/:id', component: OrderDetailsComponent },
 
   // { path: '', redirectTo: '/register', pathMatch: 'full' },
   { path: '', redirectTo: '/public', pathMatch: 'full' },  // Redirection vers Home

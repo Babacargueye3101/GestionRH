@@ -33,7 +33,7 @@ mat-card {
   h4 {
     font-size: 60px; // Taille du texte
     font-weight: bold; // Gras
-    color: #3f51b5; // Couleur de texte (bleu primaire)
+    color: #efbb60c6; // Couleur de texte (bleu primaire)
   }
 }
 
@@ -51,7 +51,7 @@ mat-card {
         width: 80px;
         height: 80px;
         border-radius: 50%;
-        background-color: #3f51b5;
+        background-color: #efbb60c6;
         color: white;
         display: flex;
         align-items: center;
@@ -64,25 +64,43 @@ mat-card {
   }
 }
 
-.payment-stats-card {
+.payment-stats-card,
+.sales-by-channel-card,
+.sales-trends-card,
+.top-sales-and-loyal-customers-card,
+.sales-by-employee-card {
   margin-top: 20px;
 
   mat-card-header {
-    background-color: #3f51b5; // Couleur d'arrière-plan de l'en-tête
+    background-color: #efbb60c6;
     color: white; // Couleur du texte
   }
+}
 
-
+.payment-chart,
+.sales-by-channel-chart,
+.sales-trends-chart,
+.top-sales-and-loyal-customers-chart,
+.sales-by-employee-chart {
+  width: 100%;
+  height: 400px;
 }
 
 // Responsive design pour les petits écrans
 @media (max-width: 600px) {
-  .payment-stats-card {
+  .payment-stats-card,
+  .sales-by-channel-card,
+  .sales-trends-card,
+  .top-sales-and-loyal-customers-card,
+  .sales-by-employee-card {
     margin: 10px;
 
-    .payment-stats-container {
+    .payment-stats-container,
+    .sales-by-channel-container,
+    .sales-trends-container,
+    .top-sales-and-loyal-customers-container,
+    .sales-by-employee-container {
       flex-direction: column; // Les éléments se placeront en colonne pour les petits écrans
     }
   }
 }
-

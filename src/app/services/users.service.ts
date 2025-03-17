@@ -37,4 +37,15 @@ export class UsersService {
     const url = `${this.baseUrl}/${userId}/update_role`;
     return this.http.patch(url, { user: { [role]: value } },  {headers: this.getHeaders()});
   }
+
+    /**
+   * Met à jour le mot de passe d'un utilisateur.
+   * @param userId L'identifiant de l'utilisateur
+   * @param currentPassword Le mot de passe actuel
+   * @param newPassword Le nouveau mot de passe
+   */
+    updatePassword(userId: number, currentPassword: string, newPassword: string): Observable<any> {
+      const url = `${this.baseUrl}/${userId}/update_password`;
+      return this.http.patch(url, { current_password: currentPassword, new_password: newPassword }, { headers: this.getHeaders() });
+    }
 }

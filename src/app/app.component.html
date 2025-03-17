@@ -15,6 +15,11 @@
         <span>Gestion Boutique</span>
       </a>
 
+      <a mat-list-item routerLink="/admin/orders" >
+        <mat-icon>shopping_cart</mat-icon>
+        <span>Gestion des Commandes</span>
+      </a>
+
       <a mat-list-item routerLink="/admin/salon" *ngIf="currentUser?.can_see_salon">
         <mat-icon>storefront</mat-icon>
         <span>Gestion Des Salons</span>

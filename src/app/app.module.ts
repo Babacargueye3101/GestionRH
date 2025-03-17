@@ -95,6 +95,9 @@ import { ClientsModule } from './pages/admin/clients/clients.module';
 import { HomeComponent } from './pages/public/home/home.component';
 import { CartComponent } from './pages/public/cart/cart.component';
 import { ReservationPublicComponent } from './pages/public/reservation-public/reservation-public.component';
+import { OrdersComponent } from './pages/admin/orders/orders.component';
+import { OrderListComponent } from './pages/admin/orders/order-list/order-list.component';
+import { OrderDetailsComponent } from './pages/admin/orders/order-details/order-details.component';
 
 
 
@@ -151,7 +154,10 @@ registerLocaleData(localeFr, 'fr');
     ClientsComponent,
     HomeComponent,
     CartComponent,
-    ReservationPublicComponent
+    ReservationPublicComponent,
+    OrdersComponent,
+    OrderListComponent,
+    OrderDetailsComponent
   ],
   imports: [
     BrowserModule,
