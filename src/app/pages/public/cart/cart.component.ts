@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
+import { CommandeService } from 'src/app/services/public/commande.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-cart',
@@ -17,7 +20,7 @@ export class CartComponent implements OnInit {
 
   currentYear: number = new Date().getFullYear();
 
-  constructor(private fb: FormBuilder, private snackBar: MatSnackBar) {}
+  constructor(private fb: FormBuilder, private route: Router, private commandeService: CommandeService) {}
 
   ngOnInit(): void {
     this.loadCart();
@@ -77,14 +80,21 @@ export class CartComponent implements OnInit {
       total: this.getTotalPrice()
     };
 
-    console.log('Commande passée :', order);
-    this.snackBar.open('Commande confirmée avec succès ! 🎉', 'Fermer', {
-      duration: 5000,
-      panelClass: 'snackbar-success',
-    });
-
-    this.cart = [];
-    localStorage.removeItem('cart');
-    this.updateCartItemCount();
+    this.commandeService.createCommande(order).subscribe((response) => {
+      console.log('Commande passée :', response);
+      Swal.fire({
+        title: 'Succès!',
+        text: 'Votre commande a été enregistré avec Success',
+        icon: 'success',
+        confirmButtonText: 'OK'
+      }).then(() => {
+        this.route.navigate(['/public']);
+      });
+      this.cart = [];
+      localStorage.removeItem('cart');
+      this.updateCartItemCount();
+    }, (error) => {
+      console.log(error);
+    })
   }
 }
