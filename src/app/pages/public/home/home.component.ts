@@ -3,6 +3,7 @@ import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 import Swiper from 'swiper';
 import { HomeService } from 'src/app/services/home.service';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -25,7 +26,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   ];
   categories: any;
 
-  constructor(private homeService: HomeService, private router: Router) {}
+  constructor(private homeService: HomeService, private router: Router, private snackBar: MatSnackBar) {}
 
   ngAfterViewInit(): void {
     new Swiper('.swiper-container', {
@@ -75,8 +76,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
     this.homeService.getProductByCategory(this.selectedCategory).subscribe((response) =>{
       this.products = response;
-      console.log("//////////");
-      console.log(this.products);
     },(error) => {
 
     });
@@ -88,7 +87,13 @@ export class HomeComponent implements OnInit, AfterViewInit {
     cart.push(product);
     localStorage.setItem('cart', JSON.stringify(cart));
     this.updateCartItemCount();
-    console.log('Produit ajouté au panier:', product);
+    this.snackBar.open('Produit ajouté au panier!', 'Fermer', {
+      duration: 3000,
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+      panelClass: ['snackbar-success']
+    });
+
   }
 
   checkScreenSize() {
@@ -99,8 +104,17 @@ export class HomeComponent implements OnInit, AfterViewInit {
     this.router.navigate(['/public/cart']);
   }
 
+  makeachat(product: any){
+    let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+    cart.push(product);
+    localStorage.setItem('cart', JSON.stringify(cart));
+    this.updateCartItemCount();
+    this.router.navigate(['/public/cart']);
+  }
+
   updateCartItemCount(): void {
     let cart = JSON.parse(localStorage.getItem('cart') || '[]');
     this.cartItemCount = cart.length;
   }
+
 }

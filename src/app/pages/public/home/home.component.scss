@@ -279,6 +279,22 @@
   text-decoration: none;
 }
 
+
+.action-buttons {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px;
+
+  button {
+    transition: transform 0.2s ease-in-out;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+}
+
+
 /* Pour les petits écrans */
 @media (max-width: 768px) {
   .sub-toolbar, .black-toolbar {
@@ -293,7 +309,14 @@
 }
 /* Changer la couleur des boutons icônes en noir */
 mat-icon-button, .mat-icon {
-  color: black !important;
+  color: white !important;
+}
+
+.snackbar-success {
+  background-color: #4caf50;
+  color: #fff;
+  font-size: 16px;
+  text-align: center;
 }
 
 /* Optionnel : Ajuster la couleur du panier uniquement */

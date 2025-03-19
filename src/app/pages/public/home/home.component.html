@@ -61,13 +61,13 @@
                 <mat-card-content>
                   <p>{{ product.price }} Fcfa</p>
                 </mat-card-content>
-                <mat-card-actions>
-                  <button mat-button color="primary" (click)="addToCart(product)">
-                    <mat-icon>shopping_cart</mat-icon>
+                <mat-card-actions class="action-buttons">
+                  <button mat-mini-fab style="background-color: #a67c52;" (click)="addToCart(product)" matTooltip="Ajouter au panier">
+                    <mat-icon style="color: white;">add_shopping_cart</mat-icon>
                   </button>
 
-                  <button mat-button color="accent" (click)="addToCart(product)">
-                    <mat-icon>add_shopping_cart</mat-icon>
+                  <button mat-mini-fab color="accent" (click)="makeachat(product)" matTooltip="Acheter maintenant">
+                    <mat-icon>shopping_bag</mat-icon>
                   </button>
                 </mat-card-actions>
               </mat-card>
