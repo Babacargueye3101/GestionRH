@@ -38,6 +38,7 @@ export class CreateDisponibilityComponent {
 
   ngOnInit() {
     this.loadShops();
+    this.loadAllTimeSlots();
   }
 
   loadShops() {
@@ -48,6 +49,16 @@ export class CreateDisponibilityComponent {
       },
       (error) => {
         console.error("Erreur lors du chargement des boutiques :", error);
+      }
+    );
+  }
+  loadAllTimeSlots() {
+    this.disponibilityService.getAllHoraires().subscribe(
+      (response) => {
+        this.availableTimeSlots = response.map((slot: any) => slot.time_range); // Extraction de time_range
+      },
+      (error) => {
+        console.error("Erreur lors du chargement des créneaux horaires :", error);
       }
     );
   }

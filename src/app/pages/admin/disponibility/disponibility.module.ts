@@ -18,6 +18,7 @@ import { UpdateDisponibilityComponent } from './update-disponibility/update-disp
 import {  MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 import { ViewDisponibilityComponent } from './view-disponibility/view-disponibility.component';
+import { CreateHoraireComponent } from './create-horaire/create-horaire.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { ViewDisponibilityComponent } from './view-disponibility/view-disponibil
     CreateDisponibilityComponent,
     ListDisponibilityComponent,
     UpdateDisponibilityComponent,
-    ViewDisponibilityComponent
+    ViewDisponibilityComponent,
+    CreateHoraireComponent
   ],
   imports: [
     CommonModule,

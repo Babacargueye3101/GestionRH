@@ -42,6 +42,15 @@ export class DisponibilityService {
   }
 
 
+  createHoraire(timeSlot: any) {
+    return this.http.post<any>(`${this.apiUrl}/time_slots`, timeSlot, { headers: this.getHeaders() });
+  }
+
+  getAllHoraires(): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/time_slots`, { headers: this.getHeaders() });
+  }
+
+
   private getHeaders() {
     const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
     const token = currentUser.token;

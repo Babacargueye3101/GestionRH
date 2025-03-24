@@ -23,7 +23,8 @@ import { DetailReservationComponent } from './detail-reservation/detail-reservat
   declarations: [
     CreateReservationComponent,
     ListReservationComponent,
-    DetailReservationComponent
+    DetailReservationComponent,
+
   ],
   imports: [
     CommonModule,

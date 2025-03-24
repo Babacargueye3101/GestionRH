@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ReservationsComponent } from './reservations.component';
+import { AuthGuard } from 'src/app/auth.guard';
 
 const routes: Routes = [
-  { path: '', component: ReservationsComponent }
+  { path: '', component: ReservationsComponent,canActivate: [AuthGuard] }
 ];
 
 @NgModule({

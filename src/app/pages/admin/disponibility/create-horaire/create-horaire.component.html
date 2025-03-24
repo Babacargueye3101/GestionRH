@@ -1,0 +1,17 @@
+<h2>Créer un Horaire</h2>
+<form [formGroup]="timeSlotForm" (ngSubmit)="onSubmit()">
+  <mat-form-field appearance="fill">
+    <mat-label>Heure de début</mat-label>
+    <input matInput type="time" formControlName="start_time" required>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Heure de fin</mat-label>
+    <input matInput type="time" formControlName="end_time" required>
+  </mat-form-field>
+
+  <div class="actions">
+    <button mat-button (click)="onCancel()">Annuler</button>
+    <button mat-flat-button type="submit" [disabled]="timeSlotForm.invalid">Créer</button>
+  </div>
+</form>
