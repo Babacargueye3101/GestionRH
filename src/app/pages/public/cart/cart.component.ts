@@ -34,17 +34,21 @@ export class CartComponent implements OnInit {
 
     this.paymentForm = this.fb.group({
       paymentMethod: ['', Validators.required],
-      mobilePhone: ['']
+      mobilePhone: [''],
+      paymentType: ['']
     });
 
     // Validation conditionnelle pour le téléphone mobile
     this.paymentForm.get('paymentMethod')?.valueChanges.subscribe(value => {
       if (value === 'mobile') {
         this.paymentForm.get('mobilePhone')?.setValidators([Validators.required, Validators.pattern('[0-9]{9}')]);
+        this.paymentForm.get('paymentType')?.setValidators([Validators.required]);
       } else {
         this.paymentForm.get('mobilePhone')?.clearValidators();
+        this.paymentForm.get('paymentType')?.clearValidators();
       }
       this.paymentForm.get('mobilePhone')?.updateValueAndValidity();
+      this.paymentForm.get('paymentType')?.updateValueAndValidity();
     });
   }
 
@@ -73,28 +77,73 @@ export class CartComponent implements OnInit {
       return;
     }
 
+    const paymentType = this.paymentForm.value.paymentType;
+
+    if (paymentType === 'orange_money') {
+      Swal.fire({
+        title: 'Code de paiement (6 chiffres)',
+        text: 'Obtenez votre code de paiement depuis votre mobile en tapant #144#391#',
+        input: 'text',
+        inputPlaceholder: 'Entrez votre code OTP',
+        inputAttributes: {
+          maxlength: '6',
+          pattern: '[0-9]{6}',
+          required: 'true'
+        },
+        showCancelButton: true,
+        confirmButtonText: 'Valider',
+        cancelButtonText: 'Annuler',
+        preConfirm: (otp) => {
+          if (!/^\d{6}$/.test(otp)) {
+            Swal.showValidationMessage('Veuillez entrer un code OTP valide (6 chiffres)');
+          }
+          return otp;
+        }
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.processOrder(result.value);
+        }
+      });
+    } else {
+      this.processOrder();
+    }
+  }
+
+  // Fonction pour envoyer la commande
+  processOrder(otpCode: string = ''): void {
     const order = {
       client: this.clientForm.value,
-      payment: this.paymentForm.value,
+      payment: { ...this.paymentForm.value, otp: otpCode },
       products: this.cart,
       total: this.getTotalPrice()
     };
 
-    this.commandeService.createCommande(order).subscribe((response) => {
-      console.log('Commande passée :', response);
-      Swal.fire({
-        title: 'Succès!',
-        text: 'Votre commande a été enregistré avec Success',
-        icon: 'success',
-        confirmButtonText: 'OK'
-      }).then(() => {
-        this.route.navigate(['/public']);
-      });
-      this.cart = [];
-      localStorage.removeItem('cart');
-      this.updateCartItemCount();
-    }, (error) => {
-      console.log(error);
-    })
+    this.commandeService.createCommande(order).subscribe(
+      (response) => {
+        if (response) {
+          Swal.fire({
+            title: 'Succès!',
+            text: 'Votre commande a été enregistrée avec succès',
+            icon: 'success',
+            confirmButtonText: 'OK'
+          }).then(() => {
+            this.route.navigate(['/public']);
+          });
+
+          this.cart = [];
+          localStorage.removeItem('cart');
+          this.updateCartItemCount();
+        }
+      },
+      (error) => {
+        console.error('Erreur lors de la commande :', error);
+        Swal.fire({
+          title: 'Erreur!',
+          text: 'Une erreur s\'est produite lors de l\'enregistrement de votre commande.',
+          icon: 'error',
+          confirmButtonText: 'OK'
+        });
+      }
+    );
   }
 }

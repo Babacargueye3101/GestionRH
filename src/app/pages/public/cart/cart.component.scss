@@ -57,6 +57,53 @@
   flex-direction: column;
 }
 
+.payment-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Espacement entre les éléments */
+  width: 100%;
+  max-width: 400px; /* Limite la largeur pour un affichage propre */
+  margin: auto;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.operator-selection {
+  display: flex;
+  justify-content: center; /* Centre les options */
+}
+
+.radio-group {
+  display: flex;
+  gap: 15px; /* Espacement entre Wave et Orange Money */
+}
+
+.radio-option {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* Espacement entre l'image et le texte */
+  padding: 10px;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.radio-option img.operator-logo {
+  width: 30px; /* Ajuste la taille des logos */
+  height: 30px;
+}
+
+.radio-option:hover {
+  border-color: #007bff; /* Effet au survol */
+}
+
+mat-radio-button.mat-radio-checked {
+  border-color: #007bff; /* Couleur de sélection */
+}
+
 .mat-step-label {
   font-size: 1.2rem;
   font-weight: bold;

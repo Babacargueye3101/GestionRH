@@ -69,11 +69,28 @@
               <mat-radio-button value="delivery">Paiement à la livraison</mat-radio-button>
             </mat-radio-group>
 
-            <div *ngIf="paymentForm.value.paymentMethod === 'mobile'">
-              <mat-form-field appearance="outline">
-                <mat-label>Numéro de téléphone</mat-label>
+            <!-- Sélection de l'opérateur mobile -->
+            <div *ngIf="paymentForm.value.paymentMethod === 'mobile'" class="payment-container">
+              <!-- Champ pour entrer le numéro -->
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Numéro Wave ou Orange Money</mat-label>
                 <input matInput formControlName="mobilePhone">
               </mat-form-field>
+
+              <!-- Sélection de l'opérateur sur une seule ligne -->
+              <div class="operator-selection">
+                <mat-radio-group formControlName="paymentType" class="radio-group">
+                  <mat-radio-button value="wave" class="radio-option">
+                    <img src="assets/wave.png" alt="Wave" class="operator-logo">
+                    Wave
+                  </mat-radio-button>
+
+                  <mat-radio-button value="orange_money" class="radio-option">
+                    <img src="assets/om.png" alt="Orange Money" class="operator-logo">
+                    Orange Money
+                  </mat-radio-button>
+                </mat-radio-group>
+              </div>
             </div>
 
             <button mat-raised-button style="background-color: #c9a173;" (click)="stepper.next()" [disabled]="paymentForm.invalid">
