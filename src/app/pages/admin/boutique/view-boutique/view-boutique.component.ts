@@ -133,7 +133,7 @@ export class ViewBoutiqueComponent implements OnInit {
 
   createProduit(): void {
     const dialogRef = this.dialog.open(AddProduitComponent, {
-      width: '400px',
+      width: '800px',
       data: { shopId: this.shopId }
     });
 
