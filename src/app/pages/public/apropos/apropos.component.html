@@ -1,0 +1,37 @@
+<mat-sidenav-container class="home-container">
+    <mat-sidenav-content>
+      <!-- Barre de navigation -->
+      <mat-toolbar class="main-toolbar light-blue-toolbar">
+        <span class="app-title">Mon Compagngy</span>
+        <span class="spacer"></span>
+      </mat-toolbar>
+
+      <!-- Sous-barre de navigation -->
+      <mat-toolbar class="sub-toolbar black-toolbar">
+        <div class="d-flex justify-content-center align-items-center mx-auto">
+          <a mat-button routerLink="">Products</a>
+          <a mat-button routerLink="/public/reservations">Reservations</a>
+          <a mat-button routerLink="/public/abonnements">Abonnnements</a>
+        </div>
+
+      </mat-toolbar>
+
+      <div class="about-container">
+        <h1>Qui sommes-nous ?</h1>
+        <p>{{ description }}</p>
+      </div>
+
+      <!-- Pied de page -->
+      <div class="footer">
+        <span>&copy; {{ currentYear }} Teranga Shop</span>
+        <div class="social-links">
+          <a href="https://facebook.com"><mat-icon>facebook</mat-icon></a>
+          <a href="https://twitter.com"><mat-icon>twitter</mat-icon></a>
+          <a href="https://instagram.com"><mat-icon>instagram</mat-icon></a>
+        </div>
+      </div>
+
+
+    </mat-sidenav-content>
+
+  </mat-sidenav-container>

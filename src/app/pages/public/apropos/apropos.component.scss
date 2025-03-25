@@ -1,0 +1,421 @@
+/* filepath: /Users/xsorcier/Desktop/GestionRH/src/app/pages/public/home/home.component.scss */
+.home-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+  }
+
+  .main-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .sub-toolbar {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+
+  .fab-cart {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #90611fc5;
+    color: white;
+    padding: 15px;
+    border-radius: 50%;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    cursor: pointer;
+
+    .cart-badge {
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      background-color: red;
+      color: white;
+      font-size: 12px;
+      font-weight: bold;
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    }
+  }
+
+
+  .about-container {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+    text-align: center;
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+    h1 {
+      color: #343a40;
+      font-size: 2rem;
+      margin-bottom: 15px;
+    }
+
+    p {
+      color: #495057;
+      font-size: 1.2rem;
+      line-height: 1.6;
+    }
+  }
+
+
+  /* Centrer les liens dans la toolbar */
+  .sub-toolbar {
+    display: flex;
+    justify-content: center; /* Centre horizontalement */
+    align-items: center;
+    width: 100%; /* Assure que ça prend toute la largeur */
+    text-align: center;
+  }
+
+  /* Centrer les boutons d'authentification */
+  .auth-buttons {
+    display: flex;
+    justify-content: center; /* Centre les boutons */
+    width: 100%;
+    margin-top: 10px; /* Ajoute un peu d’espace */
+  }
+
+  .auth-buttons a {
+    margin: 0 10px; /* Ajoute un peu d’espace entre les liens */
+  }
+
+  .app-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+
+  .spacer {
+    flex: 1 1 auto;
+  }
+
+  .search-bar {
+    width: 40%;
+  }
+
+  .auth-buttons a {
+    margin-left: 10px;
+  }
+
+  .salon-banner {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    overflow: hidden;
+  }
+
+
+
+
+  .salon-banner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+
+  .banner-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    border-radius: 8px;
+  }
+
+  .banner-text h1 {
+    font-size: 2.5rem;
+    margin: 0;
+  }
+
+  .banner-text p {
+    font-size: 1.2rem;
+    margin: 0;
+  }
+
+  .home-sections {
+    padding: 20px;
+  }
+
+  .product-section {
+    margin-bottom: 40px;
+  }
+
+
+
+  .footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: linear-gradient(135deg, #90611fc5, #34495e);
+    color: #ffffff;
+    text-align: center;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
+
+    span {
+      margin: 5px 0;
+      font-size: 14px;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 15px;
+      margin-top: 10px;
+
+      a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        color: #ffffff;
+        transition: transform 0.3s ease, color 0.3s ease;
+
+        mat-icon {
+          font-size: 26px;
+        }
+
+        &:hover {
+          transform: scale(1.3);
+          color: #f39c12; // Couleur au survol
+        }
+      }
+    }
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .footer {
+      padding: 15px;
+    }
+  }
+
+
+
+  .light-blue-toolbar {
+    background-color: #a67c52 !important; /* Bleu clair */
+    height: 90px;
+    color: white !important;
+  }
+
+  .sub-toolbar, .black-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 120px;
+    width: 100%;
+  }
+
+
+  .sub-toolbar a, .black-toolbar a {
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+  }
+
+  /* Pour les petits écrans */
+  @media (max-width: 768px) {
+    .sub-toolbar, .black-toolbar {
+      flex-direction: row; /* Assurez-vous que les éléments sont en ligne */
+      justify-content: flex-start; /* Aligner les éléments sur la gauche */
+      padding: 10px; /* Ajouter de l'espace autour des éléments */
+    }
+
+    .sub-toolbar a, .black-toolbar a {
+      margin-right: 15px; /* Espacement entre les liens */
+    }
+  }
+  /* Changer la couleur des boutons icônes en noir */
+  mat-icon-button, .mat-icon {
+    color: black !important;
+  }
+
+
+
+
+
+  /* Petits écrans (mobiles) */
+  @media (max-width: 768px) {
+    .main-toolbar {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 10px;
+    }
+
+    .sub-toolbar {
+      flex-direction: column;
+      align-items: center;
+      padding: 10px;
+    }
+
+    .search-bar {
+      width: 80%;
+    }
+
+    .auth-buttons {
+      display: flex;
+      justify-content: center;
+      margin-top: 10px;
+    }
+
+
+
+    .product-list {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .product-item {
+      flex: 1 1 100%; /* Un produit par ligne */
+    }
+
+    .footer {
+      font-size: 14px;
+    }
+  }
+
+
+/* filepath: /Users/babacargueye/Mes Dcouments/GESTION RH /GestionRH/src/app/pages/public/reservation-public/reservation-public.component.scss */
+.shop-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px;
+  }
+
+  .shop-card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 10px;
+    width: 300px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+
+    &:hover {
+      transform: translateY(-5px);
+    }
+
+    .shop-card-image {
+      overflow: hidden;
+      border-top-left-radius: 8px;
+      border-top-right-radius: 8px;
+
+      img {
+        width: 100%;
+        height: auto;
+        display: block;
+        border-bottom-left-radius: 8px;
+        border-bottom-right-radius: 8px;
+      }
+    }
+
+    .shop-card-content {
+      padding: 15px;
+      text-align: center;
+
+
+      h3 {
+        margin: 0 0 10px;
+        font-size: 1.5em;
+        color: #333;
+      }
+
+      p {
+        color: #666;
+        font-size: 1em;
+      }
+    }
+  }
+
+  .search-bar {
+    width: 300px;
+    margin-top: 10px;
+
+    mat-form-field {
+      width: 100%;
+
+      input {
+        padding: 10px;
+      }
+
+      button {
+        margin-right: 10px;
+      }
+
+      mat-icon {
+        color: #757575;
+      }
+    }
+  }
+
+
+
+  .footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    bottom: 0;
+    padding: 20px;
+    z-index: 1000;
+    width: 100%;
+    background: linear-gradient(135deg, #90611fc5, #34495e);
+    color: #ffffff;
+    text-align: center;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
+
+    span {
+      margin: 5px 0;
+      font-size: 14px;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 15px;
+      margin-top: 10px;
+
+      a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        color: #ffffff;
+        transition: transform 0.3s ease, color 0.3s ease;
+
+        mat-icon {
+          font-size: 26px;
+        }
+
+        &:hover {
+          transform: scale(1.3);
+          color: #f39c12; // Couleur au survol
+        }
+      }
+    }
+  }

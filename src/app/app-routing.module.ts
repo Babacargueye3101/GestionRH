@@ -19,6 +19,7 @@ const routes: Routes = [
   { path: 'admin/statistiques', loadChildren: () => import('./pages/admin/statistiques/statistiques.module').then(m => m.StatistiquesModule) },
   { path: 'public/reservations', loadChildren: () => import('./pages/public/reservation-public/reservation-public.module').then(m => m.ReservationPublicModule) },
   { path: 'public/abonnements', loadChildren: () => import('./pages/public/abonnement/abonnement.module').then(m => m.AbonnementModule) },
+  { path: 'public/apropos', loadChildren: () => import('./pages/public/apropos/apropos.module').then(m => m.AproposModule) },
   { path: 'admin/clients', loadChildren: () => import('./pages/admin/clients/clients.module').then(m => m.ClientsModule) },
   { path: 'employements', loadChildren: () => import('./pages/menus/employements/employements/employements.module').then(m => m.EmployementsModule) },
   { path: 'candidatures', loadChildren: () => import('./pages/menus/candidatures/candidatures/candidatures.module').then(m => m.CandidaturesModule) },

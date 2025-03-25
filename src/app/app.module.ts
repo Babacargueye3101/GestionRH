@@ -99,6 +99,7 @@ import { OrdersComponent } from './pages/admin/orders/orders.component';
 import { OrderListComponent } from './pages/admin/orders/order-list/order-list.component';
 import { OrderDetailsComponent } from './pages/admin/orders/order-details/order-details.component';
 import { AbonnementComponent } from './pages/public/abonnement/abonnement.component';
+import { AproposComponent } from './pages/public/apropos/apropos.component';
 
 
 
@@ -159,7 +160,8 @@ registerLocaleData(localeFr, 'fr');
     OrdersComponent,
     OrderListComponent,
     OrderDetailsComponent,
-    AbonnementComponent
+    AbonnementComponent,
+    AproposComponent
   ],
   imports: [
     BrowserModule,
