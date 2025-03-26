@@ -16,16 +16,21 @@ export class CartComponent implements OnInit {
   cartItemCount = 0;
   clientForm!: FormGroup;
   paymentForm!: FormGroup;
-  cartForm!: FormGroup;
-
   currentYear: number = new Date().getFullYear();
 
-  constructor(private fb: FormBuilder, private route: Router, private commandeService: CommandeService) {}
+  constructor(
+    private fb: FormBuilder,
+    private route: Router,
+    private commandeService: CommandeService,
+    private snackBar: MatSnackBar
+  ) {}
 
   ngOnInit(): void {
     this.loadCart();
-    this.updateCartItemCount();
+    this.initForms();
+  }
 
+  initForms(): void {
     this.clientForm = this.fb.group({
       name: ['', Validators.required],
       phone: ['', [Validators.required, Validators.pattern('[0-9]{9}')]],
@@ -38,7 +43,6 @@ export class CartComponent implements OnInit {
       paymentType: ['']
     });
 
-    // Validation conditionnelle pour le téléphone mobile
     this.paymentForm.get('paymentMethod')?.valueChanges.subscribe(value => {
       if (value === 'mobile') {
         this.paymentForm.get('mobilePhone')?.setValidators([Validators.required, Validators.pattern('[0-9]{9}')]);
@@ -54,70 +58,137 @@ export class CartComponent implements OnInit {
 
   loadCart(): void {
     this.cart = JSON.parse(localStorage.getItem('cart') || '[]');
+
+    // Initialiser les champs quantity et selectedVariant
+    this.cart = this.cart.map(product => ({
+      ...product,
+      quantity: product.quantity || 1,
+      selectedVariant: product.selectedVariant || (product.variants?.length > 0 ? product.variants[0] : null)
+    }));
+
+    this.updateCartItemCount();
+  }
+
+  getProductPrice(product: any): number {
+    // Si un variant est sélectionné, utiliser son prix
+    if (product.selectedVariant && product.selectedVariant.price) {
+      return parseFloat(product.selectedVariant.price.toString().replace(/\D/g, '')) * (product.quantity || 1);
+    }
+    // Sinon utiliser le prix de base du produit
+    else if (product.price) {
+      return parseFloat(product.price.toString().replace(/\D/g, '')) * (product.quantity || 1);
+    }
+    // Par défaut retourner 0 si aucun prix n'est trouvé
+    return 0;
+  }
+
+  getTotalPrice(): number {
+    return this.cart.reduce((sum, product) => sum + this.getProductPrice(product), 0);
+  }
+
+  updateCart(): void {
+    localStorage.setItem('cart', JSON.stringify(this.cart));
+    this.updateCartItemCount();
   }
 
   removeFromCart(product: any): void {
     this.cart = this.cart.filter(item => item.id !== product.id);
-    localStorage.setItem('cart', JSON.stringify(this.cart));
-    this.updateCartItemCount();
+    this.updateCart();
+    this.snackBar.open('Produit retiré du panier', 'Fermer', { duration: 3000 });
   }
 
   updateCartItemCount(): void {
     this.cartItemCount = this.cart.length;
   }
 
-  getTotalPrice(): string {
-    const total = this.cart.reduce((sum, item) => sum + parseFloat(item.price.replace('$', '')), 0);
-    return `${total.toFixed(2)} Fcfa`;
-  }
-
   confirmOrder(): void {
     if (this.clientForm.invalid || this.paymentForm.invalid) {
-      alert('Veuillez remplir tous les champs obligatoires.');
+      this.snackBar.open('Veuillez remplir tous les champs obligatoires', 'Fermer', { duration: 3000 });
       return;
     }
 
     const paymentType = this.paymentForm.value.paymentType;
 
     if (paymentType === 'orange_money') {
-      Swal.fire({
-        title: 'Code de paiement (6 chiffres)',
-        text: 'Obtenez votre code de paiement depuis votre mobile en tapant #144#391#',
-        input: 'text',
-        inputPlaceholder: 'Entrez votre code OTP',
-        inputAttributes: {
-          maxlength: '6',
-          pattern: '[0-9]{6}',
-          required: 'true'
-        },
-        showCancelButton: true,
-        confirmButtonText: 'Valider',
-        cancelButtonText: 'Annuler',
-        preConfirm: (otp) => {
-          if (!/^\d{6}$/.test(otp)) {
-            Swal.showValidationMessage('Veuillez entrer un code OTP valide (6 chiffres)');
-          }
-          return otp;
-        }
-      }).then((result) => {
-        if (result.isConfirmed) {
-          this.processOrder(result.value);
-        }
-      });
+      this.requestOrangeMoneyOTP();
     } else {
       this.processOrder();
     }
   }
 
-  // Fonction pour envoyer la commande
+  requestOrangeMoneyOTP(): void {
+    Swal.fire({
+      title: 'Code de paiement (6 chiffres)',
+      text: 'Obtenez votre code de paiement depuis votre mobile en tapant #144#391#',
+      input: 'text',
+      inputPlaceholder: 'Entrez votre code OTP',
+      inputAttributes: {
+        maxlength: '6',
+        pattern: '[0-9]{6}',
+        required: 'true'
+      },
+      showCancelButton: true,
+      confirmButtonText: 'Valider',
+      cancelButtonText: 'Annuler',
+      preConfirm: (otp) => {
+        if (!/^\d{6}$/.test(otp)) {
+          Swal.showValidationMessage('Veuillez entrer un code OTP valide (6 chiffres)');
+        }
+        return otp;
+      }
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.processOrder(result.value);
+      }
+    });
+  }
+
   processOrder(otpCode: string = ''): void {
+    // Vérifier d'abord que les variants ont bien un prix
+    const productsWithValidPrices = this.cart.every(product => {
+      const hasVariantPrice = product.selectedVariant && !isNaN(parseFloat(product.selectedVariant.price));
+      const hasBasePrice = !isNaN(parseFloat(product.price));
+      return hasVariantPrice || hasBasePrice;
+    });
+
+    if (!productsWithValidPrices) {
+      Swal.fire('Erreur', 'Certains produits n\'ont pas de prix valide', 'error');
+      return;
+    }
+
     const order = {
       client: this.clientForm.value,
       payment: { ...this.paymentForm.value, otp: otpCode },
-      products: this.cart,
+      products: this.cart.map(product => {
+        try {
+          const unitPriceValue = product.selectedVariant?.price ?? product.price;
+          const unitPrice = unitPriceValue ? parseFloat(unitPriceValue.toString().replace(/[^0-9.]/g, '')) : 0;
+          const quantity = product.quantity || 1;
+
+          return {
+            id: product.id,
+            name: product.name,
+            variant: product.selectedVariant,
+            quantity: quantity,
+            unitPrice: unitPrice,
+            totalPrice: unitPrice * quantity
+          };
+        } catch (e) {
+          console.error('Erreur de traitement du produit:', product, e);
+          return {
+            id: product.id,
+            name: product.name,
+            variant: product.selectedVariant,
+            quantity: product.quantity || 1,
+            unitPrice: 0,
+            totalPrice: 0
+          };
+        }
+      }),
       total: this.getTotalPrice()
     };
 
+    // Envoi au serveur
     this.commandeService.createCommande(order).subscribe(
       (response) => {
         if (response) {
@@ -139,7 +210,7 @@ export class CartComponent implements OnInit {
         console.error('Erreur lors de la commande :', error);
         Swal.fire({
           title: 'Erreur!',
-          text: 'Une erreur s\'est produite lors de l\'enregistrement de votre commande.',
+          text: JSON.stringify(error.error),
           icon: 'error',
           confirmButtonText: 'OK'
         });
