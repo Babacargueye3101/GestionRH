@@ -46,7 +46,7 @@
     </ng-container>
     <ng-container matColumnDef="price">
       <th mat-header-cell *matHeaderCellDef> Prix total </th>
-      <td mat-cell *matCellDef="let item"> {{item.price}} </td>
+      <td mat-cell *matCellDef="let item"> {{item.product.price}} </td>
     </ng-container>
     <tr mat-header-row *matHeaderRowDef="['product_name', 'product_description', 'product_price', 'product_stock', 'shop_name', 'category_name', 'quantity', 'price']"></tr>
     <tr mat-row *matRowDef="let row; columns: ['product_name', 'product_description', 'product_price', 'product_stock', 'shop_name', 'category_name', 'quantity', 'price'];"></tr>

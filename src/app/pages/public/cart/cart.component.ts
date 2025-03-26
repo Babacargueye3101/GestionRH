@@ -70,13 +70,23 @@ export class CartComponent implements OnInit {
   }
 
   getProductPrice(product: any): number {
+    // Fonction pour nettoyer le prix
+    const cleanPrice = (price: any) => {
+      if (!price) return 0;
+      const str = price.toString();
+      // Supprime tous les caractères non numériques SAUF le point décimal
+      const cleaned = str.replace(/[^\d.,]/g, '')
+                        .replace(',', '.'); // Convertit les virgules en points
+      return parseFloat(cleaned) || 0;
+    };
+  
     // Si un variant est sélectionné, utiliser son prix
     if (product.selectedVariant && product.selectedVariant.price) {
-      return parseFloat(product.selectedVariant.price.toString().replace(/\D/g, '')) * (product.quantity || 1);
+      return cleanPrice(product.selectedVariant.price) * (product.quantity || 1);
     }
     // Sinon utiliser le prix de base du produit
     else if (product.price) {
-      return parseFloat(product.price.toString().replace(/\D/g, '')) * (product.quantity || 1);
+      return cleanPrice(product.price) * (product.quantity || 1);
     }
     // Par défaut retourner 0 si aucun prix n'est trouvé
     return 0;
