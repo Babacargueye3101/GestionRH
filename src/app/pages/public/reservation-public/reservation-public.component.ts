@@ -15,7 +15,7 @@ export class ReservationPublicComponent implements OnInit{
 
   constructor(private resvationPublicService : ReservationService, private dialog: MatDialog, private router: Router){}
 
-  compagny = { name: 'Votre Compagnie' };
+  compagny = { name: 'Dabishpro' };
   currentYear = new Date().getFullYear();
   cartItemCount = 0;
 

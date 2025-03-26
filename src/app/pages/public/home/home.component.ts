@@ -4,20 +4,23 @@ import Swiper from 'swiper';
 import { HomeService } from 'src/app/services/home.service';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { th } from 'date-fns/locale';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit, AfterViewInit {
-  compagny = { name: 'Votre Compagnie' };
+  compagny = { name: 'Dabishpro' };
   currentYear = new Date().getFullYear();
   cartItemCount = 0;
   selectedCategory: any ;
+  filteredProducts: any[] = [];
+
 
   isMobile: boolean = false;
 
-  products : any;
+  products : any[]=[];
 
   images: string[] = [
     'https://images.unsplash.com/photo-1631679706909-1844bbd07221?q=80&w=2892&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
@@ -64,6 +67,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
     this.homeService.getAllProduct().subscribe((respone) => {
       this.products = respone
       console.log(this.products);
+      this.filteredProducts = this.products;
 
     }, (error) => {
       console.log(error);
@@ -76,6 +80,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
     this.homeService.getProductByCategory(this.selectedCategory).subscribe((response) =>{
       this.products = response;
+      this.filteredProducts = this.products;
     },(error) => {
 
     });
@@ -115,6 +120,17 @@ export class HomeComponent implements OnInit, AfterViewInit {
   updateCartItemCount(): void {
     let cart = JSON.parse(localStorage.getItem('cart') || '[]');
     this.cartItemCount = cart.length;
+  }
+
+  applyFilter(event: Event): void {
+    const filterValue = (event.target as HTMLInputElement).value.trim().toLowerCase();
+    console.log(filterValue);
+    console.log(this.products);
+    this.filteredProducts = this.products.filter((product: any) => 
+    
+      product.name.toLowerCase().includes(filterValue) ||
+      product.description.toLowerCase().includes(filterValue)
+    );
   }
 
 }

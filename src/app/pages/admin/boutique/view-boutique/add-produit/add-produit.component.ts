@@ -1,25 +1,21 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { response } from 'express';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ProductService } from 'src/app/services/product-service/product.service';
-
 
 @Component({
   selector: 'app-add-produit',
   templateUrl: './add-produit.component.html',
   styleUrls: ['./add-produit.component.scss']
 })
-export class AddProduitComponent implements OnInit{
+export class AddProduitComponent implements OnInit {
   productForm: FormGroup;
   imagePreview: string | ArrayBuffer | null = null;
   selectedFile: File | null = null;
   errorMessage: string = '';
   shopId!: number;
-
   isSubmitting: boolean = false;
-
   categories: any[] = [];
 
   constructor(
@@ -27,40 +23,41 @@ export class AddProduitComponent implements OnInit{
     private productService: ProductService,
     private spinner: NgxSpinnerService,
     public dialogRef: MatDialogRef<AddProduitComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any // ✅ Injecter les données du modal
+    @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.productForm = this.fb.group({
       name: ['', Validators.required],
       description: ['', Validators.required],
       price: [0, [Validators.required, Validators.min(1)]],
       stock: [0, [Validators.required, Validators.min(0)]],
-      category_id: ['', Validators.required]
+      category_id: ['', Validators.required],
+      variants: this.fb.array([])
     });
   }
 
+  get variants(): FormArray {
+    return this.productForm.get('variants') as FormArray;
+  }
+
   ngOnInit(): void {
-    // ✅ Récupération du shopId passé en paramètre
     if (this.data && this.data.shopId) {
       this.shopId = this.data.shopId;
     } else {
       console.error('Aucun Shop ID trouvé !');
     }
     this.loadCategories();
+    this.addVariant(); // Ajoute une variante par défaut
   }
 
+  addVariant(): void {
+    this.variants.push(this.fb.group({
+      name: ['', Validators.required],
+      stock: [0, [Validators.required, Validators.min(0)]],
+    }));
+  }
 
-  onFileSelected(event: Event): void {
-    const input = event.target as HTMLInputElement;
-    if (input.files && input.files.length > 0) {
-      this.selectedFile = input.files[0];
-
-      // Prévisualisation de l'image
-      const reader = new FileReader();
-      reader.onload = () => {
-        this.imagePreview = reader.result;
-      };
-      reader.readAsDataURL(this.selectedFile);
-    }
+  removeVariant(index: number): void {
+    this.variants.removeAt(index);
   }
 
   save() {
@@ -70,7 +67,6 @@ export class AddProduitComponent implements OnInit{
     }
 
     this.spinner.show();
-
     this.isSubmitting = true;
   
     const formData = new FormData();
@@ -80,16 +76,19 @@ export class AddProduitComponent implements OnInit{
     formData.append('stock', this.productForm.value.stock.toString());
     formData.append('category_id', this.productForm.value.category_id);
   
-    // ✅ Vérifier si un fichier a été sélectionné avant de l'ajouter
     if (this.selectedFile) {
       formData.append('image', this.selectedFile);
     }
 
+    // Ajout des variantes
+    this.productForm.value.variants.forEach((variant: any, index: number) => {
+      formData.append(`variants[${index}][name]`, variant.name);
+      formData.append(`variants[${index}][stock]`, variant.stock.toString());
+    });
+
     this.productService.createProduct(this.shopId, formData).subscribe({
       next: (product) => {
         console.log('Produit créé avec succès:', product);
-        this.productForm.reset();
-        this.errorMessage = '';
         this.dialogRef.close(product);
       },
       error: (err) => {
@@ -118,6 +117,20 @@ export class AddProduitComponent implements OnInit{
       },
       complete: () => this.spinner.hide()
     });
+  }
+
+  onFileSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      this.selectedFile = input.files[0];
+
+      // Prévisualisation de l'image
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.imagePreview = reader.result;
+      };
+      reader.readAsDataURL(this.selectedFile);
+    }
   }
 
 }

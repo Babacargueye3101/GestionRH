@@ -5,7 +5,7 @@
       <span class="app-title">{{ compagny.name }}</span>
       <span class="spacer"></span>
       <mat-form-field class="search-bar" style="margin-top: 10px;">
-        <input matInput placeholder="Rechercher des produits">
+        <input matInput (keyup)="applyFilter($event)" placeholder="Nom, description">
         <button mat-icon-button matSuffix>
           <mat-icon>search</mat-icon>
         </button>
@@ -52,7 +52,7 @@
         <h2>Nos Produits</h2>
         <div class="container">
           <div class="row">
-            <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-4" *ngFor="let product of products">
+            <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-4" *ngFor="let product of filteredProducts">
               <mat-card class="product-item">
                 <mat-card-header>
                   <mat-card-title>{{ product.name }}</mat-card-title>

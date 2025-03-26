@@ -198,7 +198,7 @@ export class PaiesComponent implements OnInit {
 
 
   downloadPayments() {
-    const compagnyId = 7; // Remplacez par l'ID de votre compagnie
+    const compagnyId = 7; // Remplacez par l'ID de Dabishpro
 
     this.paymentService.downloadCSV(compagnyId).subscribe(blob => {
       const url = window.URL.createObjectURL(blob);
