@@ -14,7 +14,7 @@ export class ShopDetailModalComponent implements OnInit {
   salons: any[] = [];
 
 
-  compagny = { name: 'Votre Compagnie' };
+  compagny = { name: 'Dabishpro' };
   currentYear = new Date().getFullYear();
   cartItemCount = 0;
 

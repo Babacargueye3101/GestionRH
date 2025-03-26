@@ -12,7 +12,7 @@ import Swal from 'sweetalert2';
 })
 export class CartComponent implements OnInit {
   cart: any[] = [];
-  compagny = { name: 'Votre Compagnie' };
+  compagny = { name: 'Dabishpro' };
   cartItemCount = 0;
   clientForm!: FormGroup;
   paymentForm!: FormGroup;
