@@ -181,3 +181,108 @@ mat-sidenav-content {
   margin-right: 8px;
 }
 
+/* filepath: /Users/xsorcier/Desktop/GestionRH/src/app/app.component.scss */
+.notification-container {
+  position: relative;
+  display: inline-block;
+}
+
+.notification-button {
+  position: relative;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+
+  mat-icon {
+    font-size: 24px;
+    color: #555;
+  }
+}
+
+.notification-badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: red;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  border-radius: 50%;
+  padding: 2px 6px;
+}
+
+/* filepath: /Users/xsorcier/Desktop/GestionRH/src/app/app.component.scss */
+
+/* Conteneur des notifications */
+.notification-dropdown {
+  position: absolute;
+  top: 50px;
+  right: 0;
+  width: 550px;
+  background-color: #f06d36bb;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  padding: 10px;
+
+  h3 {
+    margin: 0 0 10px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+  }
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    li.notification-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      border-bottom: 1px solid #eee;
+
+      &:last-child {
+        border-bottom: none;
+      }
+
+      .notification-content {
+        flex: 1;
+
+        p {
+          margin: 0;
+          font-size: 14px;
+          color: #2b2a2af1;
+
+          &:first-child {
+            font-weight: bold;
+          }
+        }
+      }
+
+      .view-button {
+        color: white; /* Couleur blanche pour le bouton */
+        background-color: #e9a365; /* Couleur de fond */
+        border-radius: 10%;
+        padding: 4px;
+
+        mat-icon {
+          font-size: 20px;
+        }
+
+        &:hover {
+          background-color: #303f9f23; /* Couleur de fond au survol */
+        }
+      }
+    }
+  }
+
+  .no-notifications {
+    text-align: center;
+    color: #999;
+    font-size: 14px;
+  }
+}

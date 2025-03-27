@@ -4,6 +4,7 @@ import { AuthService } from './services/auth.service';
 import { CompagnyService } from './services/compagny.service';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
+import { NotificationService } from './services/notification.service';
 
 @Component({
   selector: 'app-root',
@@ -34,7 +35,12 @@ export class AppComponent implements OnInit {
   isSidenavVisible: boolean = true;
   isNavbarVisible: boolean = true;
 
-  constructor(private authService: AuthService, private router: Router, private compagnyService: CompagnyService){
+  notifications: any[] = [];
+  unreadCount: number = 0;
+  showNotifications: boolean = false;
+  total: any;
+
+  constructor(private authService: AuthService, private router: Router, private compagnyService: CompagnyService, private notificationService: NotificationService) {
 
   }
   ngOnInit(): void {
@@ -60,6 +66,7 @@ export class AppComponent implements OnInit {
         this.isNavbarVisible = true;
       }
     });
+    this.fetchNotifications();
   }
 
   mouseEnterButton() {
@@ -109,6 +116,22 @@ export class AppComponent implements OnInit {
 
   toggleCategoryMenu() {
     this.showSubCategories = !this.showSubCategories;
+  }
+
+  fetchNotifications() {
+    this.notificationService.getNotifications().subscribe((response) => {
+      this.notifications = response.orders;
+      this.total = response.total;
+      console.log('Notifications:', this.notifications);
+      this.unreadCount = this.notifications.filter((notification: any) => !notification.read).length;
+    });
+  }
+
+  toggleNotifications(): void {
+    this.showNotifications = !this.showNotifications;
+    if (this.showNotifications) {
+      this.unreadCount = 0; // Réinitialiser le compteur lorsque les notifications sont affichées
+    }
   }
 
 }

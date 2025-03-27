@@ -131,6 +131,32 @@
       </div>
       <ng-template #loggedInMenu>
         <span style="font-size: 16px;">{{ userName }}</span>
+        <div class="notification-container">
+          <!-- Cloche de notification -->
+          <button mat-icon-button (click)="toggleNotifications()" class="notification-button">
+            <mat-icon>notifications</mat-icon>
+            <span *ngIf="unreadCount > 0" class="notification-badge">{{ unreadCount }}</span>
+          </button>
+        
+          <!-- Liste des notifications -->
+          <div *ngIf="showNotifications" class="notification-dropdown">
+            <h3>Notifications des 10 dernières commandes en attente</h3>
+            <ul>
+              <li *ngFor="let notification of notifications" class="notification-item">
+                <div class="notification-content">
+                  <p>
+                    <strong>{{ notification?.client_name }}</strong> - {{ notification.total }} FCFA
+                  </p>
+                  <p>{{ notification?.created_at | date:'short' }}</p>
+                </div>
+                <button mat-icon-button color="primary" [routerLink]="['/admin/orders', notification.id]" class="view-button">
+                  <mat-icon>visibility</mat-icon>
+                </button>
+              </li>
+            </ul>
+            <p *ngIf="notifications.length === 0" class="no-notifications">Aucune notification</p>
+          </div>
+        </div>
         <mat-menu #appMenu="matMenu">
           <button mat-menu-item routerLink="/profil">Profil</button>
           <button mat-menu-item (click)="logout()">Déconnexion</button>
