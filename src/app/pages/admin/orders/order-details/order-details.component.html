@@ -4,6 +4,12 @@
   <p><strong>Téléphone du client :</strong> {{ order.client_phone }}</p>
   <p><strong>Adresse du client :</strong> {{ order.client_address }}</p>
   <p><strong>Total :</strong> {{ order.total }}</p>
+  <p><strong>Etat de paiement :</strong>
+    <span [ngClass]="{'status-delivered': order.paid === true, 'status-pending': order.paid === 'false'}">
+      {{ order.paid === true ? 'Payé' : 'Non Payé' }}
+    </span>
+  </p>
+
   <p><strong>Statut :</strong> 
     <span [ngClass]="{'status-delivered': order.status === 'delivered', 'status-pending': order.status === 'pending'}">
       {{ order.status === 'delivered' ? 'Délivré' : 'En attente' }}
