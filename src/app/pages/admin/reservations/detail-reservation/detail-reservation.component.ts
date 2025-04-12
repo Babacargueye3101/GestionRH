@@ -35,4 +35,8 @@ export class DetailReservationComponent implements OnInit {
   closeDialog(): void {
     this.dialogRef.close();
   }
+
+  confirmReservation() {
+
+  }
 }

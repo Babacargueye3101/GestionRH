@@ -1,18 +1,67 @@
-<h2 mat-dialog-title>Détails de la Réservation</h2>
+<h2 mat-dialog-title class="dialog-title">Détails de la Réservation</h2>
 
-<mat-dialog-content *ngIf="reservation">
-  <p><strong>ID:</strong> {{ reservation.reservation.id }}</p>
-  <p><strong>Date:</strong> {{ reservation.availability.date }}</p>
-  <p><strong>Heure:</strong> {{ reservation.reservation.time }}</p>
-  <p><strong>Statut:</strong> 
-    <span [ngClass]="{'status-confirmed': reservation.reservation.status === 'confirmed', 'status-pending': reservation.reservation.status !== 'confirmed'}">
+<mat-dialog-content *ngIf="reservation" class="dialog-content">
+  <div class="reservation-header">
+    <div class="reservation-id">Réservation #{{ reservation.reservation.id }}</div>
+    <div class="status-badge" [ngClass]="{
+      'confirmed': reservation.reservation.status === 'confirmed',
+      'pending': reservation.reservation.status !== 'confirmed'
+    }">
       {{ reservation.reservation.status === 'confirmed' ? 'Confirmé' : 'En attente' }}
-    </span>
-  </p>
-  <p><strong>Client:</strong> {{ reservation.client.name }} {{ reservation.client.surname }} ({{ reservation.client.phone }})</p>
-  <p><strong>Email:</strong> {{ reservation.client.email }}</p>
+    </div>
+  </div>
+
+  <div class="info-grid">
+    <div class="info-section">
+      <h3 class="info-title">Détails</h3>
+      <div class="info-item">
+        <mat-icon>event</mat-icon>
+        <div>
+          <div class="info-label">Date</div>
+          <div class="info-value">{{ reservation.availability.date | date:'fullDate':'':'fr' }}</div>
+        </div>
+      </div>
+      <div class="info-item">
+        <mat-icon>schedule</mat-icon>
+        <div>
+          <div class="info-label">Heure</div>
+          <div class="info-value">{{ reservation.reservation.time }}</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-section">
+      <h3 class="info-title">Client</h3>
+      <div class="info-item">
+        <mat-icon>person</mat-icon>
+        <div>
+          <div class="info-label">Nom</div>
+          <div class="info-value">{{ reservation.client.name }} {{ reservation.client.surname }}</div>
+        </div>
+      </div>
+      <div class="info-item">
+        <mat-icon>phone</mat-icon>
+        <div>
+          <div class="info-label">Téléphone</div>
+          <div class="info-value">{{ reservation.client.phone }}</div>
+        </div>
+      </div>
+      <div class="info-item">
+        <mat-icon>email</mat-icon>
+        <div>
+          <div class="info-label">Email</div>
+          <div class="info-value">{{ reservation.client.email }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
 </mat-dialog-content>
 
-<mat-dialog-actions align="end">
-  <button mat-button (click)="closeDialog()">Fermer</button>
+<mat-dialog-actions align="end" class="dialog-actions">
+  <button mat-stroked-button (click)="closeDialog()">Fermer</button>
+  <!-- <button mat-flat-button color="primary"
+          *ngIf="reservation.reservation.status !== 'confirmed'"
+          (click)="confirmReservation()">
+    Confirmer la réservation
+  </button> -->
 </mat-dialog-actions>
