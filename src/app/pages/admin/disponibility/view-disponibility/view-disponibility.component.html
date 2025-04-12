@@ -1,18 +1,33 @@
-<h2>Détails de la Disponibilité</h2>
+<div class="availability-container">
+  <div class="availability-header">
+    <h2>Disponibilités</h2>
+    <div class="salon-info">
+      <mat-icon>storefront</mat-icon>
+      <span>{{ data.availability.salon?.name }}</span>
+    </div>
+  </div>
 
-<div>
-  <p><strong>Salon:</strong> {{ data.availability.salon?.name }}</p>
-  <p><strong>Date:</strong> {{ data.availability.date }}</p>
+  <div class="date-section">
+    <div class="date-badge">
+      <mat-icon>event</mat-icon>
+      <span>{{ data.availability.date | date:'fullDate':'':'fr' }}</span>
+    </div>
+  </div>
 
-  <!-- Liste des créneaux horaires -->
-  <p><strong>Créneaux:</strong></p>
-  <ul>
-    <li *ngFor="let slot of data.availability.time_slots">
-      {{ slot }}
-    </li>
-  </ul>
-</div>
+  <div class="time-slots-container">
+    <h3>Créneaux disponibles</h3>
+    <div class="time-slots-grid">
+      <div *ngFor="let slot of data.availability.time_slots" class="time-slot">
+        <mat-icon>schedule</mat-icon>
+        <span>{{ slot }}</span>
+      </div>
+    </div>
+  </div>
 
-<div>
-  <button mat-button (click)="closeDialog()">Fermer</button>
+  <div class="actions">
+    <button mat-flat-button color="primary" (click)="closeDialog()">
+      <mat-icon>close</mat-icon>
+      Fermer
+    </button>
+  </div>
 </div>
