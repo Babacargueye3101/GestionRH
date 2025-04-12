@@ -1,80 +1,38 @@
 /* filepath: /Users/xsorcier/Desktop/GestionRH/src/app/pages/public/home/home.component.scss */
+
+/* Structure Principale */
 .home-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #f5f5f5;
+  
+  mat-sidenav-content {
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    flex: 1;
   }
+}
 
-  .main-toolbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .sub-toolbar {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-  }
-
-
-  .fab-cart {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background-color: #90611fc5;
-    color: white;
-    padding: 15px;
-    border-radius: 50%;
-    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 24px;
-    cursor: pointer;
-
-    .cart-badge {
-      position: absolute;
-      top: -5px;
-      right: -5px;
-      background-color: red;
-      color: white;
-      font-size: 12px;
-      font-weight: bold;
-      width: 20px;
-      height: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 50%;
-      box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-    }
-  }
-
-  /* Centrer les liens dans la toolbar */
-  .sub-toolbar {
-    display: flex;
-    justify-content: center; /* Centre horizontalement */
-    align-items: center;
-    width: 100%; /* Assure que ça prend toute la largeur */
-    text-align: center;
-  }
-
-  /* Centrer les boutons d'authentification */
-  .auth-buttons {
-    display: flex;
-    justify-content: center; /* Centre les boutons */
-    width: 100%;
-    margin-top: 10px; /* Ajoute un peu d’espace */
-  }
-
-  .auth-buttons a {
-    margin: 0 10px; /* Ajoute un peu d’espace entre les liens */
-  }
+/* Toolbar Principale */
+.main-toolbar.light-blue-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background-color: #a67c52 !important;
+  height: 90px;
+  color: white !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 0 20px;
 
   .app-title {
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     font-weight: bold;
+    letter-spacing: 1px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
   }
 
   .spacer {
@@ -83,315 +41,244 @@
 
   .search-bar {
     width: 40%;
-  }
-
-  .auth-buttons a {
-    margin-left: 10px;
-  }
-
-  .salon-banner {
-    position: relative;
-    width: 100%;
-    height: 400px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 20px;
-    overflow: hidden;
-  }
-
-
-
-
-  .salon-banner img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 8px;
-  }
-
-  .banner-text {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: white;
-    text-align: center;
-    background: rgba(0, 0, 0, 0.5);
-    padding: 20px;
-    border-radius: 8px;
-  }
-
-  .banner-text h1 {
-    font-size: 2.5rem;
-    margin: 0;
-  }
-
-  .banner-text p {
-    font-size: 1.2rem;
-    margin: 0;
-  }
-
-  .home-sections {
-    padding: 20px;
-  }
-
-  .product-section {
-    margin-bottom: 40px;
-  }
-
-
-
-  .footer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    background: linear-gradient(135deg, #90611fc5, #34495e);
-    color: #ffffff;
-    text-align: center;
-    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
-
-    span {
-      margin: 5px 0;
-      font-size: 14px;
+    margin-left: 20px;
+    
+    .mat-form-field-wrapper {
+      padding-bottom: 0;
     }
-
-    .social-links {
-      display: flex;
-      gap: 15px;
-      margin-top: 10px;
-
-      a {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-decoration: none;
-        color: #ffffff;
-        transition: transform 0.3s ease, color 0.3s ease;
-
-        mat-icon {
-          font-size: 26px;
-        }
-
-        &:hover {
-          transform: scale(1.3);
-          color: #f39c12; // Couleur au survol
-        }
-      }
+    
+    .mat-form-field-outline {
+      background-color: white;
+      border-radius: 30px;
+    }
+    
+    input {
+      padding: 12px 20px;
+      font-size: 1rem;
     }
   }
+}
 
-  /* Responsive */
-  @media (max-width: 768px) {
-    .footer {
-      padding: 15px;
-    }
-  }
-
-
-
-  .light-blue-toolbar {
-    background-color: #a67c52 !important; /* Bleu clair */
-    height: 90px;
-    color: white !important;
-  }
-
-  .sub-toolbar, .black-toolbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 120px;
-    width: 100%;
-  }
-
-
-  .sub-toolbar a, .black-toolbar a {
-    color: rgb(0, 0, 0);
+/* Toolbar Secondaire */
+.sub-toolbar.black-toolbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffffff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 15px 0;
+  position: sticky;
+  top: 90px; /* Correspond à la hauteur de la toolbar principale */
+  z-index: 999;
+  margin-bottom: 30px; /* Espace avant les cartes */
+  
+  a {
+    color: #333;
     text-decoration: none;
-  }
-
-  /* Pour les petits écrans */
-  @media (max-width: 768px) {
-    .sub-toolbar, .black-toolbar {
-      flex-direction: row; /* Assurez-vous que les éléments sont en ligne */
-      justify-content: flex-start; /* Aligner les éléments sur la gauche */
-      padding: 10px; /* Ajouter de l'espace autour des éléments */
-    }
-
-    .sub-toolbar a, .black-toolbar a {
-      margin-right: 15px; /* Espacement entre les liens */
-    }
-  }
-  /* Changer la couleur des boutons icônes en noir */
-  mat-icon-button, .mat-icon {
-    color: black !important;
-  }
-
-
-
-
-
-  /* Petits écrans (mobiles) */
-  @media (max-width: 768px) {
-    .main-toolbar {
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      padding: 10px;
-    }
-
-    .sub-toolbar {
-      flex-direction: column;
-      align-items: center;
-      padding: 10px;
-    }
-
-    .search-bar {
-      width: 80%;
-    }
-
-    .auth-buttons {
-      display: flex;
-      justify-content: center;
-      margin-top: 10px;
-    }
-
-
-
-    .product-list {
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .product-item {
-      flex: 1 1 100%; /* Un produit par ligne */
-    }
-
-    .footer {
-      font-size: 14px;
-    }
-  }
-
-
-/* filepath: /Users/babacargueye/Mes Dcouments/GESTION RH /GestionRH/src/app/pages/public/reservation-public/reservation-public.component.scss */
-.shop-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    padding: 20px;
-  }
-
-  .shop-card {
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin: 10px;
-    width: 300px;
-    cursor: pointer;
-    transition: transform 0.3s ease;
-
+    margin: 0 20px;
+    font-weight: 500;
+    font-size: 1.1rem;
+    padding: 8px 15px;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+    
     &:hover {
-      transform: translateY(-5px);
+      background-color: #f0f0f0;
+      color: #a67c52;
     }
+    
+    &.active {
+      color: #a67c52;
+      font-weight: 600;
+    }
+  }
+}
 
-    .shop-card-image {
-      overflow: hidden;
-      border-top-left-radius: 8px;
-      border-top-right-radius: 8px;
+/* Conteneur des Cartes */
+.shop-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  padding: 100px 20px 40px;
+  margin: 0 auto;
+  max-width: 1200px;
+  position: relative;
+  z-index: 1;
+}
 
-      img {
-        width: 100%;
-        height: auto;
-        display: block;
-        border-bottom-left-radius: 8px;
-        border-bottom-right-radius: 8px;
+/* Cartes Produits */
+.shop-card {
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  width: 300px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  overflow: hidden;
+  
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    
+    .shop-card-image img {
+      transform: scale(1.05);
+    }
+  }
+
+  .shop-card-image {
+    height: 200px;
+    overflow: hidden;
+    
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+  }
+
+  .shop-card-content {
+    padding: 20px;
+    text-align: center;
+    
+    h3 {
+      margin: 0 0 10px;
+      font-size: 1.4rem;
+      color: #333;
+      font-weight: 600;
+    }
+    
+    p {
+      color: #666;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      margin-bottom: 15px;
+    }
+    
+    .price {
+      display: inline-block;
+      padding: 6px 15px;
+      background-color: #a67c52;
+      color: white;
+      border-radius: 20px;
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
+  }
+}
+
+/* Pied de Page */
+.footer {
+  margin-top: auto;
+  padding: 30px 20px;
+  background: linear-gradient(135deg, #90611fc5, #34495e);
+  color: white;
+  text-align: center;
+  
+  span {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+  }
+  
+  .social-links {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    
+    a {
+      color: white;
+      transition: all 0.3s ease;
+      
+      &:hover {
+        color: #f1c40f;
+        transform: scale(1.2);
+      }
+      
+      mat-icon {
+        font-size: 24px;
       }
     }
+  }
+}
 
+/* Responsive Design */
+@media (max-width: 992px) {
+  .main-toolbar .search-bar {
+    width: 50%;
+  }
+}
+
+@media (max-width: 768px) {
+  .main-toolbar.light-blue-toolbar {
+    flex-direction: column;
+    height: auto;
+    padding: 15px 0;
+    
+    .app-title {
+      margin-bottom: 10px;
+    }
+    
+    .search-bar {
+      width: 90%;
+      margin: 10px 0 0 0;
+    }
+  }
+  
+  .sub-toolbar.black-toolbar {
+    display: flex;
+    flex-wrap: wrap; /* Permet aux liens de passer à la ligne si besoin */
+    justify-content: center;
+    padding: 10px 0;
+    
+    a {
+      margin: 5px 8px;
+      font-size: 1rem;
+      white-space: nowrap; /* Empêche que le texte casse */
+    }
+
+    .d-flex {
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+  }
+  
+  .shop-container {
+    padding: 100px 10px 20px;
+    gap: 20px;
+  }
+  
+  .shop-card {
+    width: 100%;
+    max-width: 350px;
+  }
+}
+
+@media (max-width: 480px) {
+  .main-toolbar .app-title {
+    font-size: 1.5rem;
+  }
+  
+  .shop-card {
+    .shop-card-image {
+      height: 160px;
+    }
+    
     .shop-card-content {
       padding: 15px;
-      text-align: center;
-
-
+      
       h3 {
-        margin: 0 0 10px;
-        font-size: 1.5em;
-        color: #333;
-      }
-
-      p {
-        color: #666;
-        font-size: 1em;
+        font-size: 1.2rem;
       }
     }
   }
-
-  .search-bar {
-    width: 300px;
-    margin-top: 10px;
-
-    mat-form-field {
-      width: 100%;
-
-      input {
-        padding: 10px;
-      }
-
-      button {
-        margin-right: 10px;
-      }
-
-      mat-icon {
-        color: #757575;
-      }
-    }
-  }
-
-
-
+  
   .footer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    position: fixed;
-    bottom: 0;
-    padding: 20px;
-    z-index: 1000;
-    width: 100%;
-    background: linear-gradient(135deg, #90611fc5, #34495e);
-    color: #ffffff;
-    text-align: center;
-    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
-
-    span {
-      margin: 5px 0;
-      font-size: 14px;
-    }
-
+    padding: 20px 10px;
+    
     .social-links {
-      display: flex;
       gap: 15px;
-      margin-top: 10px;
-
-      a {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-decoration: none;
-        color: #ffffff;
-        transition: transform 0.3s ease, color 0.3s ease;
-
-        mat-icon {
-          font-size: 26px;
-        }
-
-        &:hover {
-          transform: scale(1.3);
-          color: #f39c12; // Couleur au survol
-        }
-      }
     }
   }
+}

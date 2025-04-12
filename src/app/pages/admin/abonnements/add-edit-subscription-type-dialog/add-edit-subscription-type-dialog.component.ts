@@ -12,7 +12,7 @@ import { AbonnementService } from 'src/app/services/abonnement.service';
 })
 export class AddEditSubscriptionTypeDialogComponent implements OnInit {
   form: FormGroup;
-
+  selectedFile: File | null = null;
   constructor(
     private fb: FormBuilder,
     private abonnementService: AbonnementService,
@@ -34,21 +34,41 @@ export class AddEditSubscriptionTypeDialogComponent implements OnInit {
     }
   }
 
+
+  onFileSelected(event: Event): void {
+    const fileInput = event.target as HTMLInputElement;
+    if (fileInput.files && fileInput.files.length > 0) {
+      this.selectedFile = fileInput.files[0];
+    }
+  }
+
   onCancel(): void {
     this.dialogRef.close();
   }
 
   onSave(): void {
-    const payload = this.form.value;
-    console.log(payload)
+    const formValue = this.form.value;
+    const formData = new FormData();
+  
+    formData.append('name', formValue.name);
+    formData.append('price', formValue.price);
+    formData.append('description', formValue.description);
+    formData.append('letter', formValue.letter);
+    formData.append('active', formValue.active);
+  
+    if (this.selectedFile) {
+      formData.append('image', this.selectedFile);
+    }
+  
     if (this.data) {
-      this.abonnementService.updateSubscriptionType(this.data.id, payload).subscribe(() => {
+      this.abonnementService.updateSubscriptionType(this.data.id, formData).subscribe(() => {
         this.dialogRef.close(true);
       });
     } else {
-      this.abonnementService.addSubscriptionType(payload).subscribe(() => {
+      this.abonnementService.addSubscriptionType(formData).subscribe(() => {
         this.dialogRef.close(true);
       });
     }
   }
+  
 }

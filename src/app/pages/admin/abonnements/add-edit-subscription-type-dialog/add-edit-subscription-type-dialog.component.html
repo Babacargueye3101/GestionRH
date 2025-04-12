@@ -17,6 +17,8 @@
       <mat-label>Lettre</mat-label>
       <input matInput formControlName="letter">
     </mat-form-field><br>
+    <input type="file" (change)="onFileSelected($event)" accept="image/*">
+    
     <mat-checkbox formControlName="active">Activé</mat-checkbox>
   </form>
 </mat-dialog-content>

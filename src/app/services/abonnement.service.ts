@@ -19,6 +19,16 @@ export class AbonnementService {
     });
   }
 
+  private getAuthHeadersForFormData(): HttpHeaders {
+    const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+    const token = currentUser.token;
+    return new HttpHeaders({
+      Authorization: `Bearer ${token}`
+      // Ne pas définir 'Content-Type' ici
+    });
+  }
+  
+
   getSubscriptionTypes(): Observable<any> {
     return this.http.get(`${this.baseUrl}/subscription_types`, { headers: this.getHeaders() });
   }
@@ -32,12 +42,15 @@ export class AbonnementService {
   }
 
   addSubscriptionType(payload: any): Observable<any> {
-    return this.http.post(`${this.baseUrl}/subscription_types`, payload, { headers: this.getHeaders() });
+    const headers = payload instanceof FormData ? this.getAuthHeadersForFormData() : this.getHeaders();
+    return this.http.post(`${this.baseUrl}/subscription_types`, payload, { headers });
+  }
+  
+  updateSubscriptionType(id: number, payload: any): Observable<any> {
+    const headers = payload instanceof FormData ? this.getAuthHeadersForFormData() : this.getHeaders();
+    return this.http.put(`${this.baseUrl}/subscription_types/${id}`, payload, { headers });
   }
 
-  updateSubscriptionType(id: number, payload: any): Observable<any> {
-    return this.http.put(`${this.baseUrl}/subscription_types/${id}`, payload, { headers: this.getHeaders() });
-  }
 
   deleteSubscriptionType(id: number): Observable<any> {
     return this.http.delete(`${this.baseUrl}/subscription_types/${id}`, { headers: this.getHeaders() });
