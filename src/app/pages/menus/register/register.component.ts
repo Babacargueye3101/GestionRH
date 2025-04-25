@@ -21,8 +21,7 @@ export class RegisterComponent implements OnInit{
       username: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
-      confirmPassword: ['', Validators.required],
-      company: ['', Validators.required]
+      confirmPassword: ['', Validators.required]
     }, { validators: this.passwordMatchValidator });
   }
   ngOnInit(): void {

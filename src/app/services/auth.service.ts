@@ -12,21 +12,28 @@ export class AuthService {
   constructor(private http: HttpClient) {}
 
   login(email: string, password: string): Observable<any> {
-    return this.http.post(`${this.apiUrl}/users/sign_in`, { email, password }, {
+    return this.http.post(`${this.apiUrl}/api/auth/login`, {
+      email,
+      password
+    }, {
       headers: { 'Content-Type': 'application/json' }
     });
-
   }
 
   register(email: string, password: string, passwordConfirmation: string, nom: string, compagnyId: string): Observable<any> {
-    return this.http.post(`${this.apiUrl}/users`, { user: { email, password, password_confirmation: passwordConfirmation, name: nom , compagny_id: compagnyId} }, {
+    return this.http.post(`${this.apiUrl}/api/auth/register`, {
+      email,
+      password,
+      password_confirmation: passwordConfirmation,
+      name: nom,
+      compagny_id: compagnyId
+    }, {
       headers: { 'Content-Type': 'application/json' }
     });
   }
 
-
   logout(): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/users/sign_out`);
+    return this.http.delete(`${this.apiUrl}/api/auth/logout`);
   }
 
   isAuthenticated(): boolean {

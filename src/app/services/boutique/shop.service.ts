@@ -9,7 +9,7 @@ import { Shop } from 'src/app/models/shop';
 })
 export class ShopService {
 
-  private apiUrl = `${environment.apiUrl}/shops`;
+  private apiUrl = `${environment.apiUrl}/api/shops`;
 
   constructor(private http: HttpClient) { }
 

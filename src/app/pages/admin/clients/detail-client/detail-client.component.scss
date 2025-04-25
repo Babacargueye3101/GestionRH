@@ -1,92 +1,213 @@
-// Conteneur du modal
-.mat-dialog-container {
-    padding: 20px;
-    background-color: #fff;
+@use '@angular/material' as mat;
+
+.dialog-title {
+  padding: 24px 24px 16px;
+  margin: 0;
+  font-size: 24px;
+  font-weight: 500;
+  color: linear-gradient(135deg, #e6b8b7, #c9a173, #a67c52);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  mat-icon {
+    margin-right: 12px;
+    color: linear-gradient(135deg, #e6b8b7, #c9a173, #a67c52);
+  }
+}
+
+.dialog-content {
+  padding: 20px 24px;
+}
+
+.client-profile {
+  display: flex;
+  align-items: center;
+  margin-bottom: 24px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.client-avatar {
+  margin-right: 20px;
+
+  .avatar-icon {
+    font-size: 60px;
+    width: 60px;
+    height: 60px;
+    color: linear-gradient(135deg, #e6b8b7, #c9a173, #a67c52);
+  }
+}
+
+.client-name {
+  margin: 0 0 12px 0;
+  font-size: 22px;
+  font-weight: 500;
+  color: linear-gradient(135deg, #e6b8b7, #c9a173, #a67c52);
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  font-size: 15px;
+  color: #555;
+
+  mat-icon {
+    margin-right: 12px;
+    color: linear-gradient(135deg, #e6b8b7, #c9a173, #a67c52);
+    font-size: 20px;
+  }
+}
+
+.reservations-section {
+  margin-top: 24px;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+
+  h3 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 500;
+    color: linear-gradient(135deg, #e6b8b7, #c9a173, #a67c52);
+  }
+
+  .badge {
+    background: linear-gradient(135deg, #e6b8b7, #c9a173, #a67c52);
+    color: linear-gradient(135deg, #e6b8b7, #c9a173, #a67c52);
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 13px;
+    font-weight: 500;
+  }
+}
+
+.reservations-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+.reservation-card {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  border-radius: 8px;
+  background: white;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease;
+  border-left: 4px solid;
+
+  &.confirmed {
+    border-color: #2ecc71;
+
+    .reservation-status {
+      color: #2ecc71;
+    }
+  }
+
+  &.pending {
+    border-color: #f1c40f;
+
+    .reservation-status {
+      color: #f1c40f;
+    }
+  }
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+}
+
+.reservation-date {
+  text-align: center;
+  margin-right: 16px;
+  min-width: 50px;
+
+  .date-day {
+    font-size: 22px;
+    font-weight: 600;
+    color: linear-gradient(135deg, #e6b8b7, #c9a173, #a67c52);
+    line-height: 1;
+  }
+
+  .date-month {
+    font-size: 12px;
+    text-transform: uppercase;
+    color: #666;
+    margin-top: 2px;
+  }
+}
+
+.reservation-details {
+  flex: 1;
+}
+
+.reservation-time {
+  display: flex;
+  align-items: center;
+  font-size: 15px;
+  color: #333;
+  margin-bottom: 4px;
+
+  mat-icon {
+    font-size: 18px;
+    margin-right: 8px;
+    color: #666;
+  }
+}
+
+.reservation-status {
+  font-size: 13px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.dialog-actions {
+  padding: 16px 24px;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+
+  button {
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 20px;
     border-radius: 8px;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-    max-width: 600px;
-    margin: 0 auto;
-    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 
-    // Titre du modal
-    mat-dialog-title {
-      font-size: 24px;
-      font-weight: 500;
-      color: #00796b;
-      text-align: center;
-      margin-bottom: 20px;
-      border-bottom: 2px solid #f0f0f0;
-      padding-bottom: 10px;
+    mat-icon {
+      margin-right: 8px;
+      font-size: 18px;
     }
+  }
+}
 
-    // Contenu du modal
-    mat-dialog-content {
-      p {
-        font-size: 16px;
-        color: #555;
-        line-height: 1.5;
-        margin-bottom: 15px;
-      }
+@media (max-width: 600px) {
+  .client-profile {
+    flex-direction: column;
+    text-align: center;
 
-      strong {
-        font-weight: 600;
-        color: #00796b;
-      }
-
-      h4 {
-        font-size: 18px;
-        font-weight: 600;
-        margin-top: 20px;
-        color: #00796b;
-      }
-
-      ul {
-        padding-left: 20px;
-        list-style-type: none;
-        margin-top: 10px;
-
-        li {
-          font-size: 16px;
-          color: #555;
-          padding: 8px 0;
-          border-bottom: 1px solid #f1f1f1;
-        }
-      }
-    }
-
-    // Actions du modal
-    mat-dialog-actions {
-      display: flex;
-      justify-content: flex-end;
-      padding-top: 20px;
-
-      button {
-        font-size: 16px;
-        padding: 10px 20px;
-        border-radius: 4px;
-        background-color: #00796b;
-        color: #fff;
-        border: none;
-        cursor: pointer;
-        transition: background-color 0.3s ease, transform 0.2s ease;
-
-        &:hover {
-          background-color: #004d40;
-          transform: scale(1.05);
-        }
-
-        &:focus {
-          outline: none;
-        }
-      }
+    .client-avatar {
+      margin-right: 0;
+      margin-bottom: 16px;
     }
   }
 
-  /* filepath: /Users/xsorcier/Desktop/GestionRH/src/app/pages/admin/clients/detail-client/detail-client.component.scss */
-.status-confirmed {
-    color: green;
+  .info-item {
+    justify-content: center;
   }
-  
-  .status-pending {
-    color: orange;
-  }
+}

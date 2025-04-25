@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class PaymentMethodeService {
 
-  private apiUrl = 'http://localhost:3000/api/payment_methodes'; // URL de l'API
+  private apiUrl = 'https://gestionrhback-production.up.railway.app/api/payment_methodes'; // URL de l'API
 
   constructor(private http: HttpClient) { }
 

@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment';
 })
 export class SalonService {
 
-  private apiUrl = `${environment.apiUrl}/shops`;
+  private apiUrl = `${environment.apiUrl}/api/shops`;
 
   constructor(private http: HttpClient) { }
 

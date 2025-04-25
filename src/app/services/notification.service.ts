@@ -7,16 +7,16 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class NotificationService {
-   private apiUrl = `${environment.apiUrl}/products/pending`;
+   private apiUrl = `${environment.apiUrl}/api/public/products/pending`;
 
    constructor(private http: HttpClient) {}
-  
+
     private getHeaders() {
       const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
       const token = currentUser.token;
-  
+
       console.log(token);
-  
+
       return new HttpHeaders({
         Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json',
@@ -27,5 +27,5 @@ export class NotificationService {
     getNotifications(): Observable<any> {
         return this.http.get(this.apiUrl, { headers: this.getHeaders() });
       }
-    
+
 }

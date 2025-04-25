@@ -8,7 +8,7 @@ import Swal from 'sweetalert2';
 })
 export class CanalService {
 
-  private apiUrl = 'http://localhost:3000/api/channels'; // URL de ton API
+  private apiUrl = 'https://gestionrhback-production.up.railway.app/api/channels'; // URL de ton API
 
   constructor(private http: HttpClient) {}
 

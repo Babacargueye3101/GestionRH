@@ -1,22 +1,59 @@
-<h2 mat-dialog-title>Détails du Client</h2>
+<h2 mat-dialog-title class="dialog-title">Profil Client</h2>
 
-<mat-dialog-content>
-  <p><strong>Prénom:</strong> {{ data.name }}</p>
-  <p><strong>Nom:</strong> {{ data.surname }}</p>
-  <p><strong>Email:</strong> {{ data.email }}</p>
-  <p><strong>Téléphone:</strong> {{ data.phone }}</p>
+<mat-dialog-content class="dialog-content">
+  <div class="client-profile">
+    <div class="client-avatar">
+      <mat-icon class="avatar-icon">account_circle</mat-icon>
+    </div>
 
-  <h4>Réservations :</h4>
-  <ul>
-    <li *ngFor="let reservation of reservations">
-      {{ reservation.time }} - {{ reservation.availability.date }}
-      <span [ngClass]="{'status-confirmed': reservation.status === 'confirmed', 'status-pending': reservation.status !== 'confirmed'}">
-        ({{ reservation.status === 'confirmed' ? 'Confirmé' : 'En attente' }})
-      </span>
-    </li>
-  </ul>
+    <div class="client-info">
+      <h3 class="client-name">{{ data.name }} {{ data.surname }}</h3>
+      <div class="info-grid">
+        <div class="info-item">
+          <mat-icon>email</mat-icon>
+          <span>{{ data.email }}</span>
+        </div>
+        <div class="info-item">
+          <mat-icon>phone</mat-icon>
+          <span>{{ data.phone }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="reservations-section">
+    <div class="section-header">
+      <h3>Historique des Réservations</h3>
+      <span class="badge">{{ reservations.length }} réservation(s)</span>
+    </div>
+
+    <div class="reservations-list">
+      <div *ngFor="let reservation of reservations" class="reservation-card" [ngClass]="{
+        'confirmed': reservation.status === 'confirmed',
+        'pending': reservation.status !== 'confirmed'
+      }">
+        <div class="reservation-date">
+          <div class="date-day">{{ reservation.availability.date | date:'d' }}</div>
+          <div class="date-month">{{ reservation.availability.date | date:'MMM' }}</div>
+        </div>
+
+        <div class="reservation-details">
+          <div class="reservation-time">
+            <mat-icon>schedule</mat-icon>
+            {{ reservation.time }}
+          </div>
+          <div class="reservation-status">
+            {{ reservation.status === 'confirmed' ? 'Confirmée' : 'En attente' }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </mat-dialog-content>
 
-<mat-dialog-actions align="end">
-  <button mat-button (click)="closeDialog()">Fermer</button>
+<mat-dialog-actions align="end" class="dialog-actions">
+  <button mat-stroked-button (click)="closeDialog()">
+    <mat-icon>close</mat-icon>
+    Fermer
+  </button>
 </mat-dialog-actions>
