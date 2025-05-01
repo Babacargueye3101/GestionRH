@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment';
 })
 export class DisponibilityService {
 
-  private apiUrl = environment.apiUrl;
+  private apiUrl = environment.apiUrl+"/api";
 
   constructor(private http: HttpClient) {}
 

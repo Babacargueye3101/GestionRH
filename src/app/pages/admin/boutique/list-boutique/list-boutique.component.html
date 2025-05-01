@@ -1,38 +1,40 @@
-<div class="container">
-    <h2>Liste des Boutiques</h2>
-     <!-- Barre de recherche -->
-    <input matInput placeholder="Rechercher..." [(ngModel)]="searchText" (input)="filterShops()" class="search-bar"/>
-    <table mat-table [dataSource]="filteredShops" class="mat-elevation-z8">
-
-      <!-- Nom -->
-      <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef> Nom </th>
-        <td mat-cell *matCellDef="let shop"> {{ shop.name }} </td>
-      </ng-container>
-
-      <!-- Lieu -->
-      <ng-container matColumnDef="location">
-        <th mat-header-cell *matHeaderCellDef> Lieu </th>
-        <td mat-cell *matCellDef="let shop"> {{ shop.location }} </td>
-      </ng-container>
-
-      <!-- Actions -->
-      <ng-container matColumnDef="actions">
-        <th mat-header-cell *matHeaderCellDef> Actions </th>
-        <td mat-cell *matCellDef="let shop">
-          <button mat-icon-button color="primary" (click)="viewShop(shop)">
-            <mat-icon>visibility</mat-icon>
-          </button>
-          <button mat-icon-button  (click)="editShop(shop)" style="color:goldenrod;">
-            <mat-icon>edit</mat-icon>
-          </button>
-          <button mat-icon-button  (click)="deleteShop(shop.id)" style="color: rgb(243, 119, 119);">
-            <mat-icon>delete</mat-icon>
-          </button>
-        </td>
-      </ng-container>
-
-      <tr mat-header-row *matHeaderRowDef="['name', 'location', 'actions']"></tr>
-      <tr mat-row *matRowDef="let row; columns: ['name', 'location', 'actions'];"></tr>
-    </table>
+<div class="shop-list-container">
+  <div class="shop-header">
+      <h2>Liste des Boutiques</h2>
+      <div class="search-container">
+          <mat-icon class="search-icon">search</mat-icon>
+          <input matInput placeholder="Rechercher une boutique..." [(ngModel)]="searchText"
+                 (input)="filterShops()" class="search-bar"/>
+      </div>
   </div>
+
+  <div class="shop-grid" *ngIf="filteredShops.length > 0; else noShops">
+      <div class="shop-card" *ngFor="let shop of filteredShops">
+          <div class="shop-info">
+              <h3 class="shop-name">{{ shop.name }}</h3>
+              <p class="shop-location">
+                  <mat-icon class="location-icon">location_on</mat-icon>
+                  {{ shop.location }}
+              </p>
+          </div>
+          <div class="shop-actions">
+              <button mat-icon-button color="primary" (click)="viewShop(shop)" matTooltip="Voir détails">
+                  <mat-icon>visibility</mat-icon>
+              </button>
+              <button mat-icon-button (click)="editShop(shop)" matTooltip="Modifier" class="edit-btn">
+                  <mat-icon>edit</mat-icon>
+              </button>
+              <button mat-icon-button (click)="deleteShop(shop.id)" matTooltip="Supprimer" class="delete-btn">
+                  <mat-icon>delete</mat-icon>
+              </button>
+          </div>
+      </div>
+  </div>
+
+  <ng-template #noShops>
+      <div class="no-shops">
+          <mat-icon class="no-shops-icon">storefront</mat-icon>
+          <p>Aucune boutique trouvée</p>
+      </div>
+  </ng-template>
+</div>
