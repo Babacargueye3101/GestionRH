@@ -1,49 +1,73 @@
 <mat-sidenav-container class="home-container">
   <mat-sidenav-content>
     <!-- Barre de navigation -->
-    <mat-toolbar class="main-toolbar light-blue-toolbar">
+    <mat-toolbar class="main-toolbar">
       <span class="app-title">{{ compagny.name }}</span>
       <span class="spacer"></span>
-      <mat-form-field class="search-bar" style="margin-top: 10px;">
-        <input matInput (keyup)="applyFilter($event)" placeholder="Nom, description">
-        <button mat-icon-button matSuffix>
-          <mat-icon>search</mat-icon>
-        </button>
+      <mat-form-field class="search-bar" appearance="fill">
+        <input matInput (keyup)="applyFilter($event)" placeholder="Rechercher...">
+        <mat-icon matSuffix>search</mat-icon>
       </mat-form-field>
     </mat-toolbar>
-
-    <!-- Sous-barre de navigation -->
-    <mat-toolbar class="sub-toolbar black-toolbar">
-      <mat-form-field class="category-select" style="margin-top: 20px;">
-        <mat-select placeholder="Afficher les catégories disponible" (selectionChange)="onCategorySelected($event)">
-          <mat-option *ngFor="let category of categories" [value]="category.id">
-            {{ category.name }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-      <div class="d-flex justify-content-center align-items-center mx-auto">
-        <a mat-button routerLink="">Products</a>
-        <a mat-button routerLink="/public/reservations">Reservations</a>
-        <a mat-button routerLink="/public/abonnements">Abonnnements</a>
-        <a mat-button routerLink="/public/apropos">A Propos</a>
-      </div>
-
-    </mat-toolbar>
-
+  
+    <!-- Navigation secondaire (sticky) -->
+    <div class="secondary-nav-container">
+      <mat-toolbar class="sub-toolbar">
+        <mat-form-field class="category-select" appearance="fill">
+          <mat-select placeholder="Catégories" (selectionChange)="onCategorySelected($event)">
+            <mat-option *ngFor="let category of categories" [value]="category.id">
+              {{ category.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        
+        <nav class="main-nav">
+          <a mat-button routerLink="" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+            <mat-icon>shopping_bag</mat-icon> Produits
+          </a>
+          <a mat-button routerLink="/public/reservations" routerLinkActive="active">
+            <mat-icon>event_available</mat-icon> Reservations
+          </a>
+          <a mat-button routerLink="/public/abonnements" routerLinkActive="active">
+            <mat-icon>subscriptions</mat-icon> Abonnements
+          </a>
+          <a mat-button routerLink="/public/apropos" routerLinkActive="active">
+            <mat-icon>info</mat-icon> A Propos
+          </a>
+        </nav>
+      </mat-toolbar>
+    </div>
     <!-- Bannière du salon -->
+<!-- Modifiez votre section swiper comme ceci -->
     <div class="swiper-container">
       <div class="swiper-wrapper">
-        <div class="swiper-slide" *ngFor="let image of images">
-          <img [src]="image" alt="Image slider" class="slider-img">
+        <!-- Slide 1 avec image et texte -->
+        <div class="swiper-slide">
+          <img src="assets/images/banner1.png" alt="Bannière Dabishpro" class="slider-img">
+          <div class="banner-text">
+            <h1>Bienvenue chez Dabishpro</h1>
+            <p>Découvrez nos produits exclusifs</p>
+            <button mat-raised-button color="accent" routerLink="/products">Voir la collection</button>
+          </div>
         </div>
+
+        <!-- Slide 2 avec image et texte différent -->
+        <div class="swiper-slide">
+          <img src="assets/images/banner2.png" alt="Promotions" class="slider-img">
+          <div class="banner-text right-align">
+            <h2>Promotions exceptionnelles</h2>
+            <p>Jusqu'à -30% sur une sélection d'articles</p>
+            <button mat-raised-button color="warn">Découvrir les offres</button>
+          </div>
+        </div>
+
+        <!-- Vous pouvez ajouter d'autres slides selon vos besoins -->
       </div>
 
-      <!-- Pagination -->
-      <!-- <div class="swiper-pagination"></div> -->
-
-      <!-- Boutons de navigation -->
-      <!-- <div class="swiper-button-prev"></div>
-      <div class="swiper-button-next"></div> -->
+      <!-- Ajoutez la pagination et navigation si besoin -->
+      <div class="swiper-pagination"></div>
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next"></div>
     </div>
 
     <!-- Sections de la page d'accueil -->
