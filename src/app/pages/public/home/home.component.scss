@@ -532,41 +532,36 @@
   border-radius: 8px;
 }
 
+/* Pied de Page */
 .footer {
-  background: linear-gradient(135deg, #34495e, #2c3e50);
-  padding: 40px 0;
+  margin-top: auto;
+  padding: 30px 20px;
+  background: linear-gradient(135deg, #90611fc5, #34495e);
   color: white;
   text-align: center;
-
+  
   span {
     display: block;
-    margin-bottom: 20px;
-    font-size: 16px;
-    opacity: 0.8;
+    margin-bottom: 10px;
+    font-size: 0.9rem;
   }
-
+  
   .social-links {
     display: flex;
     justify-content: center;
     gap: 20px;
-
+    
     a {
-      width: 40px;
-      height: 40px;
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      color: white;
       transition: all 0.3s ease;
-
-      mat-icon {
-        font-size: 20px;
-      }
-
+      
       &:hover {
-        background: #90611f;
-        transform: translateY(-5px);
+        color: #f1c40f;
+        transform: scale(1.2);
+      }
+      
+      mat-icon {
+        font-size: 24px;
       }
     }
   }

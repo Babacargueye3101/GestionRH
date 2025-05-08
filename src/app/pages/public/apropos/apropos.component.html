@@ -1,25 +1,58 @@
 <mat-sidenav-container class="home-container">
     <mat-sidenav-content>
-      <!-- Barre de navigation -->
-      <mat-toolbar class="main-toolbar light-blue-toolbar">
-        <span class="app-title">Mon Compagngy</span>
+   <!-- Barre de navigation -->
+      <mat-toolbar class="main-toolbar">
+        <span class="app-title">{{ compagny.name }}</span>
         <span class="spacer"></span>
       </mat-toolbar>
 
-      <!-- Sous-barre de navigation -->
-      <mat-toolbar class="sub-toolbar black-toolbar">
-        <div class="d-flex justify-content-center align-items-center mx-auto">
-          <a mat-button routerLink="">Products</a>
-          <a mat-button routerLink="/public/reservations">Reservations</a>
-          <a mat-button routerLink="/public/abonnements">Abonnnements</a>
-        </div>
-
-      </mat-toolbar>
-
-      <div class="about-container">
-        <h1>Qui sommes-nous ?</h1>
-        <p>{{ description }}</p>
+      <!-- Navigation secondaire (sticky) -->
+      <div class="secondary-nav-container">
+        <mat-toolbar class="sub-toolbar">
+        
+          <nav class="main-nav">
+            <a mat-button routerLink="" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+              <mat-icon>shopping_bag</mat-icon> Produits
+            </a>
+            <a mat-button routerLink="/public/reservations" routerLinkActive="active">
+              <mat-icon>event_available</mat-icon> Reservations
+            </a>
+            <a mat-button routerLink="/public/abonnements" routerLinkActive="active">
+              <mat-icon>subscriptions</mat-icon> Abonnements
+            </a>
+            <a mat-button routerLink="/public/apropos" routerLinkActive="active">
+              <mat-icon>info</mat-icon> A Propos
+            </a>
+          </nav>
+        </mat-toolbar>
       </div>
+
+      <div class="about-hero">
+        <div class="overlay">
+          <h1 class="about-title">Qui sommes-nous ?</h1>
+          <p class="about-subtitle">Découvrez notre vision, notre mission et ce qui nous rend uniques</p>
+        </div>
+      </div>
+      
+      <section class="about-us-section">
+        <div class="container">
+          <h1 class="about-title">À propos de <span class="brand-highlight">{{ compagny.name }}</span></h1>
+      
+          <div class="about-grid">
+           
+            <div class="about-text">
+              <p class="paragraph">Née de la passion pour la beauté et le bien-être, <strong>Dabishpro</strong> est bien plus qu'une boutique : c'est un univers dédié à la mise en valeur de chaque individu. Depuis ses débuts modestes, l'entreprise s’est imposée comme une référence incontournable dans la distribution de produits cosmétiques adaptés aux peaux noires et métissées.</p>
+      
+              <p class="paragraph">Forte d’une équipe engagée et d’un réseau de partenaires de confiance, Dabishpro offre également des <strong>cartes d’abonnement exclusives</strong>, permettant à ses clients de bénéficier de services personnalisés et réguliers dans nos salons partenaires.</p>
+      
+              <p class="paragraph">L’innovation est au cœur de notre stratégie. Grâce à notre plateforme intuitive, il est désormais possible de réserver vos soins en ligne, suivre vos abonnements et découvrir des offres exceptionnelles depuis le confort de votre domicile.</p>
+      
+              <p class="paragraph">Chez <strong>Dabishpro</strong>, nous croyons en une beauté plurielle, en une communauté forte et solidaire. Notre objectif ? Vous accompagner à chaque étape de votre routine bien-être, avec professionnalisme, chaleur humaine, et excellence.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      
 
       <!-- Pied de page -->
       <div class="footer">

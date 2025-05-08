@@ -13,7 +13,7 @@ export class AbonnementComponent implements OnInit{
 
   currentYear: number = new Date().getFullYear();
   abonnementList :any ;
-
+  compagny = { name: 'Dabishpro' };
   constructor(private abonnementServcie: AbonnementPublicService, private dialog: MatDialog){
 
   }

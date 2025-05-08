@@ -1,32 +1,71 @@
 <mat-sidenav-container class="home-container">
     <mat-sidenav-content>
-      <!-- Barre de navigation -->
-      <mat-toolbar class="main-toolbar light-blue-toolbar">
-        <span class="app-title">Mon Compagngy</span>
+   <!-- Barre de navigation -->
+      <mat-toolbar class="main-toolbar">
+        <span class="app-title">{{ compagny.name }}</span>
         <span class="spacer"></span>
+      
       </mat-toolbar>
-      <mat-toolbar class="sub-toolbar black-toolbar">
-        <div class="d-flex justify-content-center align-items-center mx-auto">
-          <a mat-button routerLink="">Products</a>
-          <a mat-button routerLink="/public/reservations">Reservations</a>
-          <a mat-button routerLink="/public/abonnements">Abonnements</a>
-          <a mat-button routerLink="/public/apropos">A Propos</a>
+
+      <!-- Navigation secondaire (sticky) -->
+      <div class="secondary-nav-container">
+        <mat-toolbar class="sub-toolbar">
+        
+          <nav class="main-nav">
+            <a mat-button routerLink="" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+              <mat-icon>shopping_bag</mat-icon> Produits
+            </a>
+            <a mat-button routerLink="/public/reservations" routerLinkActive="active">
+              <mat-icon>event_available</mat-icon> Reservations
+            </a>
+            <a mat-button routerLink="/public/abonnements" routerLinkActive="active">
+              <mat-icon>subscriptions</mat-icon> Abonnements
+            </a>
+            <a mat-button routerLink="/public/apropos" routerLinkActive="active">
+              <mat-icon>info</mat-icon> A Propos
+            </a>
+          </nav>
+        </mat-toolbar>
+      </div>
+
+      <!-- Modifiez votre section swiper comme ceci -->
+      <div class="swiper-container">
+        <div class="swiper-wrapper">
+          <!-- Slide 1 avec image et texte -->
+          <div class="swiper-slide">
+            <img src="assets/images/boutique.png" alt="Bannière Dabishpro" class="slider-img">
+            <div class="banner-text">
+              <h1>Bienvenue chez Dabishpro</h1>
+              <p>Découvrez nos Cartes d'abonnement</p>
+
+            </div>
+          </div>
+
+        
+          <!-- Vous pouvez ajouter d'autres slides selon vos besoins -->
         </div>
-      </mat-toolbar>
+      </div>
       
 
       <div class="shop-container" style="margin-top: -100px; margin-bottom: 100px">
-        <div *ngFor="let abonnement of abonnementList" class="shop-card" (click)="detailAbonnementRedirect(abonnement)">
-          <div class="shop-card-image">
-            <img mat-card-image [src]="abonnement?.image_url" alt="{{ abonnement?.name }}" class="img-fluid">
-          </div>
-          <div class="shop-card-content">
-            <h3>{{ abonnement.name }}</h3>
-            <p>{{ abonnement.description }}</p>
-            <p>{{ abonnement.price }} Fcfa</p>
+        <div *ngIf="abonnementList?.length > 0; else noAbonnement">
+          <div *ngFor="let abonnement of abonnementList" class="shop-card" (click)="detailAbonnementRedirect(abonnement)">
+            <div class="shop-card-image">
+              <img mat-card-image [src]="abonnement?.image_url" alt="{{ abonnement?.name }}" class="img-fluid">
+            </div>
+            <div class="shop-card-content">
+              <h3>{{ abonnement.name }}</h3>
+              <p>{{ abonnement.description }}</p>
+              <p>{{ abonnement.price }} Fcfa</p>
+            </div>
           </div>
         </div>
+      
+        <ng-template #noAbonnement>
+          <p class="empty-message">Aucune carte d’abonnement disponible pour le moment.</p>
+        </ng-template>
       </div>
+      
       <!-- Pied de page -->
       <div class="footer">
         <span>&copy; {{ currentYear }} Teranga Shop</span>
