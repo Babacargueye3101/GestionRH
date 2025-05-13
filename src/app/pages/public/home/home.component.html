@@ -1,124 +1,188 @@
 <mat-sidenav-container class="home-container">
   <mat-sidenav-content>
-    <!-- Barre de navigation -->
+    <!-- Barre de navigation principale -->
     <mat-toolbar class="main-toolbar">
       <span class="app-title">{{ compagny.name }}</span>
+
       <span class="spacer"></span>
-      <mat-form-field class="search-bar" appearance="fill">
-        <input matInput (keyup)="applyFilter($event)" placeholder="Rechercher...">
+
+      <mat-form-field class="search-bar" appearance="outline" style="margin-top: 20px;">
+        <input matInput
+               (keyup)="applyFilter($event)"
+               placeholder="Rechercher des produits...">
         <mat-icon matSuffix>search</mat-icon>
       </mat-form-field>
     </mat-toolbar>
-  
-    <!-- Navigation secondaire (sticky) -->
+
+    <!-- Navigation secondaire -->
     <div class="secondary-nav-container">
       <mat-toolbar class="sub-toolbar">
         <mat-form-field class="category-select" appearance="fill">
-          <mat-select placeholder="Catégories" (selectionChange)="onCategorySelected($event)">
-            <mat-option *ngFor="let category of categories" [value]="category.id">
+          <mat-select placeholder="Toutes catégories"
+                     (selectionChange)="onCategorySelected($event)">
+            <mat-option *ngFor="let category of categories"
+                       [value]="category.id">
               {{ category.name }}
             </mat-option>
           </mat-select>
         </mat-form-field>
-        
+
         <nav class="main-nav">
-          <a mat-button routerLink="" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-            <mat-icon>shopping_bag</mat-icon> Produits
+          <a mat-button
+             routerLink=""
+             routerLinkActive="active"
+             [routerLinkActiveOptions]="{exact: true}">
+            <mat-icon>shopping_bag</mat-icon>
+            <span class="nav-label">Produits</span>
           </a>
-          <a mat-button routerLink="/public/reservations" routerLinkActive="active">
-            <mat-icon>event_available</mat-icon> Reservations
+          <a mat-button
+             routerLink="/public/reservations"
+             routerLinkActive="active">
+            <mat-icon>event_available</mat-icon>
+            <span class="nav-label">Réservations</span>
           </a>
-          <a mat-button routerLink="/public/abonnements" routerLinkActive="active">
-            <mat-icon>subscriptions</mat-icon> Abonnements
+          <a mat-button
+             routerLink="/public/abonnements"
+             routerLinkActive="active">
+            <mat-icon>subscriptions</mat-icon>
+            <span class="nav-label">Abonnements</span>
           </a>
-          <a mat-button routerLink="/public/apropos" routerLinkActive="active">
-            <mat-icon>info</mat-icon> A Propos
+          <a mat-button
+             routerLink="/public/apropos"
+             routerLinkActive="active">
+            <mat-icon>info</mat-icon>
+            <span class="nav-label">À Propos</span>
           </a>
         </nav>
       </mat-toolbar>
     </div>
-    <!-- Bannière du salon -->
-<!-- Modifiez votre section swiper comme ceci -->
+
+    <!-- Slider moderne -->
     <div class="swiper-container">
       <div class="swiper-wrapper">
-        <!-- Slide 1 avec image et texte -->
         <div class="swiper-slide">
-          <img src="assets/images/banner1.png" alt="Bannière Dabishpro" class="slider-img">
-          <div class="banner-text">
+          <img src="assets/images/banner1.png"
+               alt="Bannière Dabishpro"
+               class="slider-img">
+          <div class="banner-text animated fade-in">
             <h1>Bienvenue chez Dabishpro</h1>
-            <p>Découvrez nos produits exclusifs</p>
-            <button mat-raised-button color="accent" routerLink="/products">Voir la collection</button>
+            <p class="animated fade-in animated-delay-1">Découvrez nos produits exclusifs</p>
+            <button mat-raised-button
+                    color="accent"
+                    class="animated fade-in animated-delay-2"
+                    routerLink="/products">
+              Explorer la collection
+            </button>
           </div>
         </div>
 
-        <!-- Slide 2 avec image et texte différent -->
         <div class="swiper-slide">
-          <img src="assets/images/banner2.png" alt="Promotions" class="slider-img">
-          <div class="banner-text right-align">
+          <img src="assets/images/banner2.png"
+               alt="Promotions"
+               class="slider-img">
+          <div class="banner-text right-align animated fade-in">
             <h2>Promotions exceptionnelles</h2>
-            <p>Jusqu'à -30% sur une sélection d'articles</p>
-            <button mat-raised-button color="warn">Découvrir les offres</button>
+            <p class="animated fade-in animated-delay-1">Jusqu'à -30% sur une sélection</p>
+            <button mat-raised-button
+                    color="warn"
+                    class="animated fade-in animated-delay-2">
+              Voir les offres
+            </button>
           </div>
         </div>
-
-        <!-- Vous pouvez ajouter d'autres slides selon vos besoins -->
       </div>
 
-      <!-- Ajoutez la pagination et navigation si besoin -->
       <div class="swiper-pagination"></div>
       <div class="swiper-button-prev"></div>
       <div class="swiper-button-next"></div>
     </div>
 
-    <!-- Sections de la page d'accueil -->
-    <div class="home-sections">
-      <section class="product-section">
-        <h2>Nos Produits</h2>
-        <div class="container">
-          <div class="row">
-            <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-4" *ngFor="let product of filteredProducts">
-              <mat-card class="product-item">
-                <mat-card-header>
-                  <mat-card-title>{{ product.name }}</mat-card-title>
-                  <mat-card-subtitle>{{ product.subtitle }}</mat-card-subtitle>
-                </mat-card-header>
-                <img mat-card-image [src]="product.image_url" alt="{{ product.title }}" class="img-fluid">
-                <mat-card-content>
-                  <p>{{ product.price }} Fcfa</p>
-                </mat-card-content>
-                <mat-card-actions class="action-buttons">
-                  <button mat-mini-fab style="background-color: #a67c52;" (click)="addToCart(product)" matTooltip="Ajouter au panier">
-                    <mat-icon style="color: white;">add_shopping_cart</mat-icon>
-                  </button>
+    <!-- Section produits -->
+    <div class="product-section">
+      <h2 class="animated slide-in-up">Nos Produits</h2>
 
-                  <button mat-mini-fab color="accent" (click)="makeachat(product)" matTooltip="Acheter maintenant">
-                    <mat-icon>shopping_bag</mat-icon>
-                  </button>
-                </mat-card-actions>
-              </mat-card>
-            </div>
-          </div>
-        </div>
-      </section>
-    </div>
+      <div class="product-grid">
+        <mat-card class="product-item animated slide-in-up animated-delay-1"
+                 *ngFor="let product of filteredProducts">
+          <mat-card-header>
+            <mat-card-title>{{ product.name }}</mat-card-title>
+            <mat-card-subtitle>{{ product.subtitle }}</mat-card-subtitle>
+          </mat-card-header>
 
-    <!-- Pied de page -->
-    <!-- Pied de page -->
-    <div class="footer">
-      <span>&copy; {{ currentYear }} {{ compagny.name }}</span>
-      <div class="social-links">
-        <a href="https://facebook.com"><mat-icon>facebook</mat-icon></a>
-        <a href="https://twitter.com"><mat-icon>twitter</mat-icon></a>
-        <a href="https://instagram.com"><mat-icon>instagram</mat-icon></a>
+          <img mat-card-image
+               [src]="product.image_url"
+               alt="{{ product.title }}"
+               class="product-image">
+
+          <mat-card-content>
+            <p>{{ product.price | currency:'XOF':'symbol':'1.0-0' }}</p>
+          </mat-card-content>
+
+          <mat-card-actions class="action-buttons">
+            <button mat-button
+                    (click)="addToCart(product)">
+              <mat-icon>add_shopping_cart</mat-icon>
+              Ajouter
+            </button>
+
+            <button mat-button
+                    color="primary"
+                    (click)="makeachat(product)">
+              <mat-icon>shopping_bag</mat-icon>
+              Acheter
+            </button>
+          </mat-card-actions>
+        </mat-card>
       </div>
     </div>
 
+    <!-- Pied de page moderne -->
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>À propos</h3>
+          <p>Dabishpro propose des produits de qualité pour répondre à tous vos besoins.</p>
+        </div>
+
+        <div class="footer-section">
+          <h3>Contact</h3>
+          <p>Email: contact&#64;dabishpro.com</p>
+          <p>Téléphone: +221 77 123 45 67</p>
+        </div>
+
+        <div class="footer-section">
+          <h3>Réseaux sociaux</h3>
+          <div class="social-links">
+            <a href="https://facebook.com" target="_blank">
+              <mat-icon>facebook</mat-icon>
+            </a>
+            <a href="https://twitter.com" target="_blank">
+              <mat-icon>twitter</mat-icon>
+            </a>
+            <a href="https://instagram.com" target="_blank">
+              <mat-icon>instagram</mat-icon>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="copyright">
+        &copy; {{ currentYear }} {{ compagny.name }} - Tous droits réservés
+      </div>
+    </footer>
+
+    <!-- Bouton panier flottant -->
     <div class="fab-cart-container">
-      <button mat-fab class="fab-cart" (click)="goToCart()">
+      <button mat-fab
+              class="fab-cart"
+              (click)="goToCart()"
+              matTooltip="Voir le panier"
+              matTooltipPosition="left">
         <mat-icon>shopping_cart</mat-icon>
-        <span class="cart-badge">{{ cartItemCount }}</span>
+        <span class="cart-badge" *ngIf="cartItemCount > 0">
+          {{ cartItemCount }}
+        </span>
       </button>
     </div>
   </mat-sidenav-content>
-
 </mat-sidenav-container>
