@@ -100,6 +100,7 @@ import { OrderListComponent } from './pages/admin/orders/order-list/order-list.c
 import { OrderDetailsComponent } from './pages/admin/orders/order-details/order-details.component';
 import { AbonnementComponent } from './pages/public/abonnement/abonnement.component';
 import { AproposComponent } from './pages/public/apropos/apropos.component';
+import { MatBadgeModule } from '@angular/material/badge';
 
 
 
@@ -205,7 +206,8 @@ registerLocaleData(localeFr, 'fr');
     PersonnelsModule,
     DisponibilityModule,
     ReservationsModule,
-    ClientsModule
+    ClientsModule,
+    MatBadgeModule
 ],
   providers: [{ provide: LOCALE_ID, useValue: 'fr' }],
   bootstrap: [AppComponent]
