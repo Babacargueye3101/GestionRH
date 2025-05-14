@@ -7,7 +7,7 @@ import { environment } from 'src/environments/environment';
 })
 export class CommandeService {
 
-  private apiUrl = `${environment.apiUrl}/public`;
+  private apiUrl = `${environment.apiUrl}/api/public`;
 
   constructor(private http: HttpClient) { }
 
