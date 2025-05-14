@@ -59,15 +59,11 @@
             
             <!-- Vous pouvez ajouter d'autres slides selon vos besoins -->
         </div>
-        
-        <!-- Ajout des contrôles de navigation -->
-        <div class="swiper-pagination"></div>
-        <div class="swiper-button-next"></div>
-        <div class="swiper-button-prev"></div>
+
     </div>
       
 
-      <div class="shop-container" style="margin-top: -100px; margin-bottom: 100px">
+      <div class="shop-container" style="margin-top: 100px; margin-bottom: 100px">
         <div *ngIf="abonnementList?.length > 0; else noAbonnement">
           <div *ngFor="let abonnement of abonnementList" class="shop-card" (click)="detailAbonnementRedirect(abonnement)">
             <div class="shop-card-image">
