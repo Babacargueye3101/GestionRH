@@ -1,74 +1,124 @@
 <mat-sidenav-container class="home-container">
-    <mat-sidenav-content>
-      <!-- Barre de navigation -->
-   <!-- Barre de navigation -->
-   <mat-toolbar class="main-toolbar">
-    <span class="app-title">{{ compagny.name }}</span>
-    <span class="spacer"></span>
-  
-  </mat-toolbar>
+  <mat-sidenav-content>
+    <!-- Barre de navigation principale -->
+    <mat-toolbar class="main-toolbar">
+      <span class="app-title">{{ compagny.name }}</span>
 
-  <!-- Navigation secondaire (sticky) -->
-  <div class="secondary-nav-container">
-    <mat-toolbar class="sub-toolbar">
-     
-      <nav class="main-nav">
-        <a mat-button routerLink="" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-          <mat-icon>shopping_bag</mat-icon> Produits
-        </a>
-        <a mat-button routerLink="/public/reservations" routerLinkActive="active">
-          <mat-icon>event_available</mat-icon> Reservations
-        </a>
-        <a mat-button routerLink="/public/abonnements" routerLinkActive="active">
-          <mat-icon>subscriptions</mat-icon> Abonnements
-        </a>
-        <a mat-button routerLink="/public/apropos" routerLinkActive="active">
-          <mat-icon>info</mat-icon> A Propos
-        </a>
-      </nav>
+      <span class="spacer"></span>
     </mat-toolbar>
-  </div>
 
-  <!-- Modifiez votre section swiper comme ceci -->
-  <div class="swiper-container">
-    <div class="swiper-wrapper">
-      <!-- Slide 1 avec image et texte -->
-      <div class="swiper-slide">
-        <img src="assets/images/RV.png" alt="Bannière Dabishpro" class="slider-img">
-        <div class="banner-text">
-          <h1>Bienvenue chez Dabishpro</h1>
-          <p>Découvrez nos Boutiques exclusifs</p>
-
-        </div>
-      </div>
-
-     
-      <!-- Vous pouvez ajouter d'autres slides selon vos besoins -->
+    <!-- Navigation secondaire (sticky) -->
+    <div class="secondary-nav-container">
+      <mat-toolbar class="sub-toolbar">
+        <nav class="main-nav">
+          <a
+            mat-button
+            routerLink=""
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+          >
+            <mat-icon>shopping_bag</mat-icon>
+            <span class="nav-label">Produits</span>
+          </a>
+          <a
+            mat-button
+            routerLink="/public/reservations"
+            routerLinkActive="active"
+          >
+            <mat-icon>event_available</mat-icon>
+            <span class="nav-label">Réservations</span>
+          </a>
+          <a
+            mat-button
+            routerLink="/public/abonnements"
+            routerLinkActive="active"
+          >
+            <mat-icon>subscriptions</mat-icon>
+            <span class="nav-label">Abonnements</span>
+          </a>
+          <a mat-button routerLink="/public/apropos" routerLinkActive="active">
+            <mat-icon>info</mat-icon>
+            <span class="nav-label">À Propos</span>
+          </a>
+        </nav>
+      </mat-toolbar>
     </div>
-  </div>
-
-      <div class="shop-container">
-        <div *ngFor="let shop of shopList" class="shop-card" (click)="detailshopRedirect(shop)">
-          <div class="shop-card-image">
-            <img src="https://plus.unsplash.com/premium_photo-1664372599811-0aa42648d1e6?q=80&w=2938&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="{{ shop.name }}">
+    <!-- Modifiez votre section swiper comme ceci -->
+    <div class="swiper-container">
+      <div class="swiper-wrapper">
+        <!-- Slide 1 avec image et texte -->
+        <div class="swiper-slide">
+          <img
+            src="assets/images/RV.png"
+            alt="Bannière Dabishpro"
+            class="slider-img"
+          />
+          <div class="banner-text">
+            <h1>Bienvenue chez Dabishpro</h1>
+            <p>Découvrez nos Boutiques exclusifs</p>
           </div>
-          <div class="shop-card-content">
-            <h3>{{ shop.name }}</h3>
-            <p>{{ shop.description }}</p>
+        </div>
+
+        <!-- Vous pouvez ajouter d'autres slides selon vos besoins -->
+      </div>
+    </div>
+
+    <div class="shop-container">
+      <div
+        *ngFor="let shop of shopList"
+        class="shop-card"
+        (click)="detailshopRedirect(shop)"
+      >
+        <div class="shop-card-image">
+          <img
+            src="https://plus.unsplash.com/premium_photo-1664372599811-0aa42648d1e6?q=80&w=2938&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            alt="{{ shop.name }}"
+          />
+        </div>
+        <div class="shop-card-content">
+          <h3>{{ shop.name }}</h3>
+          <p>{{ shop.description }}</p>
+        </div>
+      </div>
+    </div>
+    <!-- Pied de page moderne -->
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>À propos</h3>
+          <p>
+            Dabishpro propose des produits de qualité pour répondre à tous vos
+            besoins.
+          </p>
+        </div>
+
+        <div class="footer-section">
+          <h3>Contact</h3>
+          <p>Email: contact&#64;dabishpro.com</p>
+          <p>Téléphone: +221 77 123 45 67</p>
+        </div>
+
+        <div class="footer-section">
+          <h3>Réseaux sociaux</h3>
+          <div class="social-links">
+            <a href="https://facebook.com" target="_blank">
+              <mat-icon>facebook</mat-icon>
+            </a>
+            <a href="https://twitter.com" target="_blank">
+              <mat-icon>twitter</mat-icon>
+            </a>
+            <a href="https://instagram.com" target="_blank">
+              <mat-icon>instagram</mat-icon>
+            </a>
           </div>
         </div>
       </div>
-      <!-- Pied de page -->
-      <div class="footer">
-        <span>&copy; {{ currentYear }} {{ compagny.name }}</span>
-        <div class="social-links">
-          <a href="https://facebook.com"><mat-icon>facebook</mat-icon></a>
-          <a href="https://twitter.com"><mat-icon>twitter</mat-icon></a>
-          <a href="https://instagram.com"><mat-icon>instagram</mat-icon></a>
-        </div>
+
+      <div class="copyright">
+        &copy; {{ currentYear }} {{ compagny.name }} - Tous droits réservés
       </div>
+    </footer>
+  </mat-sidenav-content>
 
-
-    </mat-sidenav-content>
-
-  </mat-sidenav-container>
+  <!-- Removed the extra closing tag -->
+</mat-sidenav-container>

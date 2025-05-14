@@ -12,9 +12,9 @@ import { ReservationService } from 'src/app/services/reservations/reservation.se
   styleUrls: ['./reservations.component.scss']
 })
 export class ReservationsComponent implements OnInit{
-  shops: any[] = []; // Liste des boutiques
-  salons: any[] = []; // Liste des salons
-  reservations: any[] = []; // Liste des réservations
+  shops: any[] = [];
+  salons: any[] = [];
+  reservations: any[] = [];
 
   selectedShopId: number | null = null;
   selectedSalonId: number | null = null;
