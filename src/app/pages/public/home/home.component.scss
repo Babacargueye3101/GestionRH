@@ -34,7 +34,7 @@ $black: #000000;
   position: sticky;
   top: 0;
   z-index: 1000;
-  background: linear-gradient(135deg, darken($primary-color, 5%), $primary-color);
+  background: linear-gradient(135deg, #e1b44f, #c38a26);
   color: $white;
   height: 80px;
   box-shadow: 0 4px 12px rgba($black, 0.1);
