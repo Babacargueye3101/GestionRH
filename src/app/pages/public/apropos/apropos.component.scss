@@ -7,6 +7,215 @@ $light-bg: #f9f9f9;
 $white: #ffffff;
 $black: #000000;
 
+.about-hero {
+  position: relative;
+  height: 70vh;
+  min-height: 500px;
+  background: 
+    linear-gradient(
+      135deg,
+      rgba($primary-color, 0.2) 0%,
+      rgba($secondary-color, 0.4) 100%
+    ),
+    url('https://images.unsplash.com/photo-1697560415980-8cc04e055cdb?q=80&w=2960&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') 
+    no-repeat center/cover;
+  color: $white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  transition: all 0.5s ease;
+
+  &:hover {
+    transform: scale(1.01);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+    
+    &::before {
+      opacity: 0.3;
+    }
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.7) 100%);
+    opacity: 0.5;
+    transition: opacity 0.5s ease;
+  }
+
+  .overlay {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+    padding: 2rem;
+    animation: fadeIn 0.8s ease-out;
+
+    .about-title {
+      font-size: 4rem;
+      font-weight: 800;
+      margin: 0 0 1.5rem;
+      color: $white;
+      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);
+      letter-spacing: 1px;
+      line-height: 1.2;
+      transform: translateY(20px);
+      opacity: 0;
+      animation: slideUp 0.8s 0.3s forwards;
+      
+      @media (max-width: 768px) {
+        font-size: 2.5rem;
+      }
+    }
+
+    .about-subtitle {
+      font-size: 1.5rem;
+      font-weight: 300;
+      margin: 0 auto;
+      max-width: 80%;
+      color: rgba(255, 255, 255, 0.9);
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+      line-height: 1.6;
+      transform: translateY(20px);
+      opacity: 0;
+      animation: slideUp 0.8s 0.5s forwards;
+      
+      @media (max-width: 768px) {
+        font-size: 1.2rem;
+        max-width: 100%;
+      }
+    }
+    
+    .cta-button {
+      margin-top: 2.5rem;
+      padding: 0.8rem 2.5rem;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: $white;
+      background: transparent;
+      border: 2px solid $white;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      transform: translateY(20px);
+      opacity: 0;
+      animation: slideUp 0.8s 0.7s forwards;
+      
+      &:hover {
+        background: $white;
+        color: $primary-color;
+        transform: translateY(-2px) scale(1.05);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      }
+    }
+  }
+}
+
+
+// À PROPOS SECTION
+.about-us-section {
+  background-color: #f9f9f9;
+  padding: 4rem 1.5rem;
+
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .about-title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 2.5rem;
+    font-weight: 600;
+    color: $primary-color;
+    position: relative;
+
+    &::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 3px;
+      background-color: $accent-color;
+      margin: 0.8rem auto 0;
+    }
+
+    .brand-highlight {
+      color: $primary-color;
+    }
+  }
+
+  .about-text {
+    font-size: 1.1rem;
+    color: $text-color;
+    line-height: 1.7;
+
+    .paragraph {
+      margin-bottom: 1.5rem;
+      padding-left: 1rem;
+      border-left: 3px solid transparent;
+      transition: all 0.3s ease;
+
+      &:hover {
+        border-left-color: $primary-color;
+        background-color: rgba(166, 124, 82, 0.05);
+      }
+
+      strong {
+        color: $primary-color;
+      }
+    }
+  }
+}
+
+// Animations
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Responsive
+@media (max-width: 768px) {
+  .about-hero {
+    height: 50vh;
+
+    .about-title {
+      font-size: 2.2rem;
+    }
+
+    .about-subtitle {
+      font-size: 1rem;
+    }
+  }
+
+  .about-us-section {
+    padding: 2rem 1rem;
+
+    .about-title {
+      font-size: 2rem;
+    }
+
+    .about-text {
+      font-size: 1rem;
+    }
+  }
+}
+
 // Mixins
 @mixin flex-center {
   display: flex;
