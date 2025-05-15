@@ -58,7 +58,7 @@ export class AppComponent implements OnInit {
     this.router.events.pipe(
       filter((event): event is NavigationEnd => event instanceof NavigationEnd) // type guard
     ).subscribe((event: NavigationEnd) => {
-      if (event.urlAfterRedirects.includes('public')) {
+      if (event.urlAfterRedirects.includes('public') || event.urlAfterRedirects.includes('login') || event.urlAfterRedirects.includes('register')) {
         this.isSidenavVisible = false; // Set this based on your logic
         this.isNavbarVisible = false;  // Set this based on your logic
       } else {
