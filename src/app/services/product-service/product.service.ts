@@ -38,7 +38,7 @@ export class ProductService {
   }
 
   getProductsByShop(shopId: number): Observable<Product[]> {
-    return this.http.get<Product[]>(`${this.baseUrl}/shops/${shopId}/products`, {
+    return this.http.get<Product[]>(`${this.baseUrl}/${shopId}/products`, {
       headers: this.getHeaders()
     });
   }
