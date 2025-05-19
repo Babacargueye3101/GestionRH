@@ -47,4 +47,8 @@ export class StatisticsService {
   SummaryStats(): Observable<any> {
     return this.http.get(`${this.apiUrl}/summary_stats`, { headers: this.getHeaders() });
   }
+
+  getOrdersByPaymentMethod(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/orders_by_payment_method`, { headers: this.getHeaders() });
+  }
 }

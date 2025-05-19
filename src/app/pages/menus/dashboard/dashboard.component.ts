@@ -16,6 +16,18 @@ interface PaymentStat {
   paymentCount: number;
 }
 
+interface PaymentMethodStat {
+  payment_method: string;
+  total_amount: number;
+  order_count: number;
+}
+
+interface PaymentMethodData {
+  payment_methods: PaymentMethodStat[];
+  total_delivered_amount: number;
+  total_delivered_orders: number;
+}
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -48,6 +60,10 @@ export class DashboardComponent implements OnInit {
   total_subscriptions: any;
 
   paymentStats: PaymentStat[] = [];  // Pour stocker les statistiques de paiement
+  paymentMethodStats: PaymentMethodStat[] = []; // Pour stocker les statistiques de méthodes de paiement
+  totalDeliveredAmount: number = 0;
+  totalDeliveredOrders: number = 0;
+  chartOptionsPaymentMethods: EChartsOption = {};
 
   constructor(
     private employeeService: EmployeeServiceService,
@@ -65,6 +81,7 @@ export class DashboardComponent implements OnInit {
     this.getSalesByEmployee();
     this.getAllPersonnel();
     this.summary_stats();
+    this.getOrdersByPaymentMethod();
   }
 
   getStaticBySex(): void {
@@ -369,6 +386,71 @@ export class DashboardComponent implements OnInit {
       this.pending_reservations= data.pending_reservations
       this.total_subscriptions = data.total_subscriptions
     })
+  }
+
+  getOrdersByPaymentMethod(): void {
+    this.statisticsService.getOrdersByPaymentMethod().subscribe((data: PaymentMethodData) => {
+      this.paymentMethodStats = data.payment_methods;
+      this.totalDeliveredAmount = data.total_delivered_amount;
+      this.totalDeliveredOrders = data.total_delivered_orders;
+      
+      // Préparer les données pour le graphique
+      const paymentMethods = this.paymentMethodStats.map(stat => stat.payment_method);
+      const totalAmounts = this.paymentMethodStats.map(stat => stat.total_amount);
+      const orderCounts = this.paymentMethodStats.map(stat => stat.order_count);
+      
+      this.chartOptionsPaymentMethods = {
+        tooltip: {
+          trigger: 'axis',
+          axisPointer: {
+            type: 'shadow'
+          }
+        },
+        legend: {
+          data: ['Montant total', 'Nombre de commandes']
+        },
+        xAxis: {
+          type: 'category',
+          data: paymentMethods,
+          axisLabel: {
+            interval: 0,
+            rotate: 30
+          }
+        },
+        yAxis: [
+          {
+            type: 'value',
+            name: 'Montant',
+            position: 'left'
+          },
+          {
+            type: 'value',
+            name: 'Commandes',
+            position: 'right'
+          }
+        ],
+        series: [
+          {
+            name: 'Montant total',
+            type: 'bar',
+            data: totalAmounts,
+            itemStyle: {
+              color: '#4caf50'
+            },
+            yAxisIndex: 0
+          },
+          {
+            name: 'Nombre de commandes',
+            type: 'bar',
+            data: orderCounts,
+            itemStyle: {
+              color: '#2196f3'
+            },
+            yAxisIndex: 1
+          }
+        ]
+      };
+    });
   }
 
 
