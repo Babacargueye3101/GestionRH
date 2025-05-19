@@ -5,6 +5,11 @@
       <span class="app-title">{{ compagny.name }}</span>
 
       <span class="spacer"></span>
+
+      <button mat-button [routerLink]="['/login']" class="login-button">
+        <mat-icon>login</mat-icon>
+        <span>Connexion</span>
+      </button>
     </mat-toolbar>
 
     <!-- Navigation secondaire (sticky) -->

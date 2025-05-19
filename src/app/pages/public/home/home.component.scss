@@ -26,6 +26,21 @@ $black: #000000;
   background-color: $light-bg;
 }
 
+// Social links
+.social-links a {
+  text-decoration: none;
+  color: $text-color;
+  @include transition();
+
+  &:hover {
+    color: $primary-color;
+  }
+
+  i {
+    font-size: 1.5rem;
+  }
+}
+
 // Toolbar principale
 .main-toolbar {
   display: flex;

@@ -12,6 +12,11 @@
                placeholder="Rechercher des produits...">
         <mat-icon matSuffix>search</mat-icon>
       </mat-form-field>
+
+      <button mat-button [routerLink]="['/login']" class="login-button">
+        <mat-icon>login</mat-icon>
+        <span>Connexion</span>
+      </button>
     </mat-toolbar>
 
     <!-- Navigation secondaire -->
@@ -154,13 +159,13 @@
           <h3>Réseaux sociaux</h3>
           <div class="social-links">
             <a href="https://facebook.com" target="_blank">
-              <mat-icon>facebook</mat-icon>
+              <i class="fab fa-facebook"></i>
             </a>
             <a href="https://twitter.com" target="_blank">
-              <mat-icon>twitter</mat-icon>
+              <i class="fab fa-twitter"></i>
             </a>
             <a href="https://instagram.com" target="_blank">
-              <mat-icon>instagram</mat-icon>
+              <i class="fab fa-instagram"></i>
             </a>
           </div>
         </div>
