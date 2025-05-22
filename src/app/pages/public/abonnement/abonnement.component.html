@@ -31,14 +31,14 @@
               <mat-icon>event_available</mat-icon>
               <span class="nav-label">Réservations</span>
             </a>
-            <a
+            <!-- <a
               mat-button
               routerLink="/public/abonnements"
               routerLinkActive="active"
             >
               <mat-icon>subscriptions</mat-icon>
               <span class="nav-label">Abonnements</span>
-            </a>
+            </a> -->
             <a mat-button routerLink="/public/apropos" routerLinkActive="active">
               <mat-icon>info</mat-icon>
               <span class="nav-label">À Propos</span>
@@ -59,12 +59,12 @@
                     </div>
                 </div>
             </div>
-            
+
             <!-- Vous pouvez ajouter d'autres slides selon vos besoins -->
         </div>
 
     </div>
-      
+
 
       <div class="shop-container" style="margin-top: 10px; margin-bottom: 100px">
         <div *ngIf="abonnementList?.length > 0; else noAbonnement">
@@ -79,12 +79,12 @@
             </div>
           </div>
         </div>
-      
+
         <ng-template #noAbonnement>
           <p class="empty-message">Aucune carte d’abonnement disponible pour le moment.</p>
         </ng-template>
       </div>
-      
+
       <!-- Pied de page -->
           <!-- Pied de page moderne -->
     <footer class="footer">

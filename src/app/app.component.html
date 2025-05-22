@@ -45,10 +45,10 @@
         <mat-icon>person</mat-icon>
         <span>Gestion des Clients</span>
       </a>
-      <a mat-list-item routerLink="/admin/abonnements" *ngIf="currentUser?.can_see_subs">
+      <!-- <a mat-list-item routerLink="/admin/abonnements" *ngIf="currentUser?.can_see_subs">
         <mat-icon>subscriptions</mat-icon>
         <span>Gestion des Abonnements</span>
-      </a>
+      </a> -->
       <!-- <a mat-list-item routerLink="/admin/statistiques" *ngIf="currentUser?.can_see_dashboard">
         <mat-icon>bar_chart</mat-icon>
         <span>Statistiques</span>
@@ -137,7 +137,7 @@
             <mat-icon>notifications</mat-icon>
             <span *ngIf="unreadCount > 0" class="notification-badge">{{ unreadCount }}</span>
           </button>
-        
+
           <!-- Liste des notifications -->
           <div *ngIf="showNotifications" class="notification-dropdown">
             <h3>Notifications des 10 dernières commandes en attente</h3>
