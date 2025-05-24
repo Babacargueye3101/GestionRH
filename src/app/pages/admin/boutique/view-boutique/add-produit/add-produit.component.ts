@@ -66,8 +66,13 @@ export class AddProduitComponent implements OnInit {
       return;
     }
 
+    if (this.isSubmitting) {
+      return; // Prevent double submission
+    }
+
     this.spinner.show();
     this.isSubmitting = true;
+    this.errorMessage = '';
   
     const formData = new FormData();
     formData.append('name', this.productForm.value.name);
@@ -89,11 +94,14 @@ export class AddProduitComponent implements OnInit {
     this.productService.createProduct(this.shopId, formData).subscribe({
       next: (product) => {
         console.log('Produit créé avec succès:', product);
-        this.dialogRef.close(product);
+        // Close the dialog with the created product
+        this.dialogRef.close({ success: true, product: product });
       },
       error: (err) => {
         console.error('Erreur lors de la création du produit:', err);
-        this.errorMessage = "Erreur lors de la création du produit.";
+        this.errorMessage = "Erreur lors de la création du produit: " + (err.error?.message || err.message || 'Erreur inconnue');
+        this.spinner.hide();
+        this.isSubmitting = false;
       },
       complete: () => {
         this.spinner.hide();

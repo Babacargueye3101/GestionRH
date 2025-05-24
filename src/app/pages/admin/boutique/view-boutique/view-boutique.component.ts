@@ -134,17 +134,29 @@ export class ViewBoutiqueComponent implements OnInit {
   createProduit(): void {
     const dialogRef = this.dialog.open(AddProduitComponent, {
       width: '800px',
-      data: { shopId: this.shopId }
+      data: { shopId: this.shopId },
+      disableClose: true // Prevent closing by clicking outside
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        Swal.fire('Succès', 'Produit créé avec succès', 'success');
+      if (result?.success) {
+        // Update the local data first for immediate feedback
+        if (result.product) {
+          const currentData = this.products.data;
+          this.products.data = [result.product, ...currentData];
+        }
+        
+        // Show success message
+        Swal.fire({
+          title: 'Succès!',
+          text: 'Produit créé avec succès',
+          icon: 'success',
+          timer: 2000,
+          showConfirmButton: false
+        });
+
+        // Refresh the full list to ensure synchronization
         this.loadProducts();
-        // this.productService.createProduct(this.shopId, result).subscribe(() => {
-        //   Swal.fire('Succès', 'Produit créé avec succès', 'success');
-        //   this.loadProducts();
-        // });
       }
     });
   }
