@@ -9,6 +9,12 @@ import { CanalComponent } from './canal/canal.component';
 import { ListVentesComponent } from './list-ventes/list-ventes.component';
 import { ViewChild } from '@angular/core';
 import { saveAs } from 'file-saver';
+import jsPDF from 'jspdf';
+import 'jspdf-autotable';
+
+interface jsPDFWithAutoTable extends jsPDF {
+  autoTable: (options: any) => jsPDF;
+}
 
 @Component({
   selector: 'app-ventes',
@@ -26,21 +32,37 @@ export class VentesComponent implements OnInit {
     // Initialisation du composant
   }
 
-  exportToCsv() {
+  exportToPdf() {
     if (this.listVentes) {
       const data = this.listVentes.ventes;
       const headers = Object.keys(data[0]);
-      const csvContent = [
-        headers.join(','),
-        ...data.map(row => headers.map(header => {
-          const cell = row[header];
-          return typeof cell === 'string' ? cell.replace(/"/g, '""') : cell;
-        }).join(','))
-      ].join('\n');
-
-      const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-      const currentDate = new Date().toISOString().split('T')[0];
-      saveAs(blob, `ventes_${currentDate}.csv`);
+      
+      const doc = new jsPDF() as jsPDFWithAutoTable;
+      
+      // Titre du document
+      doc.setFontSize(16);
+      doc.text('Liste des Ventes', 14, 15);
+      
+      // Date d'exportation
+      doc.setFontSize(10);
+      const currentDate = new Date().toLocaleDateString();
+      doc.text(`Date d'exportation: ${currentDate}`, 14, 25);
+      
+      // Création du tableau
+      const tableData = data.map(row => headers.map(header => row[header]));
+      
+      doc.autoTable({
+        head: [headers],
+        body: tableData,
+        startY: 30,
+        theme: 'grid',
+        styles: { fontSize: 8 },
+        headStyles: { fillColor: [41, 128, 185], textColor: 255 },
+        margin: { top: 30 }
+      });
+      
+      // Sauvegarde du PDF
+      doc.save(`ventes_${currentDate.replace(/\//g, '-')}.pdf`);
     }
   }
 
