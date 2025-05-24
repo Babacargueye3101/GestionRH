@@ -1,32 +1,55 @@
 <mat-sidenav-container class="cart-container">
   <mat-sidenav-content>
-    <!-- Barre de navigation -->
-    <mat-toolbar class="main-toolbar light-blue-toolbar">
-      <span class="app-title">{{ compagny.name }}</span>
-      <span class="spacer"></span>
-      <button mat-icon-button routerLink="/">
-        <mat-icon>home</mat-icon>
-      </button>
+    <!-- Navigation moderne -->
+    <mat-toolbar class="main-toolbar">
+      <div class="toolbar-content">
+        <a routerLink="/" class="brand">
+          <span class="brand-name">{{ compagny.name }}</span>
+        </a>
+        <div class="nav-actions">
+          <button mat-icon-button routerLink="/" class="home-button">
+            <i class="fas fa-home"></i>
+          </button>
+        </div>
+      </div>
     </mat-toolbar>
 
-    <div class="cart-content" style="margin-bottom: 100px;">
-      <h2>Votre Panier</h2>
+    <div class="cart-content">
+      <div class="cart-header">
+        <h1 class="cart-title">Votre Panier</h1>
+        <p class="cart-subtitle" *ngIf="cart.length > 0">{{ cart.length }} article(s)</p>
+      </div>
 
       <mat-horizontal-stepper #stepper labelPosition="bottom">
         <!-- Étape 1: Panier -->
         <mat-step>
           <ng-template matStepLabel>Panier</ng-template>
           <div *ngIf="cart.length === 0" class="empty-cart">
-            <img src="/assets/images/panier_vide.jpg" alt="Panier vide">
-            <p>Votre panier est vide!</p>
+            <div class="empty-cart-content">
+              <i class="fas fa-shopping-cart empty-cart-icon"></i>
+              <h2>Votre panier est vide</h2>
+              <p>Découvrez nos produits et commencez votre shopping</p>
+              <button mat-flat-button color="primary" routerLink="/" class="shop-now-btn">
+                <i class="fas fa-store"></i> Voir les produits
+              </button>
+            </div>
           </div>
           <div *ngIf="cart.length > 0">
             <div *ngFor="let product of cart" class="cart-item">
-              <img [src]="product.image_url" alt="{{ product.name }}">
+              <div class="cart-item-image">
+                <img [src]="product.image_url" alt="{{ product.name }}">
+              </div>
               <div class="cart-item-details">
-                <h3>{{ product.name }}</h3>
-                <p>{{ product.description }}</p>
-                <p>{{ getProductPrice(product) | currency:'FCFA':'symbol':'1.2-2' }}</p>
+                <div class="item-header">
+                  <h3 class="item-title">{{ product.name }}</h3>
+                  <button mat-icon-button class="remove-btn" (click)="removeFromCart(product)">
+                    <i class="fas fa-times"></i>
+                  </button>
+                </div>
+                <p class="item-description">{{ product.description }}</p>
+                <div class="price-tag">
+                  <span class="price">{{ getProductPrice(product) | currency:'FCFA':'symbol':'1.2-2' }}</span>
+                </div>
                 <div *ngIf="product.variants?.length > 0">
                   <mat-form-field appearance="outline">
                     <mat-label>Choisir une variante</mat-label>
@@ -45,8 +68,24 @@
                 <button mat-button (click)="removeFromCart(product)" style="background-color:#c9a173;">Retirer</button>
               </div>
             </div>
-            <p class="total-price">Total: {{ getTotalPrice() | currency:'FCFA':'symbol':'1.2-2' }}</p>
-            <button mat-raised-button style="background-color: #c9a173;" (click)="stepper.next()">Suivant</button>
+            <div class="cart-summary">
+              <div class="summary-row">
+                <span>Sous-total</span>
+                <span>{{ getTotalPrice() | currency:'FCFA':'symbol':'1.2-2' }}</span>
+              </div>
+              <div class="summary-row">
+                <span>Livraison</span>
+                <span>Calculé à l'étape suivante</span>
+              </div>
+              <div class="summary-row total">
+                <span>Total</span>
+                <span class="total-amount">{{ getTotalPrice() | currency:'FCFA':'symbol':'1.2-2' }}</span>
+              </div>
+              <button mat-flat-button class="checkout-btn" (click)="stepper.next()">
+                <span>Continuer</span>
+                <i class="fas fa-arrow-right"></i>
+              </button>
+            </div>
           </div>
         </mat-step>
 
@@ -127,14 +166,24 @@
         </mat-step>
       </mat-horizontal-stepper>
     </div>
-    <!-- Pied de page -->
-    <div class="footer">
-      <span>&copy; {{ currentYear }} {{ compagny.name }}</span>
-      <div class="social-links">
-        <a href="https://facebook.com"><mat-icon>facebook</mat-icon></a>
-        <a href="https://twitter.com"><mat-icon>twitter</mat-icon></a>
-        <a href="https://instagram.com"><mat-icon>instagram</mat-icon></a>
+    <!-- Footer moderne -->
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <span>&copy; {{ currentYear }} {{ compagny.name }}</span>
+        </div>
+        <div class="social-links">
+          <a href="https://facebook.com" target="_blank">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a href="https://twitter.com" target="_blank">
+            <i class="fab fa-twitter"></i>
+          </a>
+          <a href="https://instagram.com" target="_blank">
+            <i class="fab fa-instagram"></i>
+          </a>
+        </div>
       </div>
-    </div>
+    </footer>
   </mat-sidenav-content>
 </mat-sidenav-container>

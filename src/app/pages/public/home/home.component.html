@@ -1,106 +1,100 @@
 <mat-sidenav-container class="home-container">
   <mat-sidenav-content>
-    <!-- Barre de navigation principale -->
-    <mat-toolbar class="main-toolbar">
-      <span class="app-title">{{ compagny.name }}</span>
+    <!-- Hero Section with Navigation Overlay -->
+    <section class="hero-section">
+      <!-- Navigation Menu Overlay -->
+      <div class="nav-overlay">
+        <mat-toolbar class="transparent-toolbar">
+          <div class="nav-content">
+            <!-- Left Section -->
+            <div class="nav-left">
+              <mat-form-field class="category-select" appearance="fill">
+                <mat-select placeholder="Toutes catégories"
+                           (selectionChange)="onCategorySelected($event)">
+                  <mat-option *ngFor="let category of categories"
+                             [value]="category.id">
+                    {{ category.name }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
 
-      <span class="spacer"></span>
+            <!-- Center Section -->
+            <nav class="main-nav">
+              <a mat-button
+                 routerLink=""
+                 routerLinkActive="active"
+                 [routerLinkActiveOptions]="{exact: true}">
+                <mat-icon>shopping_bag</mat-icon>
+                <span class="nav-label">Produits</span>
+              </a>
+              <a mat-button
+                 routerLink="/public/reservations"
+                 routerLinkActive="active">
+                <mat-icon>event_available</mat-icon>
+                <span class="nav-label">Réservations</span>
+              </a>
+              <a mat-button
+                 routerLink="/public/apropos"
+                 routerLinkActive="active">
+                <mat-icon>info</mat-icon>
+                <span class="nav-label">À Propos</span>
+              </a>
+            </nav>
 
-      <mat-form-field class="search-bar" appearance="outline" style="margin-top: 20px;">
-        <input matInput
-               (keyup)="applyFilter($event)"
-               placeholder="Rechercher des produits...">
-        <mat-icon matSuffix>search</mat-icon>
-      </mat-form-field>
+            <!-- Right Section -->
+            <div class="nav-right">
+              <mat-form-field class="search-bar" appearance="outline">
+                <input matInput
+                       (keyup)="applyFilter($event)"
+                       placeholder="Rechercher des produits...">
+                <mat-icon matSuffix>search</mat-icon>
+              </mat-form-field>
 
-      <button mat-button [routerLink]="['/login']" class="login-button">
-        <mat-icon>login</mat-icon>
-        <span>Administrateur</span>
-      </button>
-    </mat-toolbar>
-
-    <!-- Navigation secondaire -->
-    <div class="secondary-nav-container">
-      <mat-toolbar class="sub-toolbar">
-        <mat-form-field class="category-select" appearance="fill">
-          <mat-select placeholder="Toutes catégories"
-                     (selectionChange)="onCategorySelected($event)">
-            <mat-option *ngFor="let category of categories"
-                       [value]="category.id">
-              {{ category.name }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-
-        <nav class="main-nav">
-          <a mat-button
-             routerLink=""
-             routerLinkActive="active"
-             [routerLinkActiveOptions]="{exact: true}">
-            <mat-icon>shopping_bag</mat-icon>
-            <span class="nav-label">Produits</span>
-          </a>
-          <a mat-button
-             routerLink="/public/reservations"
-             routerLinkActive="active">
-            <mat-icon>event_available</mat-icon>
-            <span class="nav-label">Réservations</span>
-          </a>
-          <!-- <a mat-button
-             routerLink="/public/abonnements"
-             routerLinkActive="active">
-            <mat-icon>subscriptions</mat-icon>
-            <span class="nav-label">Abonnements</span>
-          </a> -->
-          <a mat-button
-             routerLink="/public/apropos"
-             routerLinkActive="active">
-            <mat-icon>info</mat-icon>
-            <span class="nav-label">À Propos</span>
-          </a>
-        </nav>
-      </mat-toolbar>
-    </div>
-
-    <!-- Slider moderne -->
-    <div class="swiper-container">
-      <div class="swiper-wrapper">
-        <div class="swiper-slide">
-          <img src="assets/images/banner1.png"
-               alt="Bannière Dabishpro"
-               class="slider-img">
-          <div class="banner-text animated fade-in">
-            <h1>Bienvenue chez Dabishpro</h1>
-            <p class="animated fade-in animated-delay-1">Découvrez nos produits exclusifs</p>
-            <button mat-raised-button
-                    color="accent"
-                    class="animated fade-in animated-delay-2"
-                    routerLink="/products">
-              Explorer la collection
-            </button>
+              <button mat-button [routerLink]="['/login']" class="login-button">
+                <mat-icon>login</mat-icon>
+                <span>Admin</span>
+              </button>
+            </div>
           </div>
-        </div>
-
-        <div class="swiper-slide">
-          <img src="assets/images/banner2.png"
-               alt="Promotions"
-               class="slider-img">
-          <div class="banner-text right-align animated fade-in">
-            <h2>Promotions exceptionnelles</h2>
-            <p class="animated fade-in animated-delay-1">Jusqu'à -30% sur une sélection</p>
-            <button mat-raised-button
-                    color="warn"
-                    class="animated fade-in animated-delay-2">
-              Voir les offres
-            </button>
-          </div>
-        </div>
+        </mat-toolbar>
       </div>
 
-      <div class="swiper-pagination"></div>
-      <div class="swiper-button-prev"></div>
-      <div class="swiper-button-next"></div>
-    </div>
+      <!-- Hero Content -->
+      <div class="hero-content">
+        <div class="swiper-container">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <img src="assets/images/banner1.png" alt="Bannière Dabishpro" class="slider-img">
+              <div class="banner-text animated fade-in">
+                <h1>Bienvenue chez Dabishpro</h1>
+                <p class="animated fade-in animated-delay-1">Découvrez nos produits exclusifs</p>
+                <button mat-raised-button color="accent" class="animated fade-in animated-delay-2" routerLink="/products">
+                  Explorer la collection
+                </button>
+              </div>
+            </div>
+
+            <div class="swiper-slide">
+              <img src="assets/images/banner2.png" alt="Promotions" class="slider-img">
+              <div class="banner-text right-align animated fade-in">
+                <h2>Promotions exceptionnelles</h2>
+                <p class="animated fade-in animated-delay-1">Jusqu'à -30% sur une sélection</p>
+                <button mat-raised-button color="warn" class="animated fade-in animated-delay-2">
+                  Voir les offres
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="swiper-pagination"></div>
+          <div class="swiper-button-prev"></div>
+          <div class="swiper-button-next"></div>
+        </div>
+      </div>
+    </section>
+
+
 
     <!-- Section produits -->
     <div class="product-section">

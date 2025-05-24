@@ -7,6 +7,106 @@ $light-bg: #f9f9f9;
 $white: #ffffff;
 $black: #000000;
 
+.hero-section {
+  position: relative;
+  z-index: 100;
+  
+  .nav-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: transparent;
+    
+    .transparent-toolbar {
+      background: transparent;
+      display: flex;
+      justify-content: center;
+      padding: 1rem 0;
+      
+      .nav-content {
+        max-width: 800px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        
+        .main-nav {
+          display: flex;
+          gap: 2rem;
+          
+          a {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: $white;
+            text-transform: uppercase;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            
+            mat-icon {
+              color: $white;
+              font-size: 24px;
+              width: 24px;
+              height: 24px;
+              line-height: 24px;
+              margin-right: 8px;
+            }
+            
+            &:hover {
+              color: $accent-color;
+              transform: translateY(-2px);
+              
+              mat-icon {
+                color: $accent-color;
+              }
+            }
+            
+            &.active {
+              color: $accent-color;
+              
+              mat-icon {
+                color: $accent-color;
+              }
+            }
+          }
+        }
+        
+        .nav-right {
+          position: absolute;
+          right: 2rem;
+          
+          .login-button {
+            color: $white;
+            border: 1px solid $white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            
+            &:hover {
+              background: $white;
+              color: $primary-color;
+              
+              mat-icon {
+                color: $primary-color;
+              }
+            }
+            
+            mat-icon {
+              color: $white;
+              font-size: 24px;
+              width: 24px;
+              height: 24px;
+              line-height: 24px;
+              margin-right: 8px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
 .about-hero {
   position: relative;
   height: 70vh;
@@ -932,7 +1032,7 @@ $black: #000000;
 
     .social-links {
       display: flex;
-      gap: 1rem;
+      gap: 1.5rem;
 
       @media (max-width: 768px) {
         justify-content: center;
@@ -944,16 +1044,22 @@ $black: #000000;
         height: 40px;
         border-radius: 50%;
         background: rgba($white, 0.1);
+        text-decoration: none;
         @include flex-center();
         @include transition();
+
+        i {
+          font-size: 1.2rem;
+          transition: transform 0.3s ease;
+        }
 
         &:hover {
           background: rgba($white, 0.2);
           transform: translateY(-3px);
-        }
-
-        mat-icon {
-          font-size: 1.2rem;
+          
+          i {
+            transform: scale(1.1);
+          }
         }
       }
     }

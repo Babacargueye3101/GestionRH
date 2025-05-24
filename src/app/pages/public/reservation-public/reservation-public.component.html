@@ -1,53 +1,45 @@
 <mat-sidenav-container class="home-container">
   <mat-sidenav-content>
-    <!-- Barre de navigation principale -->
-    <mat-toolbar class="main-toolbar">
-      <span class="app-title">{{ compagny.name }}</span>
+    <!-- Hero Section with Navigation Overlay -->
+    <section class="hero-section">
+      <!-- Navigation Menu Overlay -->
+      <div class="nav-overlay">
+        <mat-toolbar class="transparent-toolbar">
+          <div class="nav-content">
+            <!-- Center Section -->
+            <nav class="main-nav">
+              <a mat-button
+                 routerLink=""
+                 routerLinkActive="active"
+                 [routerLinkActiveOptions]="{exact: true}">
+                <mat-icon>shopping_bag</mat-icon>
+                <span class="nav-label">Produits</span>
+              </a>
+              <a mat-button
+                 routerLink="/public/reservations"
+                 routerLinkActive="active">
+                <mat-icon>event_available</mat-icon>
+                <span class="nav-label">Réservations</span>
+              </a>
+              <a mat-button
+                 routerLink="/public/apropos"
+                 routerLinkActive="active">
+                <mat-icon>info</mat-icon>
+                <span class="nav-label">À Propos</span>
+              </a>
+            </nav>
 
-      <span class="spacer"></span>
-
-      <button mat-button [routerLink]="['/login']" class="login-button">
-        <mat-icon>login</mat-icon>
-        <span>Administrateur</span>
-      </button>
-    </mat-toolbar>
-
-    <!-- Navigation secondaire (sticky) -->
-    <div class="secondary-nav-container">
-      <mat-toolbar class="sub-toolbar">
-        <nav class="main-nav">
-          <a
-            mat-button
-            routerLink=""
-            routerLinkActive="active"
-            [routerLinkActiveOptions]="{ exact: true }"
-          >
-            <mat-icon>shopping_bag</mat-icon>
-            <span class="nav-label">Produits</span>
-          </a>
-          <a
-            mat-button
-            routerLink="/public/reservations"
-            routerLinkActive="active"
-          >
-            <mat-icon>event_available</mat-icon>
-            <span class="nav-label">Réservations</span>
-          </a>
-          <!-- <a
-            mat-button
-            routerLink="/public/abonnements"
-            routerLinkActive="active"
-          >
-            <mat-icon>subscriptions</mat-icon>
-            <span class="nav-label">Abonnements</span>
-          </a> -->
-          <a mat-button routerLink="/public/apropos" routerLinkActive="active">
-            <mat-icon>info</mat-icon>
-            <span class="nav-label">À Propos</span>
-          </a>
-        </nav>
-      </mat-toolbar>
-    </div>
+            <!-- Right Section -->
+            <div class="nav-right">
+              <button mat-button [routerLink]="['/login']" class="login-button">
+                <mat-icon>login</mat-icon>
+                <span>Admin</span>
+              </button>
+            </div>
+          </div>
+        </mat-toolbar>
+      </div>
+    </section>
     <!-- Modifiez votre section swiper comme ceci -->
     <div class="swiper-container">
       <div class="swiper-wrapper">
@@ -107,13 +99,13 @@
           <h3>Réseaux sociaux</h3>
           <div class="social-links">
             <a href="https://facebook.com" target="_blank">
-              <mat-icon>facebook</mat-icon>
+              <i class="fab fa-facebook-f"></i>
             </a>
             <a href="https://twitter.com" target="_blank">
-              <mat-icon>twitter</mat-icon>
+              <i class="fab fa-twitter"></i>
             </a>
             <a href="https://instagram.com" target="_blank">
-              <mat-icon>instagram</mat-icon>
+              <i class="fab fa-instagram"></i>
             </a>
           </div>
         </div>
