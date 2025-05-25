@@ -1,98 +1,67 @@
-<div class="home-container">
-  <!-- Hero Section with Navigation Overlay -->
-  <section class="hero-section">
-      <!-- Navigation Menu Overlay -->
-      <div class="nav-overlay">
-        <mat-toolbar class="transparent-toolbar">
-          <div class="nav-content">
-            <div class="mobile-nav" *ngIf="isMobile">
-              <button mat-icon-button class="menu-button" (click)="sidenav.toggle()">
-                <mat-icon>menu</mat-icon>
-              </button>
-            </div>
-            
-            <!-- Left Section -->
-            <div class="nav-left" *ngIf="!isMobile">
-              <mat-form-field class="category-select" appearance="fill">
-                <mat-select placeholder="Toutes catégories"
-                           (selectionChange)="onCategorySelected($event)">
-                  <mat-option *ngFor="let category of categories"
-                             [value]="category.id">
-                    {{ category.name }}
-                  </mat-option>
-                </mat-select>
-              </mat-form-field>
-            </div>
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #sidenav mode="over" class="sidenav">
+    <mat-nav-list>
+      <a mat-list-item routerLink="/" (click)="sidenav.close()">
+        <span>Accueil</span>
+      </a>
+      <a mat-list-item routerLink="/public/reservations" (click)="sidenav.close()">
+        <span>Réservations</span>
+      </a>
+      <a mat-list-item routerLink="/public/apropos" (click)="sidenav.close()">
+        <span>À propos</span>
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
 
-            <!-- Center Section -->
-            <nav class="main-nav">
-              <a mat-button
-                 routerLink=""
-                 routerLinkActive="active"
-                 [routerLinkActiveOptions]="{exact: true}">
-                <mat-icon>shopping_bag</mat-icon>
-                <span class="nav-label">Produits</span>
-              </a>
-              <a mat-button
-                 routerLink="/public/reservations"
-                 routerLinkActive="active">
-                <mat-icon>event_available</mat-icon>
-                <span class="nav-label">Réservations</span>
-              </a>
-              <a mat-button
-                 routerLink="/public/apropos"
-                 routerLinkActive="active">
-                <mat-icon>info</mat-icon>
-                <span class="nav-label">À Propos</span>
-              </a>
-            </nav>
-
-            <!-- Right Section -->
-            <div class="nav-right">
-              <mat-form-field class="search-bar" appearance="outline">
-                <input matInput
-                       (keyup)="applyFilter($event)"
-                       placeholder="Rechercher des produits...">
-                <mat-icon matSuffix>search</mat-icon>
-              </mat-form-field>
-
-              <!-- <button mat-button [routerLink]="['/login']" class="login-button">
-                <mat-icon>login</mat-icon>
-                <span>Admin</span>
-              </button> -->
-            </div>
-          </div>
-        </mat-toolbar>
+  <mat-sidenav-content>
+    <div class="home-container">
+      <mat-toolbar class="main-toolbar">
+        <div class="toolbar-content">
+      <!-- Logo/Brand Section -->
+      <div class="brand-section">
+        <span class="brand-name">{{ compagny.name }}</span>
       </div>
 
-      <!-- Menu latéral -->
-      <mat-sidenav-container>
-        <mat-sidenav #sidenav mode="over" class="sidenav">
-          <mat-nav-list>
-            <a mat-list-item routerLink="/" (click)="sidenav.close()">
-              <!-- <mat-icon>home</mat-icon> -->
-              <span>Accueil</span>
-            </a>
-            <!-- <a mat-list-item routerLink="/products" (click)="sidenav.close()">
-              <mat-icon>shopping_bag</mat-icon>
-              <span>Produits</span>
-            </a> -->
-            <a mat-list-item routerLink="/public/reservations" (click)="sidenav.close()">
-              <!-- <mat-icon>event</mat-icon> -->
-              <span>Réservations</span>
-            </a>
-            <!-- <a mat-list-item routerLink="/public/cart" (click)="sidenav.close()">
-              <mat-icon style="margin-top: 10px;">shopping_cart</mat-icon>
-              <span>Panier</span>
-            </a> -->
-            <a mat-list-item routerLink="/public/apropos" (click)="sidenav.close()">
-              <!-- <mat-icon>info</mat-icon> -->
-              <span>À propos</span>
-            </a>
-          </mat-nav-list>
-        </mat-sidenav>
+      <!-- Main Navigation -->
+      <nav class="main-nav" *ngIf="!isMobile">
+        <a mat-button routerLink="" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+          <mat-icon>home</mat-icon>
+          <span>Accueil</span>
+        </a>
+        <a mat-button routerLink="/public/reservations" routerLinkActive="active">
+          <mat-icon>event_available</mat-icon>
+          <span>Réservations</span>
+        </a>
+        <a mat-button routerLink="/public/apropos" routerLinkActive="active">
+          <mat-icon>info</mat-icon>
+          <span>À Propos</span>
+        </a>
+      </nav>
 
-        <mat-sidenav-content>
+      <!-- Right Section with Search and Cart -->
+      <div class="toolbar-right">
+        <mat-form-field class="search-field" appearance="outline">
+          <input matInput (keyup)="applyFilter($event)" placeholder="Rechercher...">
+          <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
+
+        <button mat-icon-button class="cart-button" (click)="goToCart()">
+          <mat-icon>shopping_cart</mat-icon>
+          <span class="cart-badge" *ngIf="cartItemCount > 0">{{ cartItemCount }}</span>
+        </button>
+
+        <!-- Mobile Menu Button -->
+        <button mat-icon-button class="menu-button" *ngIf="isMobile" (click)="sidenav.toggle()">
+          <mat-icon>menu</mat-icon>
+        </button>
+      </div>
+    </div>
+  </mat-toolbar>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+
+
           <!-- Hero Content -->
           <div class="page-content">
             <div class="hero-content">
@@ -102,21 +71,21 @@
               <img src="assets/images/banner1.png" alt="Bannière Dabishpro" class="slider-img">
               <div class="banner-text animated fade-in">
                 <!-- <h1>Bienvenue chez Dabishpro</h1> -->
-                <p class="animated fade-in animated-delay-1">Découvrez nos produits exclusifs</p>
+                <!-- <p class="animated fade-in animated-delay-1">Découvrez nos produits exclusifs</p>
                 <button mat-raised-button color="accent" class="animated fade-in animated-delay-2" routerLink="/products">
                   Explorer la collection
-                </button>
+                </button> -->
               </div>
             </div>
 
             <div class="swiper-slide">
               <img src="assets/images/banner2.png" alt="Promotions" class="slider-img">
               <div class="banner-text right-align animated fade-in">
-                <h2>Promotions exceptionnelles</h2>
+                <!-- <h2>Promotions exceptionnelles</h2>
                 <p class="animated fade-in animated-delay-1">Jusqu'à -30% sur une sélection</p>
                 <button mat-raised-button color="warn" class="animated fade-in animated-delay-2">
                   Voir les offres
-                </button>
+                </button> -->
               </div>
             </div>
           </div>
@@ -127,8 +96,7 @@
         </div>
       </div>
               </div>
-        </mat-sidenav-content>
-      </mat-sidenav-container>
+
     </section>
     
     <!-- Section produits -->
