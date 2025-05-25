@@ -1,24 +1,27 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 import Swiper from 'swiper';
 import { HomeService } from 'src/app/services/home.service';
-import { Router } from '@angular/router';
+import { MatSidenav } from '@angular/material/sidenav';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { th } from 'date-fns/locale';
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit, AfterViewInit {
+  @ViewChild('sidenav') sidenav!: MatSidenav;
+  isMobile = false;
   compagny = { name: 'Dabishpro' };
   currentYear = new Date().getFullYear();
   cartItemCount = 0;
-  selectedCategory: any ;
+  selectedCategory: any;
   filteredProducts: any[] = [];
 
-
-  isMobile: boolean = false;
 
   products : any[]=[];
 
@@ -29,7 +32,12 @@ export class HomeComponent implements OnInit, AfterViewInit {
   ];
   categories: any;
 
-  constructor(private homeService: HomeService, private router: Router, private snackBar: MatSnackBar) {}
+  constructor(
+    private homeService: HomeService,
+    private router: Router,
+    private snackBar: MatSnackBar,
+    private breakpointObserver: BreakpointObserver
+  ) {}
 
   ngAfterViewInit(): void {
     new Swiper('.swiper-container', {
@@ -51,6 +59,14 @@ export class HomeComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
+    // Observer pour le responsive design
+    this.breakpointObserver
+      .observe([Breakpoints.XSmall, Breakpoints.Small])
+      .subscribe(result => {
+        this.isMobile = result.matches;
+      });
+
+    // Initialisation existante
 
     this.checkScreenSize();
     window.addEventListener('resize', this.checkScreenSize.bind(this));

@@ -6,8 +6,23 @@
       <div class="nav-overlay">
         <mat-toolbar class="transparent-toolbar">
           <div class="nav-content">
+            <div class="mobile-nav" *ngIf="isMobile">
+              <button mat-icon-button class="menu-button" (click)="sidenav.toggle()">
+                <mat-icon>menu</mat-icon>
+              </button>
+              <mat-form-field class="category-select" appearance="fill">
+                <mat-label>Catégories</mat-label>
+                <mat-select [(ngModel)]="selectedCategory">
+                  <mat-option>Toutes les catégories</mat-option>
+                  <mat-option *ngFor="let category of categories" [value]="category">
+                    {{category}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            
             <!-- Left Section -->
-            <div class="nav-left">
+            <div class="nav-left" *ngIf="!isMobile">
               <mat-form-field class="category-select" appearance="fill">
                 <mat-select placeholder="Toutes catégories"
                            (selectionChange)="onCategorySelected($event)">
@@ -60,7 +75,36 @@
         </mat-toolbar>
       </div>
 
-      <!-- Hero Content -->
+      <!-- Menu latéral -->
+      <mat-sidenav-container class="sidenav-container">
+        <mat-sidenav #sidenav mode="over" class="sidenav">
+          <mat-nav-list>
+            <a mat-list-item routerLink="/" (click)="sidenav.close()">
+              <!-- <mat-icon>home</mat-icon> -->
+              <span>Accueil</span>
+            </a>
+            <!-- <a mat-list-item routerLink="/products" (click)="sidenav.close()">
+              <mat-icon>shopping_bag</mat-icon>
+              <span>Produits</span>
+            </a> -->
+            <a mat-list-item routerLink="/public/reservations" (click)="sidenav.close()">
+              <!-- <mat-icon>event</mat-icon> -->
+              <span>Réservations</span>
+            </a>
+            <!-- <a mat-list-item routerLink="/public/cart" (click)="sidenav.close()">
+              <mat-icon style="margin-top: 10px;">shopping_cart</mat-icon>
+              <span>Panier</span>
+            </a> -->
+            <a mat-list-item routerLink="/public/apropos" (click)="sidenav.close()">
+              <!-- <mat-icon>info</mat-icon> -->
+              <span>À propos</span>
+            </a>
+          </mat-nav-list>
+        </mat-sidenav>
+
+        <mat-sidenav-content>
+          <!-- Hero Content -->
+          <div class="page-content">
       <div class="hero-content">
         <div class="swiper-container">
           <div class="swiper-wrapper">
@@ -92,6 +136,9 @@
           <div class="swiper-button-next"></div>
         </div>
       </div>
+              </div>
+        </mat-sidenav-content>
+      </mat-sidenav-container>
     </section>
 
 

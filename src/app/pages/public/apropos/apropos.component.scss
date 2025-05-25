@@ -30,11 +30,44 @@ $black: #000000;
         display: flex;
         justify-content: center;
         align-items: center;
+
+        .mobile-nav {
+          display: none;
+
+          @media (max-width: 768px) {
+            display: flex;
+            align-items: center;
+            position: absolute;
+            left: 1rem;
+
+            .menu-button {
+              color: $white;
+              background: transparent;
+              border: none;
+              padding: 8px;
+              cursor: pointer;
+              transition: transform 0.3s ease;
+
+              &:hover {
+                transform: scale(1.1);
+              }
+
+              mat-icon {
+                font-size: 24px;
+              }
+            }
+          }
+        }
         
         .main-nav {
           display: flex;
+          align-items: center;
           gap: 2rem;
-          
+
+          @media (max-width: 768px) {
+            display: none;
+          }
+
           a {
             display: flex;
             align-items: center;
@@ -101,6 +134,55 @@ $black: #000000;
               margin-right: 8px;
             }
           }
+        }
+      }
+    }
+  }
+}
+
+// Styles pour la sidenav
+.sidenav-container {
+  height: 100%;
+  position: absolute;
+  z-index: 999;
+
+  @media (min-width: 769px) {
+    display: none;
+  }
+
+  .sidenav {
+    width: 250px;
+    background: $white;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+
+    mat-nav-list {
+      padding: 1rem 0;
+
+      a {
+        color: $text-color;
+        font-size: 1rem;
+        height: 48px;
+        display: flex;
+        align-items: center;
+        padding: 0 1rem;
+        text-decoration: none;
+        transition: all 0.3s ease;
+
+        &:hover {
+          background: rgba($primary-color, 0.1);
+          color: $primary-color;
+        }
+
+        &.active {
+          color: $primary-color;
+          background: rgba($primary-color, 0.1);
+        }
+
+        span {
+          margin-left: 0.5rem;
         }
       }
     }

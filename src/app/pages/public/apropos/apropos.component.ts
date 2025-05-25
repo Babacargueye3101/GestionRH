@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { MatSidenav } from '@angular/material/sidenav';
 
 interface TeamMember {
   name: string;
@@ -27,8 +29,11 @@ interface Value {
   styleUrls: ['./apropos.component.scss']
 })
 export class AproposComponent implements OnInit {
+  @ViewChild('sidenav') sidenav!: MatSidenav;
+
   currentYear: number = new Date().getFullYear();
   compagny = { name: 'Dabishpro' };
+  isMobile = false;
 
   // Données de l'équipe
   teamMembers: TeamMember[] = [
@@ -139,7 +144,16 @@ export class AproposComponent implements OnInit {
   Rejoignez notre univers où excellence, accessibilité et innovation se rencontrent pour faire rayonner votre beauté.
 `;
 
-  constructor() {}
+  constructor(private breakpointObserver: BreakpointObserver) {
+    this.breakpointObserver
+      .observe([Breakpoints.Handset])
+      .subscribe(result => {
+        this.isMobile = result.matches;
+        if (!this.isMobile && this.sidenav) {
+          this.sidenav.close();
+        }
+      });
+  }
 
   ngOnInit() {
     console.log(this.description);

@@ -6,6 +6,12 @@
       <div class="nav-overlay">
         <mat-toolbar class="transparent-toolbar">
           <div class="nav-content">
+            <div class="mobile-nav" *ngIf="isMobile">
+              <button mat-icon-button class="menu-button" (click)="sidenav.toggle()">
+                <mat-icon>menu</mat-icon>
+              </button>
+            </div>
+            
             <!-- Center Section -->
             <nav class="main-nav">
               <a mat-button
@@ -41,6 +47,22 @@
       </div>
     </section>
 
+      <!-- Menu latéral -->
+      <mat-sidenav-container class="sidenav-container">
+        <mat-sidenav #sidenav mode="over" class="sidenav" [autoFocus]="false" (click)="$event.stopPropagation()" [disableClose]="false">
+          <mat-nav-list>
+            <a mat-list-item routerLink="/" (click)="sidenav.close()">
+              <span>Accueil</span>
+            </a>
+            <a mat-list-item routerLink="/public/reservations" (click)="sidenav.close()">
+              <span>Réservations</span>
+            </a>
+            <a mat-list-item routerLink="/public/apropos" (click)="sidenav.close()">
+              <span>À propos</span>
+            </a>
+          </mat-nav-list>
+        </mat-sidenav>
+      </mat-sidenav-container>
 
     <div class="about-hero">
       <div class="overlay">
