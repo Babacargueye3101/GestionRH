@@ -10,6 +10,7 @@ import {  Router } from '@angular/router';
   styleUrls: ['./reservation-public.component.scss']
 })
 export class ReservationPublicComponent implements OnInit{
+  searchQuery: string = '';
   shopList: any;
   allsalons: any;
 

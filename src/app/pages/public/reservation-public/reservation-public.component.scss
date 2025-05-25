@@ -6,6 +6,9 @@ $text-color: #333;
 $light-bg: #f9f9f9;
 $white: #ffffff;
 $black: #000000;
+$shadow-color: rgba(0, 0, 0, 0.1);
+$border-radius: 8px;
+$transition-duration: 0.3s;
 
 // Mixins
 @mixin flex-center {
@@ -18,825 +21,272 @@ $black: #000000;
   transition: $property $duration $easing;
 }
 
-// Styles de navigation
-.hero-section {
-  position: relative;
-  z-index: 100;
-  
-  .nav-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    background: transparent;
-    
-    .transparent-toolbar {
-      background: transparent;
-      display: flex;
-      justify-content: center;
-      padding: 1rem 0;
-      
-      .nav-content {
-        max-width: 800px;
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        
-        .main-nav {
-          display: flex;
-          gap: 2rem;
-          
-          a {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: $white;
-            text-transform: uppercase;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            
-            mat-icon {
-              color: $white;
-              font-size: 24px;
-              width: 24px;
-              height: 24px;
-              line-height: 24px;
-              margin-right: 8px;
-            }
-            
-            &:hover {
-              color: $accent-color;
-              transform: translateY(-2px);
-              
-              mat-icon {
-                color: $accent-color;
-              }
-            }
-            
-            &.active {
-              color: $accent-color;
-              
-              mat-icon {
-                color: $accent-color;
-              }
-            }
-          }
-        }
-        
-        .nav-right {
-          position: absolute;
-          right: 2rem;
-          
-          .login-button {
-            color: $white;
-            border: 1px solid $white;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            transition: all 0.3s ease;
-            
-            &:hover {
-              background: $white;
-              color: $primary-color;
-              
-              mat-icon {
-                color: $primary-color;
-              }
-            }
-            
-            mat-icon {
-              color: $white;
-              font-size: 24px;
-              width: 24px;
-              height: 24px;
-              line-height: 24px;
-              margin-right: 8px;
-            }
-          }
-        }
-      }
-    }
-  }
-}
-
-// Mixins
-@mixin flex-center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-@mixin transition($property: all, $duration: 0.3s, $easing: ease) {
-  transition: $property $duration $easing;
-}
-
-// Styles principaux
-.home-container {
+// Styles globaux
+.sidenav-container {
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
-  background-color: $light-bg;
-  overflow-x: hidden;
 
-  .hero-section {
-    position: relative;
-    width: 100%;
-    background: linear-gradient(135deg, rgba($primary-color, 0.95), rgba($secondary-color, 0.95));
+  .sidenav {
+    width: 250px;
+    background: white;
 
-    .nav-overlay {
-      position: fixed;
-      width: 100%;
-      z-index: 1000;
-      padding: 1rem 0;
+    mat-nav-list {
+      padding-top: 20px;
 
-      .transparent-toolbar {
-        background: transparent;
-        transition: all 0.3s ease;
-        padding: 0 1rem;
+      a {
+        color: $white;
+        padding: 12px 20px;
+        margin: 5px 0;
+        @include transition();
 
-        @media (max-width: 768px) {
-          padding: 0.5rem;
+        &:hover {
+          background: rgba($white, 0.1);
         }
 
-        .nav-content {
-          max-width: 1200px;
-          margin: 0 auto;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-
-          @media (max-width: 768px) {
-            flex-direction: column;
-            gap: 1rem;
-          }
-
-          .main-nav {
-            display: flex;
-            gap: 2rem;
-
-            @media (max-width: 768px) {
-              flex-direction: column;
-              align-items: center;
-              gap: 1rem;
-              width: 100%;
-            }
-
-            a {
-              font-size: 1rem;
-
-              @media (max-width: 768px) {
-                font-size: 0.9rem;
-                width: 100%;
-                justify-content: center;
-              }
-
-              .nav-label {
-                @media (max-width: 480px) {
-                  display: none;
-                }
-              }
-
-              mat-icon {
-                @media (max-width: 480px) {
-                  margin: 0;
-                  font-size: 24px;
-                  width: 24px;
-                  height: 24px;
-                }
-              }
-            }
-          }
-
-          .nav-right {
-            @media (max-width: 768px) {
-              position: static;
-              width: 100%;
-              display: flex;
-              justify-content: center;
-            }
-
-            .login-button {
-              @media (max-width: 768px) {
-                width: 100%;
-                max-width: 200px;
-              }
-            }
-          }
-          align-items: center;
-          width: 100%;
-          max-width: 1400px;
-          margin: 0 auto;
-          padding: 0 1rem;
-
-          @media (max-width: 768px) {
-            flex-direction: column;
-            gap: 1rem;
-            padding: 1rem;
-          }
-
-          .main-nav {
-            display: flex;
-            gap: 1rem;
-            margin: 0 auto;
-
-            @media (max-width: 768px) {
-              width: 100%;
-              justify-content: center;
-              flex-wrap: wrap;
-              
-              a {
-                flex: 1 1 auto;
-                text-align: center;
-                padding: 0.5rem;
-                
-                .nav-label {
-                  display: none;
-                }
-                
-                mat-icon {
-                  margin: 0;
-                }
-              }
-            }
-
-            a {
-              color: white;
-              text-decoration: none;
-              transition: all 0.3s ease;
-              padding: 0.5rem 1rem;
-              border-radius: 4px;
-
-              &:hover {
-                background: rgba(255, 255, 255, 0.1);
-              }
-
-              &.active {
-                background: rgba(255, 255, 255, 0.2);
-              }
-
-              mat-icon {
-                margin-right: 0.5rem;
-              }
-            }
-          }
-
-          .nav-right {
-            .login-button {
-              background: rgba(255, 255, 255, 0.2);
-              color: white;
-              padding: 0.5rem 1.5rem;
-              border-radius: 4px;
-              text-decoration: none;
-              @include transition();
-
-              &:hover {
-                background: rgba(255, 255, 255, 0.3);
-              }
-
-              mat-icon {
-                margin-right: 0.5rem;
-              }
-            }
-          }
+        mat-icon {
+          margin-right: 10px;
         }
       }
     }
   }
-}.main-toolbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between; // Ajoute cet alignement pour séparer les éléments
+}
+
+// Toolbar principale
+.main-toolbar {
   position: sticky;
   top: 0;
   z-index: 1000;
+  background: $accent-color;
+  color: $white;
+  height: 70px;
+  box-shadow: 0 4px 15px $shadow-color;
+  padding: 0 2rem;
+  @include flex-center();
+  justify-content: space-between;
+
+  .toolbar-content {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .brand-section {
+      .brand-name {
+        font-size: 1.5rem;
+        font-weight: 700;
+      }
+    }
+
+    .main-nav {
+      display: flex;
+      gap: 2rem;
+
+      a {
+        color: $white;
+        text-decoration: none;
+        @include flex-center();
+        gap: 0.5rem;
+        @include transition();
+
+        &:hover {
+          color: $primary-color;
+        }
+
+        &.active {
+          font-weight: 200;
+        }
+      }
+    }
+
+    .toolbar-right {
+      .menu-button {
+        display: none;
+      }
+    }
+  }
+
+  // Responsive
+  @media (max-width: 768px) {
+    height: 60px;
+    padding: 0 1rem;
+
+    .toolbar-content {
+      .main-nav {
+        display: none;
+      }
+
+      .toolbar-right {
+        .menu-button {
+          display: block;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 480px) {
+    .brand-name {
+      font-size: 1.2rem;
+    }
+  }
+}
+
+// Contenu principal
+.mat-sidenav-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+
+  // Slider
+  .swiper-container {
+    width: 100%;
+    height: 400px;
+    position: relative;
+    overflow: hidden;
+
+    .swiper-slide {
+      position: relative;
+      height: 100%;
+
+      .slider-img {
+        width: 100%;
+        object-fit: cover;
+      }
+    }
+
+    @media (max-width: 768px) {
+      height: 300px;
+    }
+
+    @media (max-width: 480px) {
+      height: 200px;
+    }
+  }
+
+  // Grille des boutiques
+  .shop-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    padding: 3rem 2rem;
+    background-color: $light-bg;
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+
+    .shop-card {
+      background: $white;
+      border-radius: $border-radius;
+      overflow: hidden;
+      box-shadow: 0 4px 15px $shadow-color;
+      @include transition();
+      cursor: pointer;
+
+      &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      }
+
+      .shop-card-image {
+        height: 200px;
+        overflow: hidden;
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          @include transition();
+
+          &:hover {
+            transform: scale(1.05);
+          }
+        }
+      }
+
+      .shop-card-content {
+        padding: 15px;
+
+        h3 {
+          font-size: 1.2rem;
+          font-weight: bold;
+          color: $text-color;
+          margin-bottom: 10px;
+        }
+
+        p {
+          font-size: 0.9rem;
+          color: lighten($text-color, 20%);
+          line-height: 1.4;
+        }
+      }
+    }
+
+    // Responsive
+    @media (max-width: 1024px) {
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 1.5rem;
+      padding: 2rem 1.5rem;
+    }
+
+    @media (max-width: 768px) {
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      padding: 2rem 1rem;
+    }
+
+    @media (max-width: 480px) {
+      grid-template-columns: 1fr;
+    }
+  }
+}
+
+// Footer
+.footer {
   background: linear-gradient(135deg, #e1b44f, #c38a26);
   color: $white;
-  height: 80px;
-  box-shadow: 0 4px 12px rgba($black, 0.1);
-  padding: 0 2rem;
+  padding: 2rem 0;
+  margin-top: auto;
 
-  @media (max-width: 768px) {
-    flex-direction: column;
-    height: auto;
-    padding: 1rem;
-  }
+  .footer-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
 
-
-  .app-title {
-    font-size: 1.8rem;
-    font-weight: 700;
-    letter-spacing: 0.5px;
-    font-family: 'Montserrat', sans-serif;
-
-    @media (max-width: 768px) {
-      margin-bottom: 1rem;
-    }
-  }
-
-
-  .search-bar {
-    margin-left: auto;
-    min-width: 250px;
-
-    @media (max-width: 768px) {
-      width: 100%;
-      margin-left: 0;
-    }
-
-    .mat-form-field-wrapper {
-      background: transparent;
-      border-radius: 2rem;
-      @include transition();
-
-      &:hover {
-        background: transparent; // Ajoute un léger effet au survol
-      }
-    }
-
-    input {
-      background: transparent; // Rend l'input transparent
-      color: $white; // Texte en blanc
-      padding: 0.5rem 1rem;
-      border: none; // Supprime les bordures
-      box-shadow: none; // Supprime les ombres
-
-      &::placeholder {
-        color: rgba($white, 0.8); // Placeholder légèrement transparent
-      }
-
-      &:focus {
-        outline: none; // Supprime le contour au focus
-      }
-    }
-
-    mat-icon {
-      color: $white;
-    }
-  }
-}
-
-// Navigation secondaire
-.secondary-nav-container {
-  position: sticky;
-  top: 80px;
-  z-index: 999;
-  background: $white;
-  box-shadow: 0 2px 10px rgba($black, 0.05);
-
-  @media (max-width: 768px) {
-    top: auto;
-    position: relative;
-  }
-}
-
-.sub-toolbar {
-  height: 70px;
-  padding: 0 2rem;
-  max-width: 1400px;
-  margin: 10px;
-  @include flex-center();
-
-  @media (max-width: 768px) {
-    flex-direction: column;
-    height: auto;
-    padding: 1rem;
-  }
-
-  .category-select {
-    width: 240px;
-    margin-right: 2rem;
-
-    @media (max-width: 768px) {
-      width: 100%;
-      margin: 0 0 1rem 0;
-    }
-
-    .mat-form-field-flex {
-      background: rgba($primary-color, 0.1);
-      border-radius: 0.5rem;
-      padding: 0.5rem 1rem !important;
-    }
-
-    .mat-select-value {
-      color: $primary-color;
-      font-weight: 500;
-    }
-  }
-
-
-  .main-nav {
-    display: flex;
-    gap: 0.5rem;
-    flex-wrap: wrap;
-
-    @media (max-width: 768px) {
-      width: 100%;
-      justify-content: center;
-    }
-
-    a {
-      color: lighten($text-color, 20%);
-      font-weight: 500;
-      border-radius: 0.5rem;
-      @include transition();
-      height: 50px;
-      @include flex-center();
-      padding: 0 1.5rem;
-      position: relative;
-
-      @media (max-width: 768px) {
-        padding: 0 1rem;
-        height: 40px;
-        font-size: 0.9rem;
-      }
-
-      mat-icon {
-        margin-right: 0.5rem;
-        font-size: 1.5rem;
-        color: $primary-color;
-      }
-
-      &:hover {
-        color: $primary-color;
-        background: rgba($primary-color, 0.05);
-      }
-
-      &.active {
-        color: $primary-color;
-        font-weight: 600;
+    .footer-section {
+      h3 {
+        font-size: 1.2rem;
+        margin-bottom: 1rem;
+        position: relative;
+        padding-bottom: 0.5rem;
 
         &::after {
           content: '';
           position: absolute;
           bottom: 0;
-          left: 50%;
-          transform: translateX(-50%);
-          width: 60%;
-          height: 3px;
-          background: $primary-color;
-          border-radius: 3px;
-        }
-      }
-    }
-  }
-
-  .main-nav mat-icon {
-    font-size: 1.5rem; // Ajuste la taille des icônes
-    color: $primary-color; // Définit la couleur des icônes
-    margin-right: 0.5rem; // Ajoute un espace entre l'icône et le texte
-    vertical-align: middle; // Aligne verticalement les icônes avec le texte
-  }
-}
-
-// Slider moderne
-.swiper-container {
-  width: 100%;
-  height: 600px;
-  position: relative;
-  overflow: hidden;
-
-  @media (max-width: 1024px) {
-    height: 450px;
-  }
-
-  @media (max-width: 768px) {
-    height: 350px;
-  }
-
-  .swiper-slide {
-    position: relative;
-    @include flex-center();
-
-    &::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(to right, rgba($black, 0.4), rgba($black, 0.1));
-      z-index: 1;
-    }
-
-    .slider-img {
-      width: 100%;
-      height: 100%;
-      object-position: center;
-    }
-
-    .banner-text {
-      position: absolute;
-      z-index: 2;
-      color: $white;
-      text-align: left;
-      width: 50%;
-      left: 10%;
-      transform: none;
-      top: 50%;
-      transform: translateY(-50%);
-
-      @media (max-width: 768px) {
-        width: 80%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        text-align: center;
-      }
-
-      h1, h2 {
-        font-size: 3rem;
-        font-weight: 800;
-        margin-bottom: 1.5rem;
-        line-height: 1.2;
-        text-shadow: 2px 2px 4px rgba($black, 0.3);
-
-        @media (max-width: 1024px) {
-          font-size: 2.5rem;
-        }
-
-        @media (max-width: 768px) {
-          font-size: 2rem;
+          left: 0;
+          width: 50px;
+          height: 2px;
+          background: $accent-color;
         }
       }
 
       p {
-        font-size: 1.3rem;
-        margin-bottom: 2rem;
-        text-shadow: 1px 1px 2px rgba($black, 0.3);
-
-        @media (max-width: 768px) {
-          font-size: 1.1rem;
-        }
+        margin: 0.5rem 0;
       }
 
-      button {
-        padding: 0.8rem 2rem;
-        font-size: 1.1rem;
-        font-weight: 600;
-        border-radius: 2rem;
-        @include transition();
-        box-shadow: 0 5px 15px rgba($black, 0.2);
+      .social-links {
+        display: flex;
+        gap: 1rem;
 
-        &:hover {
-          transform: translateY(-3px);
-          box-shadow: 0 8px 20px rgba($black, 0.3);
-        }
-      }
-
-      &.right-align {
-        left: auto;
-        right: 10%;
-        text-align: right;
-
-        @media (max-width: 768px) {
-          right: auto;
-          left: 50%;
-          text-align: center;
-        }
-      }
-    }
-  }
-
-  .swiper-pagination-bullet {
-    width: 12px;
-    height: 12px;
-    background: $white;
-    opacity: 0.7;
-
-    &-active {
-      opacity: 1;
-      background: $primary-color;
-    }
-  }
-
-  .swiper-button-next,
-  .swiper-button-prev {
-    color: $white;
-    background: rgba($black, 0.3);
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    @include transition();
-
-    &:hover {
-      background: rgba($black, 0.5);
-      transform: scale(1.1);
-    }
-
-    &::after {
-      font-size: 1.5rem;
-      font-weight: bold;
-    }
-  }
-}
-
-// Section produits
-.product-section {
-  padding: 4rem 2rem;
-  background-color: $light-bg;
-
-  @media (max-width: 768px) {
-    padding: 2rem 1rem;
-  }
-
-  h2 {
-    text-align: center;
-    font-size: 2.5rem;
-    margin-bottom: 3rem;
-    color: $text-color;
-    position: relative;
-    font-weight: 700;
-
-    &::after {
-      content: '';
-      position: absolute;
-      bottom: -10px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 100px;
-      height: 4px;
-      background: $primary-color;
-      border-radius: 2px;
-    }
-  }
-
-  .product-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 2rem;
-    max-width: 1400px;
-    margin: 0 auto;
-
-    @media (max-width: 768px) {
-      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-      gap: 1.5rem;
-    }
-  }
-
-  .product-item {
-    background: $white;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 5px 15px rgba($black, 0.08);
-    @include transition();
-
-    &:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 15px 30px rgba($black, 0.15);
-    }
-
-    mat-card-header {
-      padding: 1.5rem 1.5rem 0;
-
-      mat-card-title {
-        font-size: 1.3rem;
-        font-weight: 600;
-        color: $text-color;
-        margin-bottom: 0.5rem;
-      }
-
-      mat-card-subtitle {
-        color: lighten($text-color, 30%);
-        font-size: 0.9rem;
-      }
-    }
-
-    img {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-      @include transition();
-
-      &:hover {
-        transform: scale(1.05);
-      }
-    }
-
-    mat-card-content {
-      padding: 1rem 1.5rem;
-
-      p {
-        font-size: 1.2rem;
-        font-weight: 700;
-        color: $primary-color;
-        margin: 0;
-      }
-    }
-
-    .action-buttons {
-      padding: 0 1.5rem 1.5rem;
-      display: flex;
-      justify-content: space-between;
-      gap: 1rem;
-
-      button {
-        flex: 1;
-        @include transition();
-        border-radius: 8px;
-        padding: 0.5rem;
-
-        &:first-child {
-          background: linear-gradient(135deg, $primary-color, darken($primary-color, 10%));
+        a {
           color: $white;
-
-          &:hover {
-            background: linear-gradient(135deg, darken($primary-color, 5%), darken($primary-color, 15%));
-          }
-        }
-
-        &:last-child {
-          background: $secondary-color;
-          color: $white;
-
-          &:hover {
-            background: darken($secondary-color, 10%);
-          }
-        }
-
-        mat-icon {
-          margin-right: 0.5rem;
-        }
-      }
-    }
-  }
-}
-
-// Footer moderne
-.footer {
-  background: linear-gradient(135deg, #e1b44f, #c38a26);
-  color: $white;
-  padding: 3rem 2rem;
-  margin-top: 3rem;
-
-  &-content {
-    max-width: 1400px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
-
-    @media (max-width: 768px) {
-      grid-template-columns: 1fr;
-      text-align: center;
-    }
-  }
-
-  .footer-section {
-    h3 {
-      font-size: 1.5rem;
-      margin-bottom: 1.5rem;
-      position: relative;
-      padding-bottom: 0.5rem;
-
-      &::after {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 50px;
-        height: 2px;
-        background: $white;
-
-        @media (max-width: 768px) {
-          left: 50%;
-          transform: translateX(-50%);
-        }
-      }
-    }
-
-    p {
-      margin-bottom: 1rem;
-      line-height: 1.6;
-    }
-
-    .social-links {
-      display: flex;
-      gap: 1.5rem;
-
-      @media (max-width: 768px) {
-        justify-content: center;
-      }
-
-      a {
-        color: $white;
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        background: rgba($white, 0.1);
-        text-decoration: none;
-        @include flex-center();
-        @include transition();
-
-        i {
           font-size: 1.2rem;
-          transition: transform 0.3s ease;
-        }
+          @include transition();
 
-        &:hover {
-          background: rgba($white, 0.2);
-          transform: translateY(-3px);
-          
-          i {
-            transform: scale(1.1);
+          &:hover {
+            color: $accent-color;
           }
         }
       }
@@ -845,138 +295,43 @@ $black: #000000;
 
   .copyright {
     text-align: center;
-    margin-top: 3rem;
-    padding-top: 1.5rem;
+    padding-top: 2rem;
+    margin-top: 2rem;
     border-top: 1px solid rgba($white, 0.1);
     font-size: 0.9rem;
   }
+
+  // Responsive
+  @media (max-width: 768px) {
+    .footer-content {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      padding: 0 1rem;
+    }
+  }
 }
 
-// Bouton panier flottant
-.fab-cart-container {
-  position: fixed;
-  bottom: 2rem;
-  right: 2rem;
-  z-index: 1000;
-
-  .fab-cart {
-    background: linear-gradient(135deg, $primary-color, darken($primary-color, 10%));
-    color: $white;
-    width: 60px;
+// Styles spécifiques pour les écrans très petits
+@media (max-width: 480px) {
+  .main-toolbar {
     height: 60px;
-    @include flex-center();
-    @include transition();
-    box-shadow: 0 5px 20px rgba($black, 0.2);
+  }
 
-    &:hover {
-      transform: scale(1.1) rotate(10deg);
-      box-shadow: 0 8px 25px rgba($black, 0.3);
+  .mat-sidenav-content {
+    .swiper-container {
+      height: 180px;
     }
 
-    .cart-badge {
-      position: absolute;
-      top: -5px;
-      right: -5px;
-      background: #e74c3c;
-      color: $white;
-      width: 24px;
-      height: 24px;
-      border-radius: 50%;
-      @include flex-center();
-      font-size: 0.8rem;
-      font-weight: bold;
-      box-shadow: 0 2px 5px rgba($black, 0.2);
+    .shop-container {
+      padding: 1.5rem 1rem;
     }
   }
-}
 
-// Animations
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
+  .footer {
+    padding: 1.5rem 0;
 
-@keyframes slideInUp {
-  from {
-    transform: translateY(50px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-.animated {
-  animation-duration: 0.5s;
-  animation-fill-mode: both;
-
-  &-delay {
-    &-1 { animation-delay: 0.2s; }
-    &-2 { animation-delay: 0.4s; }
-    &-3 { animation-delay: 0.6s; }
-  }
-}
-
-.fade-in { animation-name: fadeIn; }
-.slide-in-up { animation-name: slideInUp; }
-
-
-.search-bar .mdc-text-field--filled:not(.mdc-text-field--disabled) {
-  background-color: transparent !important; // Supprime le fond uniquement pour la barre de recherche
-}
-
-
-.shop-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
-  padding: 20px;
-
-  .shop-card {
-    background: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    cursor: pointer;
-
-    &:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    }
-
-    .shop-card-image {
-      height: 150px;
-      overflow: hidden;
-
-      img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        transition: transform 0.3s ease;
-
-        &:hover {
-          transform: scale(1.1);
-        }
-      }
-    }
-
-    .shop-card-content {
-      padding: 15px;
-
-      h3 {
-        font-size: 1.2rem;
-        font-weight: bold;
-        color: #333;
-        margin-bottom: 10px;
-      }
-
-      p {
-        font-size: 0.9rem;
-        color: #666;
-        line-height: 1.4;
-      }
+    .copyright {
+      padding-top: 1.5rem;
     }
   }
 }
