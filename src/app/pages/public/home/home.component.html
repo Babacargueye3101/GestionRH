@@ -1,7 +1,6 @@
-<mat-sidenav-container class="home-container">
-  <mat-sidenav-content>
-    <!-- Hero Section with Navigation Overlay -->
-    <section class="hero-section">
+<div class="home-container">
+  <!-- Hero Section with Navigation Overlay -->
+  <section class="hero-section">
       <!-- Navigation Menu Overlay -->
       <div class="nav-overlay">
         <mat-toolbar class="transparent-toolbar">
@@ -10,15 +9,6 @@
               <button mat-icon-button class="menu-button" (click)="sidenav.toggle()">
                 <mat-icon>menu</mat-icon>
               </button>
-              <mat-form-field class="category-select" appearance="fill">
-                <mat-label>Catégories</mat-label>
-                <mat-select [(ngModel)]="selectedCategory">
-                  <mat-option>Toutes les catégories</mat-option>
-                  <mat-option *ngFor="let category of categories" [value]="category">
-                    {{category}}
-                  </mat-option>
-                </mat-select>
-              </mat-form-field>
             </div>
             
             <!-- Left Section -->
@@ -76,7 +66,7 @@
       </div>
 
       <!-- Menu latéral -->
-      <mat-sidenav-container class="sidenav-container">
+      <mat-sidenav-container>
         <mat-sidenav #sidenav mode="over" class="sidenav">
           <mat-nav-list>
             <a mat-list-item routerLink="/" (click)="sidenav.close()">
@@ -105,7 +95,7 @@
         <mat-sidenav-content>
           <!-- Hero Content -->
           <div class="page-content">
-      <div class="hero-content">
+            <div class="hero-content">
         <div class="swiper-container">
           <div class="swiper-wrapper">
             <div class="swiper-slide">
@@ -140,11 +130,9 @@
         </mat-sidenav-content>
       </mat-sidenav-container>
     </section>
-
-
-
+    
     <!-- Section produits -->
-    <div class="product-section">
+    <div class="product-section" id="products">
       <h2 class="animated slide-in-up">Nos Produits</h2>
 
       <div class="product-grid">
@@ -230,5 +218,4 @@
         </span>
       </button>
     </div>
-  </mat-sidenav-content>
-</mat-sidenav-container>
+</div>
