@@ -1,20 +1,346 @@
-/* filepath: /Users/xsorcier/Desktop/GestionRH/src/app/pages/public/home/home.component.scss */
-.home-container {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-  }
+// Variables globales
+$primary-color: #a67c52;
+$secondary-color: #34495e;
+$accent-color: #e1b44f;
+$text-color: #333;
+$light-bg: #f9f9f9;
+$white: #ffffff;
+$black: #000000;
+$shadow-color: rgba(0, 0, 0, 0.1);
+$border-radius: 8px;
+$transition-duration: 0.3s;
 
-  .main-toolbar {
+// Mixins
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin transition($property: all, $duration: 0.3s, $easing: ease) {
+  transition: $property $duration $easing;
+}
+
+// Styles globaux
+.sidenav-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  .sidenav {
+    width: 250px;
+    background: $white;
+
+    mat-nav-list {
+      padding-top: 20px;
+
+      a {
+        color: $text-color;
+        padding: 12px 20px;
+        margin: 5px 0;
+        @include transition();
+        font-size: 10px;
+
+        &:hover {
+          background: rgba($accent-color, 0.1);
+        }
+
+        mat-icon {
+          margin-right: 10px;
+          color: $accent-color;
+        }
+      }
+    }
+  }
+}
+
+  // Toolbar principale
+.main-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: $accent-color;
+  color: $white;
+  height: 70px;
+  box-shadow: 0 4px 15px $shadow-color;
+  padding: 0 2rem;
+  @include flex-center();
+  justify-content: space-between;
+
+  .toolbar-content {
+    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    .brand-section {
+      .brand-name {
+        font-size: 1.5rem;
+        font-weight: 700;
+      }
+    }
+
+    .main-nav {
+      display: flex;
+      gap: 2rem;
+
+      a {
+        color: $white;
+        text-decoration: none;
+        @include flex-center();
+        gap: 0.5rem;
+        @include transition();
+
+        &:hover {
+          color: $primary-color;
+        }
+
+        &.active {
+          font-weight: 600;
+        }
+
+        mat-icon {
+          color: $white;
+        }
+      }
+    }
+
+    .toolbar-right {
+      .menu-button {
+        display: none;
+        background-color: transparent;
+      }
+    }
   }
 
-  .sub-toolbar {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
+  @media (max-width: 768px) {
+    height: 60px;
+    padding: 0 1rem;
+
+    .toolbar-content {
+      .main-nav {
+        display: none;
+      }
+
+      .toolbar-right {
+        .menu-button {
+          display: block;
+          background-color: transparent;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 480px) {
+    .brand-name {
+      font-size: 1.2rem;
+    }
+  }
+}
+
+  // Section des salons
+  .salon-container {
+    padding: 2rem;
+    background-color: $light-bg;
+
+    .section-title {
+      text-align: center;
+      font-size: 2rem;
+      color: $text-color;
+      margin-bottom: 2rem;
+      font-weight: 600;
+      position: relative;
+
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 60px;
+        height: 3px;
+        background: $accent-color;
+        border-radius: 2px;
+      }
+    }
+
+    .salon-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      max-width: 1400px;
+      margin: 0 auto;
+
+      @media (max-width: 1200px) {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .salon-card {
+      background: $white;
+      border-radius: $border-radius;
+      overflow: hidden;
+      box-shadow: 0 4px 15px $shadow-color;
+      cursor: pointer;
+      @include transition();
+
+      &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 25px rgba($black, 0.15);
+
+        .salon-image img {
+          transform: scale(1.05);
+        }
+      }
+
+      .salon-image {
+        height: 200px;
+        overflow: hidden;
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          @include transition();
+        }
+      }
+
+      .salon-content {
+        padding: 1.5rem;
+
+        h3 {
+          font-size: 1.25rem;
+          color: $text-color;
+          margin-bottom: 1rem;
+          font-weight: 600;
+        }
+
+        .salon-info {
+          p {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+            color: lighten($text-color, 20%);
+            font-size: 0.9rem;
+
+            mat-icon {
+              color: $accent-color;
+              font-size: 1.2rem;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // État vide
+  .empty-state {
+    text-align: center;
+    padding: 3rem;
+    color: lighten($text-color, 30%);
+
+    mat-icon {
+      font-size: 3rem;
+      height: 3rem;
+      width: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      font-size: 1.2rem;
+    }
+  }
+
+  // Footer
+  .footer {
+    background-color: #DBA74D;
+    color: white;
+    padding: 2rem 4rem;
+    width: 100%;
+    position: relative;
+
+    .footer-sections {
+      display: flex;
+      justify-content: space-between;
+      gap: 2rem;
+      margin-bottom: 2rem;
+
+      @media (max-width: 768px) {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .footer-section {
+        flex: 1;
+
+        h3 {
+          color: white;
+          font-size: 1.2rem;
+          font-weight: 500;
+          margin-bottom: 1rem;
+          position: relative;
+          display: inline-block;
+
+          &:after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -5px;
+            width: 100%;
+            height: 2px;
+            background-color: white;
+          }
+        }
+
+        p {
+          color: white;
+          margin-bottom: 0.5rem;
+          font-size: 0.9rem;
+        }
+
+        .social-links {
+          display: flex;
+          gap: 1rem;
+          margin-top: 1rem;
+
+          @media (max-width: 768px) {
+            justify-content: center;
+          }
+
+          .social-link {
+            background-color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease;
+
+            &:hover {
+              transform: translateY(-3px);
+            }
+
+            img {
+              width: 20px;
+              height: 20px;
+            }
+          }
+        }
+      }
+    }
+
+    .copyright {
+      text-align: center;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+      font-size: 0.9rem;
+    }
   }
 
 
@@ -121,7 +447,7 @@
   /* Changer la couleur et la taille des flèches */
   .swiper-button-prev, .swiper-button-next {
     color: #ff6600 !important; /* Change la couleur */
-    font-size: 24px !important; /* Ajuste la taille */
+    font-size: 20px !important; /* Ajuste la taille */
   }
 
   /* Personnaliser le bouton précédent */
@@ -205,15 +531,15 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    position: fixed;
     bottom: 0;
     padding: 20px;
     z-index: 1000;
     width: 100%;
-    background: linear-gradient(135deg, #90611fc5, #34495e);
+    background: linear-gradient(135deg, #e1b44f, #c38a26);
     color: #ffffff;
     text-align: center;
     box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
+    margin-top: 200px;
 
     span {
       margin: 5px 0;
@@ -292,7 +618,7 @@
     }
 
     .sub-toolbar a, .black-toolbar a {
-      margin-right: 15px; /* Espacement entre les liens */
+      margin-right: 10px; /* Espacement entre les liens */
     }
   }
   /* Changer la couleur des boutons icônes en noir */

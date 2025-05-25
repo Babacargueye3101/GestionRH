@@ -13,6 +13,7 @@ import { ShowAvailibilityComponent } from './show-availibility/show-availibility
 import { MatSelectModule } from '@angular/material/select';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
+import { MatListModule } from '@angular/material/list';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { MatInputModule } from '@angular/material/input';
     MatIconModule,
     MatSelectModule,
     ReactiveFormsModule,
-    MatInputModule
+    MatInputModule,
+    MatListModule
   ]
 })
 export class ReservationPublicModule { }

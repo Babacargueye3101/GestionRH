@@ -1,39 +1,117 @@
-<mat-sidenav-container class="home-container">
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #sidenav mode="over" class="sidenav">
+    <mat-nav-list>
+      <a mat-list-item routerLink="/" (click)="sidenav.close()">
+        <mat-icon>home</mat-icon>
+        <span>Accueil</span>
+      </a>
+      <a mat-list-item routerLink="/public/reservations" (click)="sidenav.close()">
+        <mat-icon>event_available</mat-icon>
+        <span>Réservations</span>
+      </a>
+      <a mat-list-item routerLink="/public/apropos" (click)="sidenav.close()">
+        <mat-icon>info</mat-icon>
+        <span>À propos</span>
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+
   <mat-sidenav-content>
-    <!-- Barre de navigation -->
-    <mat-toolbar class="main-toolbar light-blue-toolbar">
-      <span class="app-title">Ma Boutique</span>
-      <span class="spacer"></span>
+    <mat-toolbar class="main-toolbar">
+      <div class="toolbar-content">
+        <!-- Logo/Brand Section -->
+        <div class="brand-section">
+          <span class="brand-name">DabiShop Pro</span>
+        </div>
+
+        <!-- Navigation Links -->
+        <nav class="main-nav">
+          <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+            <mat-icon>home</mat-icon>
+            <span>Accueil</span>
+          </a>
+          <a routerLink="/public/reservations" routerLinkActive="active">
+            <mat-icon>event_available</mat-icon>
+            <span>Réservations</span>
+          </a>
+          <a routerLink="/public/apropos" routerLinkActive="active">
+            <mat-icon>info</mat-icon>
+            <span>À propos</span>
+          </a>
+        </nav>
+
+        <!-- Right Section -->
+        <div class="toolbar-right">
+          <button mat-icon-button class="menu-button" (click)="sidenav.toggle()">
+            <mat-icon>menu</mat-icon>
+          </button>
+        </div>
+      </div>
     </mat-toolbar>
 
-    <div *ngIf="salons.length > 0">
-      <h3>Salons disponibles :</h3>
-      <div class="row">
-        <div *ngFor="let salon of salons" class="col-md-3 mb-4">
-          <div class="card h-100" style="cursor: pointer;" (click)="showAvailibility(salon)">
-            <div class="card-body">
-              <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" style="width: 100%; height: auto; display:block;">
-              <h4 class="card-title text-center">{{ salon.name }}</h4>
-              <p class="card-text">{{ salon.address }}</p>
-              <p class="card-text">{{ salon.phone }}</p>
-              <p class="card-text">{{ salon.description }}</p>
+    <div class="salon-container" *ngIf="salons.length > 0">
+      <h2 class="section-title">Salons disponibles</h2>
+      <div class="salon-grid">
+        <div *ngFor="let salon of salons" class="salon-card" (click)="showAvailibility(salon)">
+          <div class="salon-image">
+            <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" [alt]="salon.name">
+          </div>
+          <div class="salon-content">
+            <h3>{{ salon.name }}</h3>
+            <div class="salon-info">
+              <p><mat-icon>location_on</mat-icon> {{ salon.address }}</p>
+              <p><mat-icon>phone</mat-icon> {{ salon.phone }}</p>
+              <p><mat-icon>info</mat-icon> {{ salon.description }}</p>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div *ngIf="salons.length === 0">
+    <div class="empty-state" *ngIf="salons.length === 0">
+      <mat-icon>store_off</mat-icon>
       <p>Aucun salon disponible.</p>
     </div>
 
-    <!-- Pied de page -->
-    <div class="footer">
-      <span>&copy; {{ currentYear }} {{ compagny.name }}</span>
-      <div class="social-links">
-        <a href="https://facebook.com"><mat-icon>facebook</mat-icon></a>
-        <a href="https://twitter.com"><mat-icon>twitter</mat-icon></a>
-        <a href="https://instagram.com"><mat-icon>instagram</mat-icon></a>
+    <!-- Footer moderne -->
+    <footer class="footer">
+      <div class="footer-sections">
+        <!-- Section À propos -->
+        <div class="footer-section">
+          <h3>À propos</h3>
+          <p>Dabishpro propose des produits de qualité pour répondre à tous vos besoins.</p>
+        </div>
+
+        <!-- Section Contact -->
+        <div class="footer-section">
+          <h3>Contact</h3>
+          <p>Email: contact&#64;dabishpro.com</p>
+          <p>Téléphone: +221 77 123 45 67</p>
+        </div>
+
+        <!-- Section Réseaux sociaux -->
+        <div class="footer-section">
+          <h3>Réseaux sociaux</h3>
+          <div class="social-links">
+            <a href="https://facebook.com" target="_blank" class="social-link">
+              <img src="assets/icons/facebook.svg" alt="Facebook">
+            </a>
+            <a href="https://twitter.com" target="_blank" class="social-link">
+              <img src="assets/icons/twitter.svg" alt="Twitter">
+            </a>
+            <a href="https://instagram.com" target="_blank" class="social-link">
+              <img src="assets/icons/instagram.svg" alt="Instagram">
+            </a>
+            <a href="https://discord.com" target="_blank" class="social-link">
+              <img src="assets/icons/discord.svg" alt="Discord">
+            </a>
+          </div>
+        </div>
       </div>
-    </div>
+
+      <!-- Copyright -->
+      <div class="copyright">
+        © {{ currentYear }} {{ compagny.name }} - Tous droits réservés
+      </div>
+    </footer>
   </mat-sidenav-content>
 </mat-sidenav-container>
