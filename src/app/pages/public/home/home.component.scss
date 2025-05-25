@@ -47,6 +47,86 @@ $black: #000000;
   background-color: $light-bg;
   overflow-x: hidden;
 
+  // Styles pour la section des produits
+  .product-section {
+    padding: 2rem;
+    background-color: $white;
+
+    h2 {
+      text-align: center;
+      color: $primary-color;
+      margin-bottom: 2rem;
+      font-size: 2rem;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 2rem;
+      padding: 1rem;
+
+      .product-item {
+        display: flex;
+        flex-direction: column;
+        background: $white;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba($black, 0.1);
+        transition: transform 0.3s ease;
+
+        &:hover {
+          transform: translateY(-5px);
+        }
+
+        mat-card-header {
+          padding: 1rem;
+
+          mat-card-title {
+            font-size: 1.2rem;
+            color: $text-color;
+            margin-bottom: 0.5rem;
+          }
+
+          mat-card-subtitle {
+            color: rgba($text-color, 0.7);
+          }
+        }
+
+        .product-image {
+          height: 200px;
+          object-fit: cover;
+          border-radius: 4px;
+        }
+
+        mat-card-content {
+          padding: 1rem;
+          
+          p {
+            font-size: 1.2rem;
+            color: $primary-color;
+            font-weight: bold;
+            margin: 0;
+          }
+        }
+
+        .action-buttons {
+          display: flex;
+          justify-content: space-between;
+          padding: 0.5rem 1rem 1rem;
+
+          button {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            
+            mat-icon {
+              font-size: 20px;
+            }
+          }
+        }
+      }
+    }
+  }
+
   .mobile-nav {
     display: flex;
     align-items: center;
