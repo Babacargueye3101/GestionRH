@@ -9,12 +9,8 @@ import { CanalComponent } from './canal/canal.component';
 import { ListVentesComponent } from './list-ventes/list-ventes.component';
 import { ViewChild } from '@angular/core';
 import { saveAs } from 'file-saver';
-import jsPDF from 'jspdf';
-import 'jspdf-autotable';
-
-interface jsPDFWithAutoTable extends jsPDF {
-  autoTable: (options: any) => jsPDF;
-}
+import { jsPDF } from 'jspdf';
+import autoTable from 'jspdf-autotable';
 
 @Component({
   selector: 'app-ventes',
@@ -37,7 +33,7 @@ export class VentesComponent implements OnInit {
       const data = this.listVentes.ventes;
       const headers = Object.keys(data[0]);
       
-      const doc = new jsPDF() as jsPDFWithAutoTable;
+      const doc = new jsPDF();
       
       // Titre du document
       doc.setFontSize(16);
@@ -51,7 +47,7 @@ export class VentesComponent implements OnInit {
       // Création du tableau
       const tableData = data.map(row => headers.map(header => row[header]));
       
-      doc.autoTable({
+      autoTable(doc, {
         head: [headers],
         body: tableData,
         startY: 30,
