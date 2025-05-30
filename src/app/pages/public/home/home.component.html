@@ -1,70 +1,66 @@
-<mat-sidenav-container class="sidenav-container">
+<mat-sidenav-container class="home-container">
   <mat-sidenav #sidenav mode="over" class="sidenav">
     <mat-nav-list>
       <a mat-list-item routerLink="/" (click)="sidenav.close()">
+        <mat-icon>home</mat-icon>
         <span>Accueil</span>
       </a>
       <a mat-list-item routerLink="/public/reservations" (click)="sidenav.close()">
+        <mat-icon>event_available</mat-icon>
         <span>Réservations</span>
       </a>
       <a mat-list-item routerLink="/public/apropos" (click)="sidenav.close()">
+        <mat-icon>info</mat-icon>
         <span>À propos</span>
       </a>
     </mat-nav-list>
   </mat-sidenav>
 
   <mat-sidenav-content>
-    <div class="home-container">
-      <mat-toolbar class="main-toolbar">
-        <div class="toolbar-content">
-      <!-- Logo/Brand Section -->
-      <div class="brand-section">
-        <span class="brand-name">{{ compagny.name }}</span>
+    <!-- Hero Section with Navigation Overlay -->
+    <section class="hero-section">
+      <!-- Navigation Menu Overlay -->
+      <div class="nav-overlay">
+        <mat-toolbar class="main-toolbar">
+          <div class="toolbar-content">
+            <!-- Logo/Brand Section -->
+            <div class="brand-section">
+              <span class="brand-name">{{ compagny.name }}</span>
+            </div>
+
+            <!-- Main Navigation -->
+            <nav class="main-nav" *ngIf="!isMobile">
+              <a mat-button routerLink="" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                <mat-icon>home</mat-icon>
+                <span>Accueil</span>
+              </a>
+              <a mat-button routerLink="/public/reservations" routerLinkActive="active">
+                <mat-icon>event_available</mat-icon>
+                <span>Réservations</span>
+              </a>
+              <a mat-button routerLink="/public/apropos" routerLinkActive="active">
+                <mat-icon>info</mat-icon>
+                <span>À Propos</span>
+              </a>
+            </nav>
+
+            <!-- Right Section -->
+            <div class="toolbar-right">
+              <!-- Search Field -->
+              <mat-form-field class="search-field" appearance="outline">
+                <input matInput (keyup)="applyFilter($event)" placeholder="Rechercher...">
+                <mat-icon matSuffix>search</mat-icon>
+              </mat-form-field>
+
+              <!-- Mobile Menu Button -->
+              <button mat-icon-button class="menu-button" *ngIf="isMobile" (click)="sidenav.toggle()">
+                <mat-icon>menu</mat-icon>
+              </button>
+            </div>
+          </div>
+        </mat-toolbar>
       </div>
-
-      <!-- Main Navigation -->
-      <nav class="main-nav" *ngIf="!isMobile">
-        <a mat-button routerLink="" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-          <mat-icon>home</mat-icon>
-          <span>Accueil</span>
-        </a>
-        <a mat-button routerLink="/public/reservations" routerLinkActive="active">
-          <mat-icon>event_available</mat-icon>
-          <span>Réservations</span>
-        </a>
-        <a mat-button routerLink="/public/apropos" routerLinkActive="active">
-          <mat-icon>info</mat-icon>
-          <span>À Propos</span>
-        </a>
-      </nav>
-
-      <!-- Right Section with Search and Cart -->
-      <div class="toolbar-right">
-        <mat-form-field class="search-field" appearance="outline">
-          <input matInput (keyup)="applyFilter($event)" placeholder="Rechercher...">
-          <mat-icon matSuffix>search</mat-icon>
-        </mat-form-field>
-
-        <button mat-icon-button class="cart-button" (click)="goToCart()">
-          <mat-icon>shopping_cart</mat-icon>
-          <span class="cart-badge" *ngIf="cartItemCount > 0">{{ cartItemCount }}</span>
-        </button>
-
-        <!-- Mobile Menu Button -->
-        <button mat-icon-button class="menu-button" *ngIf="isMobile" (click)="sidenav.toggle()">
-          <mat-icon>menu</mat-icon>
-        </button>
-      </div>
-    </div>
-  </mat-toolbar>
-
-  <!-- Hero Section -->
-  <section class="hero-section">
-
-
-          <!-- Hero Content -->
-          <div class="page-content">
-            <div class="hero-content">
+      <div class="hero-content">
         <div class="swiper-container">
           <div class="swiper-wrapper">
             <div class="swiper-slide">
@@ -95,8 +91,6 @@
           <div class="swiper-button-next"></div>
         </div>
       </div>
-              </div>
-
     </section>
     
     <!-- Section produits -->
@@ -186,4 +180,5 @@
         </span>
       </button>
     </div>
-</div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

@@ -41,11 +41,138 @@ $black: #000000;
 
 // Styles principaux
 .home-container {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  background-color: $light-bg;
-  width: 100%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: $light-bg;
+
+  .hero-section {
+    position: relative;
+    z-index: 100;
+    
+    .nav-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: transparent;
+      
+      .main-toolbar {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        background: $white;
+        color: $primary-color;
+        height: 70px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        padding: 0 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .toolbar-content {
+          width: 100%;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+
+          .brand-section {
+            .brand-name {
+              font-size: 1.5rem;
+              font-weight: 700;
+              color: $primary-color;
+            }
+          }
+
+          .main-nav {
+            display: flex;
+            gap: 2rem;
+
+            @media (max-width: 768px) {
+              display: none;
+            }
+
+            a {
+              display: flex;
+              align-items: center;
+              gap: 0.5rem;
+              color: $primary-color;
+              text-decoration: none;
+              font-weight: 500;
+              transition: all 0.3s ease;
+              
+              mat-icon {
+                color: $primary-color;
+                font-size: 24px;
+                width: 24px;
+                height: 24px;
+                line-height: 24px;
+                margin-right: 8px;
+              }
+              
+              &:hover {
+                opacity: 0.8;
+              }
+              
+              &.active {
+                font-weight: 600;
+              }
+            }
+          }
+          
+          .toolbar-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+
+            .search-field {
+              width: 200px;
+              margin-bottom: -1.25em;
+
+              ::ng-deep {
+                .mat-form-field-wrapper {
+                  padding-bottom: 0;
+                }
+
+                .mat-form-field-outline {
+                  color: $primary-color;
+                }
+
+                .mat-form-field-infix {
+                  padding: 0.5em 0;
+                }
+
+                input {
+                  color: $primary-color;
+                }
+
+                .mat-icon {
+                  color: $primary-color;
+                }
+              }
+
+              @media (max-width: 768px) {
+                display: none;
+              }
+            }
+
+            .menu-button {
+              display: none;
+            }
+
+            @media (max-width: 768px) {
+              .menu-button {
+                display: block;
+                color: $primary-color;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 
   // Styles pour la section des produits
   .product-section {
@@ -795,7 +922,6 @@ mat-sidenav-container {
 
 // Slider moderne
 .hero-content {
-  height: 70vh;
   width: 100%;
   display: block;
   position: relative;

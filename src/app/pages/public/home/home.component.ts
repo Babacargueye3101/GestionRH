@@ -23,7 +23,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
   filteredProducts: any[] = [];
 
 
-  products : any[]=[];
+  products: any[] = [];
+  allProducts: any[] = [];
 
   images: string[] = [
     'https://images.unsplash.com/photo-1631679706909-1844bbd07221?q=80&w=2892&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
@@ -72,6 +73,16 @@ export class HomeComponent implements OnInit, AfterViewInit {
     window.addEventListener('resize', this.checkScreenSize.bind(this));
 
     this.updateCartItemCount();
+    this.homeService.getAllProduct().subscribe(
+      (response: any) => {
+        this.products = response;
+        this.allProducts = response;
+        this.filteredProducts = response;
+      },
+      (error: any) => {
+        console.error('Erreur lors du chargement des produits:', error);
+      }
+    );
     this.homeService.getAllCategory().subscribe((response) => {
         this.categories =response;
         console.log("Liste de catégories");
@@ -79,28 +90,32 @@ export class HomeComponent implements OnInit, AfterViewInit {
     }, (error)=> {
       console.log(error);
     })
-
-    this.homeService.getAllProduct().subscribe((respone) => {
-      this.products = respone
-      console.log(this.products);
-      this.filteredProducts = this.products;
-
-    }, (error) => {
-      console.log(error);
-
-    });
   }
 
   onCategorySelected(event: any): void {
-    this.selectedCategory = event.value
+    this.selectedCategory = event.value;
+    this.homeService.getProductByCategory(this.selectedCategory).subscribe(
+      (response: any) => {
+        this.filteredProducts = response;
+      },
+      (error: any) => {
+        console.error('Erreur lors du filtrage par catégorie:', error);
+      }
+    );
+  }
 
-    this.homeService.getProductByCategory(this.selectedCategory).subscribe((response) =>{
-      this.products = response;
+  applyFilter(event: Event): void {
+    const filterValue = (event.target as HTMLInputElement).value.trim().toLowerCase();
+    
+    if (!filterValue) {
       this.filteredProducts = this.products;
-    },(error) => {
+      return;
+    }
 
-    });
-    console.log('Catégorie sélectionnée:', this.selectedCategory);
+    this.filteredProducts = this.products.filter((product: any) => 
+      product.name.toLowerCase().includes(filterValue) ||
+      (product.subtitle && product.subtitle.toLowerCase().includes(filterValue))
+    );
   }
 
   addToCart(product: any): void {
@@ -138,15 +153,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
     this.cartItemCount = cart.length;
   }
 
-  applyFilter(event: Event): void {
-    const filterValue = (event.target as HTMLInputElement).value.trim().toLowerCase();
-    console.log(filterValue);
-    console.log(this.products);
-    this.filteredProducts = this.products.filter((product: any) => 
-    
-      product.name.toLowerCase().includes(filterValue) ||
-      product.description.toLowerCase().includes(filterValue)
-    );
-  }
+
 
 }
