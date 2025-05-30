@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { MatSidenav } from '@angular/material/sidenav';
+import { Router } from '@angular/router';
 
 interface TeamMember {
   name: string;
@@ -34,6 +35,7 @@ export class AproposComponent implements OnInit {
   currentYear: number = new Date().getFullYear();
   compagny = { name: 'Dabishpro' };
   isMobile = false;
+  cartItemCount = 0;
 
   // Données de l'équipe
   teamMembers: TeamMember[] = [
@@ -144,7 +146,10 @@ export class AproposComponent implements OnInit {
   Rejoignez notre univers où excellence, accessibilité et innovation se rencontrent pour faire rayonner votre beauté.
 `;
 
-  constructor(private breakpointObserver: BreakpointObserver) {
+  constructor(
+    private breakpointObserver: BreakpointObserver,
+    private router: Router
+  ) {
     this.breakpointObserver
       .observe([Breakpoints.Handset])
       .subscribe(result => {
@@ -153,6 +158,10 @@ export class AproposComponent implements OnInit {
           this.sidenav.close();
         }
       });
+  }
+
+  goToCart() {
+    this.router.navigate(['/public/cart']);
   }
 
   ngOnInit() {

@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ReservationService } from 'src/app/services/public/reservation.service';
 import { ShopDetailModalComponent } from './shop-detail-modal/shop-detail-modal.component';
 import { MatDialog } from '@angular/material/dialog';
-import {  Router } from '@angular/router';
+import { Router } from '@angular/router';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-reservation-public',
@@ -14,7 +15,19 @@ export class ReservationPublicComponent implements OnInit{
   shopList: any;
   allsalons: any;
 
-  constructor(private resvationPublicService : ReservationService, private dialog: MatDialog, private router: Router){}
+  isMobile = false;
+
+  constructor(
+    private resvationPublicService: ReservationService,
+    private dialog: MatDialog,
+    private router: Router,
+    private breakpointObserver: BreakpointObserver
+  ) {
+    this.breakpointObserver.observe([Breakpoints.Handset])
+      .subscribe(result => {
+        this.isMobile = result.matches;
+      });
+  }
 
   compagny = { name: 'Dabishpro' };
   currentYear = new Date().getFullYear();
@@ -41,7 +54,11 @@ export class ReservationPublicComponent implements OnInit{
     });
   }
 
-  detailshopRedirect(shop: any){
+  detailshopRedirect(shop: any) {
     this.router.navigate([`/public/reservations/shops/${shop.id}/salons`]);
+  }
+
+  goToCart() {
+    this.router.navigate(['/public/cart']);
   }
 }

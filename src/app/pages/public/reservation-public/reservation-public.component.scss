@@ -57,8 +57,8 @@ $transition-duration: 0.3s;
   position: sticky;
   top: 0;
   z-index: 1000;
-  background: $accent-color;
-  color: $white;
+  background: $white;
+  color: $primary-color;
   height: 70px;
   box-shadow: 0 4px 15px $shadow-color;
   padding: 0 2rem;
@@ -75,6 +75,7 @@ $transition-duration: 0.3s;
       .brand-name {
         font-size: 1.5rem;
         font-weight: 700;
+        color: $primary-color;
       }
     }
 
@@ -83,23 +84,42 @@ $transition-duration: 0.3s;
       gap: 2rem;
 
       a {
-        color: $white;
+        color: $primary-color;
         text-decoration: none;
         @include flex-center();
         gap: 0.5rem;
         @include transition();
 
-        &:hover {
+        mat-icon {
           color: $primary-color;
         }
 
+        &:hover {
+          opacity: 0.8;
+        }
+
         &.active {
-          font-weight: 200;
+          font-weight: 600;
         }
       }
     }
 
     .toolbar-right {
+      .menu-button, .cart-button {
+        color: $primary-color;
+      }
+
+      .cart-badge {
+        background-color: $primary-color;
+        color: $white;
+        padding: 2px 6px;
+        border-radius: 50%;
+        font-size: 12px;
+        position: absolute;
+        top: -8px;
+        right: -8px;
+      }
+
       .menu-button {
         display: none;
       }

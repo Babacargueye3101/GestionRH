@@ -4,43 +4,35 @@
     <section class="hero-section">
       <!-- Navigation Menu Overlay -->
       <div class="nav-overlay">
-        <mat-toolbar class="transparent-toolbar">
-          <div class="nav-content">
-            <div class="mobile-nav" *ngIf="isMobile">
-              <button mat-icon-button class="menu-button" (click)="sidenav.toggle()">
-                <mat-icon>menu</mat-icon>
-              </button>
+        <mat-toolbar class="main-toolbar">
+          <div class="toolbar-content">
+            <!-- Logo/Brand Section -->
+            <div class="brand-section">
+              <span class="brand-name">{{ compagny.name }}</span>
             </div>
-            
-            <!-- Center Section -->
-            <nav class="main-nav">
-              <a mat-button
-                 routerLink=""
-                 routerLinkActive="active"
-                 [routerLinkActiveOptions]="{exact: true}">
-                <mat-icon>shopping_bag</mat-icon>
-                <span class="nav-label">Produits</span>
+
+            <!-- Main Navigation -->
+            <nav class="main-nav" *ngIf="!isMobile">
+              <a mat-button routerLink="" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                <mat-icon>home</mat-icon>
+                <span>Accueil</span>
               </a>
-              <a mat-button
-                 routerLink="/public/reservations"
-                 routerLinkActive="active">
+              <a mat-button routerLink="/public/reservations" routerLinkActive="active">
                 <mat-icon>event_available</mat-icon>
-                <span class="nav-label">Réservations</span>
+                <span>Réservations</span>
               </a>
-              <a mat-button
-                 routerLink="/public/apropos"
-                 routerLinkActive="active">
+              <a mat-button routerLink="/public/apropos" routerLinkActive="active">
                 <mat-icon>info</mat-icon>
-                <span class="nav-label">À Propos</span>
+                <span>À Propos</span>
               </a>
             </nav>
 
-            <!-- Right Section -->
-            <div class="nav-right">
-              <!-- <button mat-button [routerLink]="['/login']" class="login-button">
-                <mat-icon>login</mat-icon>
-                <span>Admin</span>
-              </button> -->
+            <div class="toolbar-right">
+
+              <!-- Mobile Menu Button -->
+              <button mat-icon-button class="menu-button" *ngIf="isMobile" (click)="sidenav.toggle()">
+                <mat-icon>menu</mat-icon>
+              </button>
             </div>
           </div>
         </mat-toolbar>

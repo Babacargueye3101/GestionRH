@@ -21,35 +21,29 @@
       <div class="toolbar-content">
         <!-- Logo/Brand Section -->
         <div class="brand-section">
-          <span class="brand-name">DabiShop Pro</span>
+          <span class="brand-name">{{ compagny.name }}</span>
         </div>
 
-        <!-- Navigation Links -->
-        <nav class="main-nav">
-          <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+        <!-- Main Navigation -->
+        <nav class="main-nav" *ngIf="!isMobile">
+          <a mat-button routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
             <mat-icon>home</mat-icon>
             <span>Accueil</span>
           </a>
-          <a routerLink="/public/reservations" routerLinkActive="active">
+          <a mat-button routerLink="/public/reservations" routerLinkActive="active">
             <mat-icon>event_available</mat-icon>
             <span>Réservations</span>
           </a>
-          <a routerLink="/public/apropos" routerLinkActive="active">
+          <a mat-button routerLink="/public/apropos" routerLinkActive="active">
             <mat-icon>info</mat-icon>
-            <span>À propos</span>
+            <span>À Propos</span>
           </a>
         </nav>
 
-        <!-- Right Section -->
         <div class="toolbar-right">
-          <!-- Search Field -->
-          <!-- <mat-form-field class="search-field" appearance="outline">
-            <mat-icon matPrefix>search</mat-icon>
-            <input matInput placeholder="Rechercher..." [(ngModel)]="searchQuery">
-          </mat-form-field> -->
 
-          <!-- Menu Button (Mobile) -->
-          <button mat-icon-button class="menu-button" (click)="sidenav.toggle()">
+          <!-- Mobile Menu Button -->
+          <button mat-icon-button class="menu-button" *ngIf="isMobile" (click)="sidenav.toggle()">
             <mat-icon>menu</mat-icon>
           </button>
         </div>
