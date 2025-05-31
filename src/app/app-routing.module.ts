@@ -4,6 +4,7 @@ import { HomeComponent } from './pages/public/home/home.component';
 import { ShopComponent } from './pages/public/shop/shop.component';
 import { ProductDetailComponent } from './pages/public/product-detail/product-detail.component';
 import { CartComponent } from './pages/public/cart/cart.component';
+
 import { OrderDetailsComponent } from './pages/admin/orders/order-details/order-details.component';
 import { OrderListComponent } from './pages/admin/orders/order-list/order-list.component';
 
@@ -45,6 +46,7 @@ const routes: Routes = [
   { path: 'public/shop', component: ShopComponent },
   { path: 'public/product/:id', component: ProductDetailComponent },
   { path: 'public/cart', component: CartComponent },
+  { path: 'privacy', loadChildren: () => import('./pages/public/privacy/privacy.module').then(m => m.PrivacyModule) },
 
 ];
 

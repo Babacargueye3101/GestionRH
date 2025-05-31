@@ -1,8 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 import { AuthService } from './services/auth.service';
 import { CompagnyService } from './services/compagny.service';
-import { NavigationEnd, Router } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
+import { HeaderService } from './services/header.service';
+import { Subscription } from 'rxjs';
 import { filter } from 'rxjs';
 import { NotificationService } from './services/notification.service';
 
@@ -11,7 +13,7 @@ import { NotificationService } from './services/notification.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
   isLoggedIn: boolean = false;
   userEmail: any;
   userName: any;
@@ -40,10 +42,22 @@ export class AppComponent implements OnInit {
   showNotifications: boolean = false;
   total: any;
 
-  constructor(private authService: AuthService, private router: Router, private compagnyService: CompagnyService, private notificationService: NotificationService) {
+  private headerSubscription!: Subscription;
+
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private compagnyService: CompagnyService,
+    private notificationService: NotificationService,
+    private headerService: HeaderService
+  ) {
 
   }
   ngOnInit(): void {
+    this.headerSubscription = this.headerService.showHeader$.subscribe(show => {
+      this.isNavbarVisible = show;
+    });
+
 
     this.user = localStorage.getItem('currentUser');
     if (this.user) {
@@ -131,6 +145,12 @@ export class AppComponent implements OnInit {
     this.showNotifications = !this.showNotifications;
     if (this.showNotifications) {
       this.unreadCount = 0; // Réinitialiser le compteur lorsque les notifications sont affichées
+    }
+  }
+
+  ngOnDestroy() {
+    if (this.headerSubscription) {
+      this.headerSubscription.unsubscribe();
     }
   }
 

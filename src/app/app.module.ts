@@ -103,7 +103,6 @@ import { AproposComponent } from './pages/public/apropos/apropos.component';
 import { MatBadgeModule } from '@angular/material/badge';
 
 
-
 registerLocaleData(localeFr, 'fr');
 @NgModule({
   declarations: [
