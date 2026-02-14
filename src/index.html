@@ -2,12 +2,54 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>GestionRH</title>
+  <title>DABISH PRO - Maintenance</title>
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #f8f9fa;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .maintenance-container {
+      text-align: center;
+      padding: 2rem;
+      border-radius: 8px;
+      background-color: white;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      max-width: 600px;
+      width: 90%;
+    }
+    .maintenance-icon {
+      font-size: 5rem;
+      color: #dc3545;
+      margin-bottom: 1rem;
+    }
+    h1 {
+      color: #343a40;
+      margin-bottom: 1rem;
+    }
+    p {
+      color: #6c757d;
+      font-size: 1.1rem;
+      margin-bottom: 1.5rem;
+    }
+  </style>
 </head>
 <body>
-  <app-root></app-root>
+  <div class="maintenance-container">
+    <div class="maintenance-icon">⚠️</div>
+    <h1>Site en maintenance</h1>
+    <p>Ce site est en maintenance. Nous travaillons à améliorer votre expérience et serons bientôt de retour.</p>
+    <p>Nous vous remercions pour votre patience et compréhension.</p>
+  </div>
 </body>
 </html>
